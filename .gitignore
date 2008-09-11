@@ -1,0 +1,9 @@
+*~
+*.swp
+*.swo
+*.o
+*.a
+ext/Rakefile
+*.log
+a.out
+*.bundle

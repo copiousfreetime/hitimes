@@ -1,14 +1,20 @@
-== hightimes
+== hitimes
 
-* Homepage
+* Homepage 
 * rubyforge project
 * email
 
 == DESCRIPTION
 
+HiTimes is a fast high resolution time class for performing stopwatch style activities. 
+
 == FEATURES
 
 == SYNOPSIS
+
+duration = HiTimes.measure do { operation }
+puts duration             # => "102485 nanoseconds"
+puts duration.to_seconds  # => "0.0000000012485"
 
 == CREDITS
 
