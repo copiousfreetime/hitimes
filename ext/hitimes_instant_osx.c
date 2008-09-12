@@ -1,4 +1,7 @@
+#ifdef USE_INSTANCE_OSX
+
 #include "hitimes.h"
+
 
 #include <CoreServices/CoreServices.h>
 
@@ -14,3 +17,4 @@ hitimes_instant_t hitimes_instant_get_value( )
     return *( hitimes_instant_t *)&nano;
 }
 
+#endif

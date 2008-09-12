@@ -30,7 +30,7 @@ typedef hitimes_u64int_t hitimes_instant_t;
 /* all the backends must define this method */
 hitimes_instant_t hitimes_instant_get_value( );
 
-#define NANOSECOND_PER_SECOND         1000000000
+#define NANOSECONDS_PER_SECOND        1000000000
 #define HITIMES_INSTANT_2NUM( x )     ( LL2NUM( x ) )
 
 #endif

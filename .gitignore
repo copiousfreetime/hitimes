@@ -6,6 +6,7 @@
 ext/Rakefile
 *.log
 a.out
+*.so
 *.bundle
 coverage
 doc
