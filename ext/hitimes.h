@@ -8,6 +8,10 @@
 #ifndef __HITIMES_H_
 #define __HITIMES_H_
 
+#include <ruby.h>
+
+extern VALUE eH_Error;     /* class  HiTimes::Error     */
+
 #ifdef USE_INSTANCE_CLOCK_GETTIME
   #include "hitimes_instant_clock_gettime.h"
 #elif USE_INSTANCE_OSX 
@@ -26,6 +30,7 @@ typedef hitimes_u64int_t hitimes_instant_t;
 /* all the backends must define this method */
 hitimes_instant_t hitimes_instant_get_value( );
 
+#define NANOSECOND_PER_SECOND         1000000000
 #define HITIMES_INSTANT_2NUM( x )     ( LL2NUM( x ) )
 
 #endif

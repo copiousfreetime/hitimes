@@ -5,7 +5,6 @@
  * vim: shiftwidth=4 
  */ 
 
-#include <ruby.h>
 #include "hitimes.h"
 
 /* Module and Classes */
@@ -66,7 +65,7 @@ VALUE hitimes_instant_to_seconds( VALUE self )
     Data_Get_Struct( self, hitimes_instant_t, now );
 
     /* convert now value to seconds */
-    d = ( (double)(*now) ) * HITIMES_RESOLUTION;
+    d = ( (double)(*now) ) / NANOSECOND_PER_SECOND;
 
     return rb_float_new( d );
 }
@@ -81,14 +80,13 @@ void Init_libhitimes()
      * Top level module encapsulating the entire HiTimes library
      */
     mH = rb_define_module("HiTimes");
-    rb_define_const( mH, "RESOLUTION", rb_float_new( HITIMES_RESOLUTION ));
-    rb_define_const( mH, "RESOLUTION_NAME", rb_str_new2( HITIMES_RESOLUTION_NAME ));
    
     /* Error class */
     eH_Error = rb_define_class_under(mH, "Error", rb_eStandardError);
 
     /* Instant class */
     cH_Instant = rb_define_class_under( mH, "Instant", rb_cObject );
+    rb_define_const( cH_Instant, "NANO_RESOLUTION", hitimes_instant_nano_resolution( ) );
     rb_define_alloc_func( cH_Instant, hitimes_instant_alloc );
     rb_define_method( cH_Instant, "to_i", hitimes_instant_to_i, 0 );
     rb_define_method( cH_Instant, "to_f", hitimes_instant_to_seconds, 0 );
