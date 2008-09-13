@@ -116,6 +116,38 @@ VALUE hitimes_interval_stop_bang( VALUE self )
     return rc;
 }
 
+/**
+ * call-sec:
+ *    interval.started? -> boolean
+ *
+ * returns whether or not the interval has been started
+ */
+VALUE hitimes_interval_started( VALUE self )
+{
+    hitimes_interval_t *i;
+
+    Data_Get_Struct( self, hitimes_interval_t, i );
+
+    return ( 0L == i->start_instant ) ? Qfalse : Qtrue;
+}
+
+
+/**
+ * call-sec:
+ *    interval.stopped? -> boolean
+ *
+ * returns whether or not the interval has been stopped
+ */
+VALUE hitimes_interval_stopped( VALUE self )
+{
+    hitimes_interval_t *i;
+
+    Data_Get_Struct( self, hitimes_interval_t, i );
+
+    return ( 0L == i->stop_instant ) ? Qfalse : Qtrue;
+}
+
+
 /** 
  * call-sec:
  *    interval.start_instant -> Integer
@@ -209,6 +241,9 @@ void Init_hitimes_interval()
     rb_define_method( cH_Interval, "to_seconds",   hitimes_interval_duration, 0 );
     rb_define_method( cH_Interval, "duration",     hitimes_interval_duration, 0 );
     rb_define_method( cH_Interval, "length",       hitimes_interval_duration, 0 );
+    
+    rb_define_method( cH_Interval, "started?",  hitimes_interval_started, 0 );
+    rb_define_method( cH_Interval, "stopped?",  hitimes_interval_stopped, 0 );
 
     rb_define_method( cH_Interval, "start_instant", hitimes_interval_start_instant, 0 );
     rb_define_method( cH_Interval, "stop_instant",  hitimes_interval_stop_instant, 0 );

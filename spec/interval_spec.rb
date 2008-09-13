@@ -8,6 +8,23 @@ describe Hitimes::Interval do
     i.duration == 0.0
   end
 
+  it "knows if it has been started" do
+    i = Hitimes::Interval.new
+    i.should_not be_started
+
+    i.start!
+    i.should be_started
+  end
+
+  it "knows if it has been stopped" do
+    i = Hitimes::Interval.new
+    i.start!
+    i.should_not be_stopped
+    i.stop!
+    i.should be_stopped
+  end
+
+
   it "calling duration multiple times returns successivly graetr durations" do
     i = Hitimes::Interval.new
     i.start!
