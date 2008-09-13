@@ -1,11 +1,11 @@
 require 'rubygems'
-require 'hightimes/version'
+require 'hitimes/version'
 require 'tasks/config'
 
-Hightimes::GEM_SPEC = Gem::Specification.new do |spec|
+Hitimes::GEM_SPEC = Gem::Specification.new do |spec|
   proj = Configuration.for('project')
   spec.name         = proj.name
-  spec.version      = Hightimes::VERSION
+  spec.version      = Hitimes::VERSION
   
   spec.author       = proj.author
   spec.email        = proj.email
@@ -22,9 +22,12 @@ Hightimes::GEM_SPEC = Gem::Specification.new do |spec|
   # add dependencies here
   # spec.add_dependency("rake", ">= 0.8.1")
   spec.add_dependency("configuration", ">= 0.0.5")
-  
-   
-  
+
+  if ext_conf = Configuration.for_if_exist?("extension") then
+    spec.extensions <<  ext_conf.configs
+    spec.extensions.flatten!
+  end   
+
   if rdoc = Configuration.for_if_exist?('rdoc') then
     spec.has_rdoc         = true
     spec.extra_rdoc_files = pkg.files.rdoc

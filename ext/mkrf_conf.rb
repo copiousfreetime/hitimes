@@ -2,7 +2,7 @@ require 'rubygems'
 require 'mkrf'
 require 'rbconfig'
 
-Mkrf::Generator.new('interval') do |g|
+Mkrf::Generator.new('hitimes_interval') do |g|
     g.logger.level = Logger::WARN
 
     if g.has_function?( 'clock_gettime' ) then

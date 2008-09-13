@@ -24,13 +24,13 @@ require 'rake/clean'
 # Main configuration for the project, these overwrite the items that are in
 # tasks/config.rb
 #-------------------------------------------------------------------------------
-require 'hightimes'
+require 'hitimes'
 Configuration.for("project") {
-  name      "hightimes"
-  version   Hightimes::VERSION
+  name      "hitimes"
+  version   Hitimes::VERSION
   author    "Jeremy Hinegardner"
-  email     "jeremy@hinegardner.org"
-  homepage  "http://hightimes.rubyforge.org/"
+  email     "jeremy@copiousfreetime.org"
+  homepage  "http://copiousfreetime.rubyforge.org/hitimes/"
 }
 
 #-------------------------------------------------------------------------------

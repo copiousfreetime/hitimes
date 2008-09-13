@@ -11,24 +11,24 @@ if pkg_config = Configuration.for_if_exist?("packaging") then
 
   namespace :dist do
 
-    Rake::GemPackageTask.new(Hightimes::GEM_SPEC) do |pkg|
+    Rake::GemPackageTask.new(Hitimes::GEM_SPEC) do |pkg|
       pkg.need_tar = pkg_config.formats.tgz
       pkg.need_zip = pkg_config.formats.zip
     end
 
     desc "Install as a gem"
     task :install => [:clobber, :package] do
-      sh "sudo gem install pkg/#{Hightimes::GEM_SPEC.full_name}.gem"
+      sh "sudo gem install pkg/#{Hitimes::GEM_SPEC.full_name}.gem"
     end
 
     desc "Uninstall gem"
     task :uninstall do 
-      sh "sudo gem uninstall -x #{Hightimes::GEM_SPEC.name}"
+      sh "sudo gem uninstall -x #{Hitimes::GEM_SPEC.name}"
     end
 
     desc "dump gemspec"
     task :gemspec do
-      puts Hightimes::GEM_SPEC.to_ruby
+      puts Hitimes::GEM_SPEC.to_ruby
     end
 
     desc "reinstall gem"

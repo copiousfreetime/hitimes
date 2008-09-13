@@ -17,13 +17,15 @@ extern VALUE eH_Error;     /* class  HiTimes::Error     */
  */
 
 #ifdef USE_INSTANT_CLOCK_GETTIME
-#include "hitimes_instant_clock_gettime.h"
-#elif USE_INSTANT_OSX 
-#define HITIMES_U64INT unsigned long long int
+#    define HITIMES_U64INT unsigned long long int
+#    define HITIMES_INSTANT_CONVERSION_FACTOR 1e9
+#elif USE_INSTANT_OSX
+#    define HITIMES_U64INT unsigned long long int
+#    define HITIMES_INSTANT_CONVERSION_FACTOR 1e9
 #elif USE_INSTANT_WINDOWS
-  #include "hitimes_instant_windows.h"
+#    include "hitimes_instant_windows.h"
 #else
-  #error "Unable to build hitimes, no Instance backend available"
+#    error "Unable to build hitimes, no Instance backend available"
 #endif
 
 

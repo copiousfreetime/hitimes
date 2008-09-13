@@ -3,7 +3,7 @@
 # All rights reserved.  See LICENSE and/or COPYING for details.
 #++
 
-module Hightimes
+module Hitimes
 
   # The root directory of the project is considered to be the parent directory
   # of the 'lib' directory.
@@ -54,4 +54,4 @@ module Hightimes
   end
 
 end
-require 'hightimes/version'
+require 'hitimes/version'

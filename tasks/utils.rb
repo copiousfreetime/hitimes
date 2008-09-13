@@ -1,4 +1,4 @@
-require 'hightimes/version'
+require 'hitimes/version'
 
 #-------------------------------------------------------------------------------
 # Additions to the Configuration class that are useful

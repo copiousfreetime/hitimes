@@ -1,16 +1,8 @@
 #ifdef USE_INSTANT_CLOCK_GETTIME
 
-#include "hitimes.h"
+#include "hitimes_interval.h"
 
 #include <sys/time.h>
-
-/*
- * conversion factors is number of nanoseconds in a second
- */
-double hitimes_instant_conversion_factor( )
-{
-  return 1e9;
-}
 
 hitimes_instant_t hitimes_get_current_instant( )
 {

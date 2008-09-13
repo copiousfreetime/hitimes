@@ -7,15 +7,15 @@ require 'tasks/utils'
 # General project configuration
 #-----------------------------------------------------------------------
 Configuration.for('project') {
-  name          "FIXME: NAME"
-  version       "FIXME: 0.0.0"
-  author        "FIXME: The Author"
-  email         "FIXME: author@example.com"
-  homepage      "FIXME: http://project.example.com"
+  name          "hitimes"
+  version       Hitimes::Version.to_s
+  author        "Jeremy Hinegardner"
+  email         "jeremy at copiousfreetime dot org"
+  homepage      "http://copiousfreetime.rubyforge.org/hitimes/"
   description   Utils.section_of("README", "description")
   summary       description.split(".").first
   history       "HISTORY"
-  license       FileList["LICENSE", "COPYING"]
+  license       FileList["LICENSE"]
   readme        "README"
 }
 
@@ -27,13 +27,14 @@ Configuration.for('packaging') {
   proj_conf = Configuration.for('project')
   files {
     bin       FileList["bin/*"]
+    ext       FileList["ext/*.{c,h,rb}"]
     lib       FileList["lib/**/*.rb"]
     test      FileList["spec/**/*.rb", "test/**/*.rb"]
     data      FileList["data/**/*"]
     tasks     FileList["tasks/**/*.r{ake,b}"]
     rdoc      FileList[proj_conf.readme, proj_conf.history,
-                       proj_conf.license] + lib
-    all       bin + lib + test + data + rdoc + tasks 
+                       proj_conf.license] + lib + FileList["ext/*.c"]
+    all       bin + ext + lib + test + data + rdoc + tasks 
   }
 
   # ways to package the results
@@ -86,13 +87,20 @@ Configuration.for('rdoc') {
 }
 
 #-----------------------------------------------------------------------
+# Extension
+#-----------------------------------------------------------------------
+Configuration.for('extension') {
+  configs   Configuration.for('packaging').files.ext.find_all { |x| %w[ mkrf_conf.rb extconf.rb ].include?(File.basename(x)) }
+}
+
+#-----------------------------------------------------------------------
 # Rubyforge 
 #-----------------------------------------------------------------------
 Configuration.for('rubyforge') {
-  project       "FIXME: rubyforge project"
-  user          "FIXME: username"
+  project       "copiousfreetime"
+  user          "jjh"
   host          "rubyforge.org"
-  rdoc_location "#{user}@#{host}:/var/www/gforge-projects/#{project}"
+  rdoc_location "#{user}@#{host}:/var/www/gforge-projects/#{project}/hitimes"
 }
 
 
