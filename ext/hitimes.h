@@ -5,32 +5,40 @@
  * vim: shiftwidth=4 
  */ 
 
-#ifndef __HITIMES_H_
-#define __HITIMES_H_
+#ifndef __HITIMES_H__
+#define __HITIMES_H__
 
 #include <ruby.h>
 
 extern VALUE eH_Error;     /* class  HiTimes::Error     */
 
-#ifdef USE_INSTANCE_CLOCK_GETTIME
-  #include "hitimes_instant_clock_gettime.h"
-#elif USE_INSTANCE_OSX 
-  #include "hitimes_instant_osx.h"
-#elif USE_INSTANCE_WINDOWS
+/* 
+ * Get a 64bit unsigned type for each backend
+ */
+
+#ifdef USE_INSTANT_CLOCK_GETTIME
+#include "hitimes_instant_clock_gettime.h"
+#elif USE_INSTANT_OSX 
+#define HITIMES_U64INT unsigned long long int
+#elif USE_INSTANT_WINDOWS
   #include "hitimes_instant_windows.h"
 #else
   #error "Unable to build hitimes, no Instance backend available"
 #endif
 
+
 /* an alias for a 64bit unsigned integer.  The various sytem dependenent
  * files must define hitimes_u64int_t 
  */
-typedef hitimes_u64int_t hitimes_instant_t;
+typedef HITIMES_U64INT hitimes_instant_t;
+
+typedef struct hitimes_interval {
+    hitimes_instant_t start_instant;
+    hitimes_instant_t stop_instant;
+    VALUE             duration;
+} hitimes_interval_t;
 
 /* all the backends must define this method */
-hitimes_instant_t hitimes_instant_get_value( );
-
-#define NANOSECONDS_PER_SECOND        1000000000
-#define HITIMES_INSTANT_2NUM( x )     ( LL2NUM( x ) )
-
+hitimes_instant_t hitimes_get_current_instant( );
+double hitimes_instant_conversion_factor( );
 #endif

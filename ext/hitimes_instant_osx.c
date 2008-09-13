@@ -1,16 +1,25 @@
-#ifdef USE_INSTANCE_OSX
+#ifdef USE_INSTANT_OSX
 
 #include "hitimes.h"
-
-
 #include <CoreServices/CoreServices.h>
 
-VALUE hitimes_instant_nano_resolution( ) 
+/*
+ * 64bit int type 
+ */
+typedef unsigned long long int hitimes_u64int_t;
+
+/*
+ * conversion factors is number of nanoseconds in a second
+ */
+double hitimes_instant_conversion_factor( )
 {
-    return INT2FIX( 1 );
+  return 1e9;
 }
 
-hitimes_instant_t hitimes_instant_get_value( )
+/* 
+ * returns the number of nanoseconds since the machine was booted
+ */
+hitimes_instant_t hitimes_get_current_instant( )
 {
     Nanoseconds  nano    = AbsoluteToNanoseconds( UpTime() );
 

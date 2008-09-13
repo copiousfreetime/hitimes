@@ -1,21 +1,18 @@
+#ifdef USE_INSTANT_CLOCK_GETTIME
+
 #include "hitimes.h"
 
 #include <sys/time.h>
 
-VALUE hitimes_instant_nano_resolution( ) 
+/*
+ * conversion factors is number of nanoseconds in a second
+ */
+double hitimes_instant_conversion_factor( )
 {
-    struct timespec resolution;
-    int rc ;
-
-    rc = clock_getres( CLOCK_MONOTONIC, &resolution );
-    if ( 0 != rc ) {
-        char* e = strerror( rc );
-        rb_raise(eH_Error, "Unable to retrieve resolution for CLOCK_MONOTONIC :  %s", e );
-    }
-    return LONG2FIX( resolution.tv_nsec );
+  return 1e9;
 }
 
-hitimes_instant_t hitimes_instant_get_value( )
+hitimes_instant_t hitimes_get_current_instant( )
 {
     struct timespec time;
     int rc;
@@ -28,4 +25,4 @@ hitimes_instant_t hitimes_instant_get_value( )
 
     return ( ( NANOSECONDS_PER_SECOND * (long)time.tv_sec ) + time.tv_nsec );
 }
-
+#endif

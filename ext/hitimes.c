@@ -9,72 +9,128 @@
 
 /* Module and Classes */
 VALUE mH;           /* module HiTimes            */
-VALUE cH_Stopwatch; /* class  HiTimes::Stopwatch */
-VALUE cH_Instant;   /* class  HiTimes::Instant   */
 VALUE cH_Interval;  /* class  HiTimes::Interval  */
 VALUE eH_Error;     /* class  HiTimes::Error     */
 
 /**
- * Allocator and Deallocator for Instant classes
+ * Allocator and Deallocator for Interval classes
  */
 
-VALUE hitimes_instant_free(hitimes_instant_t* now) 
+VALUE hitimes_interval_free(hitimes_interval_t* i) 
 {
-    xfree( now );
+    if ( Qnil != i->duration ) {
+        rb_gc_unregister_address( &(i->duration) );
+        i->duration = Qnil;
+    }
+    xfree( i );
 }
 
-VALUE hitimes_instant_alloc(VALUE klass)
+VALUE hitimes_interval_alloc(VALUE klass)
 {
     VALUE obj;
-    hitimes_instant_t* now = xmalloc( sizeof( hitimes_instant_t ) );
+    hitimes_interval_t* i = xmalloc( sizeof( hitimes_interval_t ) );
 
-    *now = hitimes_instant_get_value( );
+    i->start_instant = 0L;
+    i->stop_instant  = 0L;
+    i->duration      = Qnil;
 
-    obj = Data_Wrap_Struct(klass, NULL, hitimes_instant_free, now);
+    obj = Data_Wrap_Struct(klass, NULL, hitimes_interval_free, i);
+    return obj;
+}
+
+/**
+ * call-sec:
+ *    interval.split! -> Interval
+ *
+ * Immediately stop! the current interval and start! a new interval that has a
+ * start_instant equivalent to the stop_interval of self.
+ */
+VALUE hitimes_interval_split_bang( VALUE self )
+{
+    hitimes_interval_t *first;
+    hitimes_interval_t *second = xmalloc( sizeof( hitimes_interval_t ) );
+    VALUE              obj;
+
+    Data_Get_Struct( self, hitimes_interval_t, first );
+    first->stop_instant = hitimes_get_current_instant( );
+
+    second->start_instant = first->stop_instant;
+    second->stop_instant  = 0L;
+    second->duration      = Qnil;
+
+    obj = Data_Wrap_Struct(cH_Interval, NULL, hitimes_interval_free, second);
+
     return obj;
 }
 
 
 /**
- * call-seq:
- *    instant.to_i -> Integer
+ * call-sec:
+ *    interval.start! -> nil
  *
- * Returns an Integer value of the instant, which is just a point in time.
+ * mark the start of the interval
  */
-VALUE hitimes_instant_to_i( VALUE self )
+VALUE hitimes_interval_start_bang( VALUE self )
 {
-    hitimes_instant_t *now;
+    hitimes_interval_t *i;
 
-    Data_Get_Struct( self, hitimes_instant_t, now );
+    Data_Get_Struct( self, hitimes_interval_t, i );
+    i->start_instant = hitimes_get_current_instant( );
+    i->stop_instant  = 0L;
+    i->duration      = Qnil;
 
-    return HITIMES_INSTANT_2NUM( *now );
+    return Qnil;
 }
+
+
+/**
+ * call-sec:
+ *    interval.stop! -> nil
+ *
+ * mark the start of the interval
+ */
+VALUE hitimes_interval_stop_bang( VALUE self )
+{
+    hitimes_interval_t *i;
+
+    Data_Get_Struct( self, hitimes_interval_t, i );
+    if ( 0L == i->start_instant )  {
+        rb_raise(eH_Error, "Attempt to stop an interval that has not started.\n" );
+    }
+
+    i->stop_instant = hitimes_get_current_instant( );
+
+    return Qnil;
+}
+
+
 
 /**
  * call-seq:
- *    instant.to_seconds -> Float
+ *    interval.to_seconds -> Float
  *
- * Returns the Float value of the instant, the value is in seconds
+ * Returns the Float value of the interval, the value is in seconds
  */
-VALUE hitimes_instant_to_seconds( VALUE self )
+VALUE hitimes_interval_to_seconds( VALUE self )
 {
-    hitimes_instant_t *now;
+    hitimes_interval_t *i;
     double             d;
-    VALUE              f;
 
-    Data_Get_Struct( self, hitimes_instant_t, now );
+    Data_Get_Struct( self, hitimes_interval_t, i );
+    if ( Qnil == i->duration ) {
+        d = ( i->stop_instant - i->start_instant ) / hitimes_instant_conversion_factor( );
+        i->duration = rb_float_new( d );
+        rb_gc_register_address( &(i->duration) );
+    }
 
-    /* convert now value to seconds */
-    d = ( (double)(*now) ) / NANOSECOND_PER_SECOND;
-
-    return rb_float_new( d );
+    return i->duration;
 }
 
 
 /**
  * The HiTimes Ruby Extension
  */
-void Init_libhitimes()
+void Init_interval()
 {
     /*
      * Top level module encapsulating the entire HiTimes library
@@ -84,22 +140,16 @@ void Init_libhitimes()
     /* Error class */
     eH_Error = rb_define_class_under(mH, "Error", rb_eStandardError);
 
-    /* Instant class */
-    cH_Instant = rb_define_class_under( mH, "Instant", rb_cObject );
-    rb_define_const( cH_Instant, "NANO_RESOLUTION", hitimes_instant_nano_resolution( ) );
-    rb_define_alloc_func( cH_Instant, hitimes_instant_alloc );
-    rb_define_method( cH_Instant, "to_i", hitimes_instant_to_i, 0 );
-    rb_define_method( cH_Instant, "to_f", hitimes_instant_to_seconds, 0 );
-    rb_define_method( cH_Instant, "to_seconds", hitimes_instant_to_seconds, 0 );
- 
-    /* Stopwatch Class */
-    cH_Stopwatch = rb_define_class_under( mH, "Stopwatch", rb_cObject );
-    /*rb_define_alloc_func( cH_Stopwatch, hitimes_stopwatch_alloc );
-    rb_define_method( cH_Stopwatch, "start", hitimes_stopwatch_start, 0 );
-    rb_define_method( cH_Stopwatch, "stop", hitimes_stopwatch_stop, 0 );
-    rb_define_method( cH_Stopwatch, "split", hitimes_stopwatch_stop, 0 );
-    rb_define_method( cH_Stopwatch, "intervals", hitimes_stopwatch_intervals, 0 );
-    rb_define_method( cH_Stopwatch, "elapsed_time", hitimes_stopwatch_elapsed_time, 0);
-    */
+    /* Interval class */
+    cH_Interval = rb_define_class_under( mH, "Interval", rb_cObject );
+    rb_define_alloc_func( cH_Interval, hitimes_interval_alloc );
+    rb_define_method( cH_Interval, "to_f",        hitimes_interval_to_seconds, 0 );
+    rb_define_method( cH_Interval, "to_seconds",  hitimes_interval_to_seconds, 0 );
+    rb_define_method( cH_Interval, "duration",    hitimes_interval_to_seconds, 0 );
+    rb_define_method( cH_Interval, "length",      hitimes_interval_to_seconds, 0 );
 
+    rb_define_method( cH_Interval, "start!", hitimes_interval_start_bang, 0);
+    rb_define_method( cH_Interval, "stop!",  hitimes_interval_stop_bang, 0);
+    rb_define_method( cH_Interval, "split!",  hitimes_interval_split_bang, 0);
+ 
 }
