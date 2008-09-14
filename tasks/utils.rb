@@ -69,11 +69,11 @@ module Utils
     def announcement
       cfg = Configuration.for("project") 
       { 
-        :subject        => "#{cfg.name} #{Hightimes::VERSION} Released",
-        :title          => "#{cfg.name} version #{Hightimes::VERSION} has been released.",
+        :subject        => "#{cfg.name} #{Hitimes::VERSION} Released",
+        :title          => "#{cfg.name} version #{Hitimes::VERSION} has been released.",
         :urls           => "#{cfg.homepage}",
         :description    => "#{cfg.description.rstrip}",
-        :release_notes  => Utils.release_notes_from(cfg.history)[Hightimes::VERSION].rstrip 
+        :release_notes  => Utils.release_notes_from(cfg.history)[Hitimes::VERSION].rstrip 
       }
     end
   end
