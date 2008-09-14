@@ -22,22 +22,29 @@ metrics.
 
 == SYNOPSIS
 
-  timer = Hitimes::Timer.measure do
-    # some long operation ...
-  end
-  puts timer.duration   
+  #
+  # get the duration of a piece of code
+  #
+  duration = Hitimes::Timer.measure do
+               # some operation ...
+             end
+  puts duration   
 
+  #
+  # calculate some stats about a particular operation on a collection
+  #
   timer = Hitimes::Timer.new
   collection.each do |item|
     timer.start
     # .. do something with item
     timer.stop
   end
+
   puts timer.mean
   puts timer.median
   puts timer.max
   puts timer.min
-
+  puts timer.stddev
 
 == CREDITS
 
