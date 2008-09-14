@@ -4,10 +4,13 @@
 #++
 #
 module Hitimes
+  #
+  # Access to various paths inside the project programatically
+  #
   module Paths
     #   
     # :call-seq:
-    #    Hitimes.root_dir -> String
+    #    Hitimes::Paths.root_dir -> String
     #
     # Returns The full expanded path of the parent directory of +lib+
     # going up the path from the current file.  A trailing File::SEPARATOR 
@@ -24,7 +27,7 @@ module Hitimes
 
     # 
     # :call-seq:
-    #   Hitimes.lib_path( *args ) -> String
+    #   Hitimes::Paths.lib_path( *args ) -> String
     #
     # Returns The full expanded path of the +lib+ directory below
     # _root_dir_.  All parameters passed in are joined onto the 
@@ -37,7 +40,7 @@ module Hitimes
 
     #
     # :call-seq:
-    #   Hitimes.sub_path( sub, *args ) -> String
+    #   Hitimes::Paths.sub_path( sub, *args ) -> String
     #
     # Returns the full expanded path of the +sub+ directory below _root_dir.  All
     # _arg_ parameters passed in are joined onto the result.  A trailing
