@@ -23,6 +23,7 @@ VALUE hitimes_interval_free(hitimes_interval_t* i)
         i->duration = Qnil;
     }
     xfree( i );
+    return Qnil;
 }
 
 VALUE hitimes_interval_alloc(VALUE klass)
