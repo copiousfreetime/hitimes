@@ -24,8 +24,34 @@ describe Hitimes::Interval do
     i.should be_stopped
   end
 
+  it "knows if it is currently running" do
+    i = Hitimes::Interval.new
+    i.should_not be_running
+    i.start
+    i.should be_running
+    i.stop
+    i.should_not be_running
+  end
 
-  it "calling duration multiple times returns successivly graetr durations" do
+  it "can time a block of code" do
+    d = Hitimes::Interval.measure do
+      sleep 0.2
+    end
+    d.should > 0.2
+    d.should_not > 0.25
+  end
+
+  it "raises an error if measure is called with no block" do
+    lambda{ Hitimes::Interval.measure }.should raise_error( Hitimes::Error )
+  end
+
+  it "creates an interval via #now" do
+    i = Hitimes::Interval.now
+    i.should be_started
+    i.should_not be_stopped
+  end
+
+  it "calling duration multiple times returns successivly grater durations" do
     i = Hitimes::Interval.new
     i.start
     y = i.duration
@@ -40,6 +66,12 @@ describe Hitimes::Interval do
     i.start_instant.should > 0
     i.start.should == false
     x.should == i.start_instant
+  end
+
+  it "returns the duration on the first call to stop" do
+    i = Hitimes::Interval.now
+    d = i.stop
+    d.should be_instance_of( Float )
   end
 
   it "calling stop multiple times on has no effect after the first call" do

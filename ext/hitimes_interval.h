@@ -41,4 +41,23 @@ typedef struct hitimes_interval {
 /* all the backends must define this method */
 hitimes_instant_t hitimes_get_current_instant( );
 double hitimes_instant_conversion_factor( );
+
+/**
+ * Methods for Interval
+ */
+
+VALUE hitimes_interval_free(hitimes_interval_t* i) ;
+VALUE hitimes_interval_alloc(VALUE klass);
+VALUE hitimes_interval_now( VALUE self );
+VALUE hitimes_interval_measure( VALUE self );
+VALUE hitimes_interval_split( VALUE self );
+VALUE hitimes_interval_start( VALUE self );
+VALUE hitimes_interval_stop( VALUE self );
+VALUE hitimes_interval_started( VALUE self );
+VALUE hitimes_interval_stopped( VALUE self );
+VALUE hitimes_interval_running( VALUE self );
+VALUE hitimes_interval_start_instant( VALUE self );
+VALUE hitimes_interval_stop_instant( VALUE self );
+VALUE hitimes_interval_duration ( VALUE self );
+
 #endif

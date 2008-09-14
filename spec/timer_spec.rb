@@ -13,26 +13,13 @@ describe Hitimes::Timer do
     t.should_not be_running
   end
 
-  it "#split creates adjacent intervals " do
-    t = Hitimes::Timer.new
-    t.start
-    t.split
-    t.stop
-
-    t.intervals.size.should == 2
-    t.duration.should == ( t.intervals.first.duration + t.intervals.last.duration )
-    t.intervals.first.stop_instant.should == t.intervals.last.start_instant
-  end
-  
-  it "starting and stopping creates non-adjacent intervals" do
-    t = Hitimes::Timer.new
-    t.start
-    t.stop
-    t.start
-    t.stop
-
-    t.intervals.size.should == 2
-    t.intervals.first.stop_instant.should_not == t.intervals.last.start_instant
+  it "#split returns the last duration and the timer is still running" do
+    t = Hitimes::Timer.now
+    d = t.split
+    t.should be_running
+    d.should > 0
+    t.count.should == 1
+    t.duration.should == d
   end
 
   it "#stop returns false if called more than once in a row" do
@@ -45,8 +32,8 @@ describe Hitimes::Timer do
   it "does not count a currently running interval as an interval in calculations" do
     t = Hitimes::Timer.new
     t.start
+    t.count.should == 0
     t.split
-    t.intervals.size.should == 1
     t.count.should == 1
   end
 

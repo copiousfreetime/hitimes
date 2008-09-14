@@ -40,6 +40,50 @@ VALUE hitimes_interval_alloc(VALUE klass)
 
 /**
  * call-sec:
+ *    Interval.now -> Interval
+ *
+ * Create an interval that has already started
+ */
+VALUE hitimes_interval_now( VALUE self )
+{
+    VALUE obj;
+    hitimes_interval_t *i = xmalloc( sizeof( hitimes_interval_t ) );
+
+    i->start_instant = hitimes_get_current_instant( );
+    i->stop_instant  = 0L;
+    i->duration      = Qnil;
+
+    obj = Data_Wrap_Struct(cH_Interval, NULL, hitimes_interval_free, i);
+
+    return obj;
+}
+
+/**
+ * call-sec:
+ *    Interval.measure {  }  -> Float
+ *
+ * Times the execution of the block returning the number of seconds it took
+ */
+VALUE hitimes_interval_measure( VALUE self )
+{
+    hitimes_instant_t before;
+    hitimes_instant_t after;
+    double            duration;
+
+    if ( !rb_block_given_p() ) {
+        rb_raise(eH_Error, "No block given to Interval.measure" );
+    }
+    
+    before = hitimes_get_current_instant( );
+    rb_yield( Qnil );
+    after  = hitimes_get_current_instant( );
+
+    duration = ( after - before ) / HITIMES_INSTANT_CONVERSION_FACTOR;
+    return rb_float_new( duration );
+}
+
+/**
+ * call-sec:
  *    interval.split -> Interval
  *
  * Immediately stop the current interval and start a new interval that has a
@@ -92,11 +136,11 @@ VALUE hitimes_interval_start( VALUE self )
 
 /**
  * call-sec:
- *    interval.stop -> boolean
+ *    interval.stop -> bool or Float
  *
  * mark the stop of the interval.  Calling stop on an already stopped interval
  * has no effect.  An interval can only be stopped once.  If the interval is
- * truely stopped then +true+ is returned, otherwise +false+.
+ * truely stopped then the duration is returned, otherwise +false+.
  */
 VALUE hitimes_interval_stop( VALUE self )
 {
@@ -109,8 +153,13 @@ VALUE hitimes_interval_stop( VALUE self )
     }
 
     if ( 0L == i->stop_instant ) {
+      double d;
+
       i->stop_instant = hitimes_get_current_instant( );
-      rc = Qtrue;
+      d = ( i->stop_instant - i->start_instant ) / HITIMES_INSTANT_CONVERSION_FACTOR;
+      i->duration = rb_float_new( d );
+      rb_gc_register_address( &(i->duration) );
+      rc = i->duration;
     }
 
     return rc;
@@ -145,6 +194,26 @@ VALUE hitimes_interval_stopped( VALUE self )
     Data_Get_Struct( self, hitimes_interval_t, i );
 
     return ( 0L == i->stop_instant ) ? Qfalse : Qtrue;
+}
+
+/**
+ * call-sec:
+ *    interval.running? -> boolean
+ *
+ * returns whether or not the interval is running or not.  This means that it
+ * has started, but not stopped.
+ */
+VALUE hitimes_interval_running( VALUE self )
+{
+    hitimes_interval_t *i;
+    VALUE              rc = Qfalse;
+
+    Data_Get_Struct( self, hitimes_interval_t, i );
+    if ( ( 0L != i->start_instant ) && ( 0L == i->stop_instant ) ) {
+        rc = Qtrue;
+    }
+
+    return rc;
 }
 
 
@@ -237,13 +306,18 @@ void Init_hitimes_interval()
     /* Interval class */
     cH_Interval = rb_define_class_under( mH, "Interval", rb_cObject );
     rb_define_alloc_func( cH_Interval, hitimes_interval_alloc );
+
+    rb_define_module_function( cH_Interval, "now", hitimes_interval_now, 0 );
+    rb_define_module_function( cH_Interval, "measure", hitimes_interval_measure, 0 );
+
     rb_define_method( cH_Interval, "to_f",         hitimes_interval_duration, 0 );
     rb_define_method( cH_Interval, "to_seconds",   hitimes_interval_duration, 0 );
     rb_define_method( cH_Interval, "duration",     hitimes_interval_duration, 0 );
     rb_define_method( cH_Interval, "length",       hitimes_interval_duration, 0 );
     
-    rb_define_method( cH_Interval, "started?",  hitimes_interval_started, 0 );
-    rb_define_method( cH_Interval, "stopped?",  hitimes_interval_stopped, 0 );
+    rb_define_method( cH_Interval, "started?",     hitimes_interval_started, 0 );
+    rb_define_method( cH_Interval, "running?",     hitimes_interval_running, 0 );
+    rb_define_method( cH_Interval, "stopped?",     hitimes_interval_stopped, 0 );
 
     rb_define_method( cH_Interval, "start_instant", hitimes_interval_start_instant, 0 );
     rb_define_method( cH_Interval, "stop_instant",  hitimes_interval_stop_instant, 0 );
