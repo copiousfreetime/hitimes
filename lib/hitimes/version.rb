@@ -6,8 +6,8 @@
 module Hitimes
   module Version
     MAJOR   = 0
-    MINOR   = 0
-    BUILD   = 1
+    MINOR   = 1
+    BUILD   = 0
 
     def to_a 
       [MAJOR, MINOR, BUILD]
