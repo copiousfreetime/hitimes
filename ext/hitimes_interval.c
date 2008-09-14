@@ -40,12 +40,12 @@ VALUE hitimes_interval_alloc(VALUE klass)
 
 /**
  * call-sec:
- *    interval.split! -> Interval
+ *    interval.split -> Interval
  *
- * Immediately stop! the current interval and start! a new interval that has a
+ * Immediately stop the current interval and start a new interval that has a
  * start_instant equivalent to the stop_interval of self.
  */
-VALUE hitimes_interval_split_bang( VALUE self )
+VALUE hitimes_interval_split( VALUE self )
 {
     hitimes_interval_t *first;
     hitimes_interval_t *second = xmalloc( sizeof( hitimes_interval_t ) );
@@ -66,13 +66,13 @@ VALUE hitimes_interval_split_bang( VALUE self )
 
 /**
  * call-sec:
- *    interval.start! -> boolean 
+ *    interval.start -> boolean 
  *
- * mark the start of the interval.  Calling start! on an already started
+ * mark the start of the interval.  Calling start on an already started
  * interval has no effect.  An interval can only be started once.  If the
  * interval is truely started +true+ is returned otherwise +false+.
  */
-VALUE hitimes_interval_start_bang( VALUE self )
+VALUE hitimes_interval_start( VALUE self )
 {
     hitimes_interval_t *i;
     VALUE               rc = Qfalse;
@@ -92,13 +92,13 @@ VALUE hitimes_interval_start_bang( VALUE self )
 
 /**
  * call-sec:
- *    interval.stop! -> boolean
+ *    interval.stop -> boolean
  *
- * mark the start of the interval.  Calling stop! on an already stopped interval
+ * mark the stop of the interval.  Calling stop on an already stopped interval
  * has no effect.  An interval can only be stopped once.  If the interval is
  * truely stopped then +true+ is returned, otherwise +false+.
  */
-VALUE hitimes_interval_stop_bang( VALUE self )
+VALUE hitimes_interval_stop( VALUE self )
 {
     hitimes_interval_t *i;
     VALUE               rc = Qfalse;
@@ -188,7 +188,7 @@ VALUE hitimes_interval_stop_instant( VALUE self )
  *    interval.duration -> Float
  *
  * Returns the Float value of the interval, the value is in seconds.  If the
- * interval has not had stop! called yet, it will report the number of seconds
+ * interval has not had stop called yet, it will report the number of seconds
  * in the interval up to the current point in time.
  */
 VALUE hitimes_interval_duration ( VALUE self )
@@ -248,8 +248,8 @@ void Init_hitimes_interval()
     rb_define_method( cH_Interval, "start_instant", hitimes_interval_start_instant, 0 );
     rb_define_method( cH_Interval, "stop_instant",  hitimes_interval_stop_instant, 0 );
 
-    rb_define_method( cH_Interval, "start!", hitimes_interval_start_bang, 0);
-    rb_define_method( cH_Interval, "stop!",  hitimes_interval_stop_bang, 0);
-    rb_define_method( cH_Interval, "split!",  hitimes_interval_split_bang, 0);
+    rb_define_method( cH_Interval, "start", hitimes_interval_start, 0);
+    rb_define_method( cH_Interval, "stop",  hitimes_interval_stop, 0);
+    rb_define_method( cH_Interval, "split",  hitimes_interval_split, 0);
  
 }

@@ -4,9 +4,6 @@
 #++
 
 module Hitimes
-
-  # The root directory of the project is considered to be the parent directory
-  # of the 'lib' directory.
   #   
   # returns:: [String] The full expanded path of the parent directory of 'lib'
   #           going up the path from the current file.  Trailing
@@ -19,24 +16,6 @@ module Hitimes
       @root_dir = path_parts[0...lib_index].join(::File::SEPARATOR) + ::File::SEPARATOR
     end 
     return @root_dir
-  end 
-
-  # returns:: [String] The full expanded path of the +config+ directory
-  #           below _root_dir_.  All parameters passed in are joined onto the
-  #           result.  Trailing File::SEPARATOR is guaranteed if _args_ are
-  #           *not* present.
-  #   
-  def self.config_path(*args)
-    self.sub_path("config", *args)
-  end 
-
-  # returns:: [String] The full expanded path of the +data+ directory below
-  #           _root_dir_.  All parameters passed in are joined onto the 
-  #           result. Trailing File::SEPARATOR is guaranteed if 
-  #           _*args_ are *not* present.
-  #   
-  def self.data_path(*args)
-    self.sub_path("data", *args)
   end 
 
   # returns:: [String] The full expanded path of the +lib+ directory below
@@ -55,3 +34,4 @@ module Hitimes
 
 end
 require 'hitimes/version'
+require 'hitimes/timer'

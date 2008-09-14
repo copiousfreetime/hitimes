@@ -7,6 +7,7 @@
 # make sure our project's top level directory and the lib directory are added to
 # the ruby search path.
 #-------------------------------------------------------------------------------
+$: << File.expand_path(File.join(File.dirname(__FILE__),"ext"))
 $: << File.expand_path(File.join(File.dirname(__FILE__),"lib"))
 $: << File.expand_path(File.dirname(__FILE__))
 
@@ -25,6 +26,7 @@ require 'rake/clean'
 # tasks/config.rb
 #-------------------------------------------------------------------------------
 require 'hitimes'
+
 Configuration.for("project") {
   name      "hitimes"
   version   Hitimes::VERSION
