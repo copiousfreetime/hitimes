@@ -34,5 +34,12 @@ if pkg_config = Configuration.for_if_exist?("packaging") then
     desc "reinstall gem"
     task :reinstall => [:uninstall, :repackage, :install]
 
+    desc "distribute copiously"
+    task :copious => [:package] do
+        Rake::SshFilePublisher.new('jeremy@copiousfreetime.org',
+                               '/var/www/vhosts/www.copiousfreetime.org/htdocs/gems/gems',
+                               'pkg',"#{Hitimes::GEM_SPEC.full_name}.gem").upload
+        sh "ssh jeremy@copiousfreetime.org rake -f /var/www/vhosts/www.copiousfreetime.org/htdocs/gems/Rakefile"
+    end 
  end
 end
