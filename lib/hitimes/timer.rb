@@ -24,7 +24,7 @@ module Hitimes
 
       # 
       # :call-seq:
-      #   Timer.new -> Timer
+      #   Timer.now -> Timer
       #
       # Return a newly allocated Timer that has already been started
       #

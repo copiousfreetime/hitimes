@@ -24,18 +24,16 @@ Process.times.
 
 == SYNOPSIS
 
-  #
-  #  Use Interval to calculate only the duration of a block of code
-  #
+Use Hitimes::Interval to calculate only the duration of a block of code
+
   duration = Hitimes::Interval.measure do
                # some operation ...
              end
 
   puts duration   
 
-  #
-  # Use a Timer to calculate statistics about an iterative operation
-  #
+Use a Hitimes::Timer to calculate statistics about an iterative operation
+
   timer = Hitimes::Timer.new
   collection.each do |item|
     timer.start
