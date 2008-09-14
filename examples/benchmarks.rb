@@ -25,7 +25,7 @@ end
 include Benchmark
 
 #
-# return a duration using hitimes
+# Normal apprach to Interval usage
 #
 def hitimes_duration_i1
   i = Hitimes::Interval.new
@@ -33,12 +33,27 @@ def hitimes_duration_i1
   i.stop
 end
 
+#
+# Use the easy access method to start stop an interval
+#
 def hitimes_duration_i2
   Hitimes::Interval.now.stop
 end
 
-def hitimes_duration_t
+#
+# Use a new timer each time
+#
+def hitimes_duration_t1
   Hitimes::Timer.now.stop
+end
+
+#
+# reuse the same timer over and over
+#
+HT = Hitimes::Timer.new
+def hitimes_duration_t2
+  HT.start
+  HT.stop
 end
 
 #
@@ -59,11 +74,13 @@ def time_duration
 end
   
 
-#
+puts "Testing time sampling 100,000 times"
+
 bm(20) do |x|
   x.report("Process")              { 100_000.times { process_duration } }
   x.report("Time")                 { 100_000.times { time_duration    } }
-  x.report("Hitimes::Timer")       { 100_000.times { hitimes_duration_t } }
+  x.report("Hitimes::Timer 1")     { 100_000.times { hitimes_duration_t1 } }
+  x.report("Hitimes::Timer 2")     { 100_000.times { hitimes_duration_t2 } }
   x.report("Hitimes::Interval 1")  { 100_000.times { hitimes_duration_i1 } }
   x.report("Hitimes::Interval 2")  { 100_000.times { hitimes_duration_i2 } }
 end

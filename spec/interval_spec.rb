@@ -1,6 +1,6 @@
 require File.expand_path( File.join( File.dirname( __FILE__ ), "spec_helper.rb" ) )
 
-require 'hitimes_interval'
+require 'hitimes_ext'
 
 describe Hitimes::Interval do
   it "has a 0 duration when newly created" do

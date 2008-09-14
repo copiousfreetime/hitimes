@@ -1,6 +1,6 @@
 require File.expand_path( File.join( File.dirname( __FILE__ ), "spec_helper.rb" ) )
 
-require 'hitimes'
+require 'hitimes/timer'
 
 describe Hitimes::Timer do
 
@@ -63,6 +63,18 @@ describe Hitimes::Timer do
 
   it "retuns 0.0 for mean if there is no data" do
     Hitimes::Timer.new.mean.should == 0.0
+  end
+
+  it "keeps track of the min value" do
+    t = Hitimes::Timer.new
+    2.times { t.start ; sleep 0.05 ; t.stop }
+    t.min.should > 0
+  end
+
+  it "keeps track of the max value" do
+    t = Hitimes::Timer.new
+    2.times { t.start ; sleep 0.05 ; t.stop }
+    t.max.should > 0
   end
 
   it "can create an already running timer" do

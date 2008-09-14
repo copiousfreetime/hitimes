@@ -7,10 +7,8 @@
 
 #include "hitimes_interval.h"
 
-/* Module and Classes */
-VALUE mH;           /* module HiTimes            */
-VALUE cH_Interval;  /* class  HiTimes::Interval  */
-VALUE eH_Error;     /* class  HiTimes::Error     */
+/* Modules and Classes -- defined here */
+VALUE cH_Interval;         /* class  Hitimes::Interval  */
 
 /**
  * Allocator and Deallocator for Interval classes
@@ -39,7 +37,7 @@ VALUE hitimes_interval_alloc(VALUE klass)
 }
 
 /**
- * call-sec:
+ * call-seq:
  *    Interval.now -> Interval
  *
  * Create an interval that has already started
@@ -59,7 +57,7 @@ VALUE hitimes_interval_now( VALUE self )
 }
 
 /**
- * call-sec:
+ * call-seq:
  *    Interval.measure {  }  -> Float
  *
  * Times the execution of the block returning the number of seconds it took
@@ -83,7 +81,7 @@ VALUE hitimes_interval_measure( VALUE self )
 }
 
 /**
- * call-sec:
+ * call-seq:
  *    interval.split -> Interval
  *
  * Immediately stop the current interval and start a new interval that has a
@@ -109,7 +107,7 @@ VALUE hitimes_interval_split( VALUE self )
 
 
 /**
- * call-sec:
+ * call-seq:
  *    interval.start -> boolean 
  *
  * mark the start of the interval.  Calling start on an already started
@@ -135,7 +133,7 @@ VALUE hitimes_interval_start( VALUE self )
 
 
 /**
- * call-sec:
+ * call-seq:
  *    interval.stop -> bool or Float
  *
  * mark the stop of the interval.  Calling stop on an already stopped interval
@@ -166,7 +164,7 @@ VALUE hitimes_interval_stop( VALUE self )
 }
 
 /**
- * call-sec:
+ * call-seq:
  *    interval.started? -> boolean
  *
  * returns whether or not the interval has been started
@@ -182,7 +180,7 @@ VALUE hitimes_interval_started( VALUE self )
 
 
 /**
- * call-sec:
+ * call-seq:
  *    interval.stopped? -> boolean
  *
  * returns whether or not the interval has been stopped
@@ -197,7 +195,7 @@ VALUE hitimes_interval_stopped( VALUE self )
 }
 
 /**
- * call-sec:
+ * call-seq:
  *    interval.running? -> boolean
  *
  * returns whether or not the interval is running or not.  This means that it
@@ -218,7 +216,7 @@ VALUE hitimes_interval_running( VALUE self )
 
 
 /** 
- * call-sec:
+ * call-seq:
  *    interval.start_instant -> Integer
  *
  * The integer representing the start instant of the Interval.  This value
@@ -235,7 +233,7 @@ VALUE hitimes_interval_start_instant( VALUE self )
 
 
 /** 
- * call-sec:
+ * call-seq:
  *    interval.stop_instant -> Integer
  *
  * The integer representing the stop instant of the Interval.  This value
@@ -291,39 +289,51 @@ VALUE hitimes_interval_duration ( VALUE self )
 
 
 /**
- * The HiTimes Ruby Extension
+ * Document-class: Hitimes::Interval
+ *
+ * This is the lowest level timing mechanism available.  It allows for easy
+ * measuring based upon a block:
+ *
+ *   duration = Interval.measure { ... }
+ *
+ * Or measuring something specifically
+ *
+ *   interval = Interval.new
+ *   interval.start
+ *   duration = interval.stop
+ *
+ * Allocating and starting an interval can be done in one method call with
+ *
+ *   interval = Interval.now
+ *
+ * Interval is useful when you only need to track a single interval of time, or
+ * if you do not want to track statistics about an operation.
+ *
  */
 void Init_hitimes_interval()
 {
-    /*
-     * Top level module encapsulating the entire HiTimes library
-     */
-    mH = rb_define_module("Hitimes");
+    mH = rb_define_module("Hitimes"); 
    
-    /* Error class */
-    eH_Error = rb_define_class_under(mH, "Error", rb_eStandardError);
-
-    /* Interval class */
     cH_Interval = rb_define_class_under( mH, "Interval", rb_cObject );
     rb_define_alloc_func( cH_Interval, hitimes_interval_alloc );
 
-    rb_define_module_function( cH_Interval, "now", hitimes_interval_now, 0 );
-    rb_define_module_function( cH_Interval, "measure", hitimes_interval_measure, 0 );
+    rb_define_module_function( cH_Interval, "now", hitimes_interval_now, 0 ); /* in hitimes_interval.c */
+    rb_define_module_function( cH_Interval, "measure", hitimes_interval_measure, 0 ); /* in hitimes_interval.c */
 
-    rb_define_method( cH_Interval, "to_f",         hitimes_interval_duration, 0 );
-    rb_define_method( cH_Interval, "to_seconds",   hitimes_interval_duration, 0 );
-    rb_define_method( cH_Interval, "duration",     hitimes_interval_duration, 0 );
-    rb_define_method( cH_Interval, "length",       hitimes_interval_duration, 0 );
-    
-    rb_define_method( cH_Interval, "started?",     hitimes_interval_started, 0 );
-    rb_define_method( cH_Interval, "running?",     hitimes_interval_running, 0 );
-    rb_define_method( cH_Interval, "stopped?",     hitimes_interval_stopped, 0 );
+    rb_define_method( cH_Interval, "to_f",         hitimes_interval_duration, 0 ); /* in hitimes_interval.c */
+    rb_define_method( cH_Interval, "to_seconds",   hitimes_interval_duration, 0 ); /* in hitimes_interval.c */
+    rb_define_method( cH_Interval, "duration",     hitimes_interval_duration, 0 ); /* in hitimes_interval.c */
+    rb_define_method( cH_Interval, "length",       hitimes_interval_duration, 0 ); /* in hitimes_interval.c */
+     
+    rb_define_method( cH_Interval, "started?",     hitimes_interval_started, 0 ); /* in hitimes_interval.c */
+    rb_define_method( cH_Interval, "running?",     hitimes_interval_running, 0 ); /* in hitimes_interval.c */
+    rb_define_method( cH_Interval, "stopped?",     hitimes_interval_stopped, 0 ); /* in hitimes_interval.c */
 
-    rb_define_method( cH_Interval, "start_instant", hitimes_interval_start_instant, 0 );
-    rb_define_method( cH_Interval, "stop_instant",  hitimes_interval_stop_instant, 0 );
+    rb_define_method( cH_Interval, "start_instant", hitimes_interval_start_instant, 0 ); /* in hitimes_interval.c */
+    rb_define_method( cH_Interval, "stop_instant",  hitimes_interval_stop_instant, 0 ); /* in hitimes_interval.c */
 
-    rb_define_method( cH_Interval, "start", hitimes_interval_start, 0);
-    rb_define_method( cH_Interval, "stop",  hitimes_interval_stop, 0);
-    rb_define_method( cH_Interval, "split",  hitimes_interval_split, 0);
+    rb_define_method( cH_Interval, "start", hitimes_interval_start, 0); /* in hitimes_interval.c */
+    rb_define_method( cH_Interval, "stop",  hitimes_interval_stop, 0); /* in hitimes_interval.c */
+    rb_define_method( cH_Interval, "split",  hitimes_interval_split, 0); /* in hitimes_interval.c */
  
 }

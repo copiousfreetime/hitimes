@@ -3,11 +3,21 @@
 # All rights reserved.  See LICENSE and/or COPYING for details.
 #++
 
+#
+# The top level module containing the contents of the hitimes library
+#
+# use the library with:
+#
+#   require 'hitimes'
+#
 module Hitimes
   #   
-  # returns:: [String] The full expanded path of the parent directory of 'lib'
-  #           going up the path from the current file.  Trailing
-  #           File::SEPARATOR is guaranteed.
+  # :call-seq:
+  #    Hitimes.root_dir -> String
+  #
+  # Returns The full expanded path of the parent directory of +lib+
+  # going up the path from the current file.  A trailing File::SEPARATOR 
+  # is guaranteed.
   #   
   def self.root_dir
     unless @root_dir
@@ -18,20 +28,32 @@ module Hitimes
     return @root_dir
   end 
 
-  # returns:: [String] The full expanded path of the +lib+ directory below
-  #           _root_dir_.  All parameters passed in are joined onto the 
-  #           result. Trailing File::SEPARATOR is guaranteed if 
-  #           _*args_ are *not* present.
+  # 
+  # :call-seq:
+  #   Hitimes.lib_path( *args ) -> String
+  #
+  # Returns The full expanded path of the +lib+ directory below
+  # _root_dir_.  All parameters passed in are joined onto the 
+  # result. A trailing File::SEPARATOR is guaranteed if 
+  # _args_ are *not* present.
   #   
   def self.lib_path(*args)
     self.sub_path("lib", *args)
   end 
 
+  #
+  # :call-seq:
+  #   Hitimes.sub_path( sub, *args ) -> String
+  #
+  # Returns the full expanded path of the +sub+ directory below _root_dir.  All
+  # _arg_ parameters passed in are joined onto the result.  A trailing
+  # File::SEPARATOR is guaranteed if _args_ are *not* present.
+  #
   def self.sub_path(sub,*args)
     sp = ::File.join(root_dir, sub) + File::SEPARATOR
     sp = ::File.join(sp, *args) if args
   end
-
 end
+
 require 'hitimes/version'
 require 'hitimes/timer'

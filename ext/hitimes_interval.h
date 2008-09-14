@@ -5,12 +5,10 @@
  * vim: shiftwidth=4 
  */ 
 
-#ifndef __HITIMES_H__
-#define __HITIMES_H__
+#ifndef __HITIMES_INTERVAL_H__
+#define __HITIMES_INTERVAL_H__
 
 #include <ruby.h>
-
-extern VALUE eH_Error;     /* class  HiTimes::Error     */
 
 #define NANOSECONDS_PER_SECOND  1e9
 
@@ -41,6 +39,13 @@ typedef struct hitimes_interval {
 /* all the backends must define this method */
 hitimes_instant_t hitimes_get_current_instant( );
 double hitimes_instant_conversion_factor( );
+
+
+/* Module and Classes -- defined at the top level */
+extern VALUE mH;           /* module Hitimes            */
+extern VALUE eH_Error;     /* class  Hitimes::Error     */
+extern VALUE cH_Interval;  /* class  Hitimes::Interval  */
+
 
 /**
  * Methods for Interval
