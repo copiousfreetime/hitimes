@@ -184,9 +184,18 @@ VALUE hitimes_stats_stddev ( VALUE self )
  * this contrived example shows getting a list of all the files in a directory
  * and running stats on file sizes.
  *
- *   stats = Hitimes::Stats.new
- *   File.open
+ *     s = Hitimes::Stats.new
+ *     dir = ARGV.shift || Dir.pwd
+ *     Dir.entries( dir ).each do |entry|
+ *       fs = File.stat( entry )
+ *       if fs.file? then
+ *         s.update( fs.size )
+ *        end
+ *     end
  *
+ *     %w[ count min max mean sum stddev ].each do |m|
+ *       puts "#{m.rjust(6)} : #{s.send( m ) }"
+ *     end
  */
 void Init_hitimes_stats()
 {
