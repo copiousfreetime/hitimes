@@ -12,9 +12,7 @@
 
 extern VALUE eH_Error;     /* class  HiTimes::Error     */
 
-/* 
- * Get a 64bit unsigned type for each backend
- */
+#define NANOSECONDS_PER_SECOND  1e9
 
 #ifdef USE_INSTANT_CLOCK_GETTIME
 #    define HITIMES_U64INT unsigned long long int
