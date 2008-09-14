@@ -5,6 +5,7 @@ require 'rbconfig'
 Mkrf::Generator.new('hitimes_ext') do |g|
     g.logger.level = Logger::WARN
 
+    g.include_library("rt")
     if g.has_function?( 'clock_gettime' ) then
       g.add_define "USE_INSTANT_CLOCK_GETTIME=1"
     elsif Config::CONFIG['host_os'] =~ /darwin/ then

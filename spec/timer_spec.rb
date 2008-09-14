@@ -47,7 +47,7 @@ describe Hitimes::Timer do
   it "calculates the mean of the durations" do
     t = Hitimes::Timer.new
     2.times { t.start ; sleep 0.05 ; t.stop }
-    t.mean.should > 0.05
+    t.mean.should > 0.04
   end
 
   it "calculates the stddev of the durations" do
@@ -87,10 +87,10 @@ describe Hitimes::Timer do
     dur.should > 0.025
   end
 
-  it "can meauser a block of code from an instance" do
+  it "can measuer a block of code from an instance" do
     t = Hitimes::Timer.new
     3.times { t.measure { sleep 0.05 } }
-    t.duration.should > 0.15
+    t.duration.should > 0.14
     t.count.should == 3
   end
 
