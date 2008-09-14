@@ -13,8 +13,8 @@ if spec_config = Configuration.for_if_exist?("test") then
       require 'spec/rake/spectask'
       Spec::Rake::SpecTask.new do |r| 
         r.ruby_opts   = spec_config.ruby_opts
-        r.libs        = [ Hitimes.lib_path, 
-                          Hitimes.root_dir ]
+        r.libs        = [ Hitimes::Paths.lib_path, 
+                          Hitimes::Paths.root_dir ]
         r.spec_files  = spec_config.files 
         r.spec_opts   = spec_config.options
 

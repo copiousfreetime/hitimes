@@ -25,7 +25,8 @@ require 'rake/clean'
 # Main configuration for the project, these overwrite the items that are in
 # tasks/config.rb
 #-------------------------------------------------------------------------------
-require 'hitimes'
+require 'hitimes/version'
+require 'hitimes/paths'
 
 Configuration.for("project") {
   name      "hitimes"
