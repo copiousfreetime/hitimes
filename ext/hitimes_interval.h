@@ -41,6 +41,10 @@ typedef struct hitimes_interval {
 hitimes_instant_t hitimes_get_current_instant( );
 double hitimes_instant_conversion_factor( );
 
+/* init methods */
+void Init_hitimes_stats();
+void Init_hitimes_interval();
+
 
 /* Module and Classes -- defined at the top level */
 extern VALUE mH;           /* module Hitimes            */
