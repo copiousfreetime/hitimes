@@ -42,6 +42,7 @@ if rf_conf = Configuration.for_if_exist?("rubyforge") then
     task :rubyforge do
       info = Utils.announcement
       rubyforge = RubyForge.new
+      rubyforge.configure
       rubyforge.login
       rubyforge.post_news(rf_conf.project, info[:subject], "#{info[:title]}\n\n#{info[:urls]}\n\n#{info[:release_notes]}")
       puts "Posted to rubyforge"
