@@ -15,16 +15,19 @@ if rf_conf = Configuration.for_if_exist?("rubyforge") then
 
       rubyforge = RubyForge.new
 
+      config = {}
+      config["release_notes"]     = proj_conf.description
+      config["release_changes"]   = Utils.release_notes_from(proj_conf.history)[Hitimes::VERSION]
+      config["Prefomatted"]       = true
+ 
+
+      rubyforge.configure config
+
       # make sure this release doesn't already exist
       releases = rubyforge.autoconfig['release_ids']
       if releases.has_key?(Hitimes::GEM_SPEC.name) and releases[Hitimes::GEM_SPEC.name][Hitimes::VERSION] then
         abort("Release #{Hitimes::VERSION} already exists! Unable to release.")
       end
-
-      config = rubyforge.userconfig
-      config["release_notes"]     = proj_conf.description
-      config["release_changes"]   = Utils.release_notes_from(proj_conf.history)[Hitimes::VERSION]
-      config["Prefomatted"]       = true
 
       puts "Uploading to rubyforge..."
       files = FileList[File.join("pkg","#{Hitimes::GEM_SPEC.name}-#{Hitimes::VERSION}*.*")].to_a
