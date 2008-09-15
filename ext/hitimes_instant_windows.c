@@ -24,4 +24,4 @@ hitimes_instant_t hitimes_get_current_instant()
     return (hitimes_instant_t)tick.QuadPart;
 }
 
-#end
+#endif

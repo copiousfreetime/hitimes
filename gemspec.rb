@@ -26,6 +26,7 @@ Hitimes::GEM_SPEC = Gem::Specification.new do |spec|
 
   if ext_conf = Configuration.for_if_exist?("extension") then
     spec.extensions <<  ext_conf.configs
+    spec.require_paths << 'ext'
     spec.extensions.flatten!
   end   
 
