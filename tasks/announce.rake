@@ -16,6 +16,8 @@ namespace :announce do
       mail.puts "Subject: [ANN] #{info[:subject]}"
       mail.puts
       mail.puts info[:title]
+      mail.puts 
+      mail.puts "  gem install #{Hitimes::GEM_SPEC.name}"
       mail.puts
       mail.puts info[:urls]
       mail.puts 
@@ -25,7 +27,6 @@ namespace :announce do
       mail.puts 
       mail.puts info[:release_notes]
       mail.puts
-      mail.puts info[:urls]
     end 
     puts "Created the following as email.txt:"
     puts "-" * 72
