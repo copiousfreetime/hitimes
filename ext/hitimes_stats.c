@@ -17,6 +17,7 @@ VALUE cH_Stats;         /* Hitimes::Stats */
 VALUE hitimes_stats_free(hitimes_stats_t* s) 
 {
     xfree( s );
+    return Qnil;
 }
 
 VALUE hitimes_stats_alloc(VALUE klass)

@@ -34,7 +34,7 @@ Configuration.for('packaging') {
     tasks     FileList["tasks/**/*.r{ake,b}"]
     rdoc      FileList[proj_conf.readme, proj_conf.history,
                        proj_conf.license] + lib + FileList["ext/*.c"]
-    all       bin + ext + lib + test + data + rdoc + tasks 
+    all       bin + ext + lib + test + data + rdoc + tasks  + FileList["Rakefile"]
   }
 
   # ways to package the results

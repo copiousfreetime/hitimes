@@ -19,7 +19,8 @@
 #    define HITIMES_U64INT unsigned long long int
 #    define HITIMES_INSTANT_CONVERSION_FACTOR 1e9
 #elif USE_INSTANT_WINDOWS
-#    include "hitimes_instant_windows.h"
+#    define HITIMES_U64INT unsigned __int64
+#    define HITIMES_INSTANT_CONVERSION_FACTOR hitimes_instant_conversion_factor()
 #else
 #    error "Unable to build hitimes, no Instance backend available"
 #endif
