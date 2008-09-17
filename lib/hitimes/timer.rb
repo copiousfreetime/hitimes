@@ -172,6 +172,16 @@ module Hitimes
 
     #
     # :call-seq:
+    #   timer.rate -> Float
+    #
+    # Return the rate of the states, which is the count / duration
+    #
+    def rate
+      stats.rate
+    end
+
+    #
+    # :call-seq:
     #   timer.stddev -> Float
     #
     # The standard deviation of all the intervals
