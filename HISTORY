@@ -1,4 +1,9 @@
 = Changelog
+
+== Version Next
+
+* added Timer#rate method
+
 == Version 0.2.0
 
 * Performance improvements
