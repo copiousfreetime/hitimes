@@ -50,6 +50,13 @@ describe Hitimes::Timer do
     t.mean.should > 0.04
   end
 
+  it "calculates the rate of the counts " do
+    t = Hitimes::Timer.new
+    5.times { t.start ; sleep 0.05 ; t.stop }
+    t.rate.should > 19.0
+  end
+
+
   it "calculates the stddev of the durations" do
     t = Hitimes::Timer.new
     2.times { t.start ; sleep 0.05 ; t.stop }
