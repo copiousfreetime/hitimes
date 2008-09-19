@@ -21,10 +21,6 @@ describe Hitimes::Stats do
     @full_stats.mean.should == 2.0
   end
 
-  it "calculates the rate correctly" do
-    @full_stats.rate.should == 0.5
-  end
-
   it "tracks the maximum value" do
     @full_stats.max.should == 3.0
   end
