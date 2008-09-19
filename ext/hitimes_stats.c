@@ -86,6 +86,29 @@ VALUE hitimes_stats_mean( VALUE self )
     return rb_float_new( mean );
 }
 
+
+/**
+ * call-seq:
+ *    stat.rate -> Float
+ * 
+ * Return the count per seconds ( rate ) rate stat.  If no values have passed
+ * through the stats object then 0.0 is returned.
+ */
+VALUE hitimes_stats_rate( VALUE self )
+{
+    hitimes_stats_t *stats;
+    double           rate = 0.0;
+
+    Data_Get_Struct( self, hitimes_stats_t, stats );
+
+    if ( stats->sum > 0.0 ) {
+      rate = stats->count / stats->sum;
+    }
+
+    return rb_float_new( rate );
+}
+
+
 /**
  * call-seq:
  *    stat.max -> Float
@@ -208,6 +231,7 @@ void Init_hitimes_stats()
 
     rb_define_method( cH_Stats, "update", hitimes_stats_update, 1 ); /* in hitimes_stats.c */
     rb_define_method( cH_Stats, "mean", hitimes_stats_mean, 0 ); /* in hitimes_stats.c */
+    rb_define_method( cH_Stats, "rate", hitimes_stats_rate, 0 ); /* in hitimes_stats.c */
     rb_define_method( cH_Stats, "max", hitimes_stats_max, 0 ); /* in hitimes_stats.c */
     rb_define_method( cH_Stats, "min", hitimes_stats_min, 0 ); /* in hitimes_stats.c */
     rb_define_method( cH_Stats, "count", hitimes_stats_count, 0 ); /* in hitimes_stats.c */
