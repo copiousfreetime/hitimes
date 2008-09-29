@@ -83,7 +83,7 @@ Configuration.for('rdoc') {
   files       Configuration.for('packaging').files.rdoc
   main_page   files.first
   title       Configuration.for('project').name
-  options     %w[ --line-numbers --inline-source ]
+  options     %w[ --line-numbers --inline-source -f darkfish ]
   output_dir  "doc"
 }
 

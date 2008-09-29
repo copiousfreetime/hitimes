@@ -47,6 +47,11 @@ Use a Hitimes::Timer to calculate statistics about an iterative operation
   puts timer.min
   puts timer.stddev
 
+
+== CHANGES
+
+Read the HISTORY file.
+
 == CREDITS
 
 * Bruce Williams for suggesting the idea

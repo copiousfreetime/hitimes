@@ -1,8 +1,9 @@
 = Changelog
 
-== Version Next
+== Version 0.2.1
 
 * added Timer#rate method
+* switched to darkfish rdoc
 
 == Version 0.2.0
 

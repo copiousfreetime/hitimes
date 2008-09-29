@@ -11,7 +11,7 @@ module Hitimes
 
     MAJOR   = 0
     MINOR   = 2
-    BUILD   = 0
+    BUILD   = 1
 
     # 
     # :call-seq:
