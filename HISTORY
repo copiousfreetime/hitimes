@@ -1,5 +1,11 @@
 = Changelog
 
+== Version 0.3.0
+
+* switched to extconf for building extensions
+* first release of windows binary gem
+* reverted back to normal rdoc
+
 == Version 0.2.1
 
 * added Timer#rate method

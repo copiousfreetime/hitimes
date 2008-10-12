@@ -6,7 +6,6 @@ if Config::CONFIG['host_os'] =~ /darwin/ then
   $LDFLAGS += " -framework CoreServices"
 elsif Config::CONFIG['host_os'] =~ /win32/ or Config::CONFIG['host_os'] =~ /mingw/ then
   $CFLAGS += " -DUSE_INSTANT_WINDOWS=1"
-  puts "going for mingw"
 else
   if have_library("rt", "clock_gettime") then
     $CFLAGS += " -DUSE_INSTANT_CLOCK_GETTIME=1"

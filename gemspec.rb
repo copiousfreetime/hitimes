@@ -51,3 +51,5 @@ Hitimes::GEM_SPEC_WIN = Hitimes::GEM_SPEC.clone
 Hitimes::GEM_SPEC_WIN.platform = ::Gem::Platform.new( "i386-mswin32_60" )
 Hitimes::GEM_SPEC_WIN.extensions = []
 Hitimes::GEM_SPEC_WIN.files +=  ["lib/hitimes_ext.so"]
+
+Hitimes::SPECS = [ Hitimes::GEM_SPEC, Hitimes::GEM_SPEC_WIN ]

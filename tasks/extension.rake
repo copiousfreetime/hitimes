@@ -54,7 +54,9 @@ if ext_config = Configuration.for_if_exist?('extension') then
         conf  = parts.last
         Dir.chdir(path.dirname) do |d| 
           #sh "rake clobber"
-          sh "make distclean"
+          if File.exist?( "Makefile" ) then
+            sh "make distclean"
+          end
         end 
       end 
     end

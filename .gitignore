@@ -5,6 +5,7 @@
 *.a
 ext/Rakefile
 ext/Makefile
+ext/rbconfig.rb
 *.log
 a.out
 *.so

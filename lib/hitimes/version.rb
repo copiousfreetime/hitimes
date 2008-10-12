@@ -10,8 +10,8 @@ module Hitimes
   module Version
 
     MAJOR   = 0
-    MINOR   = 2
-    BUILD   = 1
+    MINOR   = 3
+    BUILD   = 0
 
     # 
     # :call-seq:
