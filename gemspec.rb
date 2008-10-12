@@ -45,5 +45,9 @@ Hitimes::GEM_SPEC = Gem::Specification.new do |spec|
   if rf = Configuration.for_if_exist?('rubyforge') then
     spec.rubyforge_project  = rf.project
   end 
-
 end
+
+Hitimes::GEM_SPEC_WIN = Hitimes::GEM_SPEC.clone
+Hitimes::GEM_SPEC_WIN.platform = ::Gem::Platform.new( "i386-mswin32_60" )
+Hitimes::GEM_SPEC_WIN.extensions = []
+Hitimes::GEM_SPEC_WIN.files +=  ["lib/hitimes_ext.so"]

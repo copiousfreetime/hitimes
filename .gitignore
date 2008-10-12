@@ -4,6 +4,7 @@
 *.o
 *.a
 ext/Rakefile
+ext/Makefile
 *.log
 a.out
 *.so

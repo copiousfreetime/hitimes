@@ -34,8 +34,13 @@ if pkg_config = Configuration.for_if_exist?("packaging") then
     desc "reinstall gem"
     task :reinstall => [:uninstall, :repackage, :install]
 
+    desc "package up a windows gem"
+    task :package_win => "ext:build_win" do
+      Gem::Builder.new( Hitimes::GEM_SPEC_WIN ).build 
+    end
+
     desc "distribute copiously"
-    task :copious => [:package] do
+    task :copious => [:package, :package_win ] do
         Rake::SshFilePublisher.new('jeremy@copiousfreetime.org',
                                '/var/www/vhosts/www.copiousfreetime.org/htdocs/gems/gems',
                                'pkg',"#{Hitimes::GEM_SPEC.full_name}.gem").upload

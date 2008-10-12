@@ -15,10 +15,25 @@ if ext_config = Configuration.for_if_exist?('extension') then
         conf = parts.last
         Dir.chdir(path.dirname) do |d| 
           ruby conf.to_s
-          sh "rake default"
+          #sh "rake default"
+          sh "make" 
         end
       end
     end 
+
+    desc "Build the extension for windows"
+    task :build_win => :clobber do
+      Hitimes::GEM_SPEC.extensions.each do |extension|
+        path = Pathname.new(extension)
+        parts = path.split
+        conf = parts.last
+        Dir.chdir(path.dirname) do |d| 
+          cp "rbconfig-mingw.rb", "rbconfig.rb"
+          sh "ruby -I. extconf.rb"
+          sh "make"
+        end
+      end
+    end
 
     task :clean do
       ext_config.configs.each do |extension|
@@ -26,7 +41,8 @@ if ext_config = Configuration.for_if_exist?('extension') then
         parts = path.split
         conf  = parts.last
         Dir.chdir(path.dirname) do |d| 
-          sh "rake clean"
+          #sh "rake clean"
+          sh "make clean"
         end 
       end 
     end 
@@ -37,7 +53,8 @@ if ext_config = Configuration.for_if_exist?('extension') then
         parts = path.split
         conf  = parts.last
         Dir.chdir(path.dirname) do |d| 
-          sh "rake clobber"
+          #sh "rake clobber"
+          sh "make distclean"
         end 
       end 
     end
