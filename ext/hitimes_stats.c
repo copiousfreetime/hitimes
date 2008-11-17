@@ -217,7 +217,7 @@ VALUE hitimes_stats_stddev ( VALUE self )
  *        end
  *     end
  *
- *     %w[ count min max mean sum stddev ].each do |m|
+ *     %w[ count min max mean sum stddev rate ].each do |m|
  *       puts "#{m.rjust(6)} : #{s.send( m ) }"
  *     end
  */
