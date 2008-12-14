@@ -2,7 +2,7 @@ require 'rbconfig'
 require 'mkmf'
 
 if Config::CONFIG['host_os'] =~ /darwin/ then
-  $CFLAGS += " -DUSE_INSTANT_OSX=1"
+  $CFLAGS += " -DUSE_INSTANT_OSX=1 -Wall"
   $LDFLAGS += " -framework CoreServices"
 elsif Config::CONFIG['host_os'] =~ /win32/ or Config::CONFIG['host_os'] =~ /mingw/ then
   $CFLAGS += " -DUSE_INSTANT_WINDOWS=1"

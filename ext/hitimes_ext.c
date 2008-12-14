@@ -1,4 +1,5 @@
 #include <ruby.h>
+#include "hitimes_interval.h"
 
 /* Module and Classes */
 VALUE mH;           /* module Hitimes            */
