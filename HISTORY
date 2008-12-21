@@ -1,4 +1,10 @@
 = Changelog
+== Version 0.4.0 2008-12-20
+
+* Added new stat 'rate'
+* Added new stat method to_hash
+* Added MutexedStats class for threadsafe updates
+  - not needed when used in MRI 1.8.x
 
 == Version 0.3.0
 

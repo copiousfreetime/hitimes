@@ -18,4 +18,7 @@ module Hitimes
 end
 require 'hitimes/paths'
 require 'hitimes/version'
+require 'hitimes/stats'
+require 'hitimes/mutexed_stats'
 require 'hitimes/timer'
+

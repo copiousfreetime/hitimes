@@ -230,11 +230,12 @@ void Init_hitimes_stats()
     rb_define_alloc_func( cH_Stats, hitimes_stats_alloc );
 
     rb_define_method( cH_Stats, "update", hitimes_stats_update, 1 ); /* in hitimes_stats.c */
-    rb_define_method( cH_Stats, "mean", hitimes_stats_mean, 0 ); /* in hitimes_stats.c */
-    rb_define_method( cH_Stats, "rate", hitimes_stats_rate, 0 ); /* in hitimes_stats.c */
-    rb_define_method( cH_Stats, "max", hitimes_stats_max, 0 ); /* in hitimes_stats.c */
-    rb_define_method( cH_Stats, "min", hitimes_stats_min, 0 ); /* in hitimes_stats.c */
+    
     rb_define_method( cH_Stats, "count", hitimes_stats_count, 0 ); /* in hitimes_stats.c */
+    rb_define_method( cH_Stats, "max", hitimes_stats_max, 0 ); /* in hitimes_stats.c */
+    rb_define_method( cH_Stats, "mean", hitimes_stats_mean, 0 ); /* in hitimes_stats.c */
+    rb_define_method( cH_Stats, "min", hitimes_stats_min, 0 ); /* in hitimes_stats.c */
+    rb_define_method( cH_Stats, "rate", hitimes_stats_rate, 0 ); /* in hitimes_stats.c */
     rb_define_method( cH_Stats, "sum", hitimes_stats_sum, 0 ); /* in hitimes_stats.c */
     rb_define_method( cH_Stats, "stddev", hitimes_stats_stddev, 0 ); /* in hitimes_stats.c */
 }

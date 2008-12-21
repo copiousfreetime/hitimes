@@ -15,6 +15,7 @@ describe Hitimes::Stats do
     @stats.min.should == 0.0
     @stats.max.should == 0.0
     @stats.sum.should == 0.0
+    @stats.rate.should == 0.0
   end
 
   it "calculates the mean correctly" do
@@ -44,5 +45,28 @@ describe Hitimes::Stats do
   it "calculates the standard deviation" do
     @full_stats.stddev.should == 1.0
   end 
+
+  describe "#to_hash " do
+    it "converts to a Hash" do
+      h = @full_stats.to_hash
+      h.size.should == ::Hitimes::Stats::STATS.size
+      h.keys.sort.should == ::Hitimes::Stats::STATS
+    end
+
+    it "converts to a limited Hash if given arguments" do
+      h = @full_stats.to_hash( "min", "max", "mean" )
+      h.size.should == 3
+      h.keys.sort.should == %w[ max mean min  ]
+
+      h = @full_stats.to_hash( %w[ count rate ] )
+      h.size.should == 2
+      h.keys.sort.should == %w[ count rate ]
+    end
+
+    it "raises NoMethodError if an invalid stat is used" do
+      lambda { @full_stats.to_hash( "wibble" ) }.should raise_error( NoMethodError )
+    end
+
+  end
 
 end

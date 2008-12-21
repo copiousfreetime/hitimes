@@ -46,6 +46,7 @@ Use a Hitimes::Timer to calculate statistics about an iterative operation
   puts timer.max
   puts timer.min
   puts timer.stddev
+  puts timer.rate
 
 
 == CHANGES
