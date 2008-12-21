@@ -1,4 +1,8 @@
 = Changelog
+== Version 
+
+* change to ISC License
+
 == Version 0.4.0 2008-12-20
 
 * Added new stat 'rate'
