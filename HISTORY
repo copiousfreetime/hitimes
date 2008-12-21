@@ -3,8 +3,9 @@
 
 * Added new stat 'rate'
 * Added new stat method to_hash
-* Added MutexedStats class for threadsafe updates
+* Added MutexedStats class for threadsafe stats collection 
   - not needed when used in MRI 1.8.x
+* remove stale dependency on mkrf
 
 == Version 0.3.0
 
