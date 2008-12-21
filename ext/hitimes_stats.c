@@ -91,8 +91,11 @@ VALUE hitimes_stats_mean( VALUE self )
  * call-seq:
  *    stat.rate -> Float
  * 
- * Return the count per seconds ( rate ) rate stat.  If no values have passed
- * through the stats object then 0.0 is returned.
+ * Return the count per sum.  In many cases when Stats#update( _value_ ) is
+ * called, the _value_ is a unit of time, typically seconds.  #rate 
+ * is a convenience for those times.  In the most common case, where _value_ 
+ * is in seconds, then #rate returns the count / second.
+ *
  */
 VALUE hitimes_stats_rate( VALUE self )
 {
@@ -203,7 +206,7 @@ VALUE hitimes_stats_stddev ( VALUE self )
  * modeled after the RFuzz::Sampler class, but implemented in C.  For general use
  * you allocate a new Stats object, and then update it with new values.  The
  * Stats object will keep track of the _min_, _max_, _count_ and _sum_ and when
- * you want you may also retrieve the _mean_ and _stddev_.
+ * you want you may also retrieve the _mean_, _stddev_ and _rate_.
  *
  * this contrived example shows getting a list of all the files in a directory
  * and running stats on file sizes.
