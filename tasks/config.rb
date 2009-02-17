@@ -62,7 +62,7 @@ Configuration.for('test') {
   mode      "spec"
   files     Configuration.for("packaging").files.test
   options   %w[ --format specdoc --color ]
-  ruby_opts %w[ ]
+  ruby_opts %w[ -w ]
 }
 
 #-----------------------------------------------------------------------
@@ -72,7 +72,7 @@ Configuration.for('rcov') {
   output_dir  "coverage"
   libs        %w[ lib ]
   rcov_opts   %w[ --html ]
-  ruby_opts   %w[ ]
+  ruby_opts   %w[ -w ]
   test_files  Configuration.for('packaging').files.test
 }
 

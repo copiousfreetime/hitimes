@@ -3,6 +3,11 @@
 #include "hitimes_interval.h"
 
 #include <sys/time.h>
+#ifndef CLOCK_MONOTONIC
+# ifdef __linux__
+#    include <linux/time.h>
+# endif
+#endif
 
 hitimes_instant_t hitimes_get_current_instant( )
 {
