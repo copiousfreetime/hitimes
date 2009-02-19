@@ -10,5 +10,4 @@ describe Hitimes::Paths do
   it "can access the lib path of the project" do
     Hitimes::Paths.lib_path.should == File.expand_path( File.join( File.dirname( __FILE__ ), "..", "lib" ) ) + ::File::SEPARATOR
   end
-                                                
 end

@@ -1,0 +1,6 @@
+Future Release:
+    - create a pure ruby version
+    - do not blow up on install if unable to compile, fall back to pure ruby
+      version
+    - add string format for stats
+    - push Timer down to C level
