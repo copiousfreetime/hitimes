@@ -11,15 +11,15 @@ module Hitimes
 
     MAJOR   = 0
     MINOR   = 4
-    BUILD   = 0
+    BUILD   = 1
 
-    # 
+    #
     # :call-seq:
     #   Version.to_a -> [ MAJOR, MINOR, BUILD ]
     #
     # Return the version as an array of Integers
     #
-    def to_a 
+    def to_a
       [MAJOR, MINOR, BUILD]
     end
 
