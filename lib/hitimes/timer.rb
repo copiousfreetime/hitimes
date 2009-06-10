@@ -20,6 +20,14 @@ module Hitimes
     # holds all the statistics
     attr_reader :stats
 
+    # holds the time the first interval was started.
+    # This is the number of microseconds since UNIX epoch as a Float
+    attr_reader :min_start_time
+
+    # holds the time the last interval was stopped.
+    # This is the number of microseconds since UNIX epoch as a Float
+    attr_reader :max_stop_time
+
     class << self
 
       # 
@@ -53,6 +61,8 @@ module Hitimes
     def initialize
       @stats = Stats.new
       @current_interval = nil
+      @min_start_time = nil
+      @max_stop_time = nil
     end
 
     #
@@ -84,6 +94,7 @@ module Hitimes
     #
     def start
       current_interval.start unless running?
+      @min_start_time ||= self.utc_microseconds() 
       nil
     end
 
@@ -100,6 +111,7 @@ module Hitimes
       if running? then
         d = current_interval.stop
         @current_interval = nil
+        @max_stop_time = self.utc_microseconds()
         stats.update( d )
         return d
       end
@@ -218,6 +230,15 @@ module Hitimes
     #
     def min
       stats.min
+    end
+
+    #
+    # :call-seq:
+    #   timer.utc_microseconds -> Float
+    #
+    # The current time in microseconds from the UNIX Epoch in the UTC
+    def utc_microseconds
+      Time.now.gmtime.to_f * 1000
     end
   end
 end

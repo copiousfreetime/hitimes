@@ -84,6 +84,30 @@ describe Hitimes::Timer do
     t.max.should > 0
   end
 
+  it "keeps track of the minimum start time of all the intervals" do
+    t = Hitimes::Timer.new
+    f1 = Time.now.gmtime.to_f * 1000
+    5.times { t.start ; sleep 0.05 ; t.stop }
+    f2 = Time.now.gmtime.to_f * 1000
+    t.min_start_time.should > f1
+    t.min_start_time.should < f2
+    # distance from now to start time should be greater than the distance from
+    # the start to the min start_time
+    (f2 - t.min_start_time).should > ( t.min_start_time - f1 )
+  end
+
+  it "keeps track of the last stop time of all the intervals" do
+    t = Hitimes::Timer.new
+    f1 = Time.now.gmtime.to_f * 1000
+    5.times { t.start ; sleep 0.05 ; t.stop }
+    f2 = Time.now.gmtime.to_f * 1000
+    t.max_stop_time.should > f1
+    t.max_stop_time.should < f2
+    # distance from now to max stop time time should be less than the distance
+    # from the start to the max stop time
+    (f2 - t.max_stop_time).should < ( t.max_stop_time - f1 )
+  end
+
   it "can create an already running timer" do
     t = Hitimes::Timer.now
     t.should be_running
