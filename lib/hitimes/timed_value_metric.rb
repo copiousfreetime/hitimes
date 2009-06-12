@@ -26,7 +26,7 @@ module Hitimes
   #
   # A TimedValueMetric keeps track of both the time it took to do an operation
   # and the size of the batch that was operated on.  These metrics are kept
-  # separately as +timed+ and +value+ accessors.
+  # separately as +timed_stats+ and +value_stats+ accessors.
   #
   class TimedValueMetric < Metric
     # holds all the Timed statistics
@@ -38,7 +38,7 @@ module Hitimes
     class << TimedValueMetric
       #
       # :call-seq:
-      #   TimedValueMetric.now -> TimedValueMetric
+      #   TimedValueMetric.now( 'name' ) -> TimedValueMetric
       #
       # Return a TimedValueMetric that has been started
       #
@@ -102,16 +102,17 @@ module Hitimes
     # :call-seq:
     #   timed_value_metric.stop( count ) -> Float or nil
     #
-    # Stop the current timed_value_metric.  The +count+ parameter must be a
+    # Stop the current metric.  The +count+ parameter must be a
     # value to update to the _value_ portion of the TimedValueMetric.  Generally
     # this is probably the number of things that were operated upon since
     # +start+ was invoked.
     #
-    # This updates both the _value_ and _timed_ stats and removes the current
-    # interval. If the metric is stopped then the duration of the last Interval
-    # is returned.  If the metric was already stopped before this call, then
-    # false is returned and no stats are updated.
+    # This updates both the +value_stats+ and +timed_stats+ stats and removes
+    # the current interval. If the metric is stopped then the duration of the
+    # last Interval is returned.  If the metric was already stopped before this
+    # call, then false is returned and no stats are updated.
     # 
+    #
     def stop( value )
       if running? then
         d = current_interval.stop
@@ -130,7 +131,7 @@ module Hitimes
     #
     # Measure the execution of a block and add those stats to the running stats.
     # The return value is the return value of the block.  A value must be passed
-    # into _measure()_ to update the _value_ portion of the TimedValueMetric.
+    # into +measure+ to update the +value_stats+ portion of the TimedValueMetric.
     #
     def measure( value, &block )
       return_value = nil
@@ -147,14 +148,15 @@ module Hitimes
     # :call-seq:
     #   timed_value_metric.split( value ) -> Float
     #
-    # Split the current timed_value_metric.  Essentially, mark a split time.
-    # This means stop the current interval, with the givein +value+ and create a
-    # new interval, but make sure that the new interval lines up exactly,
-    # timewise, behind the previous interval.
+    # Split the current metric.  Essentially, mark a split time.  This means
+    # stop the current interval, with the givein +value+ and create a new
+    # interval, but make sure that the new interval lines up exactly, timewise,
+    # behind the previous interval.
     #
-    # If the timer is running, then split returns the duration of the previous
-    # interval, i.e. the split-time.  If the timer is not running, nothing
+    # If the metric is running, then split returns the duration of the previous
+    # interval, i.e. the split-time.  If the metric is not running, nothing
     # happens, no stats are updated, and false is returned.  
+    #
     #
     def split( value )
       if running? then 
@@ -170,7 +172,7 @@ module Hitimes
 
     #
     # :call-seq:
-    #   timed_value_metric.durnation -> Float
+    #   timed_value_metric.duration -> Float
     #
     # The duration of measured time from the metric.
     #
@@ -188,19 +190,19 @@ module Hitimes
     # the +rate+ for a TimedValueMetric is the (sum of all quantities sampled) /
     # ( sum of all durations measured )
     # 
-    # For example, say you were measuring, using a TimedValueMetric the rate of
-    # batch job completion.
+    # For example, say you were measuring, using a TimedValueMetric batch jobs
+    # that had individual units of work.
     #
     #   tvm = TimedValueMetric.new( 'some-batch' )
     #   tvm.start
-    #   # process a batch
+    #   # process a batch of 12 units
     #   duration1 = tvm.stop( 12 )
     #
     #   tvm.start
-    #   # process a larger batch
+    #   # process a larger batch of 42 units
     #   duration2 = tvm.stop( 42 )
     #
-    # At this point the rate is calculated as ( 12 + 42 ) / ( duration1 + duration2 )
+    # At this point the rate of units per second is calculated as ( 12 + 42 ) / ( duration1 + duration2 )
     #
     #   some_batch_rate = tvm.rate # returns ( 34 / ( duration1+duration2 ) )
     # 

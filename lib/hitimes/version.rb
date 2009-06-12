@@ -9,8 +9,13 @@ module Hitimes
   #
   module Version
 
+    # Major version number
     MAJOR   = 1
+
+    # Minor version number
     MINOR   = 0
+
+    # Build number
     BUILD   = 0
 
     #
@@ -25,7 +30,7 @@ module Hitimes
 
     #
     # :call-seq:
-    #   Version.to_s -> MAJOR.MINOR.BUILD
+    #   Version.to_s -> "MAJOR.MINOR.BUILD"
     #
     # Return the version as a String with dotted notation
     #
@@ -43,8 +48,10 @@ module Hitimes
       { :major => MAJOR, :minor => MINOR, :build => BUILD }
     end
 
-
+    # The Version in MAJOR.MINOR.BUILD dotted notation
     STRING = Version.to_s
   end
+
+  # The Version in MAJOR.MINOR.BUILD dotted notation
   VERSION = Version.to_s
 end

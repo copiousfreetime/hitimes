@@ -87,7 +87,7 @@ module Hitimes
     # :call-seq:
     #   timed_metric.start -> nil
     #
-    # Start the current timer, if the current timer is already started, then
+    # Start the current metric, if the current metric is already started, then
     # this is a noop.  
     #
     def start
@@ -100,10 +100,10 @@ module Hitimes
     # :call-seq:
     #   timed_metric.stop -> Float or nil
     #
-    # Stop the current timed_metric.  This updates the stats and removes the current
-    # interval. If the timer is not running then this is a noop.  If the
-    # timer was stopped then the duration of the last Interval is returned.  If
-    # the timer was already stopped then false is returned.
+    # Stop the current metric.  This updates the stats and removes the current
+    # interval. If the timer was stopped then the duration of the last Interval
+    # is returned.  If the timer was already stopped then false is returned and
+    # no stats are updated.
     # 
     def stop
       if running? then
@@ -138,7 +138,7 @@ module Hitimes
     # :call-seq:
     #   timed_metric.split -> Float
     #
-    # Split the current timed_metric.  Essentially, mark a split time. This means
+    # Split the current TimedMetric.  Essentially, mark a split time. This means
     # stop the current interval and create a new interval, but make sure
     # that the new interval lines up exactly, timewise, behind the previous
     # interval.

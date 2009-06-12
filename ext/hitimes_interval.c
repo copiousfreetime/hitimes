@@ -254,6 +254,9 @@ VALUE hitimes_interval_stop_instant( VALUE self )
 /**
  * call-seq:
  *    interval.duration -> Float
+ *    interval.to_f -> Float
+ *    interval.to_seconds -> Float
+ *    interval.length -> Float
  *
  * Returns the Float value of the interval, the value is in seconds.  If the
  * interval has not had stop called yet, it will report the number of seconds
@@ -321,10 +324,10 @@ void Init_hitimes_interval()
     rb_define_module_function( cH_Interval, "now", hitimes_interval_now, 0 ); /* in hitimes_interval.c */
     rb_define_module_function( cH_Interval, "measure", hitimes_interval_measure, 0 ); /* in hitimes_interval.c */
 
-    rb_define_method( cH_Interval, "to_f",         hitimes_interval_duration, 0 ); /* in hitimes_interval.c */
-    rb_define_method( cH_Interval, "to_seconds",   hitimes_interval_duration, 0 ); /* in hitimes_interval.c */
     rb_define_method( cH_Interval, "duration",     hitimes_interval_duration, 0 ); /* in hitimes_interval.c */
-    rb_define_method( cH_Interval, "length",       hitimes_interval_duration, 0 ); /* in hitimes_interval.c */
+    rb_define_method( cH_Interval, "length",       hitimes_interval_duration, 0 ); 
+    rb_define_method( cH_Interval, "to_f",         hitimes_interval_duration, 0 );
+    rb_define_method( cH_Interval, "to_seconds",   hitimes_interval_duration, 0 );
      
     rb_define_method( cH_Interval, "started?",     hitimes_interval_started, 0 ); /* in hitimes_interval.c */
     rb_define_method( cH_Interval, "running?",     hitimes_interval_running, 0 ); /* in hitimes_interval.c */

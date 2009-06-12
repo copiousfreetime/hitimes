@@ -15,14 +15,19 @@ Hitimes is a fast, high resolution timer library for recording
 performance metrics.  It uses the appropriate C method calls for each
 system to get the highest granularity time increments possible.  
 
-It currently supports any system with the POSIX call clock_gettime(),
-Mac OS X and Windows.
+It currently supports any of the following systems:
 
-Using Hitimes can be faster than using a series of Time.new calls, and
+* any system with the POSIX call <tt>clock_gettime()</tt>,
+* Mac OS X
+* Windows
+
+Using Hitimes can be faster than using a series of +Time.new+ calls, and
 it will have a much higher granularity.   It is definitely faster than
-using Process.times. 
+using +Process.times+. 
 
 == SYNOPSIS
+
+=== Interval
 
 Use Hitimes::Interval to calculate only the duration of a block of code
 
@@ -32,20 +37,36 @@ Use Hitimes::Interval to calculate only the duration of a block of code
 
   puts duration   
 
+=== TimedMetric
+
 Use a Hitimes::TimedMetric to calculate statistics about an iterative operation
 
   timed_metric = Hitimes::TimedMetric.new('operation on items')
+
+Explicitly use +start+ and +stop+:
+
   collection.each do |item|
     timed_metric.start
     # .. do something with item
     timed_metric.stop
   end
 
+Or use the block.  In TimedMetric the return value of +measure+ is the return
+value of the block
+
+  collection.each do |item|
+    result_of_do_something = timed_metric.measure { do_something( item ) }
+  end
+
+And then look at the stats
+
   puts timed_metric.mean
   puts timed_metric.max
   puts timed_metric.min
   puts timed_metric.stddev
   puts timed_metric.rate
+
+=== ValueMetric 
 
 Use a Hitimes::ValueMetric to calculate statistics about measured samples
 
@@ -63,6 +84,8 @@ Use a Hitimes::ValueMetric to calculate statistics about measured samples
   puts value_metric.rate
 
 
+=== TimedValueMetric
+
 Use a Hitimes::TimedValueMetric to calculate statistics about batches of samples
 
   timed_value_metric = Hitimes::TimedValueMetric.new( 'batch times' )
@@ -73,17 +96,17 @@ Use a Hitimes::TimedValueMetric to calculate statistics about batches of samples
     timed_value_metric.stop( batch.size )
   end
 
+  puts timed_value_metric.rate
+
   puts timed_value_metric.timed_stats.mean
   puts timed_value_metric.timed_stats.max
   puts timed_value_metric.timed_stats.min
   puts timed_value_metric.timed_stats.stddev
-  puts timed_value_metric.timed_stats.rate
 
   puts timed_value_metric.value_stats.mean
   puts timed_value_metric.value_stats.max
   puts timed_value_metric.value_stats.min
   puts timed_value_metric.value_stats.stddev
-  puts timed_value_metric.value_stats.rate
 
 
 == CHANGES

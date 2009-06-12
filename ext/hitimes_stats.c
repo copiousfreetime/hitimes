@@ -227,8 +227,8 @@ VALUE hitimes_stats_stddev ( VALUE self )
  * The Stats class encapulsates capturing and reporting statistics.  It is
  * modeled after the RFuzz::Sampler class, but implemented in C.  For general use
  * you allocate a new Stats object, and then update it with new values.  The
- * Stats object will keep track of the _min_, _max_, _count_ and _sum_ and when
- * you want you may also retrieve the _mean_, _stddev_ and _rate_.
+ * Stats object will keep track of the _min_, _max_, _count_, _sum_ and _sumsq_ 
+ * and when you want you may also retrieve the _mean_, _stddev_ and _rate_.
  *
  * this contrived example shows getting a list of all the files in a directory
  * and running stats on file sizes.
