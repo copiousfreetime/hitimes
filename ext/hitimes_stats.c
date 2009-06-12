@@ -182,6 +182,22 @@ VALUE hitimes_stats_sum( VALUE self )
     return rb_float_new( stats->sum );
 }
 
+/**
+ * call-seq:
+ *   stat.sumsq -> Float
+ *
+ * Return the sum of the squars of all the values that passed through the Stats
+ * object.
+ */
+VALUE hitimes_stats_sumsq( VALUE self )
+{
+    hitimes_stats_t *stats;
+
+    Data_Get_Struct( self, hitimes_stats_t, stats );
+
+    return rb_float_new( stats->sumsq );
+}
+
 
 /**
  * call-seq:
@@ -246,6 +262,7 @@ void Init_hitimes_stats()
     rb_define_method( cH_Stats, "min", hitimes_stats_min, 0 ); /* in hitimes_stats.c */
     rb_define_method( cH_Stats, "rate", hitimes_stats_rate, 0 ); /* in hitimes_stats.c */
     rb_define_method( cH_Stats, "sum", hitimes_stats_sum, 0 ); /* in hitimes_stats.c */
+    rb_define_method( cH_Stats, "sumsq", hitimes_stats_sumsq, 0 ); /* in hitimes_stats.c */
     rb_define_method( cH_Stats, "stddev", hitimes_stats_stddev, 0 ); /* in hitimes_stats.c */
 }
  

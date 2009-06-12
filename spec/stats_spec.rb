@@ -1,6 +1,6 @@
 require File.expand_path( File.join( File.dirname( __FILE__ ), "spec_helper.rb" ) )
 
-require 'hitimes_ext'
+require 'hitimes/stats'
 
 describe Hitimes::Stats do
   before( :each ) do
@@ -44,6 +44,10 @@ describe Hitimes::Stats do
 
   it "calculates the standard deviation" do
     @full_stats.stddev.should == 1.0
+  end 
+
+  it "calculates the sum of squares " do
+    @full_stats.sumsq.should == 14.0
   end 
 
   describe "#to_hash " do

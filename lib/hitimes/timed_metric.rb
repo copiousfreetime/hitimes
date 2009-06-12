@@ -4,7 +4,7 @@
 #++
 
 require 'hitimes'
-
+require 'forwardable'
 module Hitimes
   #
   # A TimedMetric holds the metrics on how long it takes to do something.  For
@@ -20,16 +20,21 @@ module Hitimes
   #
   #   puts "#{ tm.name } operated at a rate of #{ tm.rate } calls per second"
   #
-  # Since TimedMetric is a child class of ValueMetric make sure to look at the
-  # ValueMetric API also.
+  # Since TimedMetric is a child class of Metric make sure to look at the
+  # Metric API also.
   #
   # A TimedMetric measures the execution time of an option with the Interval
   # class. 
+  # 
+  # A TimedMetric contains a Stats object, therefore TimedMetric has +count+, +max+, 
+  # +mean+, +min+, +rate+, +stddev+, +sum+, +sumsq+ methods that delegate to that Stats
+  # object for convenience.
   #
-  # A TimedMetric can also be thought of as a ValueMetric where the +values+
-  # stored are durations of time. 
   #
-  class TimedMetric < ValueMetric
+  class TimedMetric < Metric
+    # holds all the statistics
+    attr_reader :stats
+
     class << TimedMetric
       #
       # :call-seq:
@@ -54,6 +59,7 @@ module Hitimes
     #
     def initialize( name, additional_data = {} )
       super( name, additional_data )
+      @stats            = Stats.new
       @current_interval = nil
     end
 
@@ -104,7 +110,7 @@ module Hitimes
         d = current_interval.stop
         @current_interval = nil
         @sampling_stop_time = self.utc_microseconds()
-        stats.update( d )
+        @stats.update( d )
         return d
       end
       return false
@@ -118,14 +124,14 @@ module Hitimes
     # The return value is the return value of the block
     #
     def measure( &block )
-      rc = nil
+      return_value = nil
       begin
         start
-        rc = yield
+        return_value = yield
       ensure
         stop
       end
-      return rc
+      return return_value
     end
 
     #
@@ -145,40 +151,16 @@ module Hitimes
       if running? then 
         next_interval = current_interval.split
         d = current_interval.duration
-        stats.update( d )
+        @stats.update( d )
         @current_interval = next_interval 
         return d
       end 
       return false
     end
 
-    # 
-    # :call-seq:
-    #   timed_metric.sum -> Float
-    #   timed_metric.duration -> Float 
-    #
-    # The total time the timer has been measuring.  
-    #
-    alias duration sum
-
-    #
-    # :call-seq:
-    #   timed_metric.rate -> Float
-    #
-    # Return the rate of the states, which is the count / duration
-    #
-    def rate
-      stats.rate
-    end
-
-    #-- 
-    # This is a forced set of documentation for the methods inherited from
-    # ValueMetric
-    #++
-    #
-    # :Document-method: mean
-    #
-    # The mean value of all the the measurements
-    # 
+    # forward appropriate calls directly to the stats object
+    extend Forwardable
+    def_delegators :@stats, :count, :sum, :max, :mean, :min, :rate, :stddev, :sum, :sumsq
+    alias :duration :sum
   end
 end

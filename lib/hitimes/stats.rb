@@ -1,7 +1,8 @@
+require 'hitimes_ext'
 module Hitimes
   class Stats
     # A list of the available stats
-    STATS = %w[ count max mean min rate stddev sum ]
+    STATS = %w[ count max mean min rate stddev sum sumsq ]
 
     # 
     # call-seq:

@@ -35,6 +35,14 @@ describe Hitimes::ValueMetric do
     m.stddev.should == 0.0
   end
 
+  it "keeps track of the sum of data" do
+    @metric.sum.should == 45.0
+  end
+
+  it "keeps track of the sum of squars of data" do
+    @metric.sumsq.should == 285.0
+  end
+
   it "retuns 0.0 for mean if there is no data" do
     Hitimes::ValueMetric.new('0-data').mean.should == 0.0
   end

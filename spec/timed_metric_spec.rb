@@ -63,7 +63,6 @@ describe Hitimes::TimedMetric do
     @tm.stddev.should == 0.0
   end
 
-
   it "keeps track of the min value" do
     2.times { @tm.start ; sleep 0.05 ; @tm.stop }
     @tm.min.should > 0
@@ -72,6 +71,16 @@ describe Hitimes::TimedMetric do
   it "keeps track of the max value" do
     2.times { @tm.start ; sleep 0.05 ; @tm.stop }
     @tm.max.should > 0
+  end
+
+  it "keeps track of the sum value" do
+    2.times { @tm.start ; sleep 0.05 ; @tm.stop }
+    @tm.sum.should > 0.05
+  end
+  
+  it "keeps track of the sum of squars value" do
+    2.times { @tm.start ; sleep 0.05 ; @tm.stop }
+    @tm.sumsq.should > 0.0025
   end
 
   it "keeps track of the minimum start time of all the intervals" do
