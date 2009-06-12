@@ -1,6 +1,7 @@
 require File.expand_path( File.join( File.dirname( __FILE__ ), "spec_helper.rb" ) )
 
 require 'hitimes/stats'
+require 'json'
 
 describe Hitimes::Stats do
   before( :each ) do
@@ -70,6 +71,30 @@ describe Hitimes::Stats do
     it "raises NoMethodError if an invalid stat is used" do
       lambda { @full_stats.to_hash( "wibble" ) }.should raise_error( NoMethodError )
     end
+  end
+
+  describe "#to_json" do
+    it "converts to a json string" do
+      j = @full_stats.to_json
+      h = JSON.parse( j )
+      h.size.should == ::Hitimes::Stats::STATS.size
+      h.keys.sort.should == ::Hitimes::Stats::STATS
+    end
+
+    it "converts to a limited Hash if given arguments" do
+      j = @full_stats.to_json( "min", "max", "mean" )
+      h = JSON.parse( j )
+      h.size.should == 3
+      h.keys.sort.should == %w[ max mean min  ]
+
+      j = @full_stats.to_json( %w[ count rate ] )
+      h = JSON.parse( j )
+      h.size.should == 2
+      h.keys.sort.should == %w[ count rate ]
+    end
+
+    it "raises NoMethodError if an invalid stat is used" do
+      lambda { @full_stats.to_json( "wibble" ) }.should raise_error( NoMethodError )
 
   end
 

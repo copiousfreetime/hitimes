@@ -20,8 +20,11 @@ Hitimes::GEM_SPEC = Gem::Specification.new do |spec|
   spec.executables  = pkg.files.bin.collect { |b| File.basename(b) }
 
   # add dependencies here
-  spec.add_dependency("rake", ">= 0.8.1")
-  spec.add_dependency("configuration", ">= 0.0.5")
+  spec.add_dependency("rake", "~> 0.8.1")
+  spec.add_dependency("configuration", " ~> 0.0.5")
+
+  # development dependencies
+  spec.add_development_dependency( "json", "~> 1.1.3")
 
   if ext_conf = Configuration.for_if_exist?("extension") then
     spec.extensions <<  ext_conf.configs

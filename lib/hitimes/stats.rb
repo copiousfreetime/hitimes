@@ -1,4 +1,5 @@
 require 'hitimes_ext'
+require 'stringio'
 module Hitimes
   class Stats
     # A list of the available stats
@@ -24,6 +25,29 @@ module Hitimes
         h[meth] = self.send( meth )
       end
       return h
+    end
+
+    #
+    # call-seq:
+    #   stat.to_json  -> String
+    #   stat.to_json( *args ) -> String
+    #
+    # return a json string of the stats.  By default this returns a json string
+    # of all the stats.  If an array of items is passed in, those that match the
+    # known stats will be all that is included in the json output.
+    #
+    def to_json( *args )
+      h = to_hash( *args )
+      a = []
+      s = StringIO.new
+
+      s.print "{ "
+      h.each_pair do |k,v|
+        a << "\"#{k}\": #{v}"
+      end
+      s.print a.join(", ")
+      s.print "}"
+      return s.string
     end
 
   end
