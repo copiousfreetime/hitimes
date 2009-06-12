@@ -1,15 +1,9 @@
 Next Release:
-    - add a min_start_time to capture the first start time of a timer
-    - add a max_stop_time to capture the last stop time of a time
     - timer to_json to report the base stats and the 
-    - add in an 'additional attributes' call
-    - split out Metric into 
-        - ValueMetric -- has a stat, and a count
-        - TimingMetric
-        - TimedValueMetric
+    - add TimedValueMetric
 
 Future Release:
-    - how to get current time in nanoseconds from all systems
+    - how to get current timeofday in nanoseconds from all systems
     - create a pure ruby version
     - do not blow up on install if unable to compile, fall back to pure ruby
       version

@@ -19,7 +19,7 @@ module Hitimes
     #
     # Return the version as an array of Integers
     #
-    def to_a
+    def self.to_a
       [MAJOR, MINOR, BUILD]
     end
 
@@ -29,12 +29,20 @@ module Hitimes
     #
     # Return the version as a String with dotted notation
     #
-    def to_s
+    def self.to_s
       to_a.join(".")
     end
 
-    module_function :to_a
-    module_function :to_s
+    #
+    # :call-seq:
+    #   Version.to_hash -> { :major => ..., :minor => ..., :build => ... }
+    #
+    # Return the version as a Hash
+    #
+    def self.to_hash
+      { :major => MAJOR, :minor => MINOR, :build => BUILD }
+    end
+
 
     STRING = Version.to_s
   end

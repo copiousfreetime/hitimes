@@ -21,6 +21,12 @@ describe "Hitimes::Version" do
         Hitimes::Version.to_s.should match(/\d+\.\d+\.\d+/)
     end 
 
+    it "should have a hash representation" do
+      [ :major, :minor, :build ].each do |k|
+        Hitimes::Version.to_hash[k].should_not be_nil
+      end
+    end
+
     it "should be accessable as a constant" do
         Hitimes::VERSION.should match(/\d+\.\d+\.\d+/)
     end 

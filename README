@@ -32,21 +32,58 @@ Use Hitimes::Interval to calculate only the duration of a block of code
 
   puts duration   
 
-Use a Hitimes::Timer to calculate statistics about an iterative operation
+Use a Hitimes::TimedMetric to calculate statistics about an iterative operation
 
-  timer = Hitimes::Timer.new
+  timed_metric = Hitimes::TimedMetric.new('operation on items')
   collection.each do |item|
-    timer.start
+    timed_metric.start
     # .. do something with item
-    timer.stop
+    timed_metric.stop
   end
 
-  puts timer.mean
-  puts timer.median
-  puts timer.max
-  puts timer.min
-  puts timer.stddev
-  puts timer.rate
+  puts timed_metric.mean
+  puts timed_metric.max
+  puts timed_metric.min
+  puts timed_metric.stddev
+  puts timed_metric.rate
+
+Use a Hitimes::ValueMetric to calculate statistics about measured samples
+
+  value_metric = Hitimes::ValueMetric.new( 'size of thing' )
+  loop do
+    # ... do stuff changing sizes of 'thing'
+    value_metric.measure( thing.size )
+    # ... do other stuff that may change size of thing
+  end
+
+  puts value_metric.mean
+  puts value_metric.max
+  puts value_metric.min
+  puts value_metric.stddev
+  puts value_metric.rate
+
+
+Use a Hitimes::TimedValueMetric to calculate statistics about batches of samples
+
+  timed_value_metric = Hitimes::TimedValueMetric.new( 'batch times' )
+  loop do 
+    batch = ... # get a batch of things
+    timed_value_metric.start
+    # .. do something with batch
+    timed_value_metric.stop( batch.size )
+  end
+
+  puts timed_value_metric.timed_stats.mean
+  puts timed_value_metric.timed_stats.max
+  puts timed_value_metric.timed_stats.min
+  puts timed_value_metric.timed_stats.stddev
+  puts timed_value_metric.timed_stats.rate
+
+  puts timed_value_metric.value_stats.mean
+  puts timed_value_metric.value_stats.max
+  puts timed_value_metric.value_stats.min
+  puts timed_value_metric.value_stats.stddev
+  puts timed_value_metric.value_stats.rate
 
 
 == CHANGES

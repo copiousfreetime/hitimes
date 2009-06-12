@@ -1,4 +1,12 @@
 = Changelog
+== Version 1.0.0 2009-06-12
+
+* Major API change, old api is no longer valid
+* 3 types of metrics now instead of just 1 Timer
+  * ValueMetric
+  * TimedMetric
+  * TimedValueMetric
+
 == Version 0.4.1 2009-02-19
 
 * change to ISC License

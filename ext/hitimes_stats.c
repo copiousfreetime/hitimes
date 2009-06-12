@@ -39,9 +39,10 @@ VALUE hitimes_stats_alloc(VALUE klass)
 
 /**
  * call-seq:
- *    stat.update( val ) -> nil
+ *    stat.update( val ) -> val
  * 
  * Update the running stats with the new value.
+ * Return the input value.
  */
 VALUE hitimes_stats_update( VALUE self, VALUE v )
 {
@@ -62,7 +63,7 @@ VALUE hitimes_stats_update( VALUE self, VALUE v )
     stats->sum   += new_v;
     stats->sumsq += ( new_v * new_v );
 
-    return Qnil;
+    return v;
 }
 
 /**
@@ -91,10 +92,15 @@ VALUE hitimes_stats_mean( VALUE self )
  * call-seq:
  *    stat.rate -> Float
  * 
- * Return the count per sum.  In many cases when Stats#update( _value_ ) is
- * called, the _value_ is a unit of time, typically seconds.  #rate 
- * is a convenience for those times.  In the most common case, where _value_ 
- * is in seconds, then #rate returns the count / second.
+ * Return the +count+ divided by +sum+.
+ *
+ * In many cases when Stats#update( _value_ ) is called, the _value_ is a unit
+ * of time, typically seconds or microseconds.  #rate is a convenience for those
+ * times.  In this case, where _value_ is a unit if time, then count divided by
+ * sum is a useful value, i.e. +something per unit of time+.
+ *
+ * In the case where _value_ is a non-time related value, then the value
+ * returned by _rate_ is not really useful.
  *
  */
 VALUE hitimes_stats_rate( VALUE self )
