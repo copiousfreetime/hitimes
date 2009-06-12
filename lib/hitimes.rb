@@ -21,6 +21,8 @@ require 'hitimes/version'
 require 'hitimes/stats'
 require 'hitimes_ext'
 require 'hitimes/mutexed_stats'
+require 'hitimes/metric'
 require 'hitimes/value_metric'
 require 'hitimes/timed_metric'
+require 'hitimes/timed_value_metric'
 
