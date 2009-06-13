@@ -1,4 +1,4 @@
-require 'hitimes_ext'
+require 'hitimes'
 require 'stringio'
 module Hitimes
   class Stats
