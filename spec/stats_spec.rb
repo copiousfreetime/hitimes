@@ -95,7 +95,6 @@ describe Hitimes::Stats do
 
     it "raises NoMethodError if an invalid stat is used" do
       lambda { @full_stats.to_json( "wibble" ) }.should raise_error( NoMethodError )
-
+    end
   end
-
 end
