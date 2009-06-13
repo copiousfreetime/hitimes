@@ -44,16 +44,21 @@ end
 # Use a new timer each time
 #
 def hitimes_duration_t1
-  Hitimes::Timer.now.stop
+  Hitimes::TimedMetric.now('duration_t1').stop
 end
 
 #
 # reuse the same timer over and over
 #
-HT = Hitimes::Timer.new
+HT2= Hitimes::TimedMetric.new( 'duration_t2' )
 def hitimes_duration_t2
-  HT.start
-  HT.stop
+  HT2.start
+  HT2.stop
+end
+
+HT3 = Hitimes::TimedMetric.new( 'duration_t3' )
+def hitimes_duration_t3
+  HT3.measure { nil }
 end
 
 #
@@ -76,11 +81,12 @@ end
 
 puts "Testing time sampling 100,000 times"
 
-bm(20) do |x|
-  x.report("Process")              { 100_000.times { process_duration } }
-  x.report("Time")                 { 100_000.times { time_duration    } }
-  x.report("Hitimes::Timer 1")     { 100_000.times { hitimes_duration_t1 } }
-  x.report("Hitimes::Timer 2")     { 100_000.times { hitimes_duration_t2 } }
-  x.report("Hitimes::Interval 1")  { 100_000.times { hitimes_duration_i1 } }
-  x.report("Hitimes::Interval 2")  { 100_000.times { hitimes_duration_i2 } }
+bm(30) do |x|
+  x.report("Process")                { 100_000.times { process_duration } }
+  x.report("Time")                   { 100_000.times { time_duration    } }
+  x.report("Hitimes::TimedMetric 1") { 100_000.times { hitimes_duration_t1 } }
+  x.report("Hitimes::TimedMetric 2") { 100_000.times { hitimes_duration_t2 } }
+  x.report("Hitimes::TimedMetric 3") { 100_000.times { hitimes_duration_t3 } }
+  x.report("Hitimes::Interval 1")    { 100_000.times { hitimes_duration_i1 } }
+  x.report("Hitimes::Interval 2")    { 100_000.times { hitimes_duration_i2 } }
 end
