@@ -18,8 +18,8 @@ module Hitimes
 end
 require 'hitimes/paths'
 require 'hitimes/version'
-require 'hitimes/stats'
 require 'hitimes_ext'
+require 'hitimes/stats'
 require 'hitimes/mutexed_stats'
 require 'hitimes/metric'
 require 'hitimes/value_metric'
