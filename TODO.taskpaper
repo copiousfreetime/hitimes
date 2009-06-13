@@ -1,10 +1,8 @@
-Next Release:
-    - timer to_json to report the base stats and the 
-    - add string format for stats
-
 Future Release:
     - how to get current timeofday in nanoseconds from all systems
     - create a pure ruby version
     - do not blow up on install if unable to compile, fall back to pure ruby
       version
     - push Timer down to C level
+    - timer to_json to report the base stats and the 
+    - add string format for stats

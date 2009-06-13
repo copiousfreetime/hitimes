@@ -1,11 +1,13 @@
 = Changelog
 == Version 1.0.0 2009-06-12
 
-* Major API change, old api is no longer valid
+* Major version bump with complete refactor of the metric collection API
 * 3 types of metrics now instead of just 1 Timer
   * ValueMetric
   * TimedMetric
   * TimedValueMetric
+* The ability to convert all metrics #to_hash
+* Updated documentation with examples using each metric type
 
 == Version 0.4.1 2009-02-19
 
