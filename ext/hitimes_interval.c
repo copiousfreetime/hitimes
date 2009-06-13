@@ -166,6 +166,34 @@ VALUE hitimes_interval_stop( VALUE self )
 
 /**
  * call-seq:
+ *     interval.duration_so_far -> Float or false
+ *
+ * return how the duration so far.  This will return the duration from the time
+ * the Interval was started if the interval is running, otherwise it will return
+ * false.
+ */
+VALUE hitimes_interval_duration_so_far( VALUE self )
+{
+    hitimes_interval_t *i;
+    VALUE               rc = Qfalse;
+    double              d;
+
+    Data_Get_Struct( self, hitimes_interval_t, i );
+    if ( 0L == i->start_instant ) {
+        return rc;
+    }
+
+    if ( 0L == i->stop_instant ) {
+        hitimes_instant_t now = hitimes_get_current_instant( );
+        d = ( now - i->start_instant ) / HITIMES_INSTANT_CONVERSION_FACTOR;
+        rc = rb_float_new( d );
+    }
+    return rc;
+}
+
+
+/**
+ * call-seq:
  *    interval.started? -> boolean
  *
  * returns whether or not the interval has been started
@@ -328,6 +356,8 @@ void Init_hitimes_interval()
     rb_define_method( cH_Interval, "length",       hitimes_interval_duration, 0 ); 
     rb_define_method( cH_Interval, "to_f",         hitimes_interval_duration, 0 );
     rb_define_method( cH_Interval, "to_seconds",   hitimes_interval_duration, 0 );
+
+    rb_define_method( cH_Interval, "duration_so_far", hitimes_interval_duration_so_far, 0); /* in hitimes_interval.c */
      
     rb_define_method( cH_Interval, "started?",     hitimes_interval_started, 0 ); /* in hitimes_interval.c */
     rb_define_method( cH_Interval, "running?",     hitimes_interval_running, 0 ); /* in hitimes_interval.c */

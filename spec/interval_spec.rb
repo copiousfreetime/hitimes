@@ -94,6 +94,18 @@ describe Hitimes::Interval do
     x.object_id.should == y.object_id
   end
 
+  it "can return how much time has elapsed from the start without stopping the interval" do
+    i = Hitimes::Interval.new
+    i.start
+    x = i.duration_so_far
+    i.should be_running
+    y = i.duration_so_far
+    i.stop
+    x.should < y
+    x.should < i.duration
+    y.should < i.duration
+  end
+
   describe "#split" do
 
     it "creates a new Interval object" do
