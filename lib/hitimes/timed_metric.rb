@@ -158,6 +158,21 @@ module Hitimes
       return false
     end
 
+    #
+    # :call-seq:
+    #   metric.to_hash -> Hash
+    #   
+    # Convert the metric to a hash
+    #
+    def to_hash
+      h = super
+      Stats::STATS.each do |s|
+        h[s] = self.send( s ) 
+      end
+      return h
+    end
+
+
     # forward appropriate calls directly to the stats object
     extend Forwardable
     def_delegators :@stats, :count, :sum, :max, :mean, :min, :rate, :stddev, :sum, :sumsq

@@ -134,4 +134,39 @@ describe Hitimes::TimedValueMetric do
     t.duration.should be_close( 0.05, 0.001 )
     x.should == 42
   end
+
+  describe "#to_hash" do
+
+    it "has name value" do
+      h = @tm.to_hash
+      h['name'].should == "test-timed-value-metric"
+    end
+
+    it "has an empty has for additional_data" do
+      h = @tm.to_hash
+      h['additional_data'].should == Hash.new
+      h['additional_data'].size.should == 0
+    end
+
+    it "has a rate" do
+      5.times { |x| @tm.start ; sleep 0.05 ; @tm.stop( x ) }
+      h = @tm.to_hash
+      h['rate'].should be_close( 40.0, 0.2 )
+    end
+
+    it "has a unit_count" do
+      5.times { |x| @tm.start ; sleep 0.05 ; @tm.stop( x ) }
+      h = @tm.to_hash
+      h['unit_count'].should ==  10
+    end
+
+    fields = %w[ name additional_data sampling_start_time sampling_stop_time value_stats timed_stats rate unit_count ]
+    fields.each do |f|
+      it "should have a value for #{f}" do
+        3.times { |x| @tm.measure(x) { sleep 0.001 } }
+        h = @tm.to_hash
+        h[f].should_not be_nil
+      end
+    end
+  end 
 end

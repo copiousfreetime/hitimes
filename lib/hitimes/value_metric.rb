@@ -2,7 +2,7 @@
 # Copyright (c) 2008, 2009 Jeremy Hinegardner
 # All rights reserved.  See LICENSE and/or COPYING for details.
 #++
-#
+
 require 'forwardable'
 require 'hitimes'
 module Hitimes
@@ -46,6 +46,20 @@ module Hitimes
       @sampling_start_time ||= now
       @sampling_stop_time = now
       @stats.update( value )
+    end
+
+    #
+    # :call-seq:
+    #   metric.to_hash -> Hash
+    #   
+    # Convert the metric to a hash
+    #
+    def to_hash
+      h = super
+      (Stats::STATS - %w[ rate ]).each do |s|
+        h[s] = self.send( s ) 
+      end
+      return h
     end
 
     # forward appropriate calls directly to the stats object

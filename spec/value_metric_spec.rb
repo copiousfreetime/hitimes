@@ -79,5 +79,32 @@ describe Hitimes::ValueMetric do
     (f2 - m.sampling_stop_time).should < ( m.sampling_stop_time - f1 )
   end
 
+  describe "#to_hash" do
+
+    it "has name value" do
+      h = @metric.to_hash
+      h['name'].should == "testing"
+    end
+
+    it "has an empty has for additional_data" do
+      h = @metric.to_hash
+      h['additional_data'].should == Hash.new
+      h['additional_data'].size.should == 0
+    end
+
+    it "has the right sum" do
+      h = @metric.to_hash
+      h['sum'].should == 45
+    end
+
+    fields = ::Hitimes::Stats::STATS.dup + %w[ name additional_data sampling_start_time sampling_stop_time ]
+    fields = fields - [ 'rate' ]
+    fields.each do |f|
+      it "should have a value for #{f}" do
+        h = @metric.to_hash
+        h[f].should_not be_nil
+      end
+    end
+  end
 end
 

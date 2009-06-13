@@ -124,6 +124,32 @@ describe Hitimes::TimedMetric do
     x.should == 42
   end
 
+  describe "#to_hash" do
 
+    it "has name value" do
+      h = @tm.to_hash
+      h['name'].should == "test-timed-metric"
+    end
 
+    it "has an empty has for additional_data" do
+      h = @tm.to_hash
+      h['additional_data'].should == Hash.new
+      h['additional_data'].size.should == 0
+    end
+
+    it "has the right sum" do
+      10.times { |x| @tm.measure { sleep 0.01*x  } }
+      h = @tm.to_hash
+      h['sum'].should be_close( 0.45, 0.002 )
+    end
+
+    fields = ::Hitimes::Stats::STATS.dup + %w[ name additional_data sampling_start_time sampling_stop_time ]
+    fields.each do |f|
+      it "should have a value for #{f}" do
+        @tm.measure { sleep 0.001 }
+        h = @tm.to_hash
+        h[f].should_not be_nil
+      end
+    end
+  end 
 end

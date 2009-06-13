@@ -17,11 +17,11 @@ module Hitimes
   class Metric
 
     # the time at which the first sample was taken
-    # This is the number of microseconds since UNIX epoch as a Float in UTC
+    # This is the number of microseconds since UNIX epoch UTC as a Float
     attr_accessor :sampling_start_time
 
     # the time at which the last sample was taken.
-    # This is the number of microseconds since UNIX epoch as a Float in UTC
+    # This is the number of microseconds since UNIX epoch UTC as a Float
     attr_accessor :sampling_stop_time
 
     # An additional hash of data to associate with the metric
@@ -45,6 +45,20 @@ module Hitimes
       @sampling_stop_time  = nil
       @name                = name.to_s
       @additional_data     = additional_data.to_hash
+    end
+
+    #
+    # :call-seq:
+    #    metric.to_hash -> Hash
+    #    metric.to_hash
+    #
+    # Convert the metric to a Hash.  
+    #
+    def to_hash
+      { 'sampling_start_time' => @sampling_start_time,
+        'sampling_stop_time'  => @sampling_stop_time,
+        'additional_data'     => @additional_data,
+        'name'                => @name }
     end
 
     #

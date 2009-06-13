@@ -182,6 +182,16 @@ module Hitimes
 
     #
     # :call-seq:
+    #   timed_value_metric.unit_count -> Float
+    #
+    # The sum of all values passed to +stop+ or +skip+ or +measure+
+    #
+    def unit_count
+      @value_stats.sum
+    end
+
+    #
+    # :call-seq:
     #   timed_value_metric.rate -> Float
     #
     # Rate in the context of the TimedValueMetric is different than the
@@ -209,5 +219,22 @@ module Hitimes
     def rate
       @value_stats.sum / @timed_stats.sum
     end
+
+    #
+    # :call-seq:
+    #   metric.to_hash -> Hash
+    #   
+    # Convert the metric to a hash
+    #
+    def to_hash
+      h = super
+      h['timed_stats'] = @timed_stats.to_hash
+      h['value_stats'] = @value_stats.to_hash( Stats::STATS - %w[ rate ] )
+      h['rate'] = self.rate
+      h['unit_count'] = self.unit_count
+      return h
+    end
+
+
   end
 end
