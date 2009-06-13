@@ -23,7 +23,9 @@ Dir.entries( dir ).each do |entry|
   end
 end
 
-%w[ count min max mean sum stddev ].each do |m|
+Hitimes::Stats::STATS.each do |m|
   puts "#{m.rjust(6)} : #{s.send( m ) }"
 end
+
+puts s.to_hash.inspect
 
