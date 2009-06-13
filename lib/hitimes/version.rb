@@ -16,7 +16,7 @@ module Hitimes
     MINOR   = 0
 
     # Build number
-    BUILD   = 0
+    BUILD   = 1
 
     #
     # :call-seq:

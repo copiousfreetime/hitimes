@@ -1,4 +1,9 @@
 = Changelog
+== Version 1.0.1 2009-06-12
+
+* Fix examples
+* performance tuning, new Metric classes are faster than old Timer class
+
 == Version 1.0.0 2009-06-12
 
 * Major version bump with complete refactor of the metric collection API
