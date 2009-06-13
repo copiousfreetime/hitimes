@@ -62,6 +62,24 @@ def hitimes_duration_t3
 end
 
 #
+# Check out the speed of the TimedValueMetric too
+#
+def hitimes_duration_tv1
+  Hitimes::TimedValueMetric.now( 'duration_tv1' ).stop( 42 )
+end
+
+HTV2 = Hitimes::TimedValueMetric.new( 'duration_tv2' )
+def hitimes_duration_tv2
+  HTV2.start
+  HTV2.stop( 42 )
+end
+
+HTV3 = Hitimes::TimedValueMetric.new( 'duration_tv3' )
+def hitimes_duration_tv3
+  HTV3.measure( 42 ) { nil }
+end
+
+#
 # use the Struct::Tms values and return  the difference in User time between 2 
 # successive calls
 #
@@ -82,11 +100,14 @@ end
 puts "Testing time sampling 100,000 times"
 
 bm(30) do |x|
-  x.report("Process")                { 100_000.times { process_duration } }
-  x.report("Time")                   { 100_000.times { time_duration    } }
-  x.report("Hitimes::TimedMetric 1") { 100_000.times { hitimes_duration_t1 } }
-  x.report("Hitimes::TimedMetric 2") { 100_000.times { hitimes_duration_t2 } }
-  x.report("Hitimes::TimedMetric 3") { 100_000.times { hitimes_duration_t3 } }
-  x.report("Hitimes::Interval 1")    { 100_000.times { hitimes_duration_i1 } }
-  x.report("Hitimes::Interval 2")    { 100_000.times { hitimes_duration_i2 } }
+  x.report("Process")                     { 100_000.times { process_duration } }
+  x.report("Time")                        { 100_000.times { time_duration    } }
+  x.report("Hitimes::TimedMetric 1")      { 100_000.times { hitimes_duration_t1 } }
+  x.report("Hitimes::TimedMetric 2")      { 100_000.times { hitimes_duration_t2 } }
+  x.report("Hitimes::TimedMetric 3")      { 100_000.times { hitimes_duration_t3 } }
+  x.report("Hitimes::Interval 1")         { 100_000.times { hitimes_duration_i1 } }
+  x.report("Hitimes::Interval 2")         { 100_000.times { hitimes_duration_i2 } }
+  x.report("Hitimes::TimedValueMetric 1") { 100_000.times { hitimes_duration_tv1 } }
+  x.report("Hitimes::TimedValueMetric 2") { 100_000.times { hitimes_duration_tv2 } }
+  x.report("Hitimes::TimedValueMetric 3") { 100_000.times { hitimes_duration_tv3 } }
 end

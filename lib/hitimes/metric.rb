@@ -16,13 +16,8 @@ module Hitimes
   #
   class Metric
 
-    # the time at which the first sample was taken
-    # This is the number of microseconds since UNIX epoch UTC as a Float
-    attr_accessor :sampling_start_time
-
-    # the time at which the last sample was taken.
-    # This is the number of microseconds since UNIX epoch UTC as a Float
-    attr_accessor :sampling_stop_time
+    # the number of seconds as a float since the sampling_start_time
+    attr_reader :sampling_delta
 
     # An additional hash of data to associate with the metric
     attr_reader :additional_data
@@ -41,10 +36,53 @@ module Hitimes
     # +name+ may be anything that follows the +to_s+ protocol.
     #
     def initialize( name, additional_data = {} )
-      @sampling_start_time = nil
-      @sampling_stop_time  = nil
+      @sampling_start_time     = nil
+      @sampling_start_interval = nil
+      @sampling_delta          = 0
+
       @name                = name.to_s
       @additional_data     = additional_data.to_hash
+    end
+
+    #
+    # :call-seq: 
+    #   metric.sampling_start_time -> Float or nil
+    #
+    # The time at which the first sample was taken.
+    # This is the number of microseconds since UNIX epoch UTC as a Float
+    #
+    # If the metric has not started measuring then the start time is nil.
+    #
+    def sampling_start_time
+      if @sampling_start_interval then
+        @sampling_start_time ||= self.utc_microseconds()
+      else
+        nil
+      end
+    end
+
+    #
+    # :call-seq:
+    #   metric.sampling_stop_time -> Float or nil
+    #
+    # The time at which the last sample was taken
+    # This is the number of microseconds since UNIX epoch UTC as a Float
+    # 
+    # If the metric has not completely measured at least one thing then 
+    # stop time is nil.
+    #
+    # Because accessing the actual 'time of day' is an expesive operation, we
+    # only get the time of day at the beginning of the first measurement and we
+    # keep track of the offset from that point in @sampling_delta.
+    #
+    # When sampling_stop_time is called, the actual time of day is caculated.
+    #
+    def sampling_stop_time
+      if @sampling_delta > 0 then
+        (self.sampling_start_time + (@sampling_delta * 1_000_000))
+      else 
+        nil
+      end
     end
 
     #

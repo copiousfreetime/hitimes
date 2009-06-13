@@ -59,21 +59,10 @@ module Hitimes
     #
     def initialize( name, additional_data = {} )
       super( name, additional_data )
-      @current_interval = nil
       @timed_stats      = Stats.new
       @value_stats      = Stats.new
+      @current_interval = Interval.new
     end
-
-    #
-    # :call-seq:
-    #   timed_value_metric.current_interval -> Interval
-    #
-    # Return the current interval, if one doesn't exist create one.
-    #
-    def current_interval
-      @current_interval ||= Interval.new
-    end
-
 
     #
     # :call-seq:
@@ -82,7 +71,7 @@ module Hitimes
     # return whether or not the metric is currently timing something.
     #
     def running?
-      current_interval.running?
+      @current_interval.running?
     end
 
     # 
@@ -93,8 +82,11 @@ module Hitimes
     # this is a noop.  
     #
     def start
-      current_interval.start unless running?
-      @sampling_start_time ||= self.utc_microseconds() 
+      if not @current_interval.running? then
+        @current_interval.start
+        @sampling_start_time ||= self.utc_microseconds() 
+        @sampling_start_interval ||= Interval.now
+      end
       nil
     end
 
@@ -114,12 +106,15 @@ module Hitimes
     # 
     #
     def stop( value )
-      if running? then
-        d = current_interval.stop
-        @current_interval = nil
-        @sampling_stop_time = self.utc_microseconds()
+      if @current_interval.running? then
+        d = @current_interval.stop
         @timed_stats.update( d )
+        @current_interval = Interval.new
         @value_stats.update( value )
+
+        # update the lenght of time we have been sampling
+        @sampling_delta = @sampling_start_interval.duration_so_far
+
         return d
       end
       return false
@@ -159,9 +154,9 @@ module Hitimes
     #
     #
     def split( value )
-      if running? then 
-        next_interval = current_interval.split
-        d = current_interval.duration
+      if @current_interval.running? then 
+        next_interval = @current_interval.split
+        d = @current_interval.duration
         @timed_stats.update( d )
         @value_stats.update( value )
         @current_interval = next_interval 

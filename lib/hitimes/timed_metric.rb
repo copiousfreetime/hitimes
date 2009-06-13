@@ -60,17 +60,7 @@ module Hitimes
     def initialize( name, additional_data = {} )
       super( name, additional_data )
       @stats            = Stats.new
-      @current_interval = nil
-    end
-
-    #
-    # :call-seq:
-    #   timed_metric.current_interval -> Interval
-    #
-    # Return the current interval, if one doesn't exist create one.
-    #
-    def current_interval
-      @current_interval ||= Interval.new
+      @current_interval = Interval.new
     end
 
     #
@@ -80,7 +70,7 @@ module Hitimes
     # return whether or not the timer is currently running.  
     #
     def running?
-      current_interval.running?
+      @current_interval.running?
     end
 
     # 
@@ -91,8 +81,11 @@ module Hitimes
     # this is a noop.  
     #
     def start
-      current_interval.start unless running?
-      @sampling_start_time ||= self.utc_microseconds() 
+      if not @current_interval.running? then
+        @current_interval.start 
+        @sampling_start_time ||= self.utc_microseconds() 
+        @sampling_start_interval ||= Interval.now
+      end
       nil
     end
 
@@ -106,11 +99,14 @@ module Hitimes
     # no stats are updated.
     # 
     def stop
-      if running? then
-        d = current_interval.stop
-        @current_interval = nil
-        @sampling_stop_time = self.utc_microseconds()
+      if @current_interval.running? then
+        d = @current_interval.stop
         @stats.update( d )
+        @current_interval = Interval.new
+
+        # update the length of time we have been sampling
+        @sampling_delta = @sampling_start_interval.duration_so_far
+
         return d
       end
       return false
@@ -148,9 +144,9 @@ module Hitimes
     # happens and false is returned.
     #
     def split  
-      if running? then 
-        next_interval = current_interval.split
-        d = current_interval.duration
+      if @current_interval.running? then 
+        next_interval = @current_interval.split
+        d = @current_interval.duration
         @stats.update( d )
         @current_interval = next_interval 
         return d
