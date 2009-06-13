@@ -2,15 +2,15 @@
 == Version 1.0.1 2009-06-12
 
 * Fix examples
-* performance tuning, new Metric classes are faster than old Timer class
+* performance tuning, new Hitimes::Metric derived classes are faster than old Timer class
 
 == Version 1.0.0 2009-06-12
 
 * Major version bump with complete refactor of the metric collection API
 * 3 types of metrics now instead of just 1 Timer
-  * ValueMetric
-  * TimedMetric
-  * TimedValueMetric
+  * Hitimes::ValueMetric
+  * Hitimes::TimedMetric
+  * Hitimes::TimedValueMetric
 * The ability to convert all metrics #to_hash
 * Updated documentation with examples using each metric type
 
@@ -23,7 +23,7 @@
 
 * Added new stat 'rate'
 * Added new stat method to_hash
-* Added MutexedStats class for threadsafe stats collection 
+* Added Hitimes::MutexedStats class for threadsafe stats collection 
   - not needed when used in MRI 1.8.x
 * remove stale dependency on mkrf
 
@@ -41,7 +41,7 @@
 == Version 0.2.0
 
 * Performance improvements
-* Added Stats class
+* Added Hitimes::Stats class
 
 == Version 0.1.0
 
