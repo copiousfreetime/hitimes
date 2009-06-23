@@ -1,4 +1,8 @@
 = Changelog
+== Version 1.0.2 
+
+* Fix bug where CLOCK_MONOTONIC not found on linode (reported by Roger Pack) 
+
 == Version 1.0.1 2009-06-12
 
 * Fix examples
