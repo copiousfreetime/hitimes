@@ -67,7 +67,7 @@ VALUE hitimes_interval_measure( VALUE self )
 {
     hitimes_instant_t before;
     hitimes_instant_t after;
-    double            duration;
+    long double       duration;
 
     if ( !rb_block_given_p() ) {
         rb_raise(eH_Error, "No block given to Interval.measure" );
@@ -152,7 +152,7 @@ VALUE hitimes_interval_stop( VALUE self )
     }
 
     if ( 0L == i->stop_instant ) {
-      double d;
+      long double d;
 
       i->stop_instant = hitimes_get_current_instant( );
       d = ( i->stop_instant - i->start_instant ) / HITIMES_INSTANT_CONVERSION_FACTOR;
@@ -176,7 +176,7 @@ VALUE hitimes_interval_duration_so_far( VALUE self )
 {
     hitimes_interval_t *i;
     VALUE               rc = Qfalse;
-    double              d;
+    long double         d;
 
     Data_Get_Struct( self, hitimes_interval_t, i );
     if ( 0L == i->start_instant ) {
@@ -293,7 +293,7 @@ VALUE hitimes_interval_stop_instant( VALUE self )
 VALUE hitimes_interval_duration ( VALUE self )
 {
     hitimes_interval_t *i;
-    double             d;
+    long double         d;
 
     Data_Get_Struct( self, hitimes_interval_t, i );
 

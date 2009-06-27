@@ -10,14 +10,14 @@
 
 #include <ruby.h>
 
-#define NANOSECONDS_PER_SECOND  1e9
+#define NANOSECONDS_PER_SECOND  1e9l
 
 #ifdef USE_INSTANT_CLOCK_GETTIME
 #    define HITIMES_U64INT unsigned long long int
-#    define HITIMES_INSTANT_CONVERSION_FACTOR 1e9
+#    define HITIMES_INSTANT_CONVERSION_FACTOR 1e9l
 #elif USE_INSTANT_OSX
 #    define HITIMES_U64INT unsigned long long int
-#    define HITIMES_INSTANT_CONVERSION_FACTOR 1e9
+#    define HITIMES_INSTANT_CONVERSION_FACTOR 1e9l
 #elif USE_INSTANT_WINDOWS
 #    define HITIMES_U64INT unsigned __int64
 #    define HITIMES_INSTANT_CONVERSION_FACTOR hitimes_instant_conversion_factor()
@@ -39,7 +39,7 @@ typedef struct hitimes_interval {
 
 /* all the backends must define this method */
 hitimes_instant_t hitimes_get_current_instant( );
-double hitimes_instant_conversion_factor( );
+long double hitimes_instant_conversion_factor( );
 
 /* init methods */
 void Init_hitimes_stats();
