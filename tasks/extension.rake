@@ -8,7 +8,7 @@ require 'pathname'
 if ext_config = Configuration.for_if_exist?('extension') then
   namespace :ext do  
     desc "Build the extension(s)"
-    task :build => :clobber do
+    task :build => :clean do
       Hitimes::GEM_SPEC.extensions.each do |extension|
         path = Pathname.new(extension)
         parts = path.split

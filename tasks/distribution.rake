@@ -35,7 +35,7 @@ if pkg_config = Configuration.for_if_exist?("packaging") then
     task :reinstall => [:uninstall, :repackage, :install]
 
     desc "package up a windows gem"
-    task :package_win => :clobber  do
+    task :package_win => :clean do
       Configuration.for("extension").cross_rbconfig.keys.each do |rbconfig|
         v = rbconfig.split("-").last
         s = v.sub(/\.\d$/,'')
@@ -45,7 +45,7 @@ if pkg_config = Configuration.for_if_exist?("packaging") then
       end
 
       Gem::Builder.new( Hitimes::GEM_SPEC_WIN ).build 
-      mkdir "pkg"
+      mkdir "pkg" unless File.directory?( 'pkg' )
       mv Dir["*.gem"].first, "pkg"
     end
 

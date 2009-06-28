@@ -1,5 +1,4 @@
 Future Release:
-    - fat binaries
     - a replacement for Time.now that only gets a new Time value if the time has
       passed 1 sec.
     - how to get current timeofday in nanoseconds from all systems

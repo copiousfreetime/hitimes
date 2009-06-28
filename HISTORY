@@ -1,8 +1,10 @@
 = Changelog
-== Version 1.0.2 
+== Version 1.0.2 2009-06-28
 
 * Fix bug with time.h on linode (reported by Roger Pack) 
 * Fix potential garbage collection issue with Interval class
+* Windows gem is now a fat binary to support installing in 1.8 or 1.9 from the
+  same gem
 
 == Version 1.0.1 2009-06-12
 

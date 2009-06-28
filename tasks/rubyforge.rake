@@ -31,6 +31,9 @@ if rf_conf = Configuration.for_if_exist?("rubyforge") then
 
       puts "Uploading to rubyforge..."
       files = FileList[File.join("pkg","#{Hitimes::GEM_SPEC.name}-#{Hitimes::VERSION}*.*")].to_a
+      files.each do |f|
+        puts "  * #{f}"
+      end
       rubyforge.login
       rubyforge.add_release(Hitimes::GEM_SPEC.rubyforge_project, Hitimes::GEM_SPEC.name, Hitimes::VERSION, *files)
       puts "done."
