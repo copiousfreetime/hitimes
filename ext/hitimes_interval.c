@@ -16,10 +16,6 @@ VALUE cH_Interval;         /* class  Hitimes::Interval  */
 
 VALUE hitimes_interval_free(hitimes_interval_t* i) 
 {
-    if ( Qnil != i->duration ) {
-        rb_gc_unregister_address( &(i->duration) );
-        i->duration = Qnil;
-    }
     xfree( i );
     return Qnil;
 }
@@ -31,7 +27,7 @@ VALUE hitimes_interval_alloc(VALUE klass)
 
     i->start_instant = 0L;
     i->stop_instant  = 0L;
-    i->duration      = Qnil;
+    i->duration      = -1.0l;
 
     obj = Data_Wrap_Struct(klass, NULL, hitimes_interval_free, i);
     return obj;
@@ -50,7 +46,7 @@ VALUE hitimes_interval_now( VALUE self )
 
     i->start_instant = hitimes_get_current_instant( );
     i->stop_instant  = 0L;
-    i->duration      = Qnil;
+    i->duration      = -1.0l;
 
     obj = Data_Wrap_Struct(cH_Interval, NULL, hitimes_interval_free, i);
 
@@ -99,7 +95,7 @@ VALUE hitimes_interval_split( VALUE self )
 
     second->start_instant = first->stop_instant;
     second->stop_instant  = 0L;
-    second->duration      = Qnil;
+    second->duration      = -1.0l;
 
     obj = Data_Wrap_Struct(cH_Interval, NULL, hitimes_interval_free, second);
 
@@ -124,7 +120,7 @@ VALUE hitimes_interval_start( VALUE self )
     if ( 0L == i->start_instant ) {
       i->start_instant = hitimes_get_current_instant( );
       i->stop_instant  = 0L;
-      i->duration      = Qnil;
+      i->duration      = -1.0l;
 
       rc = Qtrue;
     }
@@ -152,13 +148,9 @@ VALUE hitimes_interval_stop( VALUE self )
     }
 
     if ( 0L == i->stop_instant ) {
-      long double d;
-
       i->stop_instant = hitimes_get_current_instant( );
-      d = ( i->stop_instant - i->start_instant ) / HITIMES_INSTANT_CONVERSION_FACTOR;
-      i->duration = rb_float_new( d );
-      rb_gc_register_address( &(i->duration) );
-      rc = i->duration;
+      i->duration = ( i->stop_instant - i->start_instant ) / HITIMES_INSTANT_CONVERSION_FACTOR;
+      rc = rb_float_new( i->duration );
     }
 
     return rc;
@@ -176,7 +168,6 @@ VALUE hitimes_interval_duration_so_far( VALUE self )
 {
     hitimes_interval_t *i;
     VALUE               rc = Qfalse;
-    long double         d;
 
     Data_Get_Struct( self, hitimes_interval_t, i );
     if ( 0L == i->start_instant ) {
@@ -184,6 +175,7 @@ VALUE hitimes_interval_duration_so_far( VALUE self )
     }
 
     if ( 0L == i->stop_instant ) {
+        long double         d;
         hitimes_instant_t now = hitimes_get_current_instant( );
         d = ( now - i->start_instant ) / HITIMES_INSTANT_CONVERSION_FACTOR;
         rc = rb_float_new( d );
@@ -293,7 +285,6 @@ VALUE hitimes_interval_stop_instant( VALUE self )
 VALUE hitimes_interval_duration ( VALUE self )
 {
     hitimes_interval_t *i;
-    long double         d;
 
     Data_Get_Struct( self, hitimes_interval_t, i );
 
@@ -301,22 +292,20 @@ VALUE hitimes_interval_duration ( VALUE self )
      * if stop has not yet been called, then return the amount of time so far
      */
     if ( 0L == i->stop_instant ) {
+        long double d;
         hitimes_instant_t now = hitimes_get_current_instant( );
         d = ( now - i->start_instant ) / HITIMES_INSTANT_CONVERSION_FACTOR;
         return rb_float_new( d );
-    }
-
+    } 
 
     /*
      * stop has been called, calculate the duration and save the result
      */
-    if ( Qnil == i->duration ) {
-        d = ( i->stop_instant - i->start_instant ) / HITIMES_INSTANT_CONVERSION_FACTOR;
-        i->duration = rb_float_new( d );
-        rb_gc_register_address( &(i->duration) );
+    if ( i->duration < 0.0 ) {
+        i->duration = ( i->stop_instant - i->start_instant ) / HITIMES_INSTANT_CONVERSION_FACTOR;
     }
 
-    return i->duration;
+    return rb_float_new( i->duration );
 }
 
 

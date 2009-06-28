@@ -85,13 +85,19 @@ describe Hitimes::Interval do
 
   end
 
-  it "only calculates duration once after stop is called" do
+  it "duration does not change after stop is calledd" do
     i = Hitimes::Interval.new
     i.start
-    i.stop
-    x = i.duration
+    x = i.stop
     y = i.duration
-    x.object_id.should == y.object_id
+    i.stop.should == false
+
+    z = i.duration
+
+    x.should == y
+    x.should == z
+
+    y.should == z
   end
 
   it "can return how much time has elapsed from the start without stopping the interval" do

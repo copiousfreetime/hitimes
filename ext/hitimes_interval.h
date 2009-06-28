@@ -34,7 +34,7 @@ typedef HITIMES_U64INT hitimes_instant_t;
 typedef struct hitimes_interval {
     hitimes_instant_t start_instant;
     hitimes_instant_t stop_instant;
-    VALUE             duration;
+    long double       duration;
 } hitimes_interval_t;
 
 /* all the backends must define this method */
