@@ -59,5 +59,8 @@ Rake.application.tasks.each do |t|
   if t.name =~ /:clobber/ then
     task :clobber => [t.name] 
   end 
+  if t.name =~ /:clean/ then
+    task :clean => [t.name]
+  end
 end
 

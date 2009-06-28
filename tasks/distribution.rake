@@ -35,10 +35,23 @@ if pkg_config = Configuration.for_if_exist?("packaging") then
     task :reinstall => [:uninstall, :repackage, :install]
 
     desc "package up a windows gem"
-    task :package_win => "ext:build_win" do
-      #cp "ext/hitimes_ext.so", "lib", :verbose => true
+    task :package_win => :clobber  do
+      Configuration.for("extension").cross_rbconfig.keys.each do |rbconfig|
+        v = rbconfig.split("-").last
+        s = v.sub(/\.\d$/,'')
+        sh "rake ext:build_win-#{v}"
+        mkdir_p "lib/hitimes/#{s}", :verbose => true
+        cp "ext/hitimes/hitimes_ext.so", "lib/hitimes/#{s}/", :verbose => true
+      end
+
       Gem::Builder.new( Hitimes::GEM_SPEC_WIN ).build 
+      mkdir "pkg"
       mv Dir["*.gem"].first, "pkg"
+    end
+
+    task :clobber do
+      rm_rf "lib/hitimes/1.8"
+      rm_rf "lib/hitimes/1.9"
     end
 
     desc "distribute copiously"

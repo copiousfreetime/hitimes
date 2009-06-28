@@ -41,10 +41,13 @@ if ext_config = Configuration.for_if_exist?('extension') then
       end
     end
 
+    win_builds = []
     ext_config.cross_rbconfig.keys.each do |v|
       s = v.split("-").last
       desc "Build the extension for windows version #{s}"
-      task "build_win-#{s}"  => :clobber do
+      win_bname = "build_win-#{s}"
+      win_builds << win_bname
+      task win_bname => :clean do
         build_win( s )
       end
     end
@@ -55,7 +58,6 @@ if ext_config = Configuration.for_if_exist?('extension') then
         parts = path.split
         conf  = parts.last
         Dir.chdir(path.dirname) do |d| 
-          #sh "rake clean"
           sh "make clean"
         end 
       end 
@@ -67,10 +69,10 @@ if ext_config = Configuration.for_if_exist?('extension') then
         parts = path.split
         conf  = parts.last
         Dir.chdir(path.dirname) do |d| 
-          #sh "rake clobber"
           if File.exist?( "Makefile" ) then
             sh "make distclean"
           end
+          rm_f "rbconfig.rb"
         end 
       end 
     end
