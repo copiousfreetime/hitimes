@@ -18,7 +18,13 @@ module Hitimes
 end
 require 'hitimes/paths'
 require 'hitimes/version'
-require 'hitimes_ext'
+
+# support for fat binaries on windows
+if RUBY_PLATFORM =~ /(mswin|mingw)/i
+  require "hitimes/#{RUBY_VERSION.sub(/\.\d$/,'')}/hitimes_ext"
+else
+  require 'hitimes/hitimes_ext'
+end
 require 'hitimes/stats'
 require 'hitimes/mutexed_stats'
 require 'hitimes/metric'

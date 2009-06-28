@@ -1,7 +1,8 @@
 = Changelog
 == Version 1.0.2 
 
-* Fix bug where CLOCK_MONOTONIC not found on linode (reported by Roger Pack) 
+* Fix bug with time.h on linode (reported by Roger Pack) 
+* Fix potential garbage collection issue with Interval class
 
 == Version 1.0.1 2009-06-12
 

@@ -36,7 +36,7 @@ if pkg_config = Configuration.for_if_exist?("packaging") then
 
     desc "package up a windows gem"
     task :package_win => "ext:build_win" do
-      cp "ext/hitimes_ext.so", "lib", :verbose => true
+      #cp "ext/hitimes_ext.so", "lib", :verbose => true
       Gem::Builder.new( Hitimes::GEM_SPEC_WIN ).build 
       mv Dir["*.gem"].first, "pkg"
     end

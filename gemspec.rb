@@ -24,6 +24,7 @@ Hitimes::GEM_SPEC = Gem::Specification.new do |spec|
   spec.add_dependency("configuration", " ~> 0.0.5")
 
   spec.add_development_dependency( "json", "~> 1.1.3")
+  spec.add_development_dependency( "rake-compiler", "~> 0.5.0")
 
   if ext_conf = Configuration.for_if_exist?("extension") then
     spec.extensions <<  ext_conf.configs
