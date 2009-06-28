@@ -58,7 +58,9 @@ if ext_config = Configuration.for_if_exist?('extension') then
         parts = path.split
         conf  = parts.last
         Dir.chdir(path.dirname) do |d| 
-          sh "make clean"
+          if File.exist?( "Makefile" ) then
+            sh "make clean"
+          end
         end 
       end 
     end 
