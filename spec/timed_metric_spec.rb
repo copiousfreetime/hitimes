@@ -65,12 +65,12 @@ describe Hitimes::TimedMetric do
 
   it "keeps track of the min value" do
     2.times { @tm.start ; sleep 0.05 ; @tm.stop }
-    @tm.min.should be_close( 0.05, 0.001 )
+    @tm.min.should be_close( 0.05, 0.002 )
   end
 
   it "keeps track of the max value" do
     2.times { @tm.start ; sleep 0.05 ; @tm.stop }
-    @tm.max.should be_close( 0.05, 0.001 )
+    @tm.max.should be_close( 0.05, 0.002 )
   end
 
   it "keeps track of the sum value" do

@@ -151,7 +151,7 @@ describe Hitimes::TimedValueMetric do
     it "has a rate" do
       5.times { |x| @tm.start ; sleep 0.05 ; @tm.stop( x ) }
       h = @tm.to_hash
-      h['rate'].should be_close( 40.0, 0.2 )
+      h['rate'].should be_close( 40.0, 0.3 )
     end
 
     it "has a unit_count" do

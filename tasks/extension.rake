@@ -15,9 +15,7 @@ if ext_config = Configuration.for_if_exist?('extension') then
         conf = parts.last
         Dir.chdir(path.dirname) do |d| 
           ruby conf.to_s
-          #sh "rake default"
           sh "make" 
-          sh "make install"
         end
       end
     end 

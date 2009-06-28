@@ -27,7 +27,7 @@ Configuration.for('packaging') {
   proj_conf = Configuration.for('project')
   files {
     bin       FileList["bin/*"]
-    ext       FileList["ext/*.{c,h,rb}"]
+    ext       FileList["ext/hitimes/*.{c,h,rb}"]
     examples  FileList["examples/*.rb"]
     lib       FileList["lib/**/*.rb"]
     test      FileList["spec/**/*.rb", "test/**/*.rb"]

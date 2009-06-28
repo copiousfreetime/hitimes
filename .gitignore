@@ -3,9 +3,8 @@
 *.swo
 *.o
 *.a
-ext/Rakefile
-ext/Makefile
-ext/rbconfig.rb
+ext/hitimes/Makefile
+ext/hitimes/rbconfig.rb
 *.log
 a.out
 *.so
