@@ -18,11 +18,11 @@ extern VALUE cH_Stats;  /* Hitimes::Stats */
 
 
 typedef struct hitimes_stats {
-    double min;
-    double max;
-    double sum;
-    double sumsq;
-    long   count;
+    long double min;
+    long double max;
+    long double sum;
+    long double sumsq;
+    long long   count;
 } hitimes_stats_t;
 
 #endif

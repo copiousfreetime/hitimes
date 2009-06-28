@@ -46,10 +46,11 @@ VALUE hitimes_stats_alloc(VALUE klass)
  */
 VALUE hitimes_stats_update( VALUE self, VALUE v )
 {
-    double           new_v = NUM2DBL( v );
+    long double      new_v;
     hitimes_stats_t *stats;
 
     Data_Get_Struct( self, hitimes_stats_t, stats );
+    new_v = NUM2DBL( v );
 
     if ( 0 == stats->count ) {
       stats->min = new_v;
@@ -76,7 +77,7 @@ VALUE hitimes_stats_update( VALUE self, VALUE v )
 VALUE hitimes_stats_mean( VALUE self )
 {
     hitimes_stats_t *stats;
-    double           mean = 0.0;
+    long double      mean = 0.0;
 
     Data_Get_Struct( self, hitimes_stats_t, stats );
 
@@ -106,7 +107,7 @@ VALUE hitimes_stats_mean( VALUE self )
 VALUE hitimes_stats_rate( VALUE self )
 {
     hitimes_stats_t *stats;
-    double           rate = 0.0;
+    long double      rate = 0.0;
 
     Data_Get_Struct( self, hitimes_stats_t, stats );
 
@@ -210,7 +211,7 @@ VALUE hitimes_stats_sumsq( VALUE self )
 VALUE hitimes_stats_stddev ( VALUE self )
 {
     hitimes_stats_t *stats;
-    double          stddev = 0.0;
+    long double     stddev = 0.0;
 
     Data_Get_Struct( self, hitimes_stats_t, stats );
     if ( stats->count > 1 ) {

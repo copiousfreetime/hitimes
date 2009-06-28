@@ -7,7 +7,7 @@
  * returns the conversion factor, this value is used to convert
  * the value from hitimes_get_current_instant() into seconds
  */
-double hitimes_instant_conversion_factor()
+long double hitimes_instant_conversion_factor()
 {
     LARGE_INTEGER ticks_per_second;
     QueryPerformanceFrequency( &ticks_per_second );
