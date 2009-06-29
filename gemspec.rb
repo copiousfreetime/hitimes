@@ -52,6 +52,6 @@ end
 Hitimes::GEM_SPEC_WIN = Hitimes::GEM_SPEC.clone
 Hitimes::GEM_SPEC_WIN.platform = ::Gem::Platform.new( "i386-mswin32_60" )
 Hitimes::GEM_SPEC_WIN.extensions = []
-Hitimes::GEM_SPEC_WIN.files +=  FileList["lib/hitimes/{1.8,1.9}/**.{dll,so}"].to_a
+Hitimes::GEM_SPEC_WIN.files += FileList["lib/hitimes/{1.8,1.9}/**.{dll,so}"].to_a
 
 Hitimes::SPECS = [ Hitimes::GEM_SPEC, Hitimes::GEM_SPEC_WIN ]
