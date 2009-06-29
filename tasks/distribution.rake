@@ -31,6 +31,11 @@ if pkg_config = Configuration.for_if_exist?("packaging") then
       puts Hitimes::GEM_SPEC.to_ruby
     end
 
+    desc "dump gemspec for win"
+    task :gemspec_win do
+      puts Hitimes::GEM_SPEC_WIN.to_ruby
+    end
+
     desc "reinstall gem"
     task :reinstall => [:uninstall, :repackage, :install]
 
@@ -44,6 +49,7 @@ if pkg_config = Configuration.for_if_exist?("packaging") then
         cp "ext/hitimes/hitimes_ext.so", "lib/hitimes/#{s}/", :verbose => true
       end
 
+      Hitimes::GEM_SPEC_WIN.files += FileList["lib/hitimes/{1.8,1.9}/**.{dll,so}"]
       Gem::Builder.new( Hitimes::GEM_SPEC_WIN ).build 
       mkdir "pkg" unless File.directory?( 'pkg' )
       mv Dir["*.gem"].first, "pkg"
@@ -54,8 +60,10 @@ if pkg_config = Configuration.for_if_exist?("packaging") then
       rm_rf "lib/hitimes/1.9"
     end
 
+    task :prep => [:clean, :package, :package_win]
+
     desc "distribute copiously"
-    task :copious => [:package, :package_win ] do
+    task :copious => [:clean, :package, :package_win ] do
       gems = Hitimes::SPECS.collect { |s| "#{s.full_name}.gem" }
       Rake::SshFilePublisher.new('jeremy@copiousfreetime.org',
                                '/var/www/vhosts/www.copiousfreetime.org/htdocs/gems/gems',
