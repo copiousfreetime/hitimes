@@ -13,9 +13,5 @@ else
 end
 
 # put in a different location if on windows so we can have fat binaries
-parent_dir = "hitimes"
-if RUBY_PLATFORM =~ /(mswin|mingw)/i then
-  v = RUBY_VERSION.gsub(/\.\d$/,'')
-  parent_dir = File.join( parent_dir, v )
-end
-create_makefile("#{parent_dir}/hitimes_ext")
+subdir = RUBY_VERSION.gsub(/\.\d$/,'')
+create_makefile("hitimes/#{subdir}/hitimes_ext")

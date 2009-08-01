@@ -49,10 +49,13 @@ if pkg_config = Configuration.for_if_exist?("packaging") then
         cp "ext/hitimes/hitimes_ext.so", "lib/hitimes/#{s}/", :verbose => true
       end
 
-      Hitimes::GEM_SPEC_WIN.files += FileList["lib/hitimes/{1.8,1.9}/**.{dll,so}"]
-      Gem::Builder.new( Hitimes::GEM_SPEC_WIN ).build 
-      mkdir "pkg" unless File.directory?( 'pkg' )
-      mv Dir["*.gem"].first, "pkg"
+      Hitimes::SPECS.each do |spec|
+        next if spec.platform == "ruby"
+        spec.files += FileList["lib/hitimes/{1.8,1.9}/**.{dll,so}"]
+        Gem::Builder.new( spec ).build
+        mkdir "pkg" unless File.directory?( 'pkg' )
+        mv Dir["*.gem"].first, "pkg"
+      end
     end
 
     task :clobber do

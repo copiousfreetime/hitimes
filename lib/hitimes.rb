@@ -19,12 +19,9 @@ end
 require 'hitimes/paths'
 require 'hitimes/version'
 
-# support for fat binaries on windows
-if RUBY_PLATFORM =~ /(mswin|mingw)/i
-  require "hitimes/#{RUBY_VERSION.sub(/\.\d$/,'')}/hitimes_ext"
-else
-  require 'hitimes/hitimes_ext'
-end
+# use a version subdirectory for extensions, initially to support windows, but
+# why make a special case.  It doesn't hurt anyone to have an extra subdir.
+require "hitimes/#{RUBY_VERSION.sub(/\.\d$/,'')}/hitimes_ext"
 require 'hitimes/stats'
 require 'hitimes/mutexed_stats'
 require 'hitimes/metric'

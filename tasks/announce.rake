@@ -21,10 +21,14 @@ namespace :announce do
       mail.puts
       mail.puts info[:release_notes]
       mail.puts
-      mail.puts info[:urls]
+      mail.puts "    #{info[:urls]}"
       mail.puts 
+      mail.puts "=== Installation"
+      mail.puts
       mail.puts "  gem install #{Hitimes::GEM_SPEC.name}"
       mail.puts 
+      mail.puts "=== Description"
+      mail.puts
       mail.puts info[:description]
     end 
     puts "Created the following as email.txt:"

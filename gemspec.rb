@@ -49,9 +49,12 @@ Hitimes::GEM_SPEC = Gem::Specification.new do |spec|
   end 
 end
 
-Hitimes::GEM_SPEC_WIN = Hitimes::GEM_SPEC.clone
-Hitimes::GEM_SPEC_WIN.platform = ::Gem::Platform.new( "i386-mswin32_60" )
-Hitimes::GEM_SPEC_WIN.extensions = []
-#Hitimes::GEM_SPEC_WIN.files += 
+Hitimes::GEM_SPEC_MSWIN32 = Hitimes::GEM_SPEC.clone
+Hitimes::GEM_SPEC_MSWIN32.platform = ::Gem::Platform.new( "i386-mswin32" )
+Hitimes::GEM_SPEC_MSWIN32.extensions = []
 
-Hitimes::SPECS = [ Hitimes::GEM_SPEC, Hitimes::GEM_SPEC_WIN ]
+Hitimes::GEM_SPEC_MINGW32= Hitimes::GEM_SPEC.clone
+Hitimes::GEM_SPEC_MINGW32.platform = ::Gem::Platform.new( "i386-mingw32" )
+Hitimes::GEM_SPEC_MINGW32.extensions = []
+
+Hitimes::SPECS = [ Hitimes::GEM_SPEC, Hitimes::GEM_SPEC_MSWIN32, Hitimes::GEM_SPEC_MINGW32 ] 

@@ -9,13 +9,19 @@ if ext_config = Configuration.for_if_exist?('extension') then
   namespace :ext do  
     desc "Build the extension(s)"
     task :build => :clean do
-      Hitimes::GEM_SPEC.extensions.each do |extension|
-        path = Pathname.new(extension)
+      ext_config.configs.each do |extension|
+        path  = Pathname.new(extension)
         parts = path.split
-        conf = parts.last
+        conf  = parts.last
         Dir.chdir(path.dirname) do |d| 
           ruby conf.to_s
           sh "make" 
+
+          # install into requireable location so specs will run
+          subdir = "hitimes/#{RUBY_VERSION.sub(/\.\d$/,'')}"
+          dest_dir = Hitimes::Paths.lib_path( subdir )
+          mkdir_p dest_dir, :verbose => true
+          cp "hitimes_ext.#{Config::CONFIG['DLEXT']}", dest_dir, :verbose => true
         end
       end
     end 
@@ -34,6 +40,9 @@ if ext_config = Configuration.for_if_exist?('extension') then
         parts = path.split
         conf = parts.last
         Dir.chdir(path.dirname) do |d| 
+          if File.exist?( "Makefile" ) then
+            sh "make clean distclean"
+          end
           cp "#{rbconfig}", "rbconfig.rb"
           sh "#{ruby_exe} -I. extconf.rb"
           sh "make"
@@ -61,6 +70,7 @@ if ext_config = Configuration.for_if_exist?('extension') then
           if File.exist?( "Makefile" ) then
             sh "make clean"
           end
+          rm_f "rbconfig.rb"
         end 
       end 
     end 
