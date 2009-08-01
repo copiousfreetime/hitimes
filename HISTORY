@@ -1,4 +1,9 @@
 = Changelog
+== Version 1.0.4 2009-08-1
+
+* Add in support for x86-mingw32 gem
+* Add version subdirectory for extension on all platforms
+
 == Version 1.0.3 2009-06-28
 
 * Fix bug with time.h on linode (reported by Roger Pack) 
