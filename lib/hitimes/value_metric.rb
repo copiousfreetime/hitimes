@@ -66,6 +66,6 @@ module Hitimes
 
     # forward appropriate calls directly to the stats object
     extend Forwardable
-    def_delegators :@stats, :count, :sum, :max, :mean, :min, :stddev, :sum, :sumsq
- end
+    def_delegators :@stats, :count, :max, :mean, :min, :stddev, :sum, :sumsq
+  end
 end
