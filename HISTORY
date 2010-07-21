@@ -1,5 +1,10 @@
 = Changelog
-== Version 1.0.4 2009-08-1
+== Version 1.0.5 2010-07-20
+
+* Fix 'circular require considered harmful' warnings in 1.9.x (reported by Roger Pack)
+* Fix 'method redefined' warnings in 1.9.x (reported by Roger Pack)
+
+== Version 1.0.4 2009-08-01
 
 * Add in support for x86-mingw32 gem
 * Add version subdirectory for extension on all platforms
