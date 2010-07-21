@@ -4,7 +4,6 @@
 #++
 
 require 'forwardable'
-require 'hitimes'
 module Hitimes
   #
   # A ValueMetric holds the data from measuring a single value over a period of

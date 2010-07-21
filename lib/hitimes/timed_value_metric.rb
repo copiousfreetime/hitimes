@@ -3,8 +3,6 @@
 # All rights reserved.  See LICENSE and/or COPYING for details.
 #++
 
-require 'hitimes'
-
 module Hitimes
   #
   # A TimedValueMetric holds the metrics on how long it takes to do a batch of something.

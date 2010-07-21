@@ -1,4 +1,8 @@
-require 'hitimes'
+#--
+# Copyright (c) 2008, 2009 Jeremy Hinegardner
+# All rights reserved.  See LICENSE and/or COPYING for details.
+#++
+
 require 'thread'
 
 module Hitimes
