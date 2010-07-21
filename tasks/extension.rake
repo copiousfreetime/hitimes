@@ -30,21 +30,20 @@ if ext_config = Configuration.for_if_exist?('extension') then
       ext_config = Configuration.for("extension")
       rbconfig = ext_config.cross_rbconfig["rbconfig-#{version}"]
       raise ArgumentError, "No cross compiler for version #{version}, we have #{ext_config.cross_rbconfig.keys.join(",")}" unless rbconfig
-      ruby_exe = if version =~ /1\.8/ then
-                   "ruby"
-                 else
-                   "ruby1.9"
-                 end
       Hitimes::GEM_SPEC.extensions.each do |extension|
         path = Pathname.new(extension)
         parts = path.split
         conf = parts.last
+        rvm = %x[ which rvm ].strip
         Dir.chdir(path.dirname) do |d| 
           if File.exist?( "Makefile" ) then
             sh "make clean distclean"
           end
           cp "#{rbconfig}", "rbconfig.rb"
-          sh "#{ruby_exe} -I. extconf.rb"
+          rubylib = ENV['RUBYLIB']
+          ENV['RUBYLIB'] = "."
+          sh %[#{rvm} #{version} -S extconf.rb]
+          ENV['RUBYLIB'] = rubylib
           sh "make"
         end
       end
