@@ -34,7 +34,7 @@ if ext_config = Configuration.for_if_exist?('extension') then
         path = Pathname.new(extension)
         parts = path.split
         conf = parts.last
-        rvm = %x[ which rvm ].strip
+        rvm = File.expand_path( "~/.rvm/bin/rvm" )
         Dir.chdir(path.dirname) do |d| 
           if File.exist?( "Makefile" ) then
             sh "make clean distclean"
