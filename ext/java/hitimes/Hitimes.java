@@ -31,7 +31,7 @@ public class Hitimes {
     /**
      * Create the Hitimes module and add it to the Ruby runtime.
      */
-    public static RubyModule createHitimesModule( Ruby runtime ) {
+    public static RubyModule createHitimes( Ruby runtime ) {
         RubyModule mHitimes = runtime.defineModule("Hitimes");
 
         RubyClass  cStandardError = runtime.getStandardError();
@@ -40,9 +40,8 @@ public class Hitimes {
         RubyClass  cHitimesStats  = mHitimes.defineClassUnder("Stats", runtime.getObject(), HitimesStats.ALLOCATOR );
         cHitimesStats.defineAnnotatedMethods( HitimesStats.class );
 
-        RubyClass  cHitimesInterval = mHitimes.defineClassUnder("Interval", runtime.getObject(), HitimesInterval.ALLOCATOR );
+        RubyClass  cHitimesInterval  = mHitimes.defineClassUnder("Interval", runtime.getObject(), HitimesInterval.ALLOCATOR );
         Hitimes.hitimesIntervalClass = cHitimesInterval;
-
         cHitimesInterval.defineAnnotatedMethods( HitimesInterval.class );
 
         return mHitimes;
