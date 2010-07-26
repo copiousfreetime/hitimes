@@ -26,6 +26,21 @@ if ext_config = Configuration.for_if_exist?('extension') then
       end
     end 
 
+    desc "Build the jruby extension"
+    task :build_jruby => :clean do
+      path = "ext/java"
+      Dir.chdir( path ) do |d|
+        #java_ext = "lib/hitimes/java/#{RUBY_VERSION.sub(/\.\d$/,'')}/hitimes_ext.#{Config::CONFIG['DLEXT']}"
+        java_ext = "lib/hitimes/hitimes.jar"
+        jruby_home = Config::CONFIG['prefix']
+        classpath = "#{jruby_home}/lib/jruby.jar"
+        FileUtils.mkdir_p "../../#{File.dirname( java_ext )}"
+        sh "javac -g -cp #{classpath} hitimes/*.java"
+        sh "jar cf ../../#{java_ext} hitimes/*.class"
+      end
+    end
+
+
     def build_win( version = "1.8.6" )
       ext_config = Configuration.for("extension")
       rbconfig = ext_config.cross_rbconfig["rbconfig-#{version}"]

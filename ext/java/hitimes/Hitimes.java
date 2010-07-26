@@ -7,6 +7,21 @@ import org.jruby.anno.JRubyClass;
 import org.jruby.anno.JRubyMethod;
 import org.jruby.anno.JRubyModule;
 
+import org.jruby.Ruby;
+import org.jruby.RubyClass;
+import org.jruby.RubyException;
+import org.jruby.RubyModule;
+import org.jruby.RubyNumeric;
+import org.jruby.RubyObject;
+
+import org.jruby.exceptions.RaiseException;
+
+import org.jruby.runtime.builtin.IRubyObject;
+
+import org.jruby.runtime.Block;
+import org.jruby.runtime.ObjectAllocator;
+import org.jruby.runtime.ThreadContext; 
+
 /**
  * @author <a href="mailto:jeremy@hinegardner.org">Jeremy Hinegardner</a>
  */
@@ -34,14 +49,14 @@ public class Hitimes {
     }
 
     static RaiseException newHitimesError( Ruby runtime, String message ) {
-        RubyClass errorClass = runtime.fastGetModule("Hitimes").fastGetClass( klass );
-        return new RaiseException( RubyException.newException( runtime, errorClass, message ), true )
+        RubyClass errorClass = runtime.fastGetModule("Hitimes").fastGetClass( "Error" );
+        return new RaiseException( RubyException.newException( runtime, errorClass, message ), true );
     }
 
 
 
     @JRubyClass( name = "Hitimes::Error", parent = "StandardError" )
-    public static class Error {}
+    public static class Error {};
 
     @JRubyClass( name = "Hitimes::Stats" )
     public static class HitimesStats extends RubyObject {
@@ -54,9 +69,13 @@ public class Hitimes {
 
         private static final ObjectAllocator ALLOCATOR = new ObjectAllocator() {
             public IRubyObject allocate(Ruby runtime, RubyClass klass) {
-                return new HitimesStats( runtime, klass )
+                return new HitimesStats( runtime, klass );
             }
         };
+
+        public HitimesStats( Ruby runtime, RubyClass klass ) {
+            super( runtime, klass );
+        }
 
         @JRubyMethod( name = "update", required = 1, argTypes = RubyNumeric.class )
         public IRubyObject update( IRubyObject val ) {
@@ -93,7 +112,7 @@ public class Hitimes {
             double rate = 0.0;
 
             if ( this.sum > 0.0 ) {
-                mean = this.count / this.sum ;
+                rate = this.count / this.sum ;
             }
 
             return getRuntime().newFloat( rate );
@@ -113,27 +132,27 @@ public class Hitimes {
 
         @JRubyMethod( name = "min" )
         public IRubyObject min() {
-            return getRuntime().newFloat( this.min )
+            return getRuntime().newFloat( this.min );
         }
 
         @JRubyMethod( name = "max" )
         public IRubyObject max() {
-            return getRuntime().newFloat( this.max )
+            return getRuntime().newFloat( this.max );
         }
 
         @JRubyMethod( name = "sum" )
         public IRubyObject sum() {
-            return getRuntime().newFloat( this.sum )
+            return getRuntime().newFloat( this.sum );
         }
 
         @JRubyMethod( name = "sumsq" )
         public IRubyObject sumsq() {
-            return getRuntime().newFloat( this.sumsq )
+            return getRuntime().newFloat( this.sumsq );
         }
 
         @JRubyMethod( name = "count" )
         public IRubyObject count() {
-            return getRuntime().newInteger( this.count )
+            return getRuntime().newFixnum( this.count );
         }
     }
 
@@ -147,18 +166,23 @@ public class Hitimes {
 
         private static final ObjectAllocator ALLOCATOR = new ObjectAllocator() {
             public IRubyObject allocate(Ruby runtime, RubyClass klass) {
-                return new HitimesInterval( runtime, klass )
+                return new HitimesInterval( runtime, klass );
             }
         };
+
+        public HitimesInterval( Ruby runtime, RubyClass klass ) {
+            super( runtime, klass );
+        }
+
+        public HitimesInterval( Ruby runtime, RubyClass klass, long start ) {
+            super( runtime, klass );
+            this.start_instant = start;
+        }
+
 
         private long start_instant = INSTANT_NOT_SET;
         private long stop_instant  = INSTANT_NOT_SET;
         private double duration    = DURATION_NOT_SET;
-
-        public HitimesInterval( Ruby runtime, RubyClass klass, long start ) {
-            super( runtime, klass);
-            this.start_instant = start;
-        }
 
         @JRubyMethod( name = "duration", alias = { "length", "to_f", "to_seconds" } )
         public IRubyObject duration() {
@@ -224,12 +248,12 @@ public class Hitimes {
 
         @JRubyMethod( name = "start_instant" )
         public IRubyObject start_instant() {
-            return getRuntime.newInteger( this.start_instant );
+            return getRuntime().newFixnum( this.start_instant );
         }
 
         @JRubyMethod( name = "stop_instant" )
         public IRubyObject stop_instant() {
-            return getRuntime.newInteger( this.stop_instant );
+            return getRuntime().newFixnum( this.stop_instant );
         }
 
         @JRubyMethod( name = "start" )
@@ -244,7 +268,7 @@ public class Hitimes {
         @JRubyMethod( name = "stop" )
         public IRubyObject stop() {
             if ( INSTANT_NOT_SET == this.start_instant ) {
-                return Hitimes.newHitimesError( getRuntime(), "Attempt to stop an interval that has not started." );
+                throw Hitimes.newHitimesError( getRuntime(), "Attempt to stop an interval that has not started." );
             }
 
             if ( INSTANT_NOT_SET == this.stop_instant ) {
@@ -259,24 +283,29 @@ public class Hitimes {
         @JRubyMethod( name = "split" )
         public IRubyObject split() {
             this.stop();
-            return new HitimesInterval( getRuntime(), Hitimes.hitimesIntervalClass, this.start_interval )
+            return new HitimesInterval( getRuntime(), Hitimes.hitimesIntervalClass, this.start_instant );
         }
 
         @JRubyMethod( name = "now", meta = true )
         public static IRubyObject now( ThreadContext context ) {
-            return new HitimesInterval( context.getRuntime(), Hitimes.hitimesIntervalClass, System.nanoTime() )
+            return new HitimesInterval( context.getRuntime(), Hitimes.hitimesIntervalClass, System.nanoTime() );
         }
 
         @JRubyMethod( name = "measure", frame = true, meta = true )
-        public static IRubyObject measure(ThreadContext context, Block block) {
+        public static IRubyObject measure( ThreadContext context, Block block ) {
             if ( block.isGiven() ) {
-                interval = new HitimesInterval( context.getRuntime(), HitimesIntervalClass );
+                Ruby runtime    = context.getRuntime();
+                IRubyObject nil = runtime.getNil();
+
+                HitimesInterval interval = new HitimesInterval( runtime, Hitimes.hitimesIntervalClass );
+
                 interval.start();
-                block.yield( context );
+                block.yield( context, nil ); 
                 interval.stop();
+
                 return interval.duration();
             } else {
-                return Hitimes.newHitimesError( context.getRuntime(), "No block given to Interval.measure" );
+                throw Hitimes.newHitimesError( context.getRuntime(), "No block given to Interval.measure" );
             }
         }
     }
