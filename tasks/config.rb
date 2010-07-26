@@ -2,6 +2,7 @@ require 'configuration'
 
 require 'rake'
 require 'tasks/utils'
+require 'yaml'
 
 #-----------------------------------------------------------------------
 # General project configuration
@@ -92,7 +93,7 @@ Configuration.for('rdoc') {
 #-----------------------------------------------------------------------
 Configuration.for('extension') {
   configs   Configuration.for('packaging').files.ext.find_all { |x| %w[ mkrf_conf.rb extconf.rb ].include?(File.basename(x)) }
-  cross_rbconfig YAML.load_file( File.expand_path("~/.rake-compiler/config.yml"))
+  cross_rbconfig ::YAML::load_file( File.expand_path("~/.rake-compiler/config.yml"))
 }
 
 #-----------------------------------------------------------------------
