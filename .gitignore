@@ -9,6 +9,8 @@ ext/hitimes/rbconfig.rb
 a.out
 *.so
 *.bundle
+*.class
+*.jar
 coverage
 doc
 log
