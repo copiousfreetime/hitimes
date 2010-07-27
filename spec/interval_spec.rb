@@ -37,7 +37,7 @@ describe Hitimes::Interval do
     d = Hitimes::Interval.measure do
       sleep 0.2
     end
-    d.should be_close(0.2, 0.01)
+    d.should be_close(0.2, 0.02)
   end
 
   it "raises an error if measure is called with no block" do

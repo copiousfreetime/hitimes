@@ -140,7 +140,7 @@ describe Hitimes::TimedMetric do
     it "has the right sum" do
       10.times { |x| @tm.measure { sleep 0.01*x  } }
       h = @tm.to_hash
-      h['sum'].should be_close( 0.45, 0.002 )
+      h['sum'].should be_close( 0.45, 0.003 )
     end
 
     fields = ::Hitimes::Stats::STATS.dup + %w[ name additional_data sampling_start_time sampling_stop_time ]
