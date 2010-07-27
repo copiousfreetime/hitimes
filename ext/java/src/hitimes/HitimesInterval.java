@@ -14,7 +14,7 @@ import org.jruby.anno.JRubyClass;
 import org.jruby.anno.JRubyMethod;
 
 @JRubyClass( name = "Hitimes::Interval" )
-public class HitimesInterval extends RubyObject {
+public class Interval extends RubyObject {
 
     /* this is a double to force all division by the conversion factor
      * to cast to doubles
@@ -26,15 +26,15 @@ public class HitimesInterval extends RubyObject {
 
     public static final ObjectAllocator ALLOCATOR = new ObjectAllocator() {
         public IRubyObject allocate(Ruby runtime, RubyClass klass) {
-            return new HitimesInterval( runtime, klass );
+            return new Interval( runtime, klass );
         }
     };
 
-    public HitimesInterval( Ruby runtime, RubyClass klass ) {
+    public Interval( Ruby runtime, RubyClass klass ) {
         super( runtime, klass );
     }
 
-    public HitimesInterval( Ruby runtime, RubyClass klass, long start ) {
+    public Interval( Ruby runtime, RubyClass klass, long start ) {
         super( runtime, klass );
         this.start_instant = start;
     }
@@ -143,12 +143,12 @@ public class HitimesInterval extends RubyObject {
     @JRubyMethod( name = "split" )
     public IRubyObject split() {
         this.stop();
-        return new HitimesInterval( getRuntime(), Hitimes.hitimesIntervalClass, this.stop_instant );
+        return new Interval( getRuntime(), Hitimes.hitimesIntervalClass, this.stop_instant );
     }
 
     @JRubyMethod( name = "now", module = true )
     public static IRubyObject now( IRubyObject self ) {
-        return new HitimesInterval( self.getRuntime(), Hitimes.hitimesIntervalClass, System.nanoTime() );
+        return new Interval( self.getRuntime(), Hitimes.hitimesIntervalClass, System.nanoTime() );
     }
 
     @JRubyMethod( name = "measure", module = true, frame = true )
@@ -160,7 +160,7 @@ public class HitimesInterval extends RubyObject {
             IRubyObject       nil = runtime.getNil();
             ThreadContext context = runtime.getCurrentContext();
 
-            HitimesInterval interval = new HitimesInterval( runtime, Hitimes.hitimesIntervalClass );
+            Interval interval = new Interval( runtime, Hitimes.hitimesIntervalClass );
 
             interval.start();
             block.yield( context, nil );
