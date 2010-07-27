@@ -12,7 +12,7 @@ import org.jruby.anno.JRubyMethod;
 import org.jruby.anno.JRubyClass;
 
 @JRubyClass( name = "Hitimes::Stats" )
-public class Stats extends RubyObject {
+public class HitimesStats extends RubyObject {
 
     private double min   = 0.0;
     private double max   = 0.0;
@@ -22,11 +22,11 @@ public class Stats extends RubyObject {
 
     public static final ObjectAllocator ALLOCATOR = new ObjectAllocator() {
         public IRubyObject allocate(Ruby runtime, RubyClass klass) {
-            return new Stats( runtime, klass );
+            return new HitimesStats( runtime, klass );
         }
     };
 
-    public Stats( Ruby runtime, RubyClass klass ) {
+    public HitimesStats( Ruby runtime, RubyClass klass ) {
         super( runtime, klass );
     }
 
