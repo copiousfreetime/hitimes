@@ -84,10 +84,10 @@ describe Hitimes::TimedMetric do
   end
 
   it "keeps track of the minimum start time of all the intervals" do
-    f1 = Time.now.gmtime.to_f * 1000000
+    f1 = Time.now.gmtime.to_f * 1_000_000
     5.times { @tm.start ; sleep 0.05 ; @tm.stop }
-    f2 = Time.now.gmtime.to_f * 1000000
-    @tm.sampling_start_time.should > f1
+    f2 = Time.now.gmtime.to_f * 1_000_000
+    @tm.sampling_start_time.should >= f1
     @tm.sampling_start_time.should < f2
     # distance from now to start time should be greater than the distance from
     # the start to the min start_time
@@ -99,7 +99,7 @@ describe Hitimes::TimedMetric do
     5.times { @tm.start ; sleep 0.05 ; @tm.stop }
     f2 = Time.now.gmtime.to_f * 1_000_000
     @tm.sampling_stop_time.should > f1
-    @tm.sampling_stop_time.should < f2
+    @tm.sampling_stop_time.should <= f2
     # distance from now to max stop time time should be less than the distance
     # from the start to the max stop time
     (f2 - @tm.sampling_stop_time).should < ( @tm.sampling_stop_time - f1 )
