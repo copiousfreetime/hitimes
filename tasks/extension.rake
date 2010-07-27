@@ -8,7 +8,7 @@ require 'pathname'
 if ext_config = Configuration.for_if_exist?('extension') then
   namespace :ext do  
     desc "Build the extension(s)"
-    task :build => :clean do
+    task :build => :clobber do
       ext_config.configs.each do |extension|
         path  = Pathname.new(extension)
         parts = path.split
@@ -26,17 +26,20 @@ if ext_config = Configuration.for_if_exist?('extension') then
       end
     end 
 
-    desc "Build the jruby extension"
-    task :build_jruby => :clean do
-      path = "ext/java"
-      Dir.chdir( path ) do |d|
-        #java_ext = "lib/hitimes/java/#{RUBY_VERSION.sub(/\.\d$/,'')}/hitimes_ext.#{Config::CONFIG['DLEXT']}"
-        java_ext = "lib/hitimes/hitimes.jar"
+    if RUBY_PLATFORM == "java" then
+      desc "Build the jruby extension"
+      task :build_java => [ :clobber, "lib/hitimes/hitimes.jar" ]
+
+      file "lib/hitimes/hitimes.jar" => FileList["ext/java/src/hitimes/*.java"] do |t|
         jruby_home = Config::CONFIG['prefix']
-        classpath = "#{jruby_home}/lib/jruby.jar"
-        FileUtils.mkdir_p "../../#{File.dirname( java_ext )}"
-        sh "javac -g -cp #{classpath} hitimes/*.java"
-        sh "jar cf ../../#{java_ext} hitimes/*.class"
+        jruby_jar  = File.join( jruby_home, 'lib', 'jruby.jar' )
+
+        mkdir_p 'pkg/classes'
+        sh "javac -classpath #{jruby_jar} -d pkg/classes #{t.prerequisites.join(' ')}"  
+
+        dest_dir = File.dirname(t.name)
+        mkdir_p dest_dir
+        sh "jar cf #{t.name} -C pkg/classes ."
       end
     end
 

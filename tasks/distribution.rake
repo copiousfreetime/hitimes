@@ -36,11 +36,16 @@ if pkg_config = Configuration.for_if_exist?("packaging") then
       puts Hitimes::GEM_SPEC_WIN.to_ruby
     end
 
+    desc "dump gemspec for java"
+    task :gemspec_java do
+      puts Hitimes::GEM_SPEC_JAVA.to_ruby
+    end
+
     desc "reinstall gem"
     task :reinstall => [:uninstall, :repackage, :install]
 
     desc "package up a windows gem"
-    task :package_win => :clean do
+    task :package_win => :clean  do
       Configuration.for("extension").cross_rbconfig.keys.each do |rbconfig|
         v = rbconfig.split("-").last
         s = v.sub(/\.\d$/,'')
@@ -58,15 +63,25 @@ if pkg_config = Configuration.for_if_exist?("packaging") then
       end
     end
 
+    if RUBY_PLATFORM == "java" then
+      desc "package up a jruby gem"
+      task :package_java => "ext:build_java" do
+        Hitimes::GEM_SPEC_JAVA.files += FileList["lib/hitimes/java/*.jar"]
+        Gem::Builder.new( Hitimes::GEM_SPEC_JAVA ).build
+        mv Dir["*.gem"].first, "pkg"
+      end
+    end
+
     task :clobber do
       rm_rf "lib/hitimes/1.8"
       rm_rf "lib/hitimes/1.9"
+      rm_rf "lib/hitimes/*.jar"
     end
 
-    task :prep => [:clean, :package, :package_win]
+    task :prep => [:clean, :package, :package_win, :package_java ]
 
     desc "distribute copiously"
-    task :copious => [:clean, :package, :package_win ] do
+    task :copious => [:clean, :package, :package_win, :package_java ] do
       gems = Hitimes::SPECS.collect { |s| "#{s.full_name}.gem" }
       Rake::SshFilePublisher.new('jeremy@copiousfreetime.org',
                                '/var/www/vhosts/www.copiousfreetime.org/htdocs/gems/gems',

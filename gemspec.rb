@@ -57,4 +57,9 @@ Hitimes::GEM_SPEC_MINGW32= Hitimes::GEM_SPEC.clone
 Hitimes::GEM_SPEC_MINGW32.platform = ::Gem::Platform.new( "i386-mingw32" )
 Hitimes::GEM_SPEC_MINGW32.extensions = []
 
-Hitimes::SPECS = [ Hitimes::GEM_SPEC, Hitimes::GEM_SPEC_MSWIN32, Hitimes::GEM_SPEC_MINGW32 ] 
+Hitimes::GEM_SPEC_JAVA = Hitimes::GEM_SPEC.clone
+Hitimes::GEM_SPEC_JAVA.platform = ::Gem::Platform.new( 'java' )
+Hitimes::GEM_SPEC_JAVA.extensions = []
+
+Hitimes::SPECS = [ Hitimes::GEM_SPEC, Hitimes::GEM_SPEC_MSWIN32, Hitimes::GEM_SPEC_MINGW32, Hitimes::GEM_SPEC_JAVA ]
+
