@@ -19,10 +19,14 @@ end
 require 'hitimes/paths'
 require 'hitimes/version'
 
-# use a version subdirectory for extensions, initially to support windows, but
-# why make a special case.  It doesn't hurt anyone to have an extra subdir.
-#require "hitimes/#{RUBY_PLATFORM}/#{RUBY_VERSION.sub(/\.\d$/,'')}/hitimes_ext"
-require 'hitimes/hitimes.jar'
+if RUBY_PLATFORM == "java" then
+  require 'hitimes/hitimes'
+else
+  # use a version subdirectory for extensions, initially to support windows, but
+  # why make a special case.  It doesn't hurt anyone to have an extra subdir.
+  require "hitimes/#{RUBY_VERSION.sub(/\.\d$/,'')}/hitimes_ext"
+end
+
 require 'hitimes/stats'
 require 'hitimes/mutexed_stats'
 
