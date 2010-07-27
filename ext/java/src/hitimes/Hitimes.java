@@ -31,12 +31,12 @@ public class Hitimes {
         RubyClass  cStandardError = runtime.getStandardError();
         RubyClass  cHitimesError  = mHitimes.defineClassUnder("Error", cStandardError, cStandardError.getAllocator());
 
-        RubyClass  cHitimesStats  = mHitimes.defineClassUnder("Stats", runtime.getObject(), HitimesStats.ALLOCATOR );
-        cHitimesStats.defineAnnotatedMethods( HitimesStats.class );
+        RubyClass  cHitimesStats  = mHitimes.defineClassUnder("Stats", runtime.getObject(), Stats.ALLOCATOR );
+        cHitimesStats.defineAnnotatedMethods( Stats.class );
 
-        RubyClass  cHitimesInterval  = mHitimes.defineClassUnder("Interval", runtime.getObject(), HitimesInterval.ALLOCATOR );
+        RubyClass  cHitimesInterval  = mHitimes.defineClassUnder("Interval", runtime.getObject(), Interval.ALLOCATOR );
         Hitimes.hitimesIntervalClass = cHitimesInterval;
-        cHitimesInterval.defineAnnotatedMethods( HitimesInterval.class );
+        cHitimesInterval.defineAnnotatedMethods( Interval.class );
 
         return mHitimes;
     }
