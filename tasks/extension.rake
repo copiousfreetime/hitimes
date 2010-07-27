@@ -38,7 +38,6 @@ if ext_config = Configuration.for_if_exist?('extension') then
         sh "javac -classpath #{jruby_jar} -d pkg/classes #{t.prerequisites.join(' ')}"  
 
         dest_dir = File.dirname(t.name)
-        mkdir_p dest_dir
         sh "jar cf #{t.name} -C pkg/classes ."
       end
     end
