@@ -25,7 +25,9 @@ if spec_config = Configuration.for_if_exist?("test") then
         end
       end
 
-      task :spec => "ext:build"
+      pre_req = "ext:build"
+      pre_req += "_java" if RUBY_PLATFORM == "java"
+      task :spec => pre_req
     end
   end
 end
