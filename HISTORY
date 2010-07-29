@@ -1,4 +1,8 @@
 = Changelog
+== Version 1.1.0 2010-07-28
+
+* Add a pure java extension so hitimes may be used in jruby with the same API
+
 == Version 1.0.5 2010-07-20
 
 * Fix 'circular require considered harmful' warnings in 1.9.x (reported by Roger Pack)
