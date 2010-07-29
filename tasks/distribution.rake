@@ -66,7 +66,8 @@ if pkg_config = Configuration.for_if_exist?("packaging") then
     if RUBY_PLATFORM == "java" then
       desc "package up a jruby gem"
       task :package_java => "ext:build_java" do
-        Hitimes::GEM_SPEC_JAVA.files += FileList["lib/hitimes/java/*.jar"]
+        Hitimes::GEM_SPEC_JAVA.files += FileList["lib/hitimes/*.jar"]
+        Hitimes::GEM_SPEC_JAVA.files += FileList["ext/java/src/hitimes/*.java"]
         Gem::Builder.new( Hitimes::GEM_SPEC_JAVA ).build
         mv Dir["*.gem"].first, "pkg"
       end
