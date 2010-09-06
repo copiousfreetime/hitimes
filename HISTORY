@@ -1,4 +1,8 @@
 = Changelog
+== Version 1.1.1 2010-09-04
+
+* Remove the unnecessary dependencies that should be development dependencies
+
 == Version 1.1.0 2010-07-28
 
 * Add a pure java extension so hitimes may be used in jruby with the same API
