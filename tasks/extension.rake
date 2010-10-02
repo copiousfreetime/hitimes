@@ -45,6 +45,8 @@ if ext_config = Configuration.for_if_exist?('extension') then
 
     def build_win( version = "1.8.6" )
       ext_config = Configuration.for("extension")
+      return nil unless ext_config.cross_rbconfig
+
       rbconfig = ext_config.cross_rbconfig["rbconfig-#{version}"]
       raise ArgumentError, "No cross compiler for version #{version}, we have #{ext_config.cross_rbconfig.keys.join(",")}" unless rbconfig
       Hitimes::GEM_SPEC.extensions.each do |extension|

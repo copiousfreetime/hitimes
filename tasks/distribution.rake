@@ -44,22 +44,24 @@ if pkg_config = Configuration.for_if_exist?("packaging") then
     desc "reinstall gem"
     task :reinstall => [:uninstall, :repackage, :install]
 
-    desc "package up a windows gem"
-    task :package_win => :clean  do
-      Configuration.for("extension").cross_rbconfig.keys.each do |rbconfig|
-        v = rbconfig.split("-").last
-        s = v.sub(/\.\d$/,'')
-        sh "rake ext:build_win-#{v}"
-        mkdir_p "lib/hitimes/#{s}", :verbose => true
-        cp "ext/hitimes/hitimes_ext.so", "lib/hitimes/#{s}/", :verbose => true
-      end
+    if Configuration.for("extension").cross_rbconfig.size > 0 then
+      desc "package up a windows gem"
+      task :package_win => :clean  do
+        Configuration.for("extension").cross_rbconfig.keys.each do |rbconfig|
+          v = rbconfig.split("-").last
+          s = v.sub(/\.\d$/,'')
+          sh "rake ext:build_win-#{v}"
+          mkdir_p "lib/hitimes/#{s}", :verbose => true
+          cp "ext/hitimes/hitimes_ext.so", "lib/hitimes/#{s}/", :verbose => true
+        end
 
-      Hitimes::SPECS.each do |spec|
-        next if spec.platform == "ruby"
-        spec.files += FileList["lib/hitimes/{1.8,1.9}/**.{dll,so}"]
-        Gem::Builder.new( spec ).build
-        mkdir "pkg" unless File.directory?( 'pkg' )
-        mv Dir["*.gem"].first, "pkg"
+        Hitimes::SPECS.each do |spec|
+          next if spec.platform == "ruby"
+          spec.files += FileList["lib/hitimes/{1.8,1.9}/**.{dll,so}"]
+          Gem::Builder.new( spec ).build
+          mkdir "pkg" unless File.directory?( 'pkg' )
+          mv Dir["*.gem"].first, "pkg"
+        end
       end
     end
 
