@@ -1,9 +1,9 @@
 == hitimes
 
-* Homepage[http://copiousfreetime.rubyforge.org/hitimes] 
-* {Rubyforge project}[http://rubyforge.org/projects/copiousfreetime/]
+* Homepage[http://rubygems.org/gems/hitimes]
+* {Github project}[http://github.com.org/copiousfreetime/hitimes]
 * email jeremy at copiousfreetime dot org
-* git clone url git://github.com/copiousfreetime/hitimes.git
+* `git clone url git://github.com/copiousfreetime/hitimes.git`
 
 == INSTALL
 
@@ -36,7 +36,7 @@ Use Hitimes::Interval to calculate only the duration of a block of code
                # some operation ...
              end
 
-  puts duration   
+  puts duration
 
 === TimedMetric
 
@@ -120,7 +120,7 @@ Read the HISTORY file.
 
 == ISC License
 
-Copyright (c) 2008 Jeremy Hinegardner
+Copyright (c) 2008-2012 Jeremy Hinegardner
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above

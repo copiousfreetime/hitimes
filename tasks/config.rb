@@ -12,7 +12,7 @@ Configuration.for('project') {
   version       Hitimes::Version.to_s
   author        "Jeremy Hinegardner"
   email         "jeremy at copiousfreetime dot org"
-  homepage      "http://copiousfreetime.rubyforge.org/hitimes/"
+  homepage      "http://rubygems.org/gems/hitimes"
   description   Utils.section_of("README", "description")
   summary       description.split(".").first
   history       "HISTORY"

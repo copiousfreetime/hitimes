@@ -14,7 +14,7 @@ Hitimes::GEM_SPEC = Gem::Specification.new do |spec|
   spec.description  = proj.description
   spec.platform     = Gem::Platform::RUBY
 
-  
+
   pkg = Configuration.for('packaging')
   spec.files        = pkg.files.all
   spec.executables  = pkg.files.bin.collect { |b| File.basename(b) }
