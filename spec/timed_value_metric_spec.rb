@@ -48,19 +48,19 @@ describe Hitimes::TimedValueMetric do
 
   it "calculates the mean of the durations" do
     3.times { |x| @tm.start ; sleep 0.05 ; @tm.stop(x) }
-    @tm.timed_stats.mean.should be_close( 0.05, 0.01 )
+    @tm.timed_stats.mean.should be_within(0.01).of(0.05)
     @tm.value_stats.mean.should == 1.00
   end
 
   it "calculates the rate of the counts " do
     5.times { |x| @tm.start ; sleep 0.05 ; @tm.stop( x ) }
-    @tm.rate.should be_close( 40.0, 0.2)
+    @tm.rate.should be_within(0.2).of(40.0)
   end
 
 
   it "calculates the stddev of the durations" do
     3.times { |x| @tm.start ; sleep (0.05 * x) ; @tm.stop(x) }
-    @tm.timed_stats.stddev.should be_close( 0.05, 0.001) 
+    @tm.timed_stats.stddev.should be_within(0.001).of(0.05)
     @tm.value_stats.stddev.should == 1.0
   end
 
@@ -71,25 +71,25 @@ describe Hitimes::TimedValueMetric do
 
   it "keeps track of the min value" do
     3.times { |x| @tm.start ; sleep 0.05 ; @tm.stop( x ) }
-    @tm.timed_stats.min.should be_close( 0.05, 0.001 )
+    @tm.timed_stats.min.should be_within( 0.001 ).of(0.05)
     @tm.value_stats.min.should == 0
   end
 
   it "keeps track of the max value" do
     3.times { |x| @tm.start ; sleep 0.05 ; @tm.stop( x ) }
-    @tm.timed_stats.max.should be_close( 0.05, 0.001) 
+    @tm.timed_stats.max.should be_within(0.001).of( 0.05 )
     @tm.value_stats.max.should == 2
   end
 
   it "keeps track of the sum value" do
     3.times { |x| @tm.start ; sleep 0.05 ; @tm.stop( x ) }
-    @tm.timed_stats.sum.should be_close( 0.15, 0.01 )
+    @tm.timed_stats.sum.should be_within(0.01).of(0.15)
     @tm.value_stats.sum.should == 3
   end
   
   it "keeps track of the sum of squares value" do
     3.times { |x| @tm.start ; sleep 0.05 ; @tm.stop( x ) }
-    @tm.timed_stats.sumsq.should be_close( 0.0075, 0.0001 )
+    @tm.timed_stats.sumsq.should be_within(0.0001).of(0.0075)
     @tm.value_stats.sumsq.should == 5
   end
 
@@ -123,7 +123,7 @@ describe Hitimes::TimedValueMetric do
   it "can measure a block of code from an instance" do
     t = Hitimes::TimedValueMetric.new( 'measure a block' )
     3.times { t.measure( 1 ) { sleep 0.05 } }
-    t.duration.should be_close( 0.15, 0.001 )
+    t.duration.should be_within(0.001).of(0.15)
     t.timed_stats.count.should == 3
     t.value_stats.count.should == 3
   end
@@ -131,7 +131,7 @@ describe Hitimes::TimedValueMetric do
   it "returns the value of the block when measuring" do
     t = Hitimes::TimedValueMetric.new( 'measure a block' )
     x = t.measure( 42 ) { sleep 0.05; 42 }
-    t.duration.should be_close( 0.05, 0.001 )
+    t.duration.should be_within(0.001).of(0.05)
     x.should == 42
   end
 
@@ -151,7 +151,7 @@ describe Hitimes::TimedValueMetric do
     it "has a rate" do
       5.times { |x| @tm.start ; sleep 0.05 ; @tm.stop( x ) }
       h = @tm.to_hash
-      h['rate'].should be_close( 40.0, 0.3 )
+      h['rate'].should be_within(0.3).of(40.0)
     end
 
     it "has a unit_count" do

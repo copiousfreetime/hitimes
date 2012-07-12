@@ -45,18 +45,18 @@ describe Hitimes::TimedMetric do
 
   it "calculates the mean of the durations" do
     2.times { @tm.start ; sleep 0.05 ; @tm.stop }
-    @tm.mean.should be_close( 0.05, 0.01 )
+    @tm.mean.should be_within(0.01).of(0.05)
   end
 
   it "calculates the rate of the counts " do
     5.times { @tm.start ; sleep 0.05 ; @tm.stop }
-    @tm.rate.should be_close( 20.00, 0.1 )
+    @tm.rate.should be_within(0.1).of(20.00)
   end
 
 
   it "calculates the stddev of the durations" do
     3.times { |x| @tm.start ; sleep (0.05 * x) ; @tm.stop }
-    @tm.stddev.should be_close( 0.05, 0.001) 
+    @tm.stddev.should be_within(0.001).of( 0.05 )
   end
 
   it "returns 0.0 for stddev if there is no data" do
@@ -65,22 +65,22 @@ describe Hitimes::TimedMetric do
 
   it "keeps track of the min value" do
     2.times { @tm.start ; sleep 0.05 ; @tm.stop }
-    @tm.min.should be_close( 0.05, 0.002 )
+    @tm.min.should be_within( 0.002 ).of(0.05)
   end
 
   it "keeps track of the max value" do
     2.times { @tm.start ; sleep 0.05 ; @tm.stop }
-    @tm.max.should be_close( 0.05, 0.002 )
+    @tm.max.should be_within( 0.002 ).of(0.05)
   end
 
   it "keeps track of the sum value" do
     2.times { @tm.start ; sleep 0.05 ; @tm.stop }
-    @tm.sum.should be_close( 0.10, 0.002 )
+    @tm.sum.should be_within( 0.002 ).of(0.10)
   end
   
   it "keeps track of the sum of squars value" do
     3.times { @tm.start ; sleep 0.05 ; @tm.stop }
-    @tm.sumsq.should be_close( 0.0075, 0.0001 )
+    @tm.sumsq.should be_within(0.001).of(0.0075)
   end
 
   it "keeps track of the minimum start time of all the intervals" do
@@ -113,14 +113,14 @@ describe Hitimes::TimedMetric do
   it "can measure a block of code from an instance" do
     t = Hitimes::TimedMetric.new( 'measure a block' )
     3.times { t.measure { sleep 0.05 } }
-    t.duration.should be_close( 0.15, 0.001 )
+    t.duration.should be_within(0.001).of(0.15)
     t.count.should == 3
   end
 
   it "returns the value of the block when measuring" do
     t = Hitimes::TimedMetric.new( 'measure a block' )
     x = t.measure { sleep 0.05; 42 }
-    t.duration.should be_close( 0.05, 0.001 )
+    t.duration.should be_within(0.001).of(0.05)
     x.should == 42
   end
 
@@ -140,7 +140,7 @@ describe Hitimes::TimedMetric do
     it "has the right sum" do
       10.times { |x| @tm.measure { sleep 0.01*x  } }
       h = @tm.to_hash
-      h['sum'].should be_close( 0.45, 0.003 )
+      h['sum'].should be_within( 0.003).of(0.45)
     end
 
     fields = ::Hitimes::Stats::STATS.dup + %w[ name additional_data sampling_start_time sampling_stop_time ]
