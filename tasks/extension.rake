@@ -21,7 +21,7 @@ if ext_config = Configuration.for_if_exist?('extension') then
           subdir = "hitimes/#{RUBY_VERSION.sub(/\.\d$/,'')}"
           dest_dir = Hitimes::Paths.lib_path( subdir )
           mkdir_p dest_dir, :verbose => true
-          cp "hitimes_ext.#{Config::CONFIG['DLEXT']}", dest_dir, :verbose => true
+          cp "hitimes_ext.#{RbConfig::CONFIG['DLEXT']}", dest_dir, :verbose => true
         end
       end
     end 
@@ -31,7 +31,7 @@ if ext_config = Configuration.for_if_exist?('extension') then
       task :build_java => [ :clobber, "lib/hitimes/hitimes.jar" ]
 
       file "lib/hitimes/hitimes.jar" => FileList["ext/java/src/hitimes/*.java"] do |t|
-        jruby_home = Config::CONFIG['prefix']
+        jruby_home = RbConfig::CONFIG['prefix']
         jruby_jar  = File.join( jruby_home, 'lib', 'jruby.jar' )
 
         mkdir_p 'pkg/classes'
