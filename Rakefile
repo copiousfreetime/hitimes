@@ -214,6 +214,13 @@ This.gemspec['ruby'] = Gem::Specification.new do |spec|
   spec.extensions.concat Util.extension_conf_files
 end
 
+#--------------------------------------------------
+# JRuby spec has some alterations
+#--------------------------------------------------
+jruby_gemspec = This.gemspec['ruby'].dup
+jruby_gemspec.extensions.clear
+jruby_gemspec.platform = 'java'
+This.gemspec['java'] = jruby_gemspec
 
 # The name of the gemspec file on disk
 This.gemspec_file = "#{This.name}.gemspec"
