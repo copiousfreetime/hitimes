@@ -12,60 +12,60 @@ describe Hitimes::Stats do
   end
 
   it "is initialized with 0 values" do
-    @stats.count.should == 0
-    @stats.min.should == 0.0
-    @stats.max.should == 0.0
-    @stats.sum.should == 0.0
-    @stats.rate.should == 0.0
+    @stats.count.should be == 0
+    @stats.min.should be == 0.0
+    @stats.max.should be == 0.0
+    @stats.sum.should be == 0.0
+    @stats.rate.should be == 0.0
   end
 
   it "calculates the mean correctly" do
-    @full_stats.mean.should == 2.0
+    @full_stats.mean.should be == 2.0
   end
 
   it "calculates the rate correctly" do
-    @full_stats.rate.should == 0.5
+    @full_stats.rate.should be == 0.5
   end
 
   it "tracks the maximum value" do
-    @full_stats.max.should == 3.0
+    @full_stats.max.should be == 3.0
   end
 
   it "tracks the minimum value" do
-    @full_stats.min.should == 1.0
+    @full_stats.min.should be == 1.0
   end
 
   it "tracks the count" do
-    @full_stats.count.should == 3
+    @full_stats.count.should be == 3
   end
   
   it "tracks the sum" do
-    @full_stats.sum.should == 6.0
+    @full_stats.sum.should be == 6.0
   end
 
   it "calculates the standard deviation" do
-    @full_stats.stddev.should == 1.0
+    @full_stats.stddev.should be == 1.0
   end 
 
   it "calculates the sum of squares " do
-    @full_stats.sumsq.should == 14.0
+    @full_stats.sumsq.should be == 14.0
   end 
 
   describe "#to_hash " do
     it "converts to a Hash" do
       h = @full_stats.to_hash
-      h.size.should == ::Hitimes::Stats::STATS.size
-      h.keys.sort.should == ::Hitimes::Stats::STATS
+      h.size.should be == ::Hitimes::Stats::STATS.size
+      h.keys.sort.should be == ::Hitimes::Stats::STATS
     end
 
     it "converts to a limited Hash if given arguments" do
       h = @full_stats.to_hash( "min", "max", "mean" )
-      h.size.should == 3
-      h.keys.sort.should == %w[ max mean min  ]
+      h.size.should be == 3
+      h.keys.sort.should be == %w[ max mean min  ]
 
       h = @full_stats.to_hash( %w[ count rate ] )
-      h.size.should == 2
-      h.keys.sort.should == %w[ count rate ]
+      h.size.should be == 2
+      h.keys.sort.should be == %w[ count rate ]
     end
 
     it "raises NoMethodError if an invalid stat is used" do
@@ -77,20 +77,20 @@ describe Hitimes::Stats do
     it "converts to a json string" do
       j = @full_stats.to_json
       h = JSON.parse( j )
-      h.size.should == ::Hitimes::Stats::STATS.size
-      h.keys.sort.should == ::Hitimes::Stats::STATS
+      h.size.should be == ::Hitimes::Stats::STATS.size
+      h.keys.sort.should be == ::Hitimes::Stats::STATS
     end
 
     it "converts to a limited Hash if given arguments" do
       j = @full_stats.to_json( "min", "max", "mean" )
       h = JSON.parse( j )
-      h.size.should == 3
-      h.keys.sort.should == %w[ max mean min  ]
+      h.size.should be == 3
+      h.keys.sort.should be == %w[ max mean min  ]
 
       j = @full_stats.to_json( %w[ count rate ] )
       h = JSON.parse( j )
-      h.size.should == 2
-      h.keys.sort.should == %w[ count rate ]
+      h.size.should be == 2
+      h.keys.sort.should be == %w[ count rate ]
     end
 
     it "raises NoMethodError if an invalid stat is used" do

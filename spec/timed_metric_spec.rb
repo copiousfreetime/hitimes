@@ -19,28 +19,28 @@ describe Hitimes::TimedMetric do
     @tm.start
     d = @tm.split
     @tm.should be_running
-    d.should > 0
-    @tm.count.should == 1
-    @tm.duration.should == d
+    d.should be > 0
+    @tm.count.should be == 1
+    @tm.duration.should be == d
   end
 
   it "#stop returns false if called more than once in a row" do
     @tm.start
-    @tm.stop.should > 0
-    @tm.stop.should == false
+    @tm.stop.should be > 0
+    @tm.stop.should be == false
   end
 
   it "does not count a currently running interval as an interval in calculations" do
     @tm.start
-    @tm.count.should == 0
+    @tm.count.should be == 0
     @tm.split
-    @tm.count.should == 1
+    @tm.count.should be == 1
   end
 
   it "#split called on a stopped timer does nothing" do
     @tm.start
     @tm.stop
-    @tm.split.should == false
+    @tm.split.should be == false
   end
 
   it "calculates the mean of the durations" do
@@ -55,12 +55,12 @@ describe Hitimes::TimedMetric do
 
 
   it "calculates the stddev of the durations" do
-    3.times { |x| @tm.start ; sleep (0.05 * x) ; @tm.stop }
-    @tm.stddev.should be_within(0.002).of( 0.05 )
+    3.times { |x| @tm.start ; sleep(0.05 * x) ; @tm.stop }
+    @tm.stddev.should be_within(0.002).of( 0.05)
   end
 
   it "returns 0.0 for stddev if there is no data" do
-    @tm.stddev.should == 0.0
+    @tm.stddev.should be == 0.0
   end
 
   it "keeps track of the min value" do
@@ -87,8 +87,8 @@ describe Hitimes::TimedMetric do
     f1 = Time.now.gmtime.to_f * 1_000_000
     5.times { @tm.start ; sleep 0.05 ; @tm.stop }
     f2 = Time.now.gmtime.to_f * 1_000_000
-    @tm.sampling_start_time.should >= f1
-    @tm.sampling_start_time.should < f2
+    @tm.sampling_start_time.should be >= f1
+    @tm.sampling_start_time.should be < f2
     # distance from now to start time should be greater than the distance from
     # the start to the min start_time
     (f2 - @tm.sampling_start_time).should > ( @tm.sampling_start_time - f1 )
@@ -114,27 +114,27 @@ describe Hitimes::TimedMetric do
     t = Hitimes::TimedMetric.new( 'measure a block' )
     3.times { t.measure { sleep 0.05 } }
     t.duration.should be_within(0.01).of(0.15)
-    t.count.should == 3
+    t.count.should be == 3
   end
 
   it "returns the value of the block when measuring" do
     t = Hitimes::TimedMetric.new( 'measure a block' )
     x = t.measure { sleep 0.05; 42 }
     t.duration.should be_within(0.002).of(0.05)
-    x.should == 42
+    x.should be == 42
   end
 
   describe "#to_hash" do
 
     it "has name value" do
       h = @tm.to_hash
-      h['name'].should == "test-timed-metric"
+      h['name'].should be == "test-timed-metric"
     end
 
     it "has an empty hash for additional_data" do
       h = @tm.to_hash
-      h['additional_data'].should == Hash.new
-      h['additional_data'].size.should == 0
+      h['additional_data'].should be == Hash.new
+      h['additional_data'].size.should be == 0
     end
 
     it "has the right sum" do

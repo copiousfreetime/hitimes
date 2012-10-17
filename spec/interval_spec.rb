@@ -60,10 +60,10 @@ describe Hitimes::Interval do
 
   it "calling start multiple times on has no effect after the first call" do
     i = Hitimes::Interval.new
-    i.start.should == true
+    i.start.should be == true
     x = i.start_instant
-    i.start_instant.should > 0
-    i.start.should == false
+    i.start_instant.should be > 0
+    i.start.should be == false
     x.should == i.start_instant
   end
 
@@ -75,12 +75,12 @@ describe Hitimes::Interval do
 
   it "calling stop multiple times on has no effect after the first call" do
     i = Hitimes::Interval.new
-    i.start.should == true
+    i.start.should be == true
     i.stop
 
     x = i.stop_instant
-    i.stop_instant.should > 0
-    i.stop.should == false
+    i.stop_instant.should be > 0
+    i.stop.should be == false
     x.should == i.stop_instant
 
   end
@@ -90,14 +90,14 @@ describe Hitimes::Interval do
     i.start
     x = i.stop
     y = i.duration
-    i.stop.should == false
+    i.stop.should be == false
 
     z = i.duration
 
-    x.should == y
-    x.should == z
+    x.should be == y
+    x.should be == z
 
-    y.should == z
+    y.should be == z
   end
 
   it "can return how much time has elapsed from the start without stopping the interval" do
@@ -107,9 +107,9 @@ describe Hitimes::Interval do
     i.should be_running
     y = i.duration_so_far
     i.stop
-    x.should < y
-    x.should < i.duration
-    y.should < i.duration
+    x.should be < y
+    x.should be < i.duration
+    y.should be < i.duration
   end
 
   describe "#split" do
