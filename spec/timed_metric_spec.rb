@@ -50,13 +50,13 @@ describe Hitimes::TimedMetric do
 
   it "calculates the rate of the counts " do
     5.times { @tm.start ; sleep 0.05 ; @tm.stop }
-    @tm.rate.should be_within(0.1).of(20.00)
+    @tm.rate.should be_within(1.0).of(20.00)
   end
 
 
   it "calculates the stddev of the durations" do
     3.times { |x| @tm.start ; sleep (0.05 * x) ; @tm.stop }
-    @tm.stddev.should be_within(0.001).of( 0.05 )
+    @tm.stddev.should be_within(0.002).of( 0.05 )
   end
 
   it "returns 0.0 for stddev if there is no data" do
@@ -98,8 +98,8 @@ describe Hitimes::TimedMetric do
     f1 = Time.now.gmtime.to_f * 1_000_000
     5.times { @tm.start ; sleep 0.05 ; @tm.stop }
     f2 = Time.now.gmtime.to_f * 1_000_000
-    @tm.sampling_stop_time.should > f1
-    @tm.sampling_stop_time.should <= f2
+    @tm.sampling_stop_time.should be > f1
+    @tm.sampling_stop_time.should be <= f2
     # distance from now to max stop time time should be less than the distance
     # from the start to the max stop time
     (f2 - @tm.sampling_stop_time).should < ( @tm.sampling_stop_time - f1 )
@@ -113,14 +113,14 @@ describe Hitimes::TimedMetric do
   it "can measure a block of code from an instance" do
     t = Hitimes::TimedMetric.new( 'measure a block' )
     3.times { t.measure { sleep 0.05 } }
-    t.duration.should be_within(0.001).of(0.15)
+    t.duration.should be_within(0.01).of(0.15)
     t.count.should == 3
   end
 
   it "returns the value of the block when measuring" do
     t = Hitimes::TimedMetric.new( 'measure a block' )
     x = t.measure { sleep 0.05; 42 }
-    t.duration.should be_within(0.001).of(0.05)
+    t.duration.should be_within(0.002).of(0.05)
     x.should == 42
   end
 
@@ -140,7 +140,7 @@ describe Hitimes::TimedMetric do
     it "has the right sum" do
       10.times { |x| @tm.measure { sleep 0.01*x  } }
       h = @tm.to_hash
-      h['sum'].should be_within( 0.003).of(0.45)
+      h['sum'].should be_within( 0.01).of(0.45)
     end
 
     fields = ::Hitimes::Stats::STATS.dup + %w[ name additional_data sampling_start_time sampling_stop_time ]

@@ -54,7 +54,7 @@ describe Hitimes::TimedValueMetric do
 
   it "calculates the rate of the counts " do
     5.times { |x| @tm.start ; sleep 0.05 ; @tm.stop( x ) }
-    @tm.rate.should be_within(0.2).of(40.0)
+    @tm.rate.should be_within(1.0).of(40.0)
   end
 
 
@@ -77,7 +77,7 @@ describe Hitimes::TimedValueMetric do
 
   it "keeps track of the max value" do
     3.times { |x| @tm.start ; sleep 0.05 ; @tm.stop( x ) }
-    @tm.timed_stats.max.should be_within(0.001).of( 0.05 )
+    @tm.timed_stats.max.should be_within(0.003).of( 0.05 )
     @tm.value_stats.max.should == 2
   end
 
@@ -89,7 +89,7 @@ describe Hitimes::TimedValueMetric do
   
   it "keeps track of the sum of squares value" do
     3.times { |x| @tm.start ; sleep 0.05 ; @tm.stop( x ) }
-    @tm.timed_stats.sumsq.should be_within(0.0001).of(0.0075)
+    @tm.timed_stats.sumsq.should be_within(0.0005).of(0.0075)
     @tm.value_stats.sumsq.should == 5
   end
 
@@ -123,7 +123,7 @@ describe Hitimes::TimedValueMetric do
   it "can measure a block of code from an instance" do
     t = Hitimes::TimedValueMetric.new( 'measure a block' )
     3.times { t.measure( 1 ) { sleep 0.05 } }
-    t.duration.should be_within(0.001).of(0.15)
+    t.duration.should be_within(0.003).of(0.15)
     t.timed_stats.count.should == 3
     t.value_stats.count.should == 3
   end
@@ -151,7 +151,7 @@ describe Hitimes::TimedValueMetric do
     it "has a rate" do
       5.times { |x| @tm.start ; sleep 0.05 ; @tm.stop( x ) }
       h = @tm.to_hash
-      h['rate'].should be_within(0.3).of(40.0)
+      h['rate'].should be_within(0.6).of(40.0)
     end
 
     it "has a unit_count" do
