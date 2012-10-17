@@ -3,9 +3,9 @@ require File.expand_path( File.join( File.dirname( __FILE__ ), "spec_helper.rb" 
 require 'hitimes'
 
 describe Hitimes::Interval do
-  it "has a 0 duration when newly created" do
-    i = Hitimes::Interval.new   
-    i.duration == 0.0
+  it "raises an error if duration is called on a non-started interval" do
+    i = Hitimes::Interval.new
+    lambda{ i.duration }.should raise_error(Hitimes::Error)
   end
 
   it "knows if it has been started" do

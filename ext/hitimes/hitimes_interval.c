@@ -68,7 +68,7 @@ VALUE hitimes_interval_measure( VALUE self )
     if ( !rb_block_given_p() ) {
         rb_raise(eH_Error, "No block given to Interval.measure" );
     }
-    
+
     before = hitimes_get_current_instant( );
     rb_yield( Qnil );
     after  = hitimes_get_current_instant( );
@@ -105,7 +105,7 @@ VALUE hitimes_interval_split( VALUE self )
 
 /**
  * call-seq:
- *    interval.start -> boolean 
+ *    interval.start -> boolean
  *
  * mark the start of the interval.  Calling start on an already started
  * interval has no effect.  An interval can only be started once.  If the
@@ -281,6 +281,8 @@ VALUE hitimes_interval_stop_instant( VALUE self )
  * Returns the Float value of the interval, the value is in seconds.  If the
  * interval has not had stop called yet, it will report the number of seconds
  * in the interval up to the current point in time.
+ *
+ * Raises Error if duration is called on an interval that has not started yet.
  */
 VALUE hitimes_interval_duration ( VALUE self )
 {
@@ -288,7 +290,13 @@ VALUE hitimes_interval_duration ( VALUE self )
 
     Data_Get_Struct( self, hitimes_interval_t, i );
 
-    /** 
+    /* raise an error if the internval is not started */
+    if ( 0L == i->start_instant )  {
+        rb_raise(eH_Error, "Attempt to report an duration on an interval that has not started.\n" );
+    }
+
+
+    /**
      * if stop has not yet been called, then return the amount of time so far
      */
     if ( 0L == i->stop_instant ) {
@@ -296,7 +304,7 @@ VALUE hitimes_interval_duration ( VALUE self )
         hitimes_instant_t now = hitimes_get_current_instant( );
         d = ( now - i->start_instant ) / HITIMES_INSTANT_CONVERSION_FACTOR;
         return rb_float_new( d );
-    } 
+    }
 
     /*
      * stop has been called, calculate the duration and save the result
