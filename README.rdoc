@@ -1,6 +1,6 @@
 == hitimes
 
-* Homepage[http://rubygems.org/gems/hitimes]
+* Homepage[http://github.com/copiousfreetime/hitimes]
 * {Github project}[http://github.com.org/copiousfreetime/hitimes]
 * email jeremy at copiousfreetime dot org
 * `git clone url git://github.com/copiousfreetime/hitimes.git`

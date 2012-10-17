@@ -1,4 +1,4 @@
-= Changelog
+= Hitimes Changelog
 == Version 1.1.1 2010-09-04
 
 * Remove the unnecessary dependencies that should be development dependencies
