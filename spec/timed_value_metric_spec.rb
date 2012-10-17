@@ -71,7 +71,7 @@ describe Hitimes::TimedValueMetric do
 
   it "keeps track of the min value" do
     3.times { |x| @tm.start ; sleep 0.05 ; @tm.stop( x ) }
-    @tm.timed_stats.min.should be_within( 0.001 ).of(0.05)
+    @tm.timed_stats.min.should be_within( 0.003 ).of(0.05)
     @tm.value_stats.min.should == 0
   end
 
@@ -105,11 +105,12 @@ describe Hitimes::TimedValueMetric do
   end
 
   it "keeps track of the last stop time of all the intervals" do
-    f1 = Time.now.gmtime.to_f * 1000000
+    f1 = Time.now.gmtime.to_f * 1_000_000
     5.times { @tm.start ; sleep 0.05 ; @tm.stop( 1 ) }
-    f2 = Time.now.gmtime.to_f * 1000000
-    @tm.sampling_stop_time.should > f1
-    @tm.sampling_stop_time.should <= f2
+    sleep 0.05
+    f2 = Time.now.gmtime.to_f * 1_000_000
+    @tm.sampling_stop_time.should be > f1
+    @tm.sampling_stop_time.should be <= f2
     # distance from now to max stop time time should be less than the distance
     # from the start to the max stop time
     (f2 - @tm.sampling_stop_time).should < ( @tm.sampling_stop_time - f1 )
@@ -131,7 +132,7 @@ describe Hitimes::TimedValueMetric do
   it "returns the value of the block when measuring" do
     t = Hitimes::TimedValueMetric.new( 'measure a block' )
     x = t.measure( 42 ) { sleep 0.05; 42 }
-    t.duration.should be_within(0.001).of(0.05)
+    t.duration.should be_within(0.002).of(0.05)
     x.should == 42
   end
 
@@ -151,7 +152,7 @@ describe Hitimes::TimedValueMetric do
     it "has a rate" do
       5.times { |x| @tm.start ; sleep 0.05 ; @tm.stop( x ) }
       h = @tm.to_hash
-      h['rate'].should be_within(0.6).of(40.0)
+      h['rate'].should be_within(1.0  ).of(40.0)
     end
 
     it "has a unit_count" do

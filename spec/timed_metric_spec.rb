@@ -75,9 +75,9 @@ describe Hitimes::TimedMetric do
 
   it "keeps track of the sum value" do
     2.times { @tm.start ; sleep 0.05 ; @tm.stop }
-    @tm.sum.should be_within( 0.002 ).of(0.10)
+    @tm.sum.should be_within( 0.005 ).of(0.10)
   end
-  
+
   it "keeps track of the sum of squars value" do
     3.times { @tm.start ; sleep 0.05 ; @tm.stop }
     @tm.sumsq.should be_within(0.001).of(0.0075)
