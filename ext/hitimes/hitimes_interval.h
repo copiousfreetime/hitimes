@@ -16,8 +16,8 @@
 #    define HITIMES_U64INT unsigned long long int
 #    define HITIMES_INSTANT_CONVERSION_FACTOR 1e9l
 #elif USE_INSTANT_OSX
-#    define HITIMES_U64INT unsigned long long int
-#    define HITIMES_INSTANT_CONVERSION_FACTOR 1e9l
+#    define HITIMES_U64INT uint64_t
+#    define HITIMES_INSTANT_CONVERSION_FACTOR hitimes_instant_conversion_factor()
 #elif USE_INSTANT_WINDOWS
 #    define HITIMES_U64INT unsigned __int64
 #    define HITIMES_INSTANT_CONVERSION_FACTOR hitimes_instant_conversion_factor()
@@ -37,7 +37,7 @@ typedef struct hitimes_interval {
     long double       duration;
 } hitimes_interval_t;
 
-/* all the backends must define this method */
+/* all the backends must define these methods */
 hitimes_instant_t hitimes_get_current_instant( );
 long double hitimes_instant_conversion_factor( );
 
