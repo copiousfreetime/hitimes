@@ -205,11 +205,11 @@ This.gemspec['ruby'] = Gem::Specification.new do |spec|
   # spec.add_dependency( 'map', '~> 6.2.0')
 
   # The Development Dependencies
-  spec.add_development_dependency( 'rake'     , '~> 0.9.2.2')
-  spec.add_development_dependency( 'rspec' , '~> 2.11.0' )
-  spec.add_development_dependency( 'rdoc'     , '~> 3.12'   )
-  spec.add_development_dependency( 'json'     , '~> 1.1.3' )
-  spec.add_development_dependency( 'rake-compiler', '~> 0.5.0' )
+  spec.add_development_dependency( 'rake'         , '~> 10.0.3')
+  spec.add_development_dependency( 'rspec'        , '~> 2.12.0' )
+  spec.add_development_dependency( 'rdoc'         , '~> 3.12'   )
+  spec.add_development_dependency( 'json'         , '~> 1.7.6' )
+  spec.add_development_dependency( 'rake-compiler', '~> 0.8.1' )
 
   spec.extensions.concat Util.extension_conf_files
 end
