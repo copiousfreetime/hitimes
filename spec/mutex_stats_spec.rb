@@ -16,8 +16,13 @@ describe Hitimes::MutexedStats do
     return stats
   end
 
-  it "is unsafe normally" do
-    pending "not for MRI -- not interruptable in this C extension" do
+  if (not defined? RUBY_ENGINE) or (RUBY_ENGINE == "ruby") then
+    it "Hitimes::Stats is threadsafe" do
+      stats = run_with_scissors( ::Hitimes::Stats.new, @threads, @iters )
+      stats.count.should== @final_value
+    end
+  else
+    it "Hitimes::Stats is not threadsafe" do
       stats = run_with_scissors( ::Hitimes::Stats.new, @threads, @iters )
       stats.count.should_not == @final_value
     end
