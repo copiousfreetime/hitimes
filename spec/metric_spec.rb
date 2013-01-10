@@ -1,6 +1,4 @@
-require File.expand_path( File.join( File.dirname( __FILE__ ), "spec_helper.rb" ) )
-
-require 'hitimes/metric'
+require "spec_helper"
 
 describe Hitimes::Metric do
   before( :each ) do

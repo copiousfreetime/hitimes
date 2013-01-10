@@ -1,6 +1,4 @@
-require File.expand_path( File.join( File.dirname( __FILE__ ), "spec_helper.rb" ) )
-
-require 'hitimes/paths'
+require 'spec_helper'
 
 describe Hitimes::Paths do
   it "can access the root dir of the project" do

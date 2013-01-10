@@ -1,7 +1,4 @@
-require File.expand_path( File.join( File.dirname( __FILE__ ), "spec_helper.rb" ) )
-
-require 'hitimes'
-require 'hitimes/mutexed_stats'
+require 'spec_helper'
 
 describe Hitimes::MutexedStats do
   before( :each ) do

@@ -1,6 +1,4 @@
-require File.expand_path( File.join( File.dirname( __FILE__ ), "spec_helper.rb" ) )
-
-require 'hitimes'
+require "spec_helper"
 
 describe Hitimes::Interval do
   it "raises an error if duration is called on a non-started interval" do

@@ -19,13 +19,7 @@ namespace :develop do
     require 'rubygems/dependency_installer'
     installer = Gem::DependencyInstaller.new
 
-    # list these here instead of gem dependencies since there is not a way to
-    # specify ruby version specific dependencies
-    if RUBY_VERSION < "1.9.2"
-      Util.platform_gemspec.add_development_dependency( 'rcov', '~> 0.9.11' )
-    else
-      Util.platform_gemspec.add_development_dependency( 'simplecov', '~> 0.6.4' )
-    end
+    Util.set_coverage_gem
 
     puts "Installing gem depedencies needed for development"
     Util.platform_gemspec.dependencies.each do |dep|
@@ -94,7 +88,7 @@ end
 # Coverage - optional code coverage, rcov for 1.8 and simplecov for 1.9, so
 #            for the moment only rcov is listed.
 #------------------------------------------------------------------------------
-if RUBY_VERSION <= "1.9.2"
+if RUBY_VERSION < "1.9.2"
   begin
    require 'rcov/rcovtask'
    Rcov::RcovTask.new( 'coverage' ) do |t|
@@ -218,6 +212,7 @@ This.gemspec_file = "#{This.name}.gemspec"
 # Really this is only here to support those who use bundler
 desc "Build the #{This.name}.gemspec file"
 task :gemspec do
+ Util.set_coverage_gem
   File.open( This.gemspec_file, "wb+" ) do |f|
     f.write Util.platform_gemspec.to_ruby
   end
@@ -265,9 +260,14 @@ task :release => [ :release_check, 'manifest:check', :gem ] do
 end
 
 #------------------------------------------------------------------------------
-# Load the extra tasks
+# Load the extra rake tasks
 #------------------------------------------------------------------------------
-load 'tasks/extension.rake'
+$: << "." unless $:.include?(".")
+begin
+  load 'tasks/extension.rake'
+rescue LoadError => e
+  Util.task_warning( 'extension' )
+end
 
 #------------------------------------------------------------------------------
 # Rakefile Support - This is all the guts and utility methods that are
@@ -329,6 +329,19 @@ BEGIN {
 
     def self.proj_root_path
       Pathname.new( File.expand_path( "..", __FILE__ ) )
+    end
+
+    def self.set_coverage_gem
+      # list these here instead of gem dependencies since there is not a way to
+      # specify ruby version specific dependencies
+      g, v = 'simplecov', '~> 0.7.1'
+      if RUBY_VERSION < "1.9.2"
+        g, v = 'rcov', '~> 1.0.0'
+      end
+
+      if Util.platform_gemspec.dependencies.none? { |s| s.name == g } then
+        Util.platform_gemspec.add_development_dependency( g, v )
+      end
     end
 
     def self.proj_path( *args )
