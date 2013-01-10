@@ -15,6 +15,13 @@ module Hitimes
   # Base class of all errors in Hitimes
   #
   class Error < ::StandardError; end
+
+  # Hitimes.measure { } -> Float
+  #
+  # Times the execution of the block, returning the number of seconds it took
+  def self.measure(&block)
+    Hitimes::Interval.measure(&block)
+  end
 end
 require 'hitimes/paths'
 require 'hitimes/version'

@@ -9,6 +9,8 @@
 * Make hitimes -w clean
 * Fix ambiguity of calling duration on non-started Interval
 * Use RbConfig instead of Config (eregon)
+* Added Hitimes.measure
+
 == Version 1.1.1 2010-09-04
 
 * Remove the unnecessary dependencies that should be development dependencies
