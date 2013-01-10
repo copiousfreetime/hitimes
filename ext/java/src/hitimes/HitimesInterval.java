@@ -128,7 +128,7 @@ public class HitimesInterval extends RubyObject {
     @JRubyMethod( name = "stop" )
     public IRubyObject stop() {
         if ( INSTANT_NOT_SET == this.start_instant ) {
-            throw Hitimes.newHitimesError( getRuntime(), "Attempt to stop an interval that has not started." + System.nanoTime() );
+            throw Hitimes.newHitimesError( getRuntime(), "Attempt to stop an interval that has not started" );
         }
 
         if ( INSTANT_NOT_SET == this.stop_instant ) {

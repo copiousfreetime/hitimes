@@ -144,7 +144,7 @@ VALUE hitimes_interval_stop( VALUE self )
 
     Data_Get_Struct( self, hitimes_interval_t, i );
     if ( 0L == i->start_instant )  {
-        rb_raise(eH_Error, "Attempt to stop an interval that has not started.\n" );
+        rb_raise(eH_Error, "Attempt to stop an interval that has not started" );
     }
 
     if ( 0L == i->stop_instant ) {
@@ -292,7 +292,7 @@ VALUE hitimes_interval_duration ( VALUE self )
 
     /* raise an error if the internval is not started */
     if ( 0L == i->start_instant )  {
-        rb_raise(eH_Error, "Attempt to report an duration on an interval that has not started.\n" );
+        rb_raise(eH_Error, "Attempt to report a duration on an interval that has not started" );
     }
 
 
