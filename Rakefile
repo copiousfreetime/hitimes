@@ -67,6 +67,7 @@ begin
     t.ruby_opts = %w[ -w -rubygems ]
     t.rspec_opts = %w[ --format doc --color ]
   end
+  task :default => :test
 rescue LoadError
   Util.task_warning( 'test' )
 end
