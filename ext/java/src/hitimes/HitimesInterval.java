@@ -48,6 +48,13 @@ public class HitimesInterval extends RubyObject {
     public IRubyObject duration() {
 
         /*
+         * if start has not yet been called, then raise an exception.
+         */
+        if ( INSTANT_NOT_SET == this.start_instant ) {
+            throw Hitimes.newHitimesError( getRuntime(), "Attempt to report a duration on an interval that has not started");
+        }
+
+        /*
          * if stop has not yet been called, then return the amount of time so far
          */
         if ( INSTANT_NOT_SET == this.stop_instant ) {
