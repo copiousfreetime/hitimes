@@ -42,7 +42,7 @@ public class Hitimes {
     }
 
     static RaiseException newHitimesError( Ruby runtime, String message ) {
-        RubyClass errorClass = runtime.fastGetModule("Hitimes").fastGetClass( "Error" );
+        RubyClass errorClass = runtime.getModule("Hitimes").getClass( "Error" );
         return new RaiseException( RubyException.newException( runtime, errorClass, message ), true );
     }
 
