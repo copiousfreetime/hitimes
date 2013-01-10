@@ -55,23 +55,12 @@ namespace :develop do
   # Gemfiles are build artifacts
   CLOBBER << FileList['Gemfile*']
 end
-desc "Boostrap development"
+desc "Bootstrap development"
 task :develop => "develop:default"
 
 #------------------------------------------------------------------------------
-# Minitest - standard TestTask
+# RSpec tests
 #------------------------------------------------------------------------------
-# begin
-  # require 'rake/testtask'
-  # Rake::TestTask.new( :test ) do |t|
-    # t.ruby_opts    = %w[ -w -rubygems ]
-    # t.libs         = %w[ lib spec ]
-    # t.pattern      = "spec/**/*_spec.rb"
-  # end
-  # task :default => :test
-# rescue LoadError
-  # Util.task_warning( 'test' )
-# end
 begin
   require 'rspec/core/rake_task'
   RSpec::Core::RakeTask.new( :test ) do |t|
