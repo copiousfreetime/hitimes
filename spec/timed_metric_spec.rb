@@ -94,7 +94,9 @@ describe Hitimes::TimedMetric do
 
   it "keeps track of the last stop time of all the intervals" do
     f1 = Time.now.gmtime.to_f * 1_000_000
+    sleep 0.01
     5.times { @tm.start ; sleep 0.05 ; @tm.stop }
+    sleep 0.01
     f2 = Time.now.gmtime.to_f * 1_000_000
     @tm.sampling_stop_time.should be > f1
     @tm.sampling_stop_time.should be <= f2
