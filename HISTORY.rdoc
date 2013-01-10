@@ -1,4 +1,14 @@
 = Hitimes Changelog
+
+== Version 1.2.0 2013-01-10
+
+* Update dependencies
+* Documentation cleanup
+* Fix use of deprecated JRuby API in java extension
+* Fix use of deprecated OSX system calls in C extension
+* Make hitimes -w clean
+* Fix ambiguity of calling duration on non-started Interval
+* Use RbConfig instead of Config (eregon)
 == Version 1.1.1 2010-09-04
 
 * Remove the unnecessary dependencies that should be development dependencies
