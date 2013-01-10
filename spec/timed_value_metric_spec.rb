@@ -124,7 +124,7 @@ describe Hitimes::TimedValueMetric do
   it "can measure a block of code from an instance" do
     t = Hitimes::TimedValueMetric.new( 'measure a block' )
     3.times { t.measure( 1 ) { sleep 0.05 } }
-    t.duration.should be_within(0.003).of(0.15)
+    t.duration.should be_within(0.004).of(0.15)
     t.timed_stats.count.should be == 3
     t.value_stats.count.should be == 3
   end
