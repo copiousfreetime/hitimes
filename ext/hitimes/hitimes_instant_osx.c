@@ -14,6 +14,7 @@ long double hitimes_instant_conversion_factor()
 {
     static mach_timebase_info_data_t  s_timebase_info;
     static long double                conversion_factor;
+    static uint64_t                   nano_conversion;
 
     /**
      * If this is the first time we've run, get the timebase.
@@ -23,9 +24,9 @@ long double hitimes_instant_conversion_factor()
      */
 
     if ( s_timebase_info.denom == 0 ) {
-        (void) mach_timebase_info(&s_timebase_info);
-        uint64_t nano_conversion = s_timebase_info.numer / s_timebase_info.denom;
-        conversion_factor        = (long double) (nano_conversion) * (1e9l);
+        mach_timebase_info(&s_timebase_info);
+        nano_conversion   = s_timebase_info.numer / s_timebase_info.denom;
+        conversion_factor = (long double) (nano_conversion) * (1e9l);
     }
 
     return conversion_factor;
