@@ -29,6 +29,7 @@ lib/hitimes/timed_metric.rb
 lib/hitimes/timed_value_metric.rb
 lib/hitimes/value_metric.rb
 lib/hitimes/version.rb
+spec/hitimes_spec.rb
 spec/interval_spec.rb
 spec/metric_spec.rb
 spec/mutex_stats_spec.rb
@@ -39,11 +40,6 @@ spec/timed_metric_spec.rb
 spec/timed_value_metric_spec.rb
 spec/value_metric_spec.rb
 spec/version_spec.rb
-tasks/announce.rake
-tasks/config.rb
-tasks/distribution.rake
-tasks/documentation.rake
+tasks/default.rake
 tasks/extension.rake
-tasks/rspec.rake
-tasks/rubyforge.rake
-tasks/utils.rb
+tasks/this.rb

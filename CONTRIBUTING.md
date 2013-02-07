@@ -18,7 +18,7 @@ easiest way to contribute.
     * **Bug reports** please be as detailed as possible. Include:
         * full ruby engine and version: `ruby -e 'puts RUBY_DESCRIPTION'`
         * operating system and version
-        * version of hitimes `ruby -e 'ruby -rubygems -e "require 'hitimes'; puts Hitimes::VERSION'`
+        * version of hitimes `ruby -rubygems -e "require 'hitimes'; puts Hitimes::VERSION"`
         * as much detail about the bug as possible so I can replicated it. Feel free
           to link in a [gist][]
     * **New Feature**

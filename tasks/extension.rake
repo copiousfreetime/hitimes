@@ -38,24 +38,22 @@ namespace :ext do
 
   def ext_dest_dir
     version_sub = RUBY_VERSION.sub(/\.\d$/,'')
-    dest_dir = Util.proj_path( 'lib', 'hitimes', version_sub )
+    This.project_path( 'lib', 'hitimes', version_sub )
   end
 
   def with_each_extension
-    Util.platform_gemspec.extensions.each do |ext|
+    This.platform_gemspec.extensions.each do |ext|
       yield ext
     end
   end
 
   def build_win( version = "1.8.7" )
-    ext_config = Util.platform_gemspec.extensions.frist
+    ext_config = This.platform_gemspec.extensions.frist
     return nil unless ext_config.cross_rbconfig
     rbconfig = ext_config.cross_rbconfig["rbconfig-#{version}"]
     raise ArgumentError, "No cross compiler for version #{version}, we have #{ext_config.cross_rbconfig.keys.join(",")}" unless rbconfig
     with_each_extension do |extension|
       path = Pathname.new(extension)
-      parts = path.split
-      conf = parts.last
       rvm = File.expand_path( "~/.rvm/bin/rvm" )
       Dir.chdir(path.dirname) do |d|
         if File.exist?( "Makefile" ) then
@@ -85,8 +83,6 @@ namespace :ext do
   task :clean do
     with_each_extension do |extension|
       path  = Pathname.new(extension)
-      parts = path.split
-      conf  = parts.last
       Dir.chdir(path.dirname) do |d|
         if File.exist?( "Makefile" ) then
           sh "make clean"
@@ -99,8 +95,6 @@ namespace :ext do
   task :clobber do
     with_each_extension do |extension|
       path  = Pathname.new(extension)
-      parts = path.split
-      conf  = parts.last
       Dir.chdir(path.dirname) do |d|
         if File.exist?( "Makefile" ) then
           sh "make distclean"
