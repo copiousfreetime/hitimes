@@ -20,11 +20,12 @@ namespace :ext do
     end
   end
 
+  hitimes_jar_file = "lib/hitimes/hitimes.jar"
   if RUBY_PLATFORM == "java" then
     desc "Build the jruby extension"
     task :build_java => [ :clobber, "lib/hitimes/hitimes.jar" ]
 
-    file "lib/hitimes/hitimes.jar" => FileList["ext/java/src/hitimes/*.java"] do |t|
+    file hitimes_jar_file => FileList["ext/java/src/hitimes/*.java"] do |t|
       jruby_home = RbConfig::CONFIG['prefix']
       jruby_jar  = File.join( jruby_home, 'lib', 'jruby.jar' )
 
@@ -35,6 +36,7 @@ namespace :ext do
       sh "jar cf #{t.name} -C pkg/classes ."
     end
   end
+  CLOBBER << hitimes_jar_file
 
   def ext_dest_dir
     version_sub = RUBY_VERSION.sub(/\.\d$/,'')
@@ -103,6 +105,7 @@ namespace :ext do
       end
     end
   end
+  CLOBBER << FileList["lib/hitimes/1.*/"]
 end
 task :clobber => 'ext:clobber'
 task :clean => 'ext:clean'
