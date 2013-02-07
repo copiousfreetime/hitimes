@@ -58,8 +58,8 @@ extern VALUE cH_Interval;  /* class  Hitimes::Interval  */
 
 VALUE hitimes_interval_free(hitimes_interval_t* i) ;
 VALUE hitimes_interval_alloc(VALUE klass);
-VALUE hitimes_interval_now( VALUE self );
-VALUE hitimes_interval_measure( VALUE self );
+VALUE hitimes_interval_now( );
+VALUE hitimes_interval_measure( );
 VALUE hitimes_interval_split( VALUE self );
 VALUE hitimes_interval_start( VALUE self );
 VALUE hitimes_interval_stop( VALUE self );

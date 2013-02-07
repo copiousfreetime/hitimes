@@ -39,7 +39,7 @@ VALUE hitimes_interval_alloc(VALUE klass)
  *
  * Create an interval that has already started
  */
-VALUE hitimes_interval_now( VALUE self )
+VALUE hitimes_interval_now( )
 {
     VALUE obj;
     hitimes_interval_t *i = xmalloc( sizeof( hitimes_interval_t ) );
@@ -59,7 +59,7 @@ VALUE hitimes_interval_now( VALUE self )
  *
  * Times the execution of the block returning the number of seconds it took
  */
-VALUE hitimes_interval_measure( VALUE self )
+VALUE hitimes_interval_measure( )
 {
     hitimes_instant_t before;
     hitimes_instant_t after;
