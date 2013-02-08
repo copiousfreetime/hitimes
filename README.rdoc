@@ -114,6 +114,17 @@ Use a Hitimes::TimedValueMetric to calculate statistics about batches of samples
 
 Read the HISTORY file.
 
+== BUILDING FOR WINDOWS
+
+{rake-compiler}(https://github.com/luislavena/rake-compiler) is use for building
+the windows version. For me, on OSX to cross compile the process is:
+
+  % gem install rake-compiler # in each rvm instance, 1.8.7, 1.9.3
+  % rvm use 1.9.3@hitimes
+  % rake-compiler cross-ruby VERSION=1.9.3-p374 # or latest
+  % rvm use 1.8.7@hitimes
+  % rake-compiler cross-ruby VERSION=1.8.7-p371
+
 == CREDITS
 
 * Bruce Williams for suggesting the idea

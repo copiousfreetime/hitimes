@@ -8,7 +8,7 @@ TODO.taskpaper
 examples/benchmarks.rb
 examples/stats.rb
 ext/hitimes/extconf.rb
-ext/hitimes/hitimes_ext.c
+ext/hitimes/hitimes.c
 ext/hitimes/hitimes_instant_clock_gettime.c
 ext/hitimes/hitimes_instant_osx.c
 ext/hitimes/hitimes_instant_windows.c

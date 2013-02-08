@@ -10,7 +10,7 @@ VALUE eH_Error;     /* class  Hitimes::Error     */
  *
  * General error class for the Hitimes module
  */
-void Init_hitimes_ext( )
+void Init_hitimes( )
 {
     mH = rb_define_module("Hitimes");
      

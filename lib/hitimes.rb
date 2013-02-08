@@ -26,12 +26,15 @@ end
 require 'hitimes/paths'
 require 'hitimes/version'
 
-if RUBY_PLATFORM == "java" then
+# Load the binary extension, try loading one for the specific version of ruby
+# and if that fails, then fall back to one in the top of the library.
+# this is the method recommended by rake-compiler
+begin
+  # this will be for windows
+  require "hitimes/#{RUBY_VERSION.sub(/\.\d$/,'')}/hitimes"
+rescue LoadError
+  # everyone else.
   require 'hitimes/hitimes'
-else
-  # use a version subdirectory for extensions, initially to support windows, but
-  # why make a special case.  It doesn't hurt anyone to have an extra subdir.
-  require "hitimes/#{RUBY_VERSION.sub(/\.\d$/,'')}/hitimes_ext"
 end
 
 require 'hitimes/stats'
