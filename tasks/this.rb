@@ -110,6 +110,17 @@ class ThisProject
     manifest_file.readlines.map { |l| l.strip }
   end
 
+  # Internal: Returns the list of files that are extension source files
+  #
+  # Returns an Array
+  def extension_c_source
+    manifest.grep( /\.c\Z/ )
+  end
+
+  def extension_java_source
+    manifest.grep( /\.java\Z/ )
+  end
+
   # Internal: Return the files that define the extensions
   #
   # Returns an Array

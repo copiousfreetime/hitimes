@@ -4,43 +4,63 @@
 require 'pathname'
 
 namespace :ext do
-  desc "Build the extension(s)"
-  task :build => :clobber do
-    with_each_extension do |extension|
-      path  = Pathname.new(extension)
-      parts = path.split
-      conf  = parts.last
-      Dir.chdir(path.dirname) do |d|
-        ruby conf.to_s
-        sh "make"
 
-        mkdir_p ext_dest_dir, :verbose => true
-        cp "hitimes_ext.#{RbConfig::CONFIG['DLEXT']}", ext_dest_dir, :verbose => true
+  def mri_extension_dest_dir
+    version_sub = RUBY_VERSION.sub(/\.\d$/,'')
+    This.project_path( 'lib', 'hitimes', version_sub )
+  end
+
+  def mri_extension_basename
+    "hitimes_ext.#{RbConfig::CONFIG['DLEXT']}"
+  end
+
+  def mri_extension_file
+    mri_extension_dest_dir.join( mri_extension_basename )
+  end
+
+  def define_mri_extension_tasks
+    desc "Build the C extension"
+    task :build => mri_extension_file
+    file mri_extension_file => This.extension_c_source do
+      with_each_extension do |extension|
+        path  = Pathname.new(extension)
+        parts = path.split
+        conf  = parts.last
+        Dir.chdir(path.dirname) do |d|
+          ruby conf.to_s
+          sh "make"
+
+          mkdir_p mri_extension_dest_dir, :verbose => true
+          cp mri_extension_basename, mri_extension_dest_dir, :verbose => true
+        end
       end
     end
   end
 
-  hitimes_jar_file = "lib/hitimes/hitimes.jar"
-  if RUBY_PLATFORM == "java" then
-    desc "Build the jruby extension"
-    task :build_java => [ :clobber, "lib/hitimes/hitimes.jar" ]
+  def hitimes_jar_file
+    This.project_path( "lib/hitimes/hitimes.jar" )
+  end
 
-    file hitimes_jar_file => FileList["ext/java/src/hitimes/*.java"] do |t|
-      jruby_home = RbConfig::CONFIG['prefix']
-      jruby_jar  = File.join( jruby_home, 'lib', 'jruby.jar' )
+  def define_java_extension_tasks
+    desc "Build the JAVA extension"
+    task :build => hitimes_jar_file
+    file hitimes_jar_file => This.extension_java_source do |t|
+      jruby_home = Pathname.new( RbConfig::CONFIG['prefix'] )
+      jruby_jar  = jruby_home.join( 'lib', 'jruby.jar' )
 
       mkdir_p 'pkg/classes'
       sh "javac -classpath #{jruby_jar} -d pkg/classes #{t.prerequisites.join(' ')}"
 
-      dest_dir = File.dirname(t.name)
       sh "jar cf #{t.name} -C pkg/classes ."
     end
   end
   CLOBBER << hitimes_jar_file
 
-  def ext_dest_dir
-    version_sub = RUBY_VERSION.sub(/\.\d$/,'')
-    This.project_path( 'lib', 'hitimes', version_sub )
+
+  if RUBY_PLATFORM == "java" then
+    define_java_extension_tasks
+  else
+    define_mri_extension_tasks
   end
 
   def with_each_extension
@@ -50,7 +70,7 @@ namespace :ext do
   end
 
   def build_win( version = "1.8.7" )
-    ext_config = This.platform_gemspec.extensions.frist
+    ext_config = This.platform_gemspec.extensions.first
     return nil unless ext_config.cross_rbconfig
     rbconfig = ext_config.cross_rbconfig["rbconfig-#{version}"]
     raise ArgumentError, "No cross compiler for version #{version}, we have #{ext_config.cross_rbconfig.keys.join(",")}" unless rbconfig
