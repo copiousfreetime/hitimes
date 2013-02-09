@@ -29,4 +29,6 @@ else
 
 end
 
+CLOBBER << FileList["lib/**/*.{jar,so,bundle}"]
+CLOBBER << FileList["lib/#{This.name}/1.{8,9}/"]
 task :test_requirements => :compile
