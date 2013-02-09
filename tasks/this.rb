@@ -25,7 +25,7 @@ class ThisProject
   #
   # Yields self
   def initialize(&block)
-    @exclude_from_manifest = %r/tmp$|\.(git|DS_Store)|^(doc|coverage|pkg)|Gemfile*|\.gemspec$|\.swp$|\.jar|\.rvmrc$|~$/
+    @exclude_from_manifest = %r/tmp$|\.(git|DS_Store)|^(doc|coverage|pkg|tmp)|Gemfile*|\.gemspec$|\.swp$|\.jar|\.rvmrc$|~$/
     @gemspecs              = Hash.new
     yield self if block_given?
   end
@@ -108,17 +108,6 @@ class ThisProject
     manifest_file = project_path( "Manifest.txt" )
     abort "You need a Manifest.txt" unless manifest_file.readable?
     manifest_file.readlines.map { |l| l.strip }
-  end
-
-  # Internal: Returns the list of files that are extension source files
-  #
-  # Returns an Array
-  def extension_c_source
-    manifest.grep( /\.c\Z/ )
-  end
-
-  def extension_java_source
-    manifest.grep( /\.java\Z/ )
   end
 
   # Internal: Return the files that define the extensions

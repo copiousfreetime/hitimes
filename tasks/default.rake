@@ -56,8 +56,6 @@ begin
     t.libs         = %w[ lib spec ]
     t.pattern      = "spec/**/*_spec.rb"
   end
-  task :test_requirements
-  task :test => :test_requirements
   task :default => :test
 rescue LoadError
   This.task_warning( 'test' )
@@ -225,7 +223,7 @@ task :gemspec do
 end
 
 # the gemspec is also a dev artifact and should not be kept around.
-CLOBBER << This.gemspec_file.to_s
+CLOBBER << This.gemspec_file
 
 # The standard gem packaging task, everyone has it.
 require 'rubygems/package_task'
