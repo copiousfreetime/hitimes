@@ -16,7 +16,7 @@ This.ruby_gemspec do |spec|
   spec.extensions.concat This.extension_conf_files
 end
 
-This.java_gemspec do |spec|
+This.java_gemspec( This.ruby_gemspec ) do |spec|
   spec.extensions.clear
 end
 
