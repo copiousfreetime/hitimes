@@ -125,6 +125,8 @@ the windows version. For me, on OSX to cross compile the process is:
   % rvm use 1.8.7@hitimes
   % rake-compiler cross-ruby VERSION=1.8.7-p371
 
+  # This only works via 1.8.7 at the current moment
+  % rake cross native gem RUBY_CC_VERSION=1.8.7:1.9.3
 == CREDITS
 
 * Bruce Williams for suggesting the idea
