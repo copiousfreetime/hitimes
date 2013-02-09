@@ -21,4 +21,4 @@ This.java_gemspec do |spec|
 end
 
 load 'tasks/default.rake'
-load 'tasks/ext.rake'
+load 'tasks/extension.rake'
