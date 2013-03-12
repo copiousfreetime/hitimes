@@ -1,10 +1,12 @@
-= Hitimes Changelog
+# Hitimes Changelog
 
-== Version 1.2.1 2013-03-12
+## Version 1.2.1 2013-03-12
+
 * Update dependencies
 * Ruby 2.0 fixes
+* Switch to Markdown, Yeah RDoc 4.0!
 
-== Version 1.2.0 2013-02-09
+## Version 1.2.0 2013-02-09
 
 * Update dependencies
 * Documentation cleanup
@@ -16,75 +18,75 @@
 * Added Hitimes.measure
 * Switch to using rake-compiler for cross compilation of gems
 
-== Version 1.1.1 2010-09-04
+## Version 1.1.1 2010-09-04
 
 * Remove the unnecessary dependencies that should be development dependencies
 
-== Version 1.1.0 2010-07-28
+## Version 1.1.0 2010-07-28
 
 * Add a pure java extension so hitimes may be used in jruby with the same API
 
-== Version 1.0.5 2010-07-20
+## Version 1.0.5 2010-07-20
 
 * Fix 'circular require considered harmful' warnings in 1.9.x (reported by Roger Pack)
 * Fix 'method redefined' warnings in 1.9.x (reported by Roger Pack)
 
-== Version 1.0.4 2009-08-01
+## Version 1.0.4 2009-08-01
 
 * Add in support for x86-mingw32 gem
 * Add version subdirectory for extension on all platforms
 
-== Version 1.0.3 2009-06-28
+## Version 1.0.3 2009-06-28
 
 * Fix bug with time.h on linode (reported by Roger Pack) 
 * Fix potential garbage collection issue with Interval class
 * Windows gem is now a fat binary to support installing in 1.8 or 1.9 from the
   same gem
 
-== Version 1.0.1 2009-06-12
+## Version 1.0.1 2009-06-12
 
 * Fix examples
 * performance tuning, new Hitimes::Metric derived classes are faster than old Timer class
 
-== Version 1.0.0 2009-06-12
+## Version 1.0.0 2009-06-12
 
 * Major version bump with complete refactor of the metric collection API
 * 3 types of metrics now instead of just 1 Timer
-  * Hitimes::ValueMetric
-  * Hitimes::TimedMetric
-  * Hitimes::TimedValueMetric
+    * Hitimes::ValueMetric
+    * Hitimes::TimedMetric
+    * Hitimes::TimedValueMetric
 * The ability to convert all metrics #to_hash
 * Updated documentation with examples using each metric type
 
-== Version 0.4.1 2009-02-19
+## Version 0.4.1 2009-02-19
 
 * change to ISC License
 * fix bug in compilation on gentoo
 
-== Version 0.4.0 2008-12-20
+## Version 0.4.0 2008-12-20
 
 * Added new stat 'rate'
 * Added new stat method to_hash
 * Added Hitimes::MutexedStats class for threadsafe stats collection 
-  - not needed when used in MRI 1.8.x
+    - not needed when used in MRI 1.8.x
 * remove stale dependency on mkrf
 
-== Version 0.3.0
+## Version 0.3.0
 
 * switched to extconf for building extensions
 * first release of windows binary gem
 * reverted back to normal rdoc
 
-== Version 0.2.1
+## Version 0.2.1
 
 * added Timer#rate method
 * switched to darkfish rdoc
 
-== Version 0.2.0
+## Version 0.2.0
 
 * Performance improvements
 * Added Hitimes::Stats class
 
-== Version 0.1.0
+## Version 0.1.0
 
 * Initial completion
