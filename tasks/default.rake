@@ -74,9 +74,10 @@ begin
   RDoc::Task.new do |t|
     t.markup   = 'tomdoc'
     t.rdoc_dir = 'doc'
-    t.main     = 'README.rdoc'
+    t.main     = 'README.md'
     t.title    = "#{This.name} #{This.version}"
-    t.rdoc_files.include( '*.rdoc', 'lib/**/*.rb' )
+    t.rdoc_files.include( FileList['*.{rdoc,md,txt}'], FileList['ext/**/*.c'],
+                          FileList['lib/**/*.rb'] )
   end
 rescue LoadError => le
   This.task_warning( 'rdoc' )

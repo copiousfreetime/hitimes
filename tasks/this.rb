@@ -54,7 +54,7 @@ class ThisProject
   #
   # Retuns the text of the section as an array of paragrphs.
   def section_of( file, section_name )
-    re    = /^=+ (.*)$/
+    re    = /^[=#]+ (.*)$/
     sectional = project_path( file )
     parts = sectional.read.split( re )[1..-1]
     parts.map! { |p| p.strip }
@@ -137,8 +137,8 @@ class ThisProject
       spec.executables = spec.files.grep(/^bin/) { |f| File.basename(f) }
       spec.test_files  = spec.files.grep(/^spec/)
 
-      spec.extra_rdoc_files += spec.files.grep(/(txt|rdoc)$/)
-      spec.rdoc_options = [ "--main"  , 'README.rdoc',
+      spec.extra_rdoc_files += spec.files.grep(/(txt|rdoc|md)$/)
+      spec.rdoc_options = [ "--main"  , 'README.md',
                             "--markup", "tomdoc" ]
     end
   end
@@ -187,7 +187,7 @@ class ThisProject
 
   # Internal: Return the DESCRIPTION section of the README.rdoc file
   def description_section
-    section_of( 'README.rdoc', 'DESCRIPTION')
+    section_of( 'README.md', 'DESCRIPTION')
   end
  
  # Internal: Return the summary text from the README 
