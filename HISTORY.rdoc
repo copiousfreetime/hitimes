@@ -1,5 +1,9 @@
 = Hitimes Changelog
 
+== Version 1.2.1 2013-03-12
+* Update dependencies
+* Ruby 2.0 fixes
+
 == Version 1.2.0 2013-02-09
 
 * Update dependencies
