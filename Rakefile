@@ -14,6 +14,7 @@ This.ruby_gemspec do |spec|
   spec.add_development_dependency( 'rake-compiler', '~> 0.8.3' )
 
   spec.extensions.concat This.extension_conf_files
+  spec.license = "ISC"
 end
 
 This.java_gemspec( This.ruby_gemspec ) do |spec|
