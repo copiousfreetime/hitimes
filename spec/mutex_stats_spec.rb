@@ -19,18 +19,18 @@ describe Hitimes::MutexedStats do
   if (not defined? RUBY_ENGINE) or (RUBY_ENGINE == "ruby") then
     it "Hitimes::Stats is threadsafe" do
       stats = run_with_scissors( ::Hitimes::Stats.new, @threads, @iters )
-      stats.count.should== @final_value
+      stats.count.must_equal @final_value
     end
   else
     it "Hitimes::Stats is not threadsafe" do
       stats = run_with_scissors( ::Hitimes::Stats.new, @threads, @iters )
-      stats.count.should_not == @final_value
+      stats.count.wont_equal @final_value
     end
   end
 
   it "has a threadsafe update" do
     stats = run_with_scissors( ::Hitimes::MutexedStats.new, @threads, @iters )
-    stats.count.should == @final_value
+    stats.count.must_equal @final_value
   end
 
 end

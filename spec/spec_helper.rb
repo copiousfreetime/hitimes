@@ -4,6 +4,8 @@ if RUBY_VERSION >= '1.9.2' then
   SimpleCov.start if ENV['COVERAGE']
 end
 
-require 'rspec/autorun'
+gem 'minitest'
 require 'hitimes'
+require 'minitest/autorun'
+require 'minitest/pride'
 

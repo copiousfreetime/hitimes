@@ -8,7 +8,7 @@ This.homepage = "http://github.com/copiousfreetime/#{ This.name }"
 
 This.ruby_gemspec do |spec|
   spec.add_development_dependency( 'rake'         , '~> 10.0.3')
-  spec.add_development_dependency( 'rspec'        , '~> 2.13.0' )
+  spec.add_development_dependency( 'minitest'     , '~> 4.6.2' )
   spec.add_development_dependency( 'rdoc'         , '~> 4.0'   )
   spec.add_development_dependency( 'json'         , '~> 1.7.7' )
   spec.add_development_dependency( 'rake-compiler', '~> 0.8.3' )
