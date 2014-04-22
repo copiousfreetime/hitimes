@@ -79,7 +79,7 @@ begin
     t.rdoc_files.include( FileList['*.{rdoc,md,txt}'], FileList['ext/**/*.c'],
                           FileList['lib/**/*.rb'] )
   end
-rescue LoadError => le
+rescue LoadError, StandardError => le
   This.task_warning( 'rdoc' )
 end
 
