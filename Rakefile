@@ -19,6 +19,7 @@ end
 
 This.java_gemspec( This.ruby_gemspec ) do |spec|
   spec.extensions.clear
+  spec.files << "lib/hitimes/hitimes.jar"
 end
 
 load 'tasks/default.rake'
