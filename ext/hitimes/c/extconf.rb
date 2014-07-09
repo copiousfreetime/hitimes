@@ -9,6 +9,13 @@ elsif RbConfig::CONFIG['host_os'] =~ /win32/ or RbConfig::CONFIG['host_os'] =~ /
 else
   if have_library("rt", "clock_gettime") then
     $CFLAGS += " -DUSE_INSTANT_CLOCK_GETTIME=1"
+  elsif have_library("c", "clock_gettime") then
+    $CFLAGS += " -DUSE_INSTANT_CLOCK_GETTIME=1"
+  else
+    raise NotImplementedError, <<-_
+Unable to find the function 'clock_gettime' in either libc or librt.
+Please file an issue at https://github.com/copiousfreetime/hitimes.
+_
   end
 end
 
