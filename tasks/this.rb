@@ -25,7 +25,7 @@ class ThisProject
   #
   # Yields self
   def initialize(&block)
-    @exclude_from_manifest = %r/\.(git|DS_Store)|^(doc|coverage|pkg|tmp)|Gemfile*|\.(gemspec|swp|jar|bundle|so|rvmrc)$|~$/
+    @exclude_from_manifest = %r/\.(git|DS_Store)|^(doc|coverage|pkg|tmp|Gemfile(\.lock)?)|^[^\/]+\.gemspec|\.(swp|jar|bundle|so|rvmrc)$|~$/
     @gemspecs              = Hash.new
     yield self if block_given?
   end
@@ -132,6 +132,7 @@ class ThisProject
 
       spec.summary     = summary
       spec.description = description
+      spec.license     = license
 
       spec.files       = manifest
       spec.executables = spec.files.grep(/^bin/) { |f| File.basename(f) }
@@ -176,7 +177,7 @@ class ThisProject
     if RUBY_VERSION < "1.9.0"
       platform_gemspec.add_development_dependency( 'rcov', '~> 1.0.0' )
     else
-      platform_gemspec.add_development_dependency( 'simplecov', '~> 0.8' )
+      platform_gemspec.add_development_dependency( 'simplecov', '~> 0.8.2' )
     end
   end
 
@@ -195,9 +196,13 @@ class ThisProject
     description_section.first
   end
 
-  # Internal: Return the full description text from the READEM
+  # Internal: Return the full description text from the README
   def description
     description_section.join(" ").tr("\n", ' ').gsub(/[{}]/,'').gsub(/\[[^\]]+\]/,'') # strip rdoc
+  end
+
+  def license
+    "ISC"
   end
 
   # Internal: The path to the gemspec file
