@@ -1,5 +1,10 @@
 # Hitimes Changelog
 
+## Version 1.2.2 2014-07-09
+
+* fix compilation issue with clock_gettime in libc (reported by eradman and virtualfunction)
+* Switch to minispec for tests
+
 ## Version 1.2.1 2013-03-12
 
 * Update dependencies
