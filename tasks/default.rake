@@ -109,7 +109,7 @@ else
     desc 'Run tests with code coverage'
     task :coverage do
       ENV['COVERAGE'] = 'true'
-      Rake::Task[:test].execute
+      Rake::Task[:test].invoke
     end
     CLOBBER << FileList["coverage"]
   rescue LoadError
