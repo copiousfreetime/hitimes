@@ -17,4 +17,4 @@ log
 pkg
 tags
 tmp
-*.gemspec
+*.lock
