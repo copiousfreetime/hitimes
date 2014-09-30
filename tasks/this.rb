@@ -167,20 +167,6 @@ class ThisProject
     return spec
   end
 
-  # Internal: Set the recovery gem development dependency
-  #
-  # These are dynamically set since they cannot be hard coded as there is 
-  # no way to ship them correctly in the gemspec
-  #
-  # Returns nothing.
-  def set_coverage_gem
-    if RUBY_VERSION < "1.9.0"
-      platform_gemspec.add_development_dependency( 'rcov', '~> 1.0.0' )
-    else
-      platform_gemspec.add_development_dependency( 'simplecov', '~> 0.8.2' )
-    end
-  end
-
   # Internal: Return the platform of ThisProject at the current moment in time.
   def platform
     (RUBY_PLATFORM == "java") ? 'java' : Gem::Platform::RUBY
@@ -190,8 +176,8 @@ class ThisProject
   def description_section
     section_of( 'README.md', 'DESCRIPTION')
   end
- 
- # Internal: Return the summary text from the README 
+
+  # Internal: Return the summary text from the README 
   def summary
     description_section.first
   end

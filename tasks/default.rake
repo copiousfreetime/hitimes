@@ -14,8 +14,6 @@ namespace :develop do
     require 'rubygems/dependency_installer'
     installer = ::Gem::DependencyInstaller.new
 
-    This.set_coverage_gem
-
     puts "Installing gem depedencies needed for development"
     This.platform_gemspec.dependencies.each do |dep|
       if dep.matching_specs.empty? then
@@ -90,31 +88,16 @@ end
 # Coverage - optional code coverage, rcov for 1.8 and simplecov for 1.9, so
 #            for the moment only rcov is listed.
 #------------------------------------------------------------------------------
-if RUBY_VERSION < "1.9.0"
-  begin
-   require 'rcov/rcovtask'
-   Rcov::RcovTask.new( 'coverage' ) do |t|
-     t.libs      << 'spec'
-     t.pattern   = 'spec/**/*_spec.rb'
-     t.verbose   = true
-     t.rcov_opts << "-x ^/"           # remove all the global files
-     t.rcov_opts << "--sort coverage" # so we see the worst files at the top
-   end
-  rescue LoadError
-   This.task_warning( 'rcov' )
+begin
+  require 'simplecov'
+  desc 'Run tests with code coverage'
+  task :coverage do
+    ENV['COVERAGE'] = 'true'
+    Rake::Task[:test].invoke
   end
-else
-  begin
-    require 'simplecov'
-    desc 'Run tests with code coverage'
-    task :coverage do
-      ENV['COVERAGE'] = 'true'
-      Rake::Task[:test].invoke
-    end
-    CLOBBER << FileList["coverage"] if File.directory?( "coverage" )
-  rescue LoadError
-    This.task_warning( 'simplecov' )
-  end
+  CLOBBER << FileList["coverage"] if File.directory?( "coverage" )
+rescue LoadError
+  This.task_warning( 'simplecov' )
 end
 
 #------------------------------------------------------------------------------

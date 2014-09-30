@@ -33,12 +33,14 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<rdoc>, ["~> 4.1"])
       s.add_development_dependency(%q<json>, ["~> 1.7.7"])
       s.add_development_dependency(%q<rake-compiler>, ["~> 0.9"])
+      s.add_development_dependency(%q<simplecov>, ["~> 0.9"])
     else
       s.add_dependency(%q<rake>, ["~> 10.0"])
       s.add_dependency(%q<minitest>, ["~> 5.3"])
       s.add_dependency(%q<rdoc>, ["~> 4.1"])
       s.add_dependency(%q<json>, ["~> 1.7.7"])
       s.add_dependency(%q<rake-compiler>, ["~> 0.9"])
+      s.add_dependency(%q<simplecov>, ["~> 0.9"])
     end
   else
     s.add_dependency(%q<rake>, ["~> 10.0"])
@@ -46,5 +48,6 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<rdoc>, ["~> 4.1"])
     s.add_dependency(%q<json>, ["~> 1.7.7"])
     s.add_dependency(%q<rake-compiler>, ["~> 0.9"])
+    s.add_dependency(%q<simplecov>, ["~> 0.9"])
   end
 end
