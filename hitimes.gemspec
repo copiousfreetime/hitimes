@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/copiousfreetime/hitimes"
   s.licenses = ["ISC"]
   s.rdoc_options = ["--main", "README.md", "--markup", "tomdoc"]
-  s.rubygems_version = "2.2.2"
+  s.rubygems_version = "2.4.5"
   s.summary = "Hitimes is a fast, high resolution timer library for recording performance metrics.  It uses the appropriate low method calls for each system to get the highest granularity time increments possible."
   s.test_files = ["spec/hitimes_spec.rb", "spec/interval_spec.rb", "spec/metric_spec.rb", "spec/mutex_stats_spec.rb", "spec/paths_spec.rb", "spec/spec_helper.rb", "spec/stats_spec.rb", "spec/timed_metric_spec.rb", "spec/timed_value_metric_spec.rb", "spec/value_metric_spec.rb", "spec/version_spec.rb"]
 
@@ -29,14 +29,14 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_development_dependency(%q<rake>, ["~> 10.4"])
-      s.add_development_dependency(%q<minitest>, ["~> 5.3"])
+      s.add_development_dependency(%q<minitest>, ["~> 5.5"])
       s.add_development_dependency(%q<rdoc>, ["~> 4.2"])
       s.add_development_dependency(%q<json>, ["~> 1.8"])
       s.add_development_dependency(%q<rake-compiler>, ["~> 0.9"])
       s.add_development_dependency(%q<simplecov>, ["~> 0.9"])
     else
       s.add_dependency(%q<rake>, ["~> 10.4"])
-      s.add_dependency(%q<minitest>, ["~> 5.3"])
+      s.add_dependency(%q<minitest>, ["~> 5.5"])
       s.add_dependency(%q<rdoc>, ["~> 4.2"])
       s.add_dependency(%q<json>, ["~> 1.8"])
       s.add_dependency(%q<rake-compiler>, ["~> 0.9"])
@@ -44,7 +44,7 @@ Gem::Specification.new do |s|
     end
   else
     s.add_dependency(%q<rake>, ["~> 10.4"])
-    s.add_dependency(%q<minitest>, ["~> 5.3"])
+    s.add_dependency(%q<minitest>, ["~> 5.5"])
     s.add_dependency(%q<rdoc>, ["~> 4.2"])
     s.add_dependency(%q<json>, ["~> 1.8"])
     s.add_dependency(%q<rake-compiler>, ["~> 0.9"])
