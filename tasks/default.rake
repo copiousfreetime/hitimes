@@ -212,9 +212,6 @@ task :gemspec do
   end
 end
 
-# the gemspec is also a dev artifact and should not be kept around.
-CLOBBER << This.gemspec_file.to_s
-
 # .rbc files from ruby 2.0
 CLOBBER << FileList["**/*.rbc"]
 
