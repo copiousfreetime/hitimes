@@ -41,8 +41,6 @@ namespace :develop do
     puts "Now you can 'bundle'"
   end
 
-  # Gemfiles are build artifacts
-  CLOBBER << FileList['Gemfile*']
 end
 desc "Boostrap development"
 task :develop => "develop:default"
