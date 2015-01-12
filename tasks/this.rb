@@ -13,7 +13,7 @@ class ThisProject
   attr_accessor :email
 
   # The homepage of this project
-  attr_accessor :homepage 
+  attr_accessor :homepage
 
   # The regex of files to exclude from the manifest
   attr_accessor :exclude_from_manifest
@@ -25,7 +25,11 @@ class ThisProject
   #
   # Yields self
   def initialize(&block)
-    @exclude_from_manifest = %r/\.(git|DS_Store)|^(doc|coverage|pkg|tmp|Gemfile(\.lock)?)|^[^\/]+\.gemspec|\.(swp|jar|bundle|so|rvmrc)$|~$/
+    @exclude_from_manifest = Regexp.union(/\.(git|DS_Store)/,
+                                          /^(doc|coverage|pkg|tmp|Gemfile(\.lock)?)/,
+                                          /^[^\/]+\.gemspec/,
+                                          /\.(swp|jar|bundle|so|rvmrc|travis.yml)$/,
+                                          /~$/)
     @gemspecs              = Hash.new
     yield self if block_given?
   end
@@ -119,7 +123,7 @@ class ThisProject
 
   # Internal: Returns the gemspace associated with the current ruby platform
   def platform_gemspec
-    gemspecs[platform]
+    gemspecs.fetch(platform) { This.ruby_gemspec }
   end
 
   def core_gemspec
@@ -141,6 +145,8 @@ class ThisProject
       spec.extra_rdoc_files += spec.files.grep(/(txt|rdoc|md)$/)
       spec.rdoc_options = [ "--main"  , 'README.md',
                             "--markup", "tomdoc" ]
+
+      spec.required_ruby_version = '>= 1.9.3'
     end
   end
 
@@ -177,7 +183,7 @@ class ThisProject
     section_of( 'README.md', 'DESCRIPTION')
   end
 
-  # Internal: Return the summary text from the README 
+  # Internal: Return the summary text from the README
   def summary
     description_section.first
   end
