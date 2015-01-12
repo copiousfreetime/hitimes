@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Jeremy Hinegardner"]
-  s.date = "2015-01-06"
+  s.date = "2015-01-12"
   s.description = "Hitimes is a fast, high resolution timer library for recording performance metrics.  It uses the appropriate low method calls for each system to get the highest granularity time increments possible.   It currently supports any of the following systems: * any system with the POSIX call `clock_gettime()` * Mac OS X * Windows * JRuby Using Hitimes can be faster than using a series of `Time.new` calls, and it will have a much higher granularity. It is definitely faster than using `Process.times`."
   s.email = "jeremy@copiousfreetime.org"
   s.extensions = ["ext/hitimes/c/extconf.rb"]
@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/copiousfreetime/hitimes"
   s.licenses = ["ISC"]
   s.rdoc_options = ["--main", "README.md", "--markup", "tomdoc"]
+  s.required_ruby_version = Gem::Requirement.new(">= 1.9.3")
   s.rubygems_version = "2.2.2"
   s.summary = "Hitimes is a fast, high resolution timer library for recording performance metrics.  It uses the appropriate low method calls for each system to get the highest granularity time increments possible."
   s.test_files = ["spec/hitimes_spec.rb", "spec/interval_spec.rb", "spec/metric_spec.rb", "spec/mutex_stats_spec.rb", "spec/paths_spec.rb", "spec/spec_helper.rb", "spec/stats_spec.rb", "spec/timed_metric_spec.rb", "spec/timed_value_metric_spec.rb", "spec/value_metric_spec.rb", "spec/version_spec.rb"]
