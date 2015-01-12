@@ -24,7 +24,7 @@ begin
       ext.gem_spec  = This.ruby_gemspec
 
       ext.cross_compile  = true               # enable cross compilation (requires cross compile toolchain)
-      ext.cross_platform = 'i386-mswin32'     # forces the Windows platform instead of the default one
+      ext.cross_platform = 'i386-mingw32'     # forces the Windows platform instead of the default one
                                               # configure options only for cross compile
     end
   end
