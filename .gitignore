@@ -18,3 +18,4 @@ pkg
 tags
 tmp
 *.lock
+.gem/
