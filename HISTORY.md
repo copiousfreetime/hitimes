@@ -1,5 +1,11 @@
 # Hitimes Changelog
 
+## Version 1.2.3 2015-09-13
+
+* Release new fatbinary version for windows
+* Update README to indicate duration units
+* Provide a more friendly error message if the gem is not installed correctly
+
 ## Version 1.2.2 2014-07-09
 
 * fix compilation issue with clock_gettime in libc (reported by eradman and virtualfunction)
