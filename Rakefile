@@ -12,6 +12,7 @@ This.ruby_gemspec do |spec|
   spec.add_development_dependency( 'rdoc'         , '~> 4.2'  )
   spec.add_development_dependency( 'json'         , '~> 1.8' )
   spec.add_development_dependency( 'rake-compiler', '~> 0.9' )
+  spec.add_development_dependency( 'rake-compiler-dock', '~> 0.4' )
   spec.add_development_dependency( 'simplecov'    , '~> 0.9' )
 
   spec.extensions.concat This.extension_conf_files
