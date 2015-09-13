@@ -29,13 +29,21 @@ require 'hitimes/version'
 # Load the binary extension, try loading one for the specific version of ruby
 # and if that fails, then fall back to one in the top of the library.
 # this is the method recommended by rake-compiler
-begin
-  # this will be for windows
-  require "hitimes/#{RUBY_VERSION.sub(/\.\d$/,'')}/hitimes"
-rescue LoadError
-  # everyone else.
-  require 'hitimes/hitimes'
+
+attempts = [
+  "hitimes/#{RUBY_VERSION.sub(/\.\d$/,'')}/hitimes",
+  "hitimes/hitimes"
+]
+loaded = false
+
+attempts.each do |path|
+  begin
+    require path
+    loaded = true
+  rescue LoadError
+  end
 end
+raise LoadError, "Unable to find binary extension, was hitimes installed correctly?" unless loaded
 
 require 'hitimes/stats'
 require 'hitimes/mutexed_stats'
