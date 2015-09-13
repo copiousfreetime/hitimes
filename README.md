@@ -13,7 +13,7 @@
 
 Hitimes is a fast, high resolution timer library for recording
 performance metrics.  It uses the appropriate low method calls for each
-system to get the highest granularity time increments possible.  
+system to get the highest granularity time increments possible.
 
 It currently supports any of the following systems:
 
@@ -30,14 +30,17 @@ using `Process.times`.
 
 ### Interval
 
-Use Hitimes::Interval to calculate only the duration of a block of code
+Use Hitimes::Interval to calculate only the duration of a block of code. Returns
+the time as seconds.
 
 ``` ruby
 duration = Hitimes::Interval.measure do
-             # some operation ...
+             1_000_000.times do |x|
+               2 + 2
+             end
            end
 
-puts duration
+puts duration  # => 0.047414297 (seconds)
 ```
 
 ### TimedMetric
@@ -126,21 +129,14 @@ Read the HISTORY.md file.
 
 ## BUILDING FOR WINDOWS
 
-[rake-compiler](https://github.com/luislavena/rake-compiler) is use for building
-the windows version. For me, on OSX to cross compile the process is:
+This is done using https://github.com/rake-compiler/rake-compiler-dock
 
-```
-% gem install rake-compiler # in each rvm instance, 1.8.7, 1.9.3
-% rvm use 2.0.0@hitimes
-% rake-compiler cross-ruby VERSION=2.0.0-p0 # or latest
-% rvm use 1.9.3@hitimes
-% rake-compiler cross-ruby VERSION=1.9.3-p374 # or latest
-% rvm use 1.8.7@hitimes
-% rake-compiler cross-ruby VERSION=1.8.7-p371
-
-# This only works via 1.8.7 at the current moment
-% rake cross native gem RUBY_CC_VERSION=1.8.7:1.9.3:2.0.0
-```
+1. have VirtualBox installed
+2. Install boot2docker `brew install boot2docker`
+3. `gem install rake-compiler-dock`
+4. `rake-compiler-dock`
+5. `bundle`
+6 `rake cross native gem`
 
 ## CREDITS
 
@@ -148,7 +144,7 @@ the windows version. For me, on OSX to cross compile the process is:
 
 ## ISC License
 
-Copyright (c) 2008-2012 Jeremy Hinegardner
+Copyright (c) 2008-2015 Jeremy Hinegardner
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
