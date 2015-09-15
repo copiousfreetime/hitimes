@@ -136,7 +136,7 @@ This is done using https://github.com/rake-compiler/rake-compiler-dock
 3. `gem install rake-compiler-dock`
 4. `rake-compiler-dock`
 5. `bundle`
-6 `rake cross native gem`
+6. `rake cross native gem`
 
 ## CREDITS
 
