@@ -36,14 +36,20 @@ attempts = [
 ]
 loaded = false
 
+exception_messages = []
+
 attempts.each do |path|
   begin
     require path
     loaded = true
-  rescue LoadError
+  rescue LoadError => ex
+    exception_messages << [path, ex.message]
   end
 end
-raise LoadError, "Unable to find binary extension, was hitimes installed correctly?" unless loaded
+unless loaded
+  raise LoadError, "Unable to find binary extension, was hitimes installed correctly? " \
+    "Attempted paths and error messages: #{exception_messages}"
+end
 
 require 'hitimes/stats'
 require 'hitimes/mutexed_stats'
