@@ -31,7 +31,7 @@ require 'hitimes/version'
 # this is the method recommended by rake-compiler
 
 attempts = [
-  "hitimes/#{RUBY_VERSION.sub(/\.\d$/,'')}/hitimes",
+  "hitimes/#{RUBY_VERSION.sub(/\.\d+$/,'')}/hitimes",
   "hitimes/hitimes"
 ]
 loaded = false

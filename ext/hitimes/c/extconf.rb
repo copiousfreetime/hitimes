@@ -20,5 +20,5 @@ _
 end
 
 # put in a different location if on windows so we can have fat binaries
-subdir = RUBY_VERSION.gsub(/\.\d$/,'')
+subdir = RUBY_VERSION.gsub(/\.\d+$/,'')
 create_makefile("hitimes/#{subdir}/hitimes")
