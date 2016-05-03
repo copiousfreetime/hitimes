@@ -1,5 +1,11 @@
 # Hitimes Changelog
 
+## Version 1.2.4 2016-05-01
+
+* Fix finding the extension on ruby 2.1.10 (thanks @wpiekutowski)
+* Add more readable load error (thanks @mbautin)
+* Update README with what versions of ruby are supported.
+
 ## Version 1.2.3 2015-09-13
 
 * Release new fatbinary version for windows

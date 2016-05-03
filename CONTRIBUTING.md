@@ -27,7 +27,7 @@ easiest way to contribute.
 * Fork the [repo][].
 * Create a new branch for your issue: `git checkout -b issue/my-issue`
 * Lovingly craft your contribution:
-    * `rake develop` to get started, or if you prefer bundler `rake develop:using_bunder && bundle`.
+    * `rake develop` to get started
     * `rake test` to run tests
 * Make sure that `rake test` passes. Its important, I said it twice.
 * Add yourself to the contributors section below.

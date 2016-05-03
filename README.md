@@ -138,8 +138,8 @@ puts timed_value_metric.value_stats.stddev
 
 ### Implementation details
 
-THitimes use the appropriate low-level system call for each operating system to
-get the highest granualtiry time increment possible. Generally this is
+Hitimes use the appropriate low-level system call for each operating system to
+get the highest granularity time increment possible. Generally this is
 nanosecond resolution, or whatever the hardware chip in the CPU supports.
 
 It currently supports any of the following systems:
