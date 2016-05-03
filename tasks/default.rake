@@ -29,7 +29,7 @@ namespace :develop do
     end
   end
 end
-desc "Boostrap development"
+desc "Bootstrap development"
 task :develop => "develop:default"
 
 #------------------------------------------------------------------------------

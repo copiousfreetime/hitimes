@@ -180,7 +180,7 @@ class ThisProject
 
   # Internal: Return the DESCRIPTION section of the README.rdoc file
   def description_section
-    section_of( 'README.md', 'DESCRIPTION')
+    section_of( 'README.md', 'Hitimes')
   end
 
   # Internal: Return the summary text from the README
