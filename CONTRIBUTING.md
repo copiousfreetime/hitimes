@@ -33,6 +33,17 @@ easiest way to contribute.
 * Add yourself to the contributors section below.
 * Submit your [pull request][].
 
+## Building Windows Binaries
+
+This is done using https://github.com/rake-compiler/rake-compiler-dock
+
+1. have VirtualBox installed
+2. have Docker Machine installed (https://docs.docker.com/engine/installation/)
+3. `gem install rake-compiler-dock`
+4. `rake-compiler-dock` (this could take a while)
+5. `bundle`
+6. `rake cross native gem`
+
 # Contributors
 
 * Jeremy Hinegardner

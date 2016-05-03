@@ -1,39 +1,52 @@
-## hitimes
+# Hitimes
+
+A fast, high resolution timer library for recording peformance metrics.
 
 * [Homepage](http://github.com/copiousfreetime/hitimes)
 * [Github project](http://github.com.org/copiousfreetime/hitimes)
 * email jeremy at copiousfreetime dot org
 * `git clone url git://github.com/copiousfreetime/hitimes.git`
 
-## INSTALL
+## Table of Contents
 
-* `gem install hitimes`
+* [Requirements](#requirements)
+* [Usage](#usage)
+* [Contributing](#contributing)
+* [Support](#support)
+* [License](#license)
 
-## DESCRIPTION
+## Requirements
 
-Hitimes is a fast, high resolution timer library for recording
-performance metrics.  It uses the appropriate low method calls for each
-system to get the highest granularity time increments possible.
+Hitimes requires the following to run:
 
-It currently supports any of the following systems:
+  * Ruby
 
-* any system with the POSIX call `clock_gettime()`
-* Mac OS X
-* Windows
-* JRuby
+## Usage
 
-Using Hitimes can be faster than using a series of `Time.new` calls, and
-it will have a much higher granularity. It is definitely faster than
-using `Process.times`. 
+Hitimes easiest to use when installed with `rubygems`:
 
-## SYNOPSIS
+```sh
+gem install hitimes
+```
+
+Or as part of your bundler `Gemfile`:
+
+```ruby
+gem 'hitimes'
+```
+
+You can load it with the standard ruby require statement.
+
+```ruby
+require 'hitimes'
+```
 
 ### Interval
 
-Use Hitimes::Interval to calculate only the duration of a block of code. Returns
-the time as seconds.
+Use `Hitimes::Interval` to calculate only the duration of a block of code.
+Returns the time as seconds.
 
-``` ruby
+```ruby
 duration = Hitimes::Interval.measure do
              1_000_000.times do |x|
                2 + 2
@@ -45,15 +58,15 @@ puts duration  # => 0.047414297 (seconds)
 
 ### TimedMetric
 
-Use a Hitimes::TimedMetric to calculate statistics about an iterative operation
+Use a `Hitimes::TimedMetric` to calculate statistics about an iterative operation
 
-``` ruby
+```ruby
 timed_metric = Hitimes::TimedMetric.new('operation on items')
 ```
 
 Explicitly use `start` and `stop`:
 
-``` ruby
+```ruby
 collection.each do |item|
   timed_metric.start
   # .. do something with item
@@ -61,26 +74,26 @@ collection.each do |item|
 end
 ```
 
-Or use the block.  In TimedMetric the return value of +measure+ is the return
-value of the block
+Or use the block. In `TimedMetric` the return value of `measure` is the return
+value of the block.
 
-``` ruby
+```ruby
 collection.each do |item|
   result_of_do_something = timed_metric.measure { do_something( item ) }
 end
 ```
 And then look at the stats
 
-``` ruby
+```ruby
 puts timed_metric.mean
 puts timed_metric.max
 puts timed_metric.min
 puts timed_metric.stddev
 puts timed_metric.rate
 ```
-### ValueMetric 
+### ValueMetric
 
-Use a Hitimes::ValueMetric to calculate statistics about measured samples
+Use a `Hitimes::ValueMetric` to calculate statistics about measured samples.
 
 ``` ruby
 value_metric = Hitimes::ValueMetric.new( 'size of thing' )
@@ -99,7 +112,7 @@ puts value_metric.rate
 
 ### TimedValueMetric
 
-Use a Hitimes::TimedValueMetric to calculate statistics about batches of samples
+Use a `Hitimes::TimedValueMetric` to calculate statistics about batches of samples.
 
 ``` ruby
 timed_value_metric = Hitimes::TimedValueMetric.new( 'batch times' )
@@ -123,28 +136,51 @@ puts timed_value_metric.value_stats.min
 puts timed_value_metric.value_stats.stddev
 ```
 
-## CHANGES
+### Implementation details
 
-Read the HISTORY.md file.
+THitimes use the appropriate low-level system call for each operating system to
+get the highest granualtiry time increment possible. Generally this is
+nanosecond resolution, or whatever the hardware chip in the CPU supports.
 
-## BUILDING FOR WINDOWS
+It currently supports any of the following systems:
 
-This is done using https://github.com/rake-compiler/rake-compiler-dock
+* any system with the POSIX call `clock_gettime()`
+* Mac OS X
+* Windows
+* JRuby
 
-1. have VirtualBox installed
-2. Install boot2docker `brew install boot2docker`
-3. `gem install rake-compiler-dock`
-4. `rake-compiler-dock`
-5. `bundle`
-6. `rake cross native gem`
+## Support
 
-## CREDITS
+Hitimes is supported on whatever versions of ruby are currently supported.
+Hitimes also follows [semantic versioning](http://semver.org/).
+
+The current officially supported versions of Ruby are:
+
+* MRI Ruby 2.2, 2.3
+* JRuby 1.7.25, 9.0.5.0
+
+Unofficially supported versions, they have been supported in the past when they
+were the primary rubies around. In all likelihood they still work, but are not
+supported.
+
+* MRI Ruby - everything from 1.8.7 to 2.1
+* JRuby - I think everything back to 1.4
+* Rubinius
+
+## Contributing
+
+Please read the [CONTRIBUTING.md](CONTRIBUTING.md)
+
+## Credits
 
 * [Bruce Williams](https://github.com/bruce) for suggesting the idea
 
-## ISC License
+## License
 
-Copyright (c) 2008-2015 Jeremy Hinegardner
+Hitimes is licensed under the [ISC](https://opensource.org/licenses/ISC)
+license.
+
+Copyright (c) 2008-2016 Jeremy Hinegardner
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
