@@ -1,4 +1,9 @@
 # Hitimes Changelog
+## Version 1.2.5 2017-05-25
+
+* Update dependencies
+* Add ruby 2.4 to windows fatbinary
+* Update docs to indicate windows ruby before 2.0 is no longer supported
 
 ## Version 1.2.4 2016-05-01
 
