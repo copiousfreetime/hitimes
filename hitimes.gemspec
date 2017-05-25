@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
   s.authors = ["Jeremy Hinegardner".freeze]
-  s.date = "2016-05-03"
+  s.date = "2017-05-25"
   s.description = "A fast, high resolution timer library for recording peformance metrics. * (http://github.com/copiousfreetime/hitimes) * (http://github.com.org/copiousfreetime/hitimes) * email jeremy at copiousfreetime dot org * `git clone url git://github.com/copiousfreetime/hitimes.git`".freeze
   s.email = "jeremy@copiousfreetime.org".freeze
   s.extensions = ["ext/hitimes/c/extconf.rb".freeze]
@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   s.licenses = ["ISC".freeze]
   s.rdoc_options = ["--main".freeze, "README.md".freeze, "--markup".freeze, "tomdoc".freeze]
   s.required_ruby_version = Gem::Requirement.new(">= 1.9.3".freeze)
-  s.rubygems_version = "2.6.4".freeze
+  s.rubygems_version = "2.6.11".freeze
   s.summary = "A fast, high resolution timer library for recording peformance metrics.".freeze
   s.test_files = ["spec/hitimes_spec.rb".freeze, "spec/interval_spec.rb".freeze, "spec/metric_spec.rb".freeze, "spec/mutex_stats_spec.rb".freeze, "spec/paths_spec.rb".freeze, "spec/spec_helper.rb".freeze, "spec/stats_spec.rb".freeze, "spec/timed_metric_spec.rb".freeze, "spec/timed_value_metric_spec.rb".freeze, "spec/value_metric_spec.rb".freeze, "spec/version_spec.rb".freeze]
 
@@ -29,29 +29,29 @@ Gem::Specification.new do |s|
     s.specification_version = 4
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_development_dependency(%q<rake>.freeze, ["~> 10.4"])
+      s.add_development_dependency(%q<rake>.freeze, ["~> 12.0"])
       s.add_development_dependency(%q<minitest>.freeze, ["~> 5.5"])
-      s.add_development_dependency(%q<rdoc>.freeze, ["~> 4.2"])
-      s.add_development_dependency(%q<json>.freeze, ["~> 1.8"])
-      s.add_development_dependency(%q<rake-compiler>.freeze, ["~> 0.9"])
-      s.add_development_dependency(%q<rake-compiler-dock>.freeze, ["~> 0.4"])
-      s.add_development_dependency(%q<simplecov>.freeze, ["~> 0.9"])
+      s.add_development_dependency(%q<rdoc>.freeze, ["~> 5.0"])
+      s.add_development_dependency(%q<json>.freeze, ["~> 2.0"])
+      s.add_development_dependency(%q<rake-compiler>.freeze, ["~> 1.0"])
+      s.add_development_dependency(%q<rake-compiler-dock>.freeze, ["~> 0.6"])
+      s.add_development_dependency(%q<simplecov>.freeze, ["~> 0.14"])
     else
-      s.add_dependency(%q<rake>.freeze, ["~> 10.4"])
+      s.add_dependency(%q<rake>.freeze, ["~> 12.0"])
       s.add_dependency(%q<minitest>.freeze, ["~> 5.5"])
-      s.add_dependency(%q<rdoc>.freeze, ["~> 4.2"])
-      s.add_dependency(%q<json>.freeze, ["~> 1.8"])
-      s.add_dependency(%q<rake-compiler>.freeze, ["~> 0.9"])
-      s.add_dependency(%q<rake-compiler-dock>.freeze, ["~> 0.4"])
-      s.add_dependency(%q<simplecov>.freeze, ["~> 0.9"])
+      s.add_dependency(%q<rdoc>.freeze, ["~> 5.0"])
+      s.add_dependency(%q<json>.freeze, ["~> 2.0"])
+      s.add_dependency(%q<rake-compiler>.freeze, ["~> 1.0"])
+      s.add_dependency(%q<rake-compiler-dock>.freeze, ["~> 0.6"])
+      s.add_dependency(%q<simplecov>.freeze, ["~> 0.14"])
     end
   else
-    s.add_dependency(%q<rake>.freeze, ["~> 10.4"])
+    s.add_dependency(%q<rake>.freeze, ["~> 12.0"])
     s.add_dependency(%q<minitest>.freeze, ["~> 5.5"])
-    s.add_dependency(%q<rdoc>.freeze, ["~> 4.2"])
-    s.add_dependency(%q<json>.freeze, ["~> 1.8"])
-    s.add_dependency(%q<rake-compiler>.freeze, ["~> 0.9"])
-    s.add_dependency(%q<rake-compiler-dock>.freeze, ["~> 0.4"])
-    s.add_dependency(%q<simplecov>.freeze, ["~> 0.9"])
+    s.add_dependency(%q<rdoc>.freeze, ["~> 5.0"])
+    s.add_dependency(%q<json>.freeze, ["~> 2.0"])
+    s.add_dependency(%q<rake-compiler>.freeze, ["~> 1.0"])
+    s.add_dependency(%q<rake-compiler-dock>.freeze, ["~> 0.6"])
+    s.add_dependency(%q<simplecov>.freeze, ["~> 0.14"])
   end
 end
