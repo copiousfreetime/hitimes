@@ -1,4 +1,8 @@
 # Hitimes Changelog
+## Version 1.2.6 2017-08-04
+
+* Resolve version number issue (#61) (thanks @anthraxx)
+
 ## Version 1.2.5 2017-05-25
 
 * Update dependencies
