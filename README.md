@@ -1,4 +1,6 @@
 # Hitimes
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcopiousfreetime%2Fhitimes.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcopiousfreetime%2Fhitimes?ref=badge_shield)
+
 
 A fast, high resolution timer library for recording peformance metrics.
 
@@ -195,3 +197,6 @@ INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
 LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
 OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 PERFORMANCE OF THIS SOFTWARE.
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcopiousfreetime%2Fhitimes.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcopiousfreetime%2Fhitimes?ref=badge_large)
