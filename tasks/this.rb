@@ -194,7 +194,9 @@ class ThisProject
   end
 
   def license
-    "ISC"
+    license_file = project_path("LICENSE")
+    line = license_file.readlines.first
+    line.split(/\s+/).first
   end
 
   # Internal: The path to the gemspec file
