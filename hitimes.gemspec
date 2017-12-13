@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
   s.authors = ["Jeremy Hinegardner".freeze]
-  s.date = "2017-08-04"
+  s.date = "2017-12-13"
   s.description = "A fast, high resolution timer library for recording peformance metrics. * (http://github.com/copiousfreetime/hitimes) * (http://github.com.org/copiousfreetime/hitimes) * email jeremy at copiousfreetime dot org * `git clone url git://github.com/copiousfreetime/hitimes.git`".freeze
   s.email = "jeremy@copiousfreetime.org".freeze
   s.extensions = ["ext/hitimes/c/extconf.rb".freeze]
@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   s.licenses = ["ISC".freeze]
   s.rdoc_options = ["--main".freeze, "README.md".freeze, "--markup".freeze, "tomdoc".freeze]
   s.required_ruby_version = Gem::Requirement.new(">= 1.9.3".freeze)
-  s.rubygems_version = "2.6.11".freeze
+  s.rubygems_version = "2.6.13".freeze
   s.summary = "A fast, high resolution timer library for recording peformance metrics.".freeze
   s.test_files = ["spec/hitimes_spec.rb".freeze, "spec/interval_spec.rb".freeze, "spec/metric_spec.rb".freeze, "spec/mutex_stats_spec.rb".freeze, "spec/paths_spec.rb".freeze, "spec/spec_helper.rb".freeze, "spec/stats_spec.rb".freeze, "spec/timed_metric_spec.rb".freeze, "spec/timed_value_metric_spec.rb".freeze, "spec/value_metric_spec.rb".freeze, "spec/version_spec.rb".freeze]
 
