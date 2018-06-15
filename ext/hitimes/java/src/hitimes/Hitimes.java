@@ -54,7 +54,7 @@ public class Hitimes {
 
     static RaiseException newHitimesError( Ruby runtime, String message ) {
         RubyClass errorClass = runtime.getModule("Hitimes").getClass( "Error" );
-        return RaiseException.from( runtime, errorClass, message );
+        return new RaiseException( RubyException.newException( runtime, errorClass, message ), true );
     }
 
 
