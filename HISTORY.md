@@ -1,4 +1,10 @@
 # Hitimes Changelog
+## Version 1.3.0 2018-06-15
+
+* Add api method `Hitimes.raw_instant` to expose raw OS instant value
+* Add api constant `Hitimes::INSTANT_CONVERSION_FACTOR` to expose raw OS instant conversion factor
+* other development cleanup tasks
+
 ## Version 1.2.6 2017-08-04
 
 * Resolve version number issue (#61) (thanks @anthraxx)
