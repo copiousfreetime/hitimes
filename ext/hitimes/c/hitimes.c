@@ -29,7 +29,7 @@ void Init_hitimes( )
     mH = rb_define_module("Hitimes");
 
     eH_Error = rb_define_class_under(mH, "Error", rb_eStandardError);
-    rb_define_const( mH, "INSTANT_CONVERSION_FACTOR", DBL2NUM( hitimes_instant_conversion_factor() ));
+    rb_define_const( mH, "INSTANT_CONVERSION_FACTOR", DBL2NUM( HITIMES_INSTANT_CONVERSION_FACTOR ));
     rb_define_module_function( mH, "raw_instant", hitimes_instant_raw, 0 );
 
     Init_hitimes_interval();
