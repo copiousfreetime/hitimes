@@ -16,11 +16,6 @@ import org.jruby.anno.JRubyMethod;
 @JRubyClass( name = "Hitimes::Interval" )
 public class HitimesInterval extends RubyObject {
 
-    /* this is a double to force all division by the conversion factor
-     * to cast to doubles
-     */
-    private static final double INSTANT_CONVERSION_FACTOR = 1000000000d;
-
     private static final long   INSTANT_NOT_SET  = Long.MIN_VALUE;
     private static final double DURATION_NOT_SET = Double.NaN;
 
@@ -58,7 +53,7 @@ public class HitimesInterval extends RubyObject {
          * if stop has not yet been called, then return the amount of time so far
          */
         if ( INSTANT_NOT_SET == this.stop_instant ) {
-            double d = ( System.nanoTime() - this.start_instant ) / INSTANT_CONVERSION_FACTOR;
+            double d = ( System.nanoTime() - this.start_instant ) / Hitimes.INSTANT_CONVERSION_FACTOR;
             return getRuntime().newFloat( d );
         }
 
@@ -66,7 +61,7 @@ public class HitimesInterval extends RubyObject {
          * if stop has been called, then calculate the duration and return
          */
         if ( DURATION_NOT_SET == this.duration ) {
-            this.duration = (this.stop_instant - this.start_instant) / INSTANT_CONVERSION_FACTOR;
+            this.duration = (this.stop_instant - this.start_instant) / Hitimes.INSTANT_CONVERSION_FACTOR;
         }
 
         return getRuntime().newFloat( this.duration );
@@ -82,7 +77,7 @@ public class HitimesInterval extends RubyObject {
         }
 
         if ( INSTANT_NOT_SET == this.stop_instant ) {
-            double d = ( System.nanoTime() - this.start_instant ) / INSTANT_CONVERSION_FACTOR;
+            double d = ( System.nanoTime() - this.start_instant ) / Hitimes.INSTANT_CONVERSION_FACTOR;
             return getRuntime().newFloat( d );
         }
 
@@ -140,7 +135,7 @@ public class HitimesInterval extends RubyObject {
 
         if ( INSTANT_NOT_SET == this.stop_instant ) {
             this.stop_instant = System.nanoTime();
-            this.duration = (this.stop_instant - this.start_instant) / INSTANT_CONVERSION_FACTOR;
+            this.duration = (this.stop_instant - this.start_instant) / Hitimes.INSTANT_CONVERSION_FACTOR;
             return getRuntime().newFloat( this.duration );
         }
 

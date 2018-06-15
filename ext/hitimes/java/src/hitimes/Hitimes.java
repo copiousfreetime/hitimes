@@ -4,7 +4,10 @@ import java.lang.Math;
 import java.lang.System;
 
 import org.jruby.anno.JRubyClass;
+import org.jruby.anno.JRubyMethod;
 import org.jruby.anno.JRubyModule;
+import org.jruby.anno.JRubyConstant;
+import org.jruby.runtime.Visibility;
 
 import org.jruby.Ruby;
 import org.jruby.RubyClass;
@@ -14,6 +17,8 @@ import org.jruby.RubyObject;
 
 import org.jruby.exceptions.RaiseException;
 
+import org.jruby.runtime.builtin.IRubyObject;
+
 
 /**
  * @author <a href="mailto:jeremy@hinegardner.org">Jeremy Hinegardner</a>
@@ -21,12 +26,18 @@ import org.jruby.exceptions.RaiseException;
 @JRubyModule( name = "Hitimes" )
 public class Hitimes {
 
+    public static final double INSTANT_CONVERSION_FACTOR = 1000000000d;
+
+    private static final Ruby __ruby__ = Ruby.getGlobalRuntime();
+
     public static RubyClass hitimesIntervalClass;
     /**
      * Create the Hitimes module and add it to the Ruby runtime.
      */
-    public static RubyModule createHitimes( Ruby runtime ) {
+    public static RubyModule createHitimesModule( Ruby runtime ) {
         RubyModule mHitimes = runtime.defineModule("Hitimes");
+        mHitimes.defineConstant("INSTANT_CONVERSION_FACTOR", __ruby__.newFloat(INSTANT_CONVERSION_FACTOR));
+        mHitimes.defineAnnotatedMethods( Hitimes.class );
 
         RubyClass  cStandardError = runtime.getStandardError();
         RubyClass  cHitimesError  = mHitimes.defineClassUnder("Error", cStandardError, cStandardError.getAllocator());
@@ -47,8 +58,9 @@ public class Hitimes {
     }
 
 
-
-    @JRubyClass( name = "Hitimes::Error", parent = "StandardError" )
-    public static class Error {};
+    @JRubyMethod( name = "raw_instant", module = true )
+    public static IRubyObject rawInstant(IRubyObject self) {
+      return __ruby__.newFixnum( System.nanoTime() );
+    }
 
 }
