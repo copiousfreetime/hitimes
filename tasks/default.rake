@@ -38,7 +38,7 @@ task :develop => "develop:default"
 begin
   require 'rake/testtask'
   Rake::TestTask.new( :test ) do |t|
-    t.ruby_opts    = %w[ -w -rubygems ]
+    t.ruby_opts    = %w[ -w ]
     t.libs         = %w[ lib spec test ]
     t.pattern      = "{test,spec}/**/{test_*,*_spec}.rb"
   end
