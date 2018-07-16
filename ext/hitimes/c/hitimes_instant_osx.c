@@ -4,7 +4,7 @@
 #include <mach/mach.h>
 #include <mach/mach_time.h>
 
-/* All this OSX code is adapted from http://developer.apple.com/library/mac/#qa/qa1398/_index.html */
+/* All this OSX code is adapted from https://developer.apple.com/library/archive/qa/qa1398/_index.html */
 
 /*
  * returns the conversion factor, this value is used to convert
