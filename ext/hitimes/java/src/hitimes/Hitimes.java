@@ -3,20 +3,18 @@ package hitimes;
 import java.lang.Math;
 import java.lang.System;
 
-import org.jruby.anno.JRubyClass;
-import org.jruby.anno.JRubyMethod;
-import org.jruby.anno.JRubyModule;
-import org.jruby.anno.JRubyConstant;
-import org.jruby.runtime.Visibility;
-
 import org.jruby.Ruby;
 import org.jruby.RubyClass;
 import org.jruby.RubyException;
 import org.jruby.RubyModule;
 import org.jruby.RubyObject;
-
+import org.jruby.anno.JRubyClass;
+import org.jruby.anno.JRubyMethod;
+import org.jruby.anno.JRubyModule;
+import org.jruby.anno.JRubyConstant;
 import org.jruby.exceptions.RaiseException;
-
+import org.jruby.runtime.ThreadContext;
+import org.jruby.runtime.Visibility;
 import org.jruby.runtime.builtin.IRubyObject;
 
 
