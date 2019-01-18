@@ -1,4 +1,10 @@
 # Hitimes Changelog
+## Version 1.3.1 2019-01-18
+
+* Update jruby extension to not use global runtime state (thanks @kares) (#70)
+* Update travis CI config
+* Update documentataion for Ruby 2.6
+
 ## Version 1.3.0 2018-06-15
 
 * Add api method `Hitimes.raw_instant` to expose raw OS instant value

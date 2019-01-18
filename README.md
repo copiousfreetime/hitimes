@@ -159,8 +159,8 @@ Hitimes also follows [semantic versioning](http://semver.org/).
 
 The current officially supported versions of Ruby are:
 
-* MRI Ruby (all platforms) 2.3 - 2.5
-* JRuby 9.1.17.0, 9.2.0.0
+* MRI Ruby (all platforms) 2.3 - 2.6
+* JRuby 9.1.17.0, 9.2.X.X
 
 Unofficially supported versions, these have been supported in the past when they
 were the primary rubies around. In all likelihood they still work, but are not
