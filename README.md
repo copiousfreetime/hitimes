@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/copiousfreetime/hitimes.svg?branch=master)](https://travis-ci.org/copiousfreetime/hitimes)
 
+## Description
+
 A fast, high resolution timer library for recording peformance metrics.
 
 * [Homepage](http://github.com/copiousfreetime/hitimes)

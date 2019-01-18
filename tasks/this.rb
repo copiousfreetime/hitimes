@@ -28,7 +28,7 @@ class ThisProject
     @exclude_from_manifest = Regexp.union(/\.(git|DS_Store)/,
                                           /^(doc|coverage|pkg|tmp|Gemfile(\.lock)?)/,
                                           /^[^\/]+\.gemspec/,
-                                          /\.(swp|jar|bundle|so|rvmrc|travis.yml)$/,
+                                          /\.(swp|jar|bundle|so|rvmrc|travis.yml|byebug_history)$/,
                                           /~$/)
     @gemspecs              = Hash.new
     yield self if block_given?
@@ -146,7 +146,7 @@ class ThisProject
       spec.rdoc_options = [ "--main"  , 'README.md',
                             "--markup", "tomdoc" ]
 
-      spec.required_ruby_version = '>= 1.9.3'
+      spec.required_ruby_version = '>= 2.2.2'
     end
   end
 
@@ -178,9 +178,9 @@ class ThisProject
     (RUBY_PLATFORM == "java") ? 'java' : Gem::Platform::RUBY
   end
 
-  # Internal: Return the DESCRIPTION section of the README.rdoc file
+  # Internal: Return the Description section of the README.rdoc file
   def description_section
-    section_of( 'README.md', 'Hitimes')
+    section_of( 'README.md', 'Description')
   end
 
   # Internal: Return the summary text from the README
