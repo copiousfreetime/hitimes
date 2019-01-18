@@ -8,3 +8,11 @@ rvm:
   - "2.5"
   - "2.6"
   - jruby-9.2.5.0
+
+before_script:
+  - "curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install.sh | sudo bash"
+
+script:
+  - rake
+  - fossa init
+  - fossa analyze
