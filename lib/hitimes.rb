@@ -25,6 +25,7 @@ module Hitimes
 end
 require 'hitimes/paths'
 require 'hitimes/version'
+require 'hitimes/instant'
 
 # Load the binary extension, try loading one for the specific version of ruby
 # and if that fails, then fall back to one in the top of the library.
