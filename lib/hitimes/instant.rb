@@ -2,17 +2,20 @@ require 'hitimes/initialize'
 
 module Hitimes
   # Public: The clock_id to use in Process.clock_gettime
-  CLOCK_ID                  = Initialize.determine_clock_id.freeze
+  CLOCK_ID                        = Initialize.determine_clock_id.freeze
 
   # Public: The resolution of the clock
-  CLOCK_RESOLUTION          = Process.clock_getres(CLOCK_ID).freeze
+  CLOCK_RESOLUTION_IN_NANOSECONDS = Process.clock_getres(CLOCK_ID, :nanosecond).freeze
+
+  # Internal: The fraction of second of a nanosecond
+  NANOSECONDS_PER_SECOND                 = 1e9
 
   # Public: The same as CLOCK_RESOLUTION here for API compatibility with
   # previous versions of Hitimes.
-  INSTANT_CONVERSION_FACTOR = CLOCK_RESOLUTION # for api compatibility
+  #
+  # The raw instant values are divided by this value to get float seconds
+  INSTANT_CONVERSION_FACTOR  = CLOCK_RESOLUTION_IN_NANOSECONDS * NANOSECONDS_PER_SECOND
 
-  # Internal: The fraction of second of a nanosecond
-  NANOSECOND                = 1.0e-9
 
   # Public: Get the raw instant
   #
