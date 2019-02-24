@@ -9,10 +9,10 @@ describe Hitimes::Stats do
     [ 1, 2, 3].each { |i| @full_stats.update( i ) }
   end
 
-  it "is initialized with 0 values" do
+  it "is initialized with usable values" do
     @stats.count.must_equal 0
-    @stats.min.must_equal 0.0
-    @stats.max.must_equal 0.0
+    @stats.min.must_equal Float::INFINITY
+    @stats.max.must_equal -Float::INFINITY
     @stats.sum.must_equal 0.0
     @stats.rate.must_equal 0.0
   end
