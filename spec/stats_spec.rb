@@ -12,7 +12,7 @@ describe Hitimes::Stats do
   it "is initialized with usable values" do
     @stats.count.must_equal 0
     @stats.min.must_equal Float::INFINITY
-    @stats.max.must_equal -Float::INFINITY
+    @stats.max.must_equal(-Float::INFINITY)
     @stats.sum.must_equal 0.0
     @stats.rate.must_equal 0.0
   end
