@@ -1,9 +1,8 @@
 require 'hitimes/initialize'
 
 module Hitimes
-
   # Public: The clock_id to use in Process.clock_gettime
-  CLOCK_ID                  = determine_clock_id.freeze
+  CLOCK_ID                  = Initialize.determine_clock_id.freeze
 
   # Public: The resolution of the clock
   CLOCK_RESOLUTION          = Process.clock_getres(CLOCK_ID).freeze
@@ -22,14 +21,15 @@ module Hitimes
   #    Hitimes.raw_instant
   #
   # Returns the raw instant value
-  def self.raw_instant
+  def raw_instant
     Process.clock_gettime(::Hitimes::CLOCK_ID, :nanosecond)
   end
+  module_function :raw_instant
 
   # Internal: The human readable clock description of the CLOCK_ID as a string
   #
   # Returns the clock description as a String
-  def self.clock_description
+  def clock_description
     case CLOCK_ID
     when Symbol
       CLOCK_ID.to_s
@@ -39,7 +39,6 @@ module Hitimes
       }
       "Process::#{const.to_s}"
     end
-
   end
-
+  module_function :clock_description
 end

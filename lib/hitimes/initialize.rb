@@ -18,7 +18,7 @@ module Hitimes
     # The one requirement is that they are monotonically increasing clocks
     #
     # Returns an array of clock ids
-    def self.potential_clock_ids
+    def potential_clock_ids
       Array.new.tap do |clock_ids|
 
         # if we're on OSX this will add in an additional clock_id, although not
@@ -40,6 +40,7 @@ module Hitimes
 
       end
     end
+    module_function :potential_clock_ids
 
     # Internal: Determine what clock to use for the machine we are one. We want
     # the highest resolution clock possible, which should be nanosecond
@@ -49,7 +50,7 @@ module Hitimes
     # id from the list
     #
     # Returns the clock id to use on this ruby
-    def self.determine_clock_id
+    def determine_clock_id
       ids_and_resolutions = potential_clock_ids.map { |clock_id|
         [clock_id, Process.clock_getres(clock_id)]
       }
@@ -59,5 +60,6 @@ module Hitimes
 
       return ids_and_resolutions.first[0]
     end
+    module_function :determine_clock_id
   end
 end

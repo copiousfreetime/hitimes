@@ -56,6 +56,7 @@ if !loaded then
   end
   raise LoadError, msg.join("\n")
 end
+require 'hitimes/interval'
 
 require 'hitimes/stats'
 require 'hitimes/mutexed_stats'
