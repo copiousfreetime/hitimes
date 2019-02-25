@@ -145,7 +145,7 @@ puts timed_value_metric.value_stats.stddev
 
 Hitimes uses the internal ruby `Process::clock_gettime()` to
 get the highest granularity time increment possible. Generally this is
-nanosecond resolution, or whatever the hardware chip in the CPU supports.
+nanosecond resolution, or whatever the hardware in the CPU supports.
 
 ## Support
 
@@ -159,7 +159,7 @@ The current officially supported versions of Ruby are:
 
 Unofficially supported versions, any version of MRI from Ruby 2.1 and up. Sincd
 the C Extension has been removed Hitimes should work with any ruby that is 2.1
-or greata as that is when `Process.clock_gettime()` was implemented.
+or greater as that is when `Process.clock_gettime()` was implemented.
 
 For versions of Ruby before 2.1 please use Hitimes 1.3, the extension code is
 still in there and they should still work.

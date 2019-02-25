@@ -12,7 +12,7 @@ module Hitimes
     # Internal: Return the list of clock ids, in general priority order,
     # assuming they all have the same resolution.
     #
-    # On OSX we probably waant to use the MACH time first, and then fall back to
+    # On OSX we probably want to use the MACH time first, and then fall back to
     # CLOCK_... Constants on other machines.
     #
     # The one requirement is that they are monotonically increasing clocks
