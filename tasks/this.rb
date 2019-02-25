@@ -146,7 +146,7 @@ class ThisProject
       spec.rdoc_options = [ "--main"  , 'README.md',
                             "--markup", "tomdoc" ]
 
-      spec.required_ruby_version = '>= 2.2.2'
+      spec.required_ruby_version = '>= 2.1'
     end
   end
 
