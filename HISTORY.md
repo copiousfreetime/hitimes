@@ -1,7 +1,7 @@
 # Hitimes Changeloga
 ## Version 2.0.0 2019-02-XX
 
-* Remove the C and Ruby extensions as `Process.clock_gettime()` has the same
+* Remove the C and Java extensions as `Process.clock_gettime()` has the same
   resolution as what the extensions did
 
 ## Version 1.3.1 2019-01-18
