@@ -7,7 +7,7 @@
 A fast, high resolution timer library for recording peformance metrics.
 
 * [Homepage](http://github.com/copiousfreetime/hitimes)
-* [Github project](http://github.com.org/copiousfreetime/hitimes)
+* [Github project](http://github.com/copiousfreetime/hitimes)
 * email jeremy at copiousfreetime dot org
 * `git clone url git://github.com/copiousfreetime/hitimes.git`
 
