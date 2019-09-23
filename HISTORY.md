@@ -1,8 +1,10 @@
 # Hitimes Changeloga
-## Version 2.0.0 2019-02-XX
+## Version 2.0.0 2019-09-23
 
 * Remove the C and Java extensions as `Process.clock_gettime()` has the same
-  resolution as what the extensions did
+  resolution as what the extensions did.
+* Update all depedencies and resolve deprecations
+* Now usable on truffleruby
 
 ## Version 1.3.1 2019-01-18
 
