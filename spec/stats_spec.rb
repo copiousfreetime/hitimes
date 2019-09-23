@@ -10,64 +10,64 @@ describe Hitimes::Stats do
   end
 
   it "is initialized with usable values" do
-    @stats.count.must_equal 0
-    @stats.min.must_equal Float::INFINITY
-    @stats.max.must_equal(-Float::INFINITY)
-    @stats.sum.must_equal 0.0
-    @stats.rate.must_equal 0.0
+    _(@stats.count).must_equal 0
+    _(@stats.min).must_equal Float::INFINITY
+    _(@stats.max).must_equal(-Float::INFINITY)
+    _(@stats.sum).must_equal 0.0
+    _(@stats.rate).must_equal 0.0
   end
 
   it "calculates the mean correctly" do
-    @full_stats.mean.must_equal 2.0
+    _(@full_stats.mean).must_equal 2.0
   end
 
   it "calculates the rate correctly" do
-    @full_stats.rate.must_equal 0.5
+    _(@full_stats.rate).must_equal 0.5
   end
 
   it "tracks the maximum value" do
-    @full_stats.max.must_equal 3.0
+    _(@full_stats.max).must_equal 3.0
   end
 
   it "tracks the minimum value" do
-    @full_stats.min.must_equal 1.0
+    _(@full_stats.min).must_equal 1.0
   end
 
   it "tracks the count" do
-    @full_stats.count.must_equal 3
+    _(@full_stats.count).must_equal 3
   end
   
   it "tracks the sum" do
-    @full_stats.sum.must_equal 6.0
+    _(@full_stats.sum).must_equal 6.0
   end
 
   it "calculates the standard deviation" do
-    @full_stats.stddev.must_equal 1.0
+    _(@full_stats.stddev).must_equal 1.0
   end 
 
   it "calculates the sum of squares " do
-    @full_stats.sumsq.must_equal 14.0
+    _(@full_stats.sumsq).must_equal 14.0
   end 
 
   describe "#to_hash " do
     it "converts to a Hash" do
       h = @full_stats.to_hash
-      h.size.must_equal ::Hitimes::Stats::STATS.size
-      h.keys.sort.must_equal ::Hitimes::Stats::STATS
+      _(h.size).must_equal ::Hitimes::Stats::STATS.size
+      _(h.keys.sort).must_equal ::Hitimes::Stats::STATS
     end
 
     it "converts to a limited Hash if given arguments" do
       h = @full_stats.to_hash( "min", "max", "mean" )
-      h.size.must_equal 3
-      h.keys.sort.must_equal %w[ max mean min  ]
+      _(h.size).must_equal 3
+      _(h.keys.sort).must_equal %w[ max mean min  ]
 
       h = @full_stats.to_hash( %w[ count rate ] )
-      h.size.must_equal 2
-      h.keys.sort.must_equal %w[ count rate ]
+      _(h.size).must_equal 2
+      _(h.keys.sort).must_equal %w[ count rate ]
     end
 
     it "raises NoMethodError if an invalid stat is used" do
-      lambda { @full_stats.to_hash( "wibble" ) }.must_raise( NoMethodError )
+      _(lambda { @full_stats.to_hash( "wibble" ) }).must_raise( NoMethodError )
     end
   end
 
@@ -75,24 +75,24 @@ describe Hitimes::Stats do
     it "converts to a json string" do
       j = @full_stats.to_json
       h = JSON.parse( j )
-      h.size.must_equal ::Hitimes::Stats::STATS.size
-      h.keys.sort.must_equal ::Hitimes::Stats::STATS
+      _(h.size).must_equal ::Hitimes::Stats::STATS.size
+      _(h.keys.sort).must_equal ::Hitimes::Stats::STATS
     end
 
     it "converts to a limited Hash if given arguments" do
       j = @full_stats.to_json( "min", "max", "mean" )
       h = JSON.parse( j )
-      h.size.must_equal 3
-      h.keys.sort.must_equal %w[ max mean min  ]
+      _(h.size).must_equal 3
+      _(h.keys.sort).must_equal %w[ max mean min  ]
 
       j = @full_stats.to_json( %w[ count rate ] )
       h = JSON.parse( j )
-      h.size.must_equal 2
-      h.keys.sort.must_equal %w[ count rate ]
+      _(h.size).must_equal 2
+      _(h.keys.sort).must_equal %w[ count rate ]
     end
 
     it "raises NoMethodError if an invalid stat is used" do
-      lambda { @full_stats.to_json( "wibble" ) }.must_raise( NoMethodError )
+      _(lambda { @full_stats.to_json( "wibble" ) }).must_raise( NoMethodError )
     end
   end
 end

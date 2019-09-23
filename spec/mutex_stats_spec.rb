@@ -18,12 +18,12 @@ describe Hitimes::MutexedStats do
 
   it "Hitimes::Stats is threadsafe" do
     stats = run_with_scissors( ::Hitimes::Stats.new, @threads, @iters )
-    stats.count.must_equal @final_value
+    _(stats.count).must_equal @final_value
   end
 
   it "has a threadsafe update" do
     stats = run_with_scissors( ::Hitimes::MutexedStats.new, @threads, @iters )
-    stats.count.must_equal @final_value
+    _(stats.count).must_equal @final_value
   end
 
 end
