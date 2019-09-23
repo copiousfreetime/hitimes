@@ -143,16 +143,9 @@ puts timed_value_metric.value_stats.stddev
 
 ### Implementation details
 
-Hitimes use the appropriate low-level system call for each operating system to
+Hitimes uses the internal ruby `Process::clock_gettime()` to
 get the highest granularity time increment possible. Generally this is
-nanosecond resolution, or whatever the hardware chip in the CPU supports.
-
-It currently supports any of the following systems:
-
-* any system with the POSIX call `clock_gettime()`
-* Mac OS X
-* Windows
-* JRuby
+nanosecond resolution, or whatever the hardware in the CPU supports.
 
 ## Support
 
@@ -164,15 +157,12 @@ The current officially supported versions of Ruby are:
 * MRI Ruby (all platforms) 2.3 - 2.6
 * JRuby 9.1.17.0, 9.2.X.X
 
-Unofficially supported versions, these have been supported in the past when they
-were the primary rubies around. In all likelihood they still work, but are not
-supported.
+Unofficially supported versions, any version of MRI from Ruby 2.1 and up. Sincd
+the C Extension has been removed Hitimes should work with any ruby that is 2.1
+or greater as that is when `Process.clock_gettime()` was implemented.
 
-* MRI Ruby (linux/mac/bsd/unix/etc) - everything from 1.8.7 to 2.2
-* MRI Ruby (windows) - 2.0 and up
-  * Ruby 1.8 and 1.9 for windows are supported in hitimes version 1.2.4 or earlier
-* JRuby - I think everything back to 1.4
-* Rubinius
+For versions of Ruby before 2.1 please use Hitimes 1.3, the extension code is
+still in there and they should still work.
 
 ## Contributing
 

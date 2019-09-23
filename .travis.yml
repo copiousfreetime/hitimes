@@ -1,13 +1,12 @@
 language: ruby
-before_install:
-  - sudo apt-get -qq update
-  - sudo apt-get install -y libgmp-dev
 rvm:
   - "2.3"
   - "2.4"
   - "2.5"
   - "2.6"
-  - jruby-9.2.5.0
+  - jruby-9.2.8.0
+  - jruby-9.1.17.0
+  - truffleruby
 
 before_script:
   - "curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install.sh | sudo bash"

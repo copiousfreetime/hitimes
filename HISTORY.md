@@ -1,4 +1,9 @@
-# Hitimes Changelog
+# Hitimes Changeloga
+## Version 2.0.0 2019-02-XX
+
+* Remove the C and Java extensions as `Process.clock_gettime()` has the same
+  resolution as what the extensions did
+
 ## Version 1.3.1 2019-01-18
 
 * Update jruby extension to not use global runtime state (thanks @kares) (#70)
