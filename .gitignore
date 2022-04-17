@@ -17,5 +17,5 @@ log
 pkg
 tags
 tmp
-*.lock
 .gem/
+vendor/
