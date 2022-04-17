@@ -5,12 +5,14 @@ agent:
     type: e1-standard-2
     os_image: ubuntu2004
 blocks:
-  - name: bundle exec rspec
+  - name: bundle exec rake test
     task:
       jobs:
         - name: bundle install
           commands:
             - checkout
-            - sem-version ruby 2.6.0
-            - bundle install --deployment --path vendor/bundle
-            - bundle exec rspec
+            - sem-version ruby 2.7.6
+            - bundle config set --local deployment true
+            - bundle config set --local path vendor/bundle
+            - bundle install
+            - bundle exec rake test
