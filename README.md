@@ -1,5 +1,5 @@
 # Hitimes
-[![Build Status](https://github.com/copiousfreetime/hitimes/actions/workflows/testing.yaml/badge.svg)](https://github.com/copiousfreetime/hitimes/actions/workflows/testing.yaml)
+[![Build Status](https://copiousfreetime.semaphoreci.com/badges/hitimes.svg)](https://copiousfreetime.semaphoreci.com/projects/hitimes)
 
 ## Description
 
