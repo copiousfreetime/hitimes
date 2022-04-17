@@ -1,6 +1,5 @@
 # Hitimes
-
-[![Build Status](https://travis-ci.org/copiousfreetime/hitimes.svg?branch=master)](https://travis-ci.org/copiousfreetime/hitimes)
+[![Build Status](https://github.com/copiousfreetime/hitimes/actions/workflows/testing.yaml/badge.svg)](https://github.com/copiousfreetime/hitimes/actions/workflows/testing.yaml)
 
 ## Description
 
