@@ -30,12 +30,14 @@ Gem::Specification.new do |s|
   if s.respond_to? :add_runtime_dependency then
     s.add_development_dependency(%q<rake>.freeze, ["~> 12.3"])
     s.add_development_dependency(%q<minitest>.freeze, ["~> 5.5"])
+    s.add_development_dependency(%q<minitest-focus>.freeze, ["~> 1.3"])
     s.add_development_dependency(%q<rdoc>.freeze, ["~> 6.2"])
     s.add_development_dependency(%q<json>.freeze, ["~> 2.2"])
     s.add_development_dependency(%q<simplecov>.freeze, ["~> 0.17"])
   else
     s.add_dependency(%q<rake>.freeze, ["~> 12.3"])
     s.add_dependency(%q<minitest>.freeze, ["~> 5.5"])
+    s.add_dependency(%q<minitest-focus>.freeze, ["~> 1.3"])
     s.add_dependency(%q<rdoc>.freeze, ["~> 6.2"])
     s.add_dependency(%q<json>.freeze, ["~> 2.2"])
     s.add_dependency(%q<simplecov>.freeze, ["~> 0.17"])
