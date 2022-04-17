@@ -9,6 +9,7 @@ blocks:
     task:
       jobs:
         - name: matrix test
+          matrix:
             - env_var: RUBY_VERSION
               values:
                 - 2.6.10
