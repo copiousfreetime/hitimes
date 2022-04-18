@@ -16,4 +16,9 @@ describe Hitimes do
     v = Hitimes.raw_instant
     _(v).must_be :>, 0
   end
+
+  it "has access to the number of nanosecond" do
+    f = Hitimes::NANOSECONDS_PER_SECOND
+    _(f).must_be :>, 0
+  end
 end
