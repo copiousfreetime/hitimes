@@ -165,7 +165,7 @@ module Hitimes
     private
 
     def calculate_duration(start, stop)
-      (stop - start) / ::Hitimes::INSTANT_CONVERSION_FACTOR
+      (stop - start) / ::Hitimes::NANOSECONDS_PER_SECOND
     end
   end
 end

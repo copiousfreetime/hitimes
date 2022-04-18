@@ -1,4 +1,15 @@
-# Hitimes Changeloga
+# Hitimes Changelog
+## Version 2.1.0 2022-04-18
+
+* Migrated to SemaphoreCI for doing full test runs on all active ruby versions.
+* Remove the dependency on `Process.clock_getres` as it is unreliable. This has
+  the effect of deprecating some Hitimes constants that had been documented as
+  public. These are now constant values across all systems and will be removed
+  in the future. (#76)
+  - `Hitimes::CLOCK_RESOLUTION_NANOSECONDS`
+  - `Hitimes::CLOCK_RESOLUTION_SECONDS`
+  - `Hitimes::INSTANT_CONVERSION_FACTOR`
+
 ## Version 2.0.0 2019-09-23
 
 * Remove the C and Java extensions as `Process.clock_gettime()` has the same
