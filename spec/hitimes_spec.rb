@@ -16,9 +16,4 @@ describe Hitimes do
     v = Hitimes.raw_instant
     _(v).must_be :>, 0
   end
-
-  it "has access to the instant conversion factor" do
-    f = Hitimes::INSTANT_CONVERSION_FACTOR
-    _(f).must_be :>, 0
-  end
 end
