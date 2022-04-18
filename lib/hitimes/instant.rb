@@ -4,19 +4,17 @@ module Hitimes
   # Public: The clock_id to use in Process.clock_gettime
   CLOCK_ID                        = Initialize.determine_clock_id.freeze
 
-  # Public: The resolution of the clock
-  CLOCK_RESOLUTION_NANOSECONDS    = Process.clock_getres(CLOCK_ID, :nanosecond).freeze
+  # Deprecated: No longer used
+  CLOCK_RESOLUTION_NANOSECONDS    = 1
 
   # Internal: The fraction of second of a nanosecond
   NANOSECONDS_PER_SECOND          = 1e9
 
-  # Public: The smallest fraction of a second hitimes can do
+  # Deprecated: Deprecated no longer userd
   CLOCK_RESOLUTION_SECONDS        = CLOCK_RESOLUTION_NANOSECONDS / NANOSECONDS_PER_SECOND
 
-  # Public: The factor used to convert the instant values to fractional seconds
-  #
-  # The raw instant values are divided by this value to get float seconds
-  INSTANT_CONVERSION_FACTOR       = CLOCK_RESOLUTION_NANOSECONDS * NANOSECONDS_PER_SECOND
+  # Deprecated: No longer used
+  INSTANT_CONVERSION_FACTOR       = 1
 
 
   # Public: Get the raw instant
