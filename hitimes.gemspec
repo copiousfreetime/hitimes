@@ -32,14 +32,14 @@ Gem::Specification.new do |s|
     s.add_development_dependency(%q<minitest>.freeze, ["~> 5.5"])
     s.add_development_dependency(%q<minitest-focus>.freeze, ["~> 1.3"])
     s.add_development_dependency(%q<rdoc>.freeze, ["~> 6.4"])
-    s.add_development_dependency(%q<json>.freeze, ["~> 2.2"])
+    s.add_development_dependency(%q<json_pure>.freeze, ["~> 2.2"])
     s.add_development_dependency(%q<simplecov>.freeze, ["~> 0.21"])
   else
     s.add_dependency(%q<rake>.freeze, ["~> 13.0"])
     s.add_dependency(%q<minitest>.freeze, ["~> 5.5"])
     s.add_dependency(%q<minitest-focus>.freeze, ["~> 1.3"])
     s.add_dependency(%q<rdoc>.freeze, ["~> 6.4"])
-    s.add_dependency(%q<json>.freeze, ["~> 2.2"])
+    s.add_dependency(%q<json_pure>.freeze, ["~> 2.2"])
     s.add_dependency(%q<simplecov>.freeze, ["~> 0.21"])
   end
 end
