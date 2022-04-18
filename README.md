@@ -1,5 +1,5 @@
 # Hitimes
-[![Build Status](https://copiousfreetime.semaphoreci.com/badges/hitimes.svg)](https://copiousfreetime.semaphoreci.com/projects/hitimes)
+[![Build Status](https://copiousfreetime.semaphoreci.com/badges/hitimes/branches/main.svg)](https://copiousfreetime.semaphoreci.com/projects/hitimes)
 
 ## Description
 
