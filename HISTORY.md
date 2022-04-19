@@ -1,5 +1,5 @@
 # Hitimes Changelog
-## Version 2.1.0 2022-04-18
+## Version 2.1.0 2022-04-XX
 
 * Migrated to SemaphoreCI for doing full test runs on all active ruby versions.
 * Remove the dependency on `Process.clock_getres` as it is unreliable. This has
