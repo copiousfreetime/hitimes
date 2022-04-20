@@ -11,7 +11,7 @@ This.ruby_gemspec do |spec|
   spec.add_development_dependency( 'minitest'     , '~> 5.5' )
   spec.add_development_dependency( 'minitest-focus', '~> 1.3' )
   spec.add_development_dependency( 'rdoc'         , '~> 6.4' )
-  spec.add_development_dependency( 'json_pure'    , '~> 2.2' )
+  spec.add_development_dependency( 'json'         , '~> 2.2' )
   spec.add_development_dependency( 'simplecov'    , '~> 0.21' )
 
   spec.license = "ISC"

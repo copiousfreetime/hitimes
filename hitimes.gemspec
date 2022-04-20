@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
   s.authors = ["Jeremy Hinegardner".freeze]
-  s.date = "2022-04-18"
+  s.date = "2022-04-20"
   s.description = "A fast, high resolution timer library for recording peformance metrics. * (http://github.com/copiousfreetime/hitimes) * (http://github.com/copiousfreetime/hitimes) * email jeremy at copiousfreetime dot org * `git clone url git://github.com/copiousfreetime/hitimes.git`".freeze
   s.email = "jeremy@copiousfreetime.org".freeze
   s.extra_rdoc_files = ["CONTRIBUTING.md".freeze, "HISTORY.md".freeze, "Manifest.txt".freeze, "README.md".freeze]
@@ -32,14 +32,14 @@ Gem::Specification.new do |s|
     s.add_development_dependency(%q<minitest>.freeze, ["~> 5.5"])
     s.add_development_dependency(%q<minitest-focus>.freeze, ["~> 1.3"])
     s.add_development_dependency(%q<rdoc>.freeze, ["~> 6.4"])
-    s.add_development_dependency(%q<json_pure>.freeze, ["~> 2.2"])
+    s.add_development_dependency(%q<json>.freeze, ["~> 2.2"])
     s.add_development_dependency(%q<simplecov>.freeze, ["~> 0.21"])
   else
     s.add_dependency(%q<rake>.freeze, ["~> 13.0"])
     s.add_dependency(%q<minitest>.freeze, ["~> 5.5"])
     s.add_dependency(%q<minitest-focus>.freeze, ["~> 1.3"])
     s.add_dependency(%q<rdoc>.freeze, ["~> 6.4"])
-    s.add_dependency(%q<json_pure>.freeze, ["~> 2.2"])
+    s.add_dependency(%q<json>.freeze, ["~> 2.2"])
     s.add_dependency(%q<simplecov>.freeze, ["~> 0.21"])
   end
 end
