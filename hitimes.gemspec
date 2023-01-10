@@ -8,6 +8,7 @@ Gem::Specification.new do |s|
   s.version = "2.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
+  s.metadata = { "bug_tracker_uri" => "https://github.com/copiousfreetime/htauth/issues", "changelog_uri" => "https://github.com/copiousfreetime/htauth/blob/master/HISTORY.md", "homepage_uri" => "https://github.com/copiousfreetime/htauth", "source_code_uri" => "https://github.com/copiousfreetime/htauth" } if s.respond_to? :metadata=
   s.require_paths = ["lib".freeze]
   s.authors = ["Jeremy Hinegardner".freeze]
   s.date = "2023-01-10"
@@ -30,6 +31,7 @@ Gem::Specification.new do |s|
   if s.respond_to? :add_runtime_dependency then
     s.add_development_dependency(%q<rake>.freeze, ["~> 13.0"])
     s.add_development_dependency(%q<minitest>.freeze, ["~> 5.5"])
+    s.add_development_dependency(%q<minitest-junit>.freeze, ["~> 1.0"])
     s.add_development_dependency(%q<minitest-focus>.freeze, ["~> 1.3"])
     s.add_development_dependency(%q<rdoc>.freeze, ["~> 6.4"])
     s.add_development_dependency(%q<json>.freeze, ["~> 2.2"])
@@ -37,6 +39,7 @@ Gem::Specification.new do |s|
   else
     s.add_dependency(%q<rake>.freeze, ["~> 13.0"])
     s.add_dependency(%q<minitest>.freeze, ["~> 5.5"])
+    s.add_dependency(%q<minitest-junit>.freeze, ["~> 1.0"])
     s.add_dependency(%q<minitest-focus>.freeze, ["~> 1.3"])
     s.add_dependency(%q<rdoc>.freeze, ["~> 6.4"])
     s.add_dependency(%q<json>.freeze, ["~> 2.2"])
