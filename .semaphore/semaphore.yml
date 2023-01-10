@@ -26,7 +26,6 @@ blocks:
                 - jruby-9.3.9.0
                 - jruby-9.4.0.0
                 - truffleruby-22.3.0
-                - truffleruby+graalvm-22.3.0
           commands:
             - sem-version ruby ${RUBY_VERSION}
             - bundle config set --local deployment true
