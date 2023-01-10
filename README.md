@@ -1,16 +1,14 @@
 # Hitimes
 [![Build Status](https://copiousfreetime.semaphoreci.com/badges/hitimes/branches/main.svg)](https://copiousfreetime.semaphoreci.com/projects/hitimes)
 
-## Description
+* [Homepage](http://github.com/copiousfreetime/hitimes)
+* [Github project](http://github.com/copiousfreetime/hitimes)
+
+## DESCRIPTION
 
 A fast, high resolution timer library for recording peformance metrics.
 
-* [Homepage](http://github.com/copiousfreetime/hitimes)
-* [Github project](http://github.com/copiousfreetime/hitimes)
-* email jeremy at copiousfreetime dot org
-* `git clone url git://github.com/copiousfreetime/hitimes.git`
-
-## Table of Contents
+## TABLE OF CONTENTS
 
 * [Requirements](#requirements)
 * [Usage](#usage)
@@ -19,13 +17,13 @@ A fast, high resolution timer library for recording peformance metrics.
 * [License](#license)
 
 
-## Requirements
+## REQUIREMENTS
 
 Hitimes requires the following to run:
 
   * Ruby
 
-## Usage
+## USAGE
 
 Hitimes easiest to use when installed with `rubygems`:
 
@@ -95,6 +93,7 @@ puts timed_metric.min
 puts timed_metric.stddev
 puts timed_metric.rate
 ```
+
 ### ValueMetric
 
 Use a `Hitimes::ValueMetric` to calculate statistics about measured samples.
@@ -146,7 +145,7 @@ Hitimes uses the internal ruby `Process::clock_gettime()` to
 get the highest granularity time increment possible. Generally this is
 nanosecond resolution, or whatever the hardware in the CPU supports.
 
-## Support
+## SUPPORT
 
 Hitimes is supported on whatever versions of ruby are currently supported.
 Hitimes also follows [semantic versioning](http://semver.org/).
@@ -164,7 +163,7 @@ or greater as that is when `Process.clock_gettime()` was implemented.
 For versions of Ruby before 2.1 please use Hitimes 1.3, the extension code is
 still in there and they should still work.
 
-## Contributing
+## CONTRIBUTING
 
 Please read the [CONTRIBUTING.md](CONTRIBUTING.md)
 
