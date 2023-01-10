@@ -12,6 +12,7 @@ blocks:
         commands:
           - checkout
           - sudo apt-get update && sudo apt-get install -y libyaml-dev
+          - git -C ${HOME}/.rbenv/plugins/ruby-build pull
       jobs:
         - name: run tests
           matrix:
