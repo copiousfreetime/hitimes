@@ -153,8 +153,9 @@ Hitimes also follows [semantic versioning](http://semver.org/).
 
 The current officially supported versions of Ruby are:
 
-* MRI Ruby (all platforms) 2.3 - 2.6
-* JRuby 9.1.17.0, 9.2.X.X
+* MRI Ruby (all platforms) 2.6 - current
+* JRuby 9.3.x.x, 9.4.x.x
+* Truffleruby 22.3.x
 
 Unofficially supported versions, any version of MRI from Ruby 2.1 and up. Sincd
 the C Extension has been removed Hitimes should work with any ruby that is 2.1
