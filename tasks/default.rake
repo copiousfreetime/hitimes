@@ -36,11 +36,13 @@ task :develop => "develop:default"
 # Minitest - standard TestTask
 #------------------------------------------------------------------------------
 begin
-  require 'rake/testtask'
-  Rake::TestTask.new( :test ) do |t|
-    t.ruby_opts    = %w[ -w ]
-    t.libs         = %w[ lib spec test ]
-    t.pattern      = "{test,spec}/**/{test_*,*_spec}.rb"
+  require 'minitest/test_task'
+  Minitest::TestTask.create( :test) do |t|
+    t.libs << "lib"
+    t.libs << "spec"
+    t.libs << "test"
+    t.warning = true
+    t.test_globs = "{test,spec}/**/{test_*,*_spec}.rb"
   end
 
   task :test_requirements
