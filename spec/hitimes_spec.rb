@@ -17,8 +17,8 @@ describe Hitimes do
     _(v).must_be :>, 0
   end
 
-  it "has access to the instant conversion factor" do
-    f = Hitimes::INSTANT_CONVERSION_FACTOR
+  it "has access to the number of nanosecond" do
+    f = Hitimes::NANOSECONDS_PER_SECOND
     _(f).must_be :>, 0
   end
 end

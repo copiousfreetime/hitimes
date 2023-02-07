@@ -5,23 +5,45 @@ agent:
     type: e1-standard-2
     os_image: ubuntu2004
 blocks:
-  - name: bundle exec rake test
+  - name: Run tests in Linux environment
+    dependencies: []
     task:
+      prologue:
+        commands:
+          - checkout
+          - sudo apt-get update && sudo apt-get install -y libyaml-dev
+          - git -C ${HOME}/.rbenv/plugins/ruby-build pull
+      epilogue:
+        always:
+          commands:
+            - test-results publish --name ${RUBY_VERSION} ${TEST_RESULTS_FILE}
+
       jobs:
-        - name: matrix test
+        - name: run tests
           matrix:
             - env_var: RUBY_VERSION
               values:
                 - 2.6.10
-                - 2.7.6
-                - 3.0.4
-                - 3.1.2
-                - jruby-9.3.4.0
-                - truffleruby-22.0.0.2
+                - 2.7.7
+                - 3.0.5
+                - 3.1.3
+                - 3.2.0
+                - jruby-9.3.9.0
+                - jruby-9.4.0.0
+                - truffleruby-22.3.0
           commands:
-            - checkout
-            - sem-version ruby ${RUBY_VERSION}
+            - sem-version ruby ${RUBY_VERSION} -f
             - bundle config set --local deployment true
             - bundle config set --local path vendor/bundle
+            - gem update --no-doc bundler
             - bundle install
-            - bundle exec rake test
+            - mkdir -p tmp/test-results/
+            - export TEST_RESULTS_FILE=tmp/test-results/${RUBY_VERSION}.xml
+            - TESTOPTS="--junit --junit-filename=${TEST_RESULTS_FILE}" bundle exec rake test
+
+after_pipeline:
+  task:
+    jobs:
+      - name: Publish Results
+        commands:
+          - test-results gen-pipeline-report

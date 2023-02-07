@@ -1,19 +1,27 @@
 PATH
   remote: .
   specs:
-    hitimes (2.0.0)
+    hitimes (2.1.0)
 
 GEM
   remote: https://rubygems.org/
   specs:
+    builder (3.2.4)
     docile (1.4.0)
+    jar-dependencies (0.4.1)
     json (2.6.1)
-    minitest (5.15.0)
+    json (2.6.1-java)
+    minitest (5.17.0)
     minitest-focus (1.3.1)
       minitest (>= 4, < 6)
+    minitest-junit (1.1.0)
+      builder (~> 3.2)
+      minitest (~> 5.11)
     psych (4.0.3)
       stringio
-    rake (12.3.3)
+    psych (4.0.3-java)
+      jar-dependencies (>= 0.1.7)
+    rake (13.0.6)
     rdoc (6.4.0)
       psych (>= 4.0.0)
     simplecov (0.21.2)
@@ -25,16 +33,18 @@ GEM
     stringio (3.0.1)
 
 PLATFORMS
+  java
   ruby
 
 DEPENDENCIES
   hitimes!
   json (~> 2.2)
-  minitest (~> 5.5)
+  minitest (~> 5.17)
   minitest-focus (~> 1.3)
-  rake (~> 12.3)
-  rdoc (~> 6.2)
-  simplecov (~> 0.17)
+  minitest-junit (~> 1.0)
+  rake (~> 13.0)
+  rdoc (~> 6.4)
+  simplecov (~> 0.21)
 
 BUNDLED WITH
-   2.3.11
+   2.4.6
