@@ -3,7 +3,7 @@
 # All rights reserved.  See LICENSE and/or COPYING for details.
 #++
 
-require 'thread'
+require "thread"
 
 module Hitimes
   #

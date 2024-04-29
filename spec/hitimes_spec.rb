@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Hitimes do
   it "can time a block of code" do

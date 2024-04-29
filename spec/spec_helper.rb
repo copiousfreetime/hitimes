@@ -1,12 +1,12 @@
-if RUBY_VERSION >= '1.9.2' then
-  require 'simplecov'
+if RUBY_VERSION >= "1.9.2" then
+  require "simplecov"
   puts "Using coverage!"
-  SimpleCov.start if ENV['COVERAGE']
+  SimpleCov.start if ENV["COVERAGE"]
 end
 
-gem 'minitest'
-require 'hitimes'
-require 'minitest/autorun'
-require 'minitest/focus'
-require 'minitest/pride'
+gem "minitest"
+require "hitimes"
+require "minitest/autorun"
+require "minitest/focus"
+require "minitest/pride"
 

@@ -5,18 +5,18 @@ describe Hitimes::Metric do
     @metric = Hitimes::Metric.new( "testing" )
   end
 
-  it 'has a name' do
+  it "has a name" do
     _(@metric.name).must_equal "testing"
   end
 
   it "has associated data from initialization" do
-    m = Hitimes::Metric.new( "more-data", 'foo' => 'bar', 'this' => 'that' )
-    _(m.additional_data['foo']).must_equal 'bar'
-    _(m.additional_data['this']).must_equal 'that'
+    m = Hitimes::Metric.new( "more-data", "foo" => "bar", "this" => "that" )
+    _(m.additional_data["foo"]).must_equal "bar"
+    _(m.additional_data["this"]).must_equal "that"
     
-    m = Hitimes::Metric.new( "more-data", { 'foo' => 'bar', 'this' => 'that' } )
-    _(m.additional_data['foo']).must_equal 'bar'
-    _(m.additional_data['this']).must_equal 'that'
+    m = Hitimes::Metric.new( "more-data", { "foo" => "bar", "this" => "that" } )
+    _(m.additional_data["foo"]).must_equal "bar"
+    _(m.additional_data["this"]).must_equal "that"
   end
 
   it "initially has no sampling times" do

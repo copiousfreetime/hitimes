@@ -1,8 +1,8 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Hitimes::TimedValueMetric do
   before( :each ) do
-    @tm = Hitimes::TimedValueMetric.new( 'test-timed-value-metric' )
+    @tm = Hitimes::TimedValueMetric.new( "test-timed-value-metric" )
   end
 
   it "knows if it is running or not" do
@@ -115,12 +115,12 @@ describe Hitimes::TimedValueMetric do
   end
 
   it "can create an already running timer" do
-    t = Hitimes::TimedValueMetric.now( 'already-running' )
+    t = Hitimes::TimedValueMetric.now( "already-running" )
     _(t.running?).must_equal true
   end
 
   it "can measure a block of code from an instance" do
-    t = Hitimes::TimedValueMetric.new( 'measure a block' )
+    t = Hitimes::TimedValueMetric.new( "measure a block" )
     3.times { t.measure( 1 ) { sleep 0.05 } }
     _(t.duration).must_be_close_to(0.15, 0.004)
     _(t.timed_stats.count).must_equal 3
@@ -128,7 +128,7 @@ describe Hitimes::TimedValueMetric do
   end
 
   it "returns the value of the block when measuring" do
-    t = Hitimes::TimedValueMetric.new( 'measure a block' )
+    t = Hitimes::TimedValueMetric.new( "measure a block" )
     x = t.measure( 42 ) { sleep 0.05; 42 }
     _(t.duration).must_be_close_to(0.05, 0.002)
     _(x).must_equal 42
@@ -138,25 +138,25 @@ describe Hitimes::TimedValueMetric do
 
     it "has name value" do
       h = @tm.to_hash
-      _(h['name']).must_equal "test-timed-value-metric"
+      _(h["name"]).must_equal "test-timed-value-metric"
     end
 
     it "has an empty has for additional_data" do
       h = @tm.to_hash
-      _(h['additional_data']).must_equal Hash.new
-      _(h['additional_data'].size).must_equal 0
+      _(h["additional_data"]).must_equal Hash.new
+      _(h["additional_data"].size).must_equal 0
     end
 
     it "has a rate" do
       5.times { |x| @tm.start ; sleep 0.05 ; @tm.stop( x ) }
       h = @tm.to_hash
-      _(h['rate']).must_be_close_to(40.0, 1.0)
+      _(h["rate"]).must_be_close_to(40.0, 1.0)
     end
 
     it "has a unit_count" do
       5.times { |x| @tm.start ; sleep 0.05 ; @tm.stop( x ) }
       h = @tm.to_hash
-      _(h['unit_count']).must_equal  10
+      _(h["unit_count"]).must_equal  10
     end
 
     fields = %w[ name additional_data sampling_start_time sampling_stop_time value_stats timed_stats rate unit_count ]

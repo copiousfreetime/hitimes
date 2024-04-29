@@ -94,7 +94,7 @@
 
 ## Version 1.0.3 2009-06-28
 
-* Fix bug with time.h on linode (reported by Roger Pack) 
+* Fix bug with time.h on linode (reported by Roger Pack)
 * Fix potential garbage collection issue with Interval class
 * Windows gem is now a fat binary to support installing in 1.8 or 1.9 from the
   same gem
@@ -123,7 +123,7 @@
 
 * Added new stat 'rate'
 * Added new stat method to_hash
-* Added Hitimes::MutexedStats class for threadsafe stats collection 
+* Added Hitimes::MutexedStats class for threadsafe stats collection
     - not needed when used in MRI 1.8.x
 * remove stale dependency on mkrf
 

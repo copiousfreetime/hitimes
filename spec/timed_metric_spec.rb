@@ -1,8 +1,8 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Hitimes::TimedMetric do
   before( :each ) do
-    @tm = Hitimes::TimedMetric.new( 'test-timed-metric' )
+    @tm = Hitimes::TimedMetric.new( "test-timed-metric" )
   end
 
   it "knows if it is running or not" do
@@ -106,19 +106,19 @@ describe Hitimes::TimedMetric do
   end
 
   it "can create an already running timer" do
-    t = Hitimes::TimedMetric.now( 'already-running' )
+    t = Hitimes::TimedMetric.now( "already-running" )
     _(t.running?).must_equal true
   end
 
   it "can measure a block of code from an instance" do
-    t = Hitimes::TimedMetric.new( 'measure a block' )
+    t = Hitimes::TimedMetric.new( "measure a block" )
     3.times { t.measure { sleep 0.05 } }
     _(t.duration).must_be_close_to(0.15, 0.01)
     _(t.count).must_equal 3
   end
 
   it "returns the value of the block when measuring" do
-    t = Hitimes::TimedMetric.new( 'measure a block' )
+    t = Hitimes::TimedMetric.new( "measure a block" )
     x = t.measure { sleep 0.05; 42 }
     _(t.duration).must_be_close_to(0.05, 0.002)
     _(x).must_equal 42
@@ -128,19 +128,19 @@ describe Hitimes::TimedMetric do
 
     it "has name value" do
       h = @tm.to_hash
-      _(h['name']).must_equal "test-timed-metric"
+      _(h["name"]).must_equal "test-timed-metric"
     end
 
     it "has an empty hash for additional_data" do
       h = @tm.to_hash
-      _(h['additional_data']).must_equal Hash.new
-      _(h['additional_data'].size).must_equal 0
+      _(h["additional_data"]).must_equal Hash.new
+      _(h["additional_data"].size).must_equal 0
     end
 
     it "has the right sum" do
       10.times { |x| @tm.measure { sleep 0.01*x  } }
       h = @tm.to_hash
-      _(h['sum']).must_be_close_to(0.45, 0.01)
+      _(h["sum"]).must_be_close_to(0.45, 0.01)
     end
 
     fields = ::Hitimes::Stats::STATS.dup + %w[ name additional_data sampling_start_time sampling_stop_time ]

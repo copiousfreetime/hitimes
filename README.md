@@ -34,13 +34,13 @@ gem install hitimes
 Or as part of your bundler `Gemfile`:
 
 ```ruby
-gem 'hitimes'
+gem "hitimes"
 ```
 
 You can load it with the standard ruby require statement.
 
 ```ruby
-require 'hitimes'
+require "hitimes"
 ```
 
 ### Interval
@@ -63,7 +63,7 @@ puts duration  # => 0.047414297 (seconds)
 Use a `Hitimes::TimedMetric` to calculate statistics about an iterative operation
 
 ```ruby
-timed_metric = Hitimes::TimedMetric.new('operation on items')
+timed_metric = Hitimes::TimedMetric.new("operation on items")
 ```
 
 Explicitly use `start` and `stop`:
@@ -119,7 +119,7 @@ Use a `Hitimes::TimedValueMetric` to calculate statistics about batches of sampl
 
 ``` ruby
 timed_value_metric = Hitimes::TimedValueMetric.new( 'batch times' )
-loop do 
+loop do
   batch = ... # get a batch of things
   timed_value_metric.start
   # .. do something with batch

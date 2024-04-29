@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Hitimes::ValueMetric do
   before( :each ) do
@@ -6,18 +6,18 @@ describe Hitimes::ValueMetric do
     10.times { |x| @metric.measure( x ) }
   end
 
-  it 'has a name' do
+  it "has a name" do
     _(@metric.name).must_equal "testing"
   end
 
   it "has associated data from initialization" do
-    m = Hitimes::ValueMetric.new( "more-data", 'foo' => 'bar', 'this' => 'that' )
-    _(m.additional_data['foo']).must_equal 'bar'
-    _(m.additional_data['this']).must_equal 'that'
+    m = Hitimes::ValueMetric.new( "more-data", "foo" => "bar", "this" => "that" )
+    _(m.additional_data["foo"]).must_equal "bar"
+    _(m.additional_data["this"]).must_equal "that"
     
-    m = Hitimes::ValueMetric.new( "more-data", { 'foo' => 'bar', 'this' => 'that' } )
-    _(m.additional_data['foo']).must_equal 'bar'
-    _(m.additional_data['this']).must_equal 'that'
+    m = Hitimes::ValueMetric.new( "more-data", { "foo" => "bar", "this" => "that" } )
+    _(m.additional_data["foo"]).must_equal "bar"
+    _(m.additional_data["this"]).must_equal "that"
   end
 
   it "calculates the mean of the measurements" do
@@ -29,7 +29,7 @@ describe Hitimes::ValueMetric do
   end
 
   it "returns 0.0 for stddev if there is no data" do
-    m = Hitimes::ValueMetric.new('0-data')
+    m = Hitimes::ValueMetric.new("0-data")
     _(m.stddev).must_equal 0.0
   end
 
@@ -42,7 +42,7 @@ describe Hitimes::ValueMetric do
   end
 
   it "retuns 0.0 for mean if there is no data" do
-    _(Hitimes::ValueMetric.new('0-data').mean).must_equal 0.0
+    _(Hitimes::ValueMetric.new("0-data").mean).must_equal 0.0
   end
 
   it "keeps track of the min value" do
@@ -81,22 +81,22 @@ describe Hitimes::ValueMetric do
 
     it "has name value" do
       h = @metric.to_hash
-      _(h['name']).must_equal "testing"
+      _(h["name"]).must_equal "testing"
     end
 
     it "has an empty has for additional_data" do
       h = @metric.to_hash
-      _(h['additional_data']).must_equal Hash.new
-      _(h['additional_data'].size).must_equal 0
+      _(h["additional_data"]).must_equal Hash.new
+      _(h["additional_data"].size).must_equal 0
     end
 
     it "has the right sum" do
       h = @metric.to_hash
-      _(h['sum']).must_equal 45
+      _(h["sum"]).must_equal 45
     end
 
     fields = ::Hitimes::Stats::STATS.dup + %w[ name additional_data sampling_start_time sampling_stop_time ]
-    fields = fields - [ 'rate' ]
+    fields = fields - [ "rate" ]
     fields.each do |f|
       it "has a value for #{f}" do
         h = @metric.to_hash

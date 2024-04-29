@@ -1,5 +1,5 @@
 # vim: syntax=ruby
-load 'tasks/this.rb'
+load "tasks/this.rb"
 
 This.name     = "hitimes"
 This.author   = "Jeremy Hinegardner"
@@ -17,4 +17,4 @@ This.ruby_gemspec do |spec|
   spec.license = "ISC"
 end
 
-load 'tasks/default.rake'
+load "tasks/default.rake"

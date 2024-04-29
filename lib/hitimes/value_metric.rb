@@ -3,7 +3,7 @@
 # All rights reserved.  See LICENSE and/or COPYING for details.
 #++
 
-require 'forwardable'
+require "forwardable"
 module Hitimes
   #
   # A ValueMetric holds the data from measuring a single value over a period of

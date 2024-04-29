@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Hitimes::Paths do
   it "can access the root dir of the project" do

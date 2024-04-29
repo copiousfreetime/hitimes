@@ -1,5 +1,5 @@
-require 'spec_helper'
-require 'json'
+require "spec_helper"
+require "json"
 
 describe Hitimes::Stats do
   before( :each ) do

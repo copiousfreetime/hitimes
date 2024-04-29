@@ -1,4 +1,4 @@
-require 'hitimes/initialize'
+require "hitimes/initialize"
 
 module Hitimes
   # Public: The clock_id to use in Process.clock_gettime

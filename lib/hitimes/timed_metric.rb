@@ -3,7 +3,7 @@
 # All rights reserved.  See LICENSE and/or COPYING for details.
 #++
 
-require 'forwardable'
+require "forwardable"
 module Hitimes
   #
   # A TimedMetric holds the metrics on how long it takes to do something.  For

@@ -23,16 +23,16 @@ module Hitimes
     Hitimes::Interval.measure(&block)
   end
 end
-require 'hitimes/paths'
-require 'hitimes/version'
-require 'hitimes/instant'
-require 'hitimes/interval'
+require "hitimes/paths"
+require "hitimes/version"
+require "hitimes/instant"
+require "hitimes/interval"
 
-require 'hitimes/stats'
-require 'hitimes/mutexed_stats'
+require "hitimes/stats"
+require "hitimes/mutexed_stats"
 
-require 'hitimes/metric'
-require 'hitimes/value_metric'
-require 'hitimes/timed_metric'
-require 'hitimes/timed_value_metric'
+require "hitimes/metric"
+require "hitimes/value_metric"
+require "hitimes/timed_metric"
+require "hitimes/timed_value_metric"
 

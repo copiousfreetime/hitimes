@@ -3,8 +3,8 @@
 # All rights reserved.  See LICENSE and/or COPYING for details.
 #++
 
-require 'stringio'
-require 'thread'
+require "stringio"
+require "thread"
 module Hitimes
   #
   # The Stats class encapulsates capturing and reporting statistics.  It is

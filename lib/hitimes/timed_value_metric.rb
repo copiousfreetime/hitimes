@@ -221,10 +221,10 @@ module Hitimes
     #
     def to_hash
       h = super
-      h['timed_stats'] = @timed_stats.to_hash
-      h['value_stats'] = @value_stats.to_hash( Stats::STATS - %w[ rate ] )
-      h['rate'] = self.rate
-      h['unit_count'] = self.unit_count
+      h["timed_stats"] = @timed_stats.to_hash
+      h["value_stats"] = @value_stats.to_hash( Stats::STATS - %w[ rate ] )
+      h["rate"] = self.rate
+      h["unit_count"] = self.unit_count
       return h
     end
 

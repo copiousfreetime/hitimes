@@ -2,7 +2,7 @@
 # this is all here in case this example is run from the examples directory
 #
 begin
-  require 'hitimes'
+  require "hitimes"
 rescue LoadError => le
   %w[ ext lib ].each do |p|
     path = File.expand_path( File.join( File.dirname( __FILE__ ), "..", p ) )
