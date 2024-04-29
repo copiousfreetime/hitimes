@@ -39,7 +39,7 @@ module Hitimes
       CLOCK_ID.to_s
     else
       const = Process.constants.grep(/CLOCK/).find do |c|
-        CLOCK_ID == Process.const_get(c)
+        Process.const_get(c) == CLOCK_ID
       end
       "Process::#{const}"
     end
