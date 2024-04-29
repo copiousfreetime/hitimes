@@ -182,7 +182,6 @@ license.
 ## Related Works
 
 * [monotime](https://github.com/Freaky/monotime) - A sensible interface to Ruby's monotonic clock.
-* [concurrent-ruby](https://github.com/ruby-concurrency/concurrent-ruby) - [Concurrent.monotonic_time](https://github.com/ruby-concurrency/concurrent-ruby) is a straight pass through to
-    `Process.clock_gettime(Process::CLOCK_MONOTONIC,...)`.
+* [concurrent-ruby](https://github.com/ruby-concurrency/concurrent-ruby) - [Concurrent.monotonic_time](https://github.com/ruby-concurrency/concurrent-ruby) is a straight pass through to `Process.clock_gettime(Process::CLOCK_MONOTONIC,...)`.
 * [Instant](https://doc.rust-lang.org/src/std/time.rs.html) - The rust equivalent.
 * [time.Now](https://pkg.go.dev/time) - The go monotonic time interface is part of this package.
