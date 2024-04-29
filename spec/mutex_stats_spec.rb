@@ -12,7 +12,7 @@ describe Hitimes::MutexedStats do
     threads.times do |_t|
       spool << Thread.new { iters.times { stats.update(1) } }
     end
-    spool.each { |t| t.join }
+    spool.each(&:join)
     stats
   end
 

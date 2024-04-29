@@ -80,7 +80,7 @@ module Hitimes
     # When sampling_stop_time is called, the actual time of day is caculated.
     #
     def sampling_stop_time
-      return unless @sampling_delta > 0
+      return unless @sampling_delta.positive?
 
       (sampling_start_time + (@sampling_delta * 1_000_000))
     end

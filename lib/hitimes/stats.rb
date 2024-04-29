@@ -30,7 +30,7 @@ module Hitimes
   #
   class Stats
     # A list of the available stats
-    STATS = %w[count max mean min rate stddev sum sumsq]
+    STATS = %w[count max mean min rate stddev sum sumsq].freeze
 
     attr_reader :min, :max, :count, :sum, :sumsq
 
