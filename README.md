@@ -82,6 +82,7 @@ value of the block.
 ```ruby
 collection.each do |item|
   result_of_do_something = timed_metric.measure { do_something(item) }
+  # do something with result_of_do_somthing
 end
 ```
 And then look at the stats
@@ -99,10 +100,10 @@ puts timed_metric.rate
 Use a `Hitimes::ValueMetric` to calculate statistics about measured samples.
 
 ``` ruby
-value_metric = Hitimes::ValueMetric.new( 'size of thing' )
+value_metric = Hitimes::ValueMetric.new("size of thing")
 loop do
   # ... do stuff changing sizes of 'thing'
-  value_metric.measure( thing.size )
+  value_metric.measure(thing.size)
   # ... do other stuff that may change size of thing
 end
 
@@ -118,12 +119,12 @@ puts value_metric.rate
 Use a `Hitimes::TimedValueMetric` to calculate statistics about batches of samples.
 
 ``` ruby
-timed_value_metric = Hitimes::TimedValueMetric.new( 'batch times' )
+timed_value_metric = Hitimes::TimedValueMetric.new("batch times")
 loop do
   batch = ... # get a batch of things
   timed_value_metric.start
   # .. do something with batch
-  timed_value_metric.stop( batch.size )
+  timed_value_metric.stop(batch.size)
 end
 
 puts timed_value_metric.rate
@@ -152,9 +153,9 @@ Hitimes also follows [semantic versioning](http://semver.org/).
 
 The current officially supported versions of Ruby are:
 
-* MRI Ruby (all platforms) 2.6 - current
-* JRuby 9.3.x.x, 9.4.x.x
-* Truffleruby 22.3.x
+* MRI Ruby (all platforms) 3.0 - current
+* JRuby 9.4.x.x
+* Truffleruby 24
 
 Unofficially supported versions, any version of MRI from Ruby 2.1 and up. Sincd
 the C Extension has been removed Hitimes should work with any ruby that is 2.1
