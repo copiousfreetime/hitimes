@@ -56,7 +56,10 @@ describe Hitimes::ValueMetric do
   it "keeps track of the first start time of all the measurements" do
     m = Hitimes::ValueMetric.new("first-start-time")
     f1 = Time.now.gmtime.to_f * 1_000_000
-    10.times { |x| m.measure(x); sleep 0.1 }
+    10.times do |x|
+      m.measure(x)
+      sleep 0.1
+    end
     f2 = Time.now.gmtime.to_f * 1_000_000
     _(m.sampling_start_time).must_be :>=, f1
     _(m.sampling_start_time).must_be :<, f2
@@ -68,7 +71,10 @@ describe Hitimes::ValueMetric do
   it "keeps track of the last stop time of all the intervals" do
     m = Hitimes::ValueMetric.new("last-stop-time")
     f1 = Time.now.gmtime.to_f * 1_000_000
-    10.times { |x| m.measure(x); sleep 0.1 }
+    10.times do |x|
+      m.measure(x)
+      sleep 0.1
+    end
     f2 = Time.now.gmtime.to_f * 1_000_000
     _(m.sampling_stop_time).must_be :>, f1
     _(m.sampling_stop_time).must_be :<=, f2

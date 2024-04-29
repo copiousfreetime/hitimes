@@ -42,17 +42,29 @@ describe Hitimes::TimedMetric do
   end
 
   it "calculates the mean of the durations" do
-    2.times { @tm.start; sleep 0.05; @tm.stop }
+    2.times do
+      @tm.start
+      sleep 0.05
+      @tm.stop
+    end
     _(@tm.mean).must_be_close_to(0.05, 0.002)
   end
 
   it "calculates the rate of the counts " do
-    5.times { @tm.start; sleep 0.05; @tm.stop }
+    5.times do
+      @tm.start
+      sleep 0.05
+      @tm.stop
+    end
     _(@tm.rate).must_be_close_to(20.00, 0.5)
   end
 
   it "calculates the stddev of the durations" do
-    3.times { |x| @tm.start; sleep(0.05 * x); @tm.stop }
+    3.times do |x|
+      @tm.start
+      sleep(0.05 * x)
+      @tm.stop
+    end
     _(@tm.stddev).must_be_close_to(0.05)
   end
 
@@ -61,28 +73,48 @@ describe Hitimes::TimedMetric do
   end
 
   it "keeps track of the min value" do
-    2.times { @tm.start; sleep 0.05; @tm.stop }
+    2.times do
+      @tm.start
+      sleep 0.05
+      @tm.stop
+    end
     _(@tm.min).must_be_close_to(0.05, 0.01)
   end
 
   it "keeps track of the max value" do
-    2.times { @tm.start; sleep 0.05; @tm.stop }
+    2.times do
+      @tm.start
+      sleep 0.05
+      @tm.stop
+    end
     _(@tm.max).must_be_close_to(0.05, 0.01)
   end
 
   it "keeps track of the sum value" do
-    2.times { @tm.start; sleep 0.05; @tm.stop }
+    2.times do
+      @tm.start
+      sleep 0.05
+      @tm.stop
+    end
     _(@tm.sum).must_be_close_to(0.10, 0.01)
   end
 
   it "keeps track of the sum of squars value" do
-    3.times { @tm.start; sleep 0.05; @tm.stop }
+    3.times do
+      @tm.start
+      sleep 0.05
+      @tm.stop
+    end
     _(@tm.sumsq).must_be_close_to(0.0075)
   end
 
   it "keeps track of the minimum start time of all the intervals" do
     f1 = Time.now.gmtime.to_f * 1_000_000
-    5.times { @tm.start; sleep 0.05; @tm.stop }
+    5.times do
+      @tm.start
+      sleep 0.05
+      @tm.stop
+    end
     f2 = Time.now.gmtime.to_f * 1_000_000
     _(@tm.sampling_start_time).must_be :>=, f1
     _(@tm.sampling_start_time).must_be :<, f2
@@ -94,7 +126,11 @@ describe Hitimes::TimedMetric do
   it "keeps track of the last stop time of all the intervals" do
     f1 = Time.now.gmtime.to_f * 1_000_000
     sleep 0.01
-    5.times { @tm.start; sleep 0.05; @tm.stop }
+    5.times do
+      @tm.start
+      sleep 0.05
+      @tm.stop
+    end
     sleep 0.01
     f2 = Time.now.gmtime.to_f * 1_000_000
     _(@tm.sampling_stop_time).must_be :>, f1
@@ -118,7 +154,10 @@ describe Hitimes::TimedMetric do
 
   it "returns the value of the block when measuring" do
     t = Hitimes::TimedMetric.new("measure a block")
-    x = t.measure { sleep 0.05; 42 }
+    x = t.measure do
+      sleep 0.05
+      42
+    end
     _(t.duration).must_be_close_to(0.05, 0.002)
     _(x).must_equal 42
   end

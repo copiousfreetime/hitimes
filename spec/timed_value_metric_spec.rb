@@ -45,18 +45,30 @@ describe Hitimes::TimedValueMetric do
   end
 
   it "calculates the mean of the durations" do
-    3.times { |x| @tm.start; sleep 0.05; @tm.stop(x) }
+    3.times do |x|
+      @tm.start
+      sleep 0.05
+      @tm.stop(x)
+    end
     _(@tm.timed_stats.mean).must_be_close_to(0.05, 0.01)
     _(@tm.value_stats.mean).must_equal 1.00
   end
 
   it "calculates the rate of the counts " do
-    5.times { |x| @tm.start; sleep 0.05; @tm.stop(x) }
+    5.times do |x|
+      @tm.start
+      sleep 0.05
+      @tm.stop(x)
+    end
     _(@tm.rate).must_be_close_to(40.0, 1.0)
   end
 
   it "calculates the stddev of the durations" do
-    3.times { |x| @tm.start; sleep(0.05 * x); @tm.stop(x) }
+    3.times do |x|
+      @tm.start
+      sleep(0.05 * x)
+      @tm.stop(x)
+    end
     _(@tm.timed_stats.stddev).must_be_close_to(0.05, 0.001)
     _(@tm.value_stats.stddev).must_equal 1.0
   end
@@ -67,32 +79,52 @@ describe Hitimes::TimedValueMetric do
   end
 
   it "keeps track of the min value" do
-    3.times { |x| @tm.start; sleep 0.05; @tm.stop(x) }
+    3.times do |x|
+      @tm.start
+      sleep 0.05
+      @tm.stop(x)
+    end
     _(@tm.timed_stats.min).must_be_close_to(0.05, 0.003)
     _(@tm.value_stats.min).must_equal 0
   end
 
   it "keeps track of the max value" do
-    3.times { |x| @tm.start; sleep 0.05; @tm.stop(x) }
+    3.times do |x|
+      @tm.start
+      sleep 0.05
+      @tm.stop(x)
+    end
     _(@tm.timed_stats.max).must_be_close_to(0.05, 0.003)
     _(@tm.value_stats.max).must_equal 2
   end
 
   it "keeps track of the sum value" do
-    3.times { |x| @tm.start; sleep 0.05; @tm.stop(x) }
+    3.times do |x|
+      @tm.start
+      sleep 0.05
+      @tm.stop(x)
+    end
     _(@tm.timed_stats.sum).must_be_close_to(0.15, 0.01)
     _(@tm.value_stats.sum).must_equal 3
   end
 
   it "keeps track of the sum of squares value" do
-    3.times { |x| @tm.start; sleep 0.05; @tm.stop(x) }
+    3.times do |x|
+      @tm.start
+      sleep 0.05
+      @tm.stop(x)
+    end
     _(@tm.timed_stats.sumsq).must_be_close_to(0.0075, 0.0005)
     _(@tm.value_stats.sumsq).must_equal 5
   end
 
   it "keeps track of the minimum start time of all the intervals" do
     f1 = Time.now.gmtime.to_f * 1_000_000
-    5.times { @tm.start; sleep 0.05; @tm.stop(1) }
+    5.times do
+      @tm.start
+      sleep 0.05
+      @tm.stop(1)
+    end
     f2 = Time.now.gmtime.to_f * 1_000_000
     _(@tm.sampling_start_time).must_be :>=, f1
     _(@tm.sampling_start_time).must_be :<, f2
@@ -103,7 +135,11 @@ describe Hitimes::TimedValueMetric do
 
   it "keeps track of the last stop time of all the intervals" do
     f1 = Time.now.gmtime.to_f * 1_000_000
-    5.times { @tm.start; sleep 0.05; @tm.stop(1) }
+    5.times do
+      @tm.start
+      sleep 0.05
+      @tm.stop(1)
+    end
     sleep 0.05
     f2 = Time.now.gmtime.to_f * 1_000_000
     _(@tm.sampling_stop_time).must_be :>, f1
@@ -128,7 +164,10 @@ describe Hitimes::TimedValueMetric do
 
   it "returns the value of the block when measuring" do
     t = Hitimes::TimedValueMetric.new("measure a block")
-    x = t.measure(42) { sleep 0.05; 42 }
+    x = t.measure(42) do
+      sleep 0.05
+      42
+    end
     _(t.duration).must_be_close_to(0.05, 0.002)
     _(x).must_equal 42
   end
@@ -146,13 +185,21 @@ describe Hitimes::TimedValueMetric do
     end
 
     it "has a rate" do
-      5.times { |x| @tm.start; sleep 0.05; @tm.stop(x) }
+      5.times do |x|
+        @tm.start
+        sleep 0.05
+        @tm.stop(x)
+      end
       h = @tm.to_hash
       _(h["rate"]).must_be_close_to(40.0, 1.0)
     end
 
     it "has a unit_count" do
-      5.times { |x| @tm.start; sleep 0.05; @tm.stop(x) }
+      5.times do |x|
+        @tm.start
+        sleep 0.05
+        @tm.stop(x)
+      end
       h = @tm.to_hash
       _(h["unit_count"]).must_equal 10
     end
