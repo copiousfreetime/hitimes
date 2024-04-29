@@ -1,0 +1,79 @@
+:platform: x86_64-linux
+:clock_ids:
+  :CLOCK_MONOTONIC_RAW:
+    '1.0e-09': 999016
+    '1.0e-06': 984
+  :CLOCK_MONOTONIC:
+    '1.0e-09': 999070
+    '1.0e-06': 929
+    '0.001': 1
+  :CLOCK_BOOTTIME:
+    '1.0e-09': 999046
+    '1.0e-06': 954
+  :CLOCK_REALTIME:
+    '1.0e-09': 998980
+    '1.0e-06': 1019
+    '0.001': 1
+---
+:platform: arm64-darwin23
+:clock_ids:
+  :CLOCK_MONOTONIC_RAW:
+    '1.0e-09': 960487
+    '1.0e-06': 39469
+    '0.001': 44
+  :CLOCK_UPTIME_RAW:
+    '1.0e-09': 961327
+    '1.0e-06': 38632
+    '0.001': 41
+  :CLOCK_MONOTONIC:
+    '1.0e-06': 998928
+    '0.001': 1072
+  :CLOCK_REALTIME:
+    '1.0e-06': 998963
+    '0.001': 1037
+---
+:platform: x86_64-darwin21
+:clock_ids:
+  :CLOCK_MONOTONIC_RAW:
+    '1.0e-09': 999526
+    '1.0e-06': 473
+    '0.001': 1
+  :CLOCK_UPTIME_RAW:
+    '1.0e-09': 999020
+    '1.0e-06': 978
+    '0.001': 2
+  :CLOCK_MONOTONIC:
+    '1.0e-06': 998998
+    '0.001': 1000
+    '1': 2
+  :CLOCK_REALTIME:
+    '1.0e-06': 998986
+    '0.001': 1014
+---
+:platform: x86_64-darwin21
+:clock_ids:
+  :CLOCK_MONOTONIC_RAW:
+    '1.0e-09': 999048
+    '1.0e-06': 952
+  :CLOCK_UPTIME_RAW:
+    '1.0e-09': 999371
+    '1.0e-06': 629
+  :CLOCK_MONOTONIC:
+    '1.0e-06': 998999
+    '0.001': 1001
+  :CLOCK_REALTIME:
+    '1.0e-06': 998998
+    '0.001': 1002
+---
+:platform: x86_64-openbsd
+:clock_ids:
+  :CLOCK_MONOTONIC:
+    1.0e-09: 999023
+    1.0e-06: 977
+  :CLOCK_UPTIME:
+    1.0e-09: 998966
+    1.0e-06: 1034
+  :CLOCK_REALTIME:
+    1.0e-09: 998966
+    1.0e-06: 1032
+    0.001: 2
