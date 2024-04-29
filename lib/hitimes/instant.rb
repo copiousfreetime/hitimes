@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "hitimes/initialize"
 
 # Hitimes Constants and module methods

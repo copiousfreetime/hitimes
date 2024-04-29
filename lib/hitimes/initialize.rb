@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Hitimes
   # Internal: Internal setup that is done when the library is loaded
   #
