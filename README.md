@@ -53,7 +53,7 @@ duration = Hitimes::Interval.measure do
              1_000_000.times do |x|
                2 + 2
              end
-           end
+end
 
 puts duration  # => 0.047414297 (seconds)
 ```
