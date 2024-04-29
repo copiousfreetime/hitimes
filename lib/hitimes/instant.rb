@@ -8,17 +8,8 @@ module Hitimes
   # Public: The clock_id to use in Process.clock_gettime
   CLOCK_ID                        = Initialize.determine_clock_id.freeze
 
-  # Deprecated: No longer used
-  CLOCK_RESOLUTION_NANOSECONDS    = 1
-
   # Internal: The fraction of second of a nanosecond
   NANOSECONDS_PER_SECOND          = 1e9
-
-  # Deprecated: Deprecated no longer userd
-  CLOCK_RESOLUTION_SECONDS        = CLOCK_RESOLUTION_NANOSECONDS / NANOSECONDS_PER_SECOND
-
-  # Deprecated: No longer used
-  INSTANT_CONVERSION_FACTOR       = 1
 
   # Public: Get the raw instant
   #
@@ -47,20 +38,4 @@ module Hitimes
     end
   end
   module_function :clock_name
-
-  # Internal: The human readable clock resolution
-  #
-  # Returns the clock resolution as a string
-  def clock_resolution_description
-    "#{CLOCK_RESOLUTION_NANOSECONDS}ns"
-  end
-  module_function :clock_resolution_description
-
-  # Internal: The human readable clock description that is used by hitimes
-  #
-  # Returns the clock description as a String
-  def clock_description
-    "#{clock_name} #{clock_resolution_description}"
-  end
-  module_function :clock_description
 end
