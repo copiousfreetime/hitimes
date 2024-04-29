@@ -15,6 +15,7 @@ AllCops:
     - 'tmp/**/*'
     - '*.gemspec'
     - 'vendor/bundle/**/*'
+    - 'examples/*'
 
 Layout/ExtraSpacing:
   AllowBeforeTrailingComments: true
@@ -30,41 +31,28 @@ Metrics/AbcSize:
   CountRepeatedAttributes: false
   Max: 25
   Exclude:
-    - 'test/**/*'
     - 'tasks/**/*'
 
 Metrics/BlockLength:
-  CountAsOne:
-    - heredoc
+  Exclude:
+    - 'tasks/**/*'
+    - 'spec/**/*'
+
+Metrics/ClassLength:
   Exclude:
     - 'tasks/**/*'
 
-Metrics/ClassLength:
-  Max: 175
-  CountAsOne:
-    - heredoc
-    - array
-
-Metrics/CyclomaticComplexity:
-  Max: 10
-
 Metrics/MethodLength:
   Max: 20
-  CountAsOne:
-    - heredoc
-    - array
-  Exclude:
-    - 'test/**/*'
 
-Metrics/ParameterLists:
-  CountKeywordArgs: false
+# keeps want to combine examples
+Style/CombinableLoops:
+  Exclude:
+    - README.md
 
 Style/Documentation:
   Exclude:
-    - 'test/**/*'
-
-Style/SafeNavigation:
-  Enabled: false
+    - 'spec/**/*'
 
 Style/TernaryParentheses:
   EnforcedStyle: require_parentheses_when_complex
@@ -80,4 +68,6 @@ Style/StringLiterals:
   ConsistentQuotesInMultiline: false
 
 ThreadSafety/InstanceVariableInClassMethod:
+  Enabled: false
+ThreadSafety/NewThread:
   Enabled: false
