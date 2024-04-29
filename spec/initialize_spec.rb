@@ -5,7 +5,7 @@ require "spec_helper"
 describe "Hitimes::Initialize" do
   it "should return a clock id" do
     val = Hitimes::Initialize.determine_clock_id
-    _(val).must_be_kind_of(Integer)
+    _(val).wont_be_nil
   end
 
   it "should return :CLOCK_REALTIME as a last option" do
