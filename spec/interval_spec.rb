@@ -5,7 +5,9 @@ require "spec_helper"
 describe Hitimes::Interval do
   it "raises an error if duration is called on a non-started interval" do
     i = Hitimes::Interval.new
-    _(-> { i.duration }).must_raise(Hitimes::Error, /\AAttempt to report a duration on an interval that has not started\Z/)
+    _(lambda {
+        i.duration
+      }).must_raise(Hitimes::Error, /\AAttempt to report a duration on an interval that has not started\Z/)
   end
 
   it "raises an error if stop is called on a non-started interval" do

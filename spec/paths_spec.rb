@@ -8,6 +8,7 @@ describe Hitimes::Paths do
   end
 
   it "can access the lib path of the project" do
-    _(Hitimes::Paths.lib_path).must_equal File.expand_path(File.join(File.dirname(__FILE__), "..", "lib")) + File::SEPARATOR
+    _(Hitimes::Paths.lib_path).must_equal File.expand_path(File.join(File.dirname(__FILE__), "..",
+                                                                     "lib")) + File::SEPARATOR
   end
 end
