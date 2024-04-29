@@ -1,5 +1,7 @@
 require "hitimes/initialize"
 
+# Hitimes Constants and module methods
+#
 module Hitimes
   # Public: The clock_id to use in Process.clock_gettime
   CLOCK_ID                        = Initialize.determine_clock_id.freeze
