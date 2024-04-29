@@ -6,7 +6,7 @@
 
 ## DESCRIPTION
 
-A fast, high resolution timer library for recording peformance metrics.
+A fast, high resolution timer library for recording performance metrics.
 
 ## TABLE OF CONTENTS
 
@@ -82,7 +82,7 @@ value of the block.
 ```ruby
 collection.each do |item|
   result_of_do_something = timed_metric.measure { do_something(item) }
-  # do something with result_of_do_somthing
+  # do something with result_of_do_something
 end
 ```
 And then look at the stats
@@ -157,7 +157,7 @@ The current officially supported versions of Ruby are:
 * JRuby 9.4.x.x
 * Truffleruby 24
 
-Unofficially supported versions, any version of MRI from Ruby 2.1 and up. Sincd
+Unofficially supported versions, any version of MRI from Ruby 2.1 and up. Since
 the C Extension has been removed Hitimes should work with any ruby that is 2.1
 or greater as that is when `Process.clock_gettime()` was implemented.
 
@@ -171,7 +171,8 @@ and bug reporting.
 
 ## Credits
 
-* [Bruce Williams](https://github.com/bruce) for suggesting the idea
+* [Bruce Williams](https://github.com/bruce) for suggesting the idea.
+* [Benoit Daloze](https://github.com/eregon) and [Thomas Hurst](https://github.com/Freaky) for conversations around clock_ids.
 
 ## License
 
@@ -180,3 +181,8 @@ license.
 
 ## Related Works
 
+* [monotime](https://github.com/Freaky/monotime) - A sensible interface to Ruby's monotonic clock.
+* [concurrent-ruby](https://github.com/ruby-concurrency/concurrent-ruby) - [Concurrent.monotonic_time](https://github.com/ruby-concurrency/concurrent-ruby) is a straight pass through to
+    `Process.clock_gettime(Process::CLOCK_MONOTONIC,...)`.
+* [Instant](https://doc.rust-lang.org/src/std/time.rs.html) - The rust equivalent.
+* [time.Now](https://pkg.go.dev/time) - The go monotonic time interface is part of this package.
