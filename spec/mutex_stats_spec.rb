@@ -9,7 +9,7 @@ describe Hitimes::MutexedStats do
 
   def run_with_scissors(stats, threads, iters)
     spool = []
-    threads.times do |t|
+    threads.times do |_t|
       spool << Thread.new { iters.times { stats.update(1) } }
     end
     spool.each { |t| t.join }

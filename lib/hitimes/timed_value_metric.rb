@@ -126,7 +126,7 @@ module Hitimes
     # The return value is the return value of the block.  A value must be passed
     # into +measure+ to update the +value_stats+ portion of the TimedValueMetric.
     #
-    def measure(value, &block)
+    def measure(value)
       return_value = nil
       begin
         start

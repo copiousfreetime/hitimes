@@ -47,7 +47,7 @@ module Hitimes
     #    Interval.measure {  }  -> Float
     #
     # Times the execution of the block returning the number of seconds it took
-    def self.measure(&block)
+    def self.measure
       raise Error, "No block given to Interval.measure" unless block_given?
 
       i = Interval.now
@@ -104,8 +104,8 @@ module Hitimes
     def duration_so_far
       return false unless running?
 
-      _now = Hitimes.raw_instant
-      calculate_duration(@start_instant, _now)
+      raw = Hitimes.raw_instant
+      calculate_duration(@start_instant, raw)
     end
 
     # call-seq:

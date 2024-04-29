@@ -118,7 +118,7 @@ module Hitimes
     # Measure the execution of a block and add those stats to the running stats.
     # The return value is the return value of the block
     #
-    def measure(&block)
+    def measure
       return_value = nil
       begin
         start

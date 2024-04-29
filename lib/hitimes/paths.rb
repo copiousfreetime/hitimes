@@ -47,7 +47,7 @@ module Hitimes
     #
     def self.sub_path(sub, *args)
       sp = ::File.join(root_dir, sub) + File::SEPARATOR
-      sp = ::File.join(sp, *args) if args
+      ::File.join(sp, *args) if args
     end
   end
 end
