@@ -1,16 +1,17 @@
+# frozen_string_literal: true
+
 #--
 # Copyright (c) 2008, 2009 Jeremy Hinegardner
 # All rights reserved.  See LICENSE and/or COPYING for details.
 #++
 
-require 'stringio'
-require 'thread'
+require "stringio"
 module Hitimes
   #
   # The Stats class encapulsates capturing and reporting statistics.  It is
   # modeled after the RFuzz::Sampler class, but implemented in C.  For general use
   # you allocate a new Stats object, and then update it with new values.  The
-  # Stats object will keep track of the _min_, _max_, _count_, _sum_ and _sumsq_ 
+  # Stats object will keep track of the _min_, _max_, _count_, _sum_ and _sumsq_
   # and when you want you may also retrieve the _mean_, _stddev_ and _rate_.
   #
   # this contrived example shows getting a list of all the files in a directory
@@ -31,13 +32,9 @@ module Hitimes
   #
   class Stats
     # A list of the available stats
-    STATS = %w[ count max mean min rate stddev sum sumsq ]
+    STATS = %w[count max mean min rate stddev sum sumsq].freeze
 
-    attr_reader :min
-    attr_reader :max
-    attr_reader :count
-    attr_reader :sum
-    attr_reader :sumsq
+    attr_reader :min, :max, :count, :sum, :sumsq
 
     def initialize
       @mutex = Mutex.new
@@ -63,17 +60,18 @@ module Hitimes
         @sumsq += (value * value)
       end
 
-      return value
+      value
     end
 
     # call-seq:
     #    stat.mean -> Float
-    # 
+    #
     # Return the arithmetic mean of the values put into the Stats object.  If no
     # values have passed through the stats object then 0.0 is returned;
     def mean
       return 0.0 if @count.zero?
-      return @sum / @count
+
+      @sum / @count
     end
 
     # call-seq:
@@ -91,7 +89,8 @@ module Hitimes
     #
     def rate
       return 0.0 if @sum.zero?
-      return @count / @sum
+
+      @count / @sum
     end
 
     #
@@ -104,29 +103,30 @@ module Hitimes
     #
     def stddev
       return 0.0 unless @count > 1
-      Math.sqrt((@sumsq - ((@sum * @sum)/@count)) / (@count - 1))
+
+      Math.sqrt((@sumsq - ((@sum * @sum) / @count)) / (@count - 1))
     end
 
-    # 
+    #
     # call-seq:
     #   stat.to_hash   -> Hash
     #   stat.to_hash( %w[ count max mean ]) -> Hash
     #
     # return a hash of the stats.  By default this returns a hash of all stats
     # but passing in an array of items will limit the stats returned to only
-    # those in the Array. 
+    # those in the Array.
     #
     # If passed in an empty array or nil to to_hash then STATS is assumed to be
     # the list of stats to return in the hash.
     #
-    def to_hash( *args )
+    def to_hash(*args)
       h = {}
-      args = [ args ].flatten
+      args = [args].flatten
       args = STATS if args.empty?
       args.each do |meth|
-        h[meth] = self.send( meth )
+        h[meth] = send(meth)
       end
-      return h
+      h
     end
 
     #
@@ -138,18 +138,18 @@ module Hitimes
     # of all the stats.  If an array of items is passed in, those that match the
     # known stats will be all that is included in the json output.
     #
-    def to_json( *args )
-      h = to_hash( *args )
+    def to_json(*args)
+      h = to_hash(*args)
       a = []
       s = StringIO.new
 
       s.print "{ "
-      h.each_pair do |k,v|
+      h.each_pair do |k, v|
         a << "\"#{k}\": #{v}"
       end
       s.print a.join(", ")
       s.print "}"
-      return s.string
+      s.string
     end
   end
 end

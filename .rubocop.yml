@@ -1,0 +1,73 @@
+require:
+  - rubocop-md
+  - rubocop-minitest
+  - rubocop-packaging
+  - rubocop-performance
+  - rubocop-rake
+  - rubocop-thread_safety
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'coverage/**/*'
+    - 'doc/**/*'
+    - 'pkg/**/*'
+    - 'tmp/**/*'
+    - '*.gemspec'
+    - 'vendor/bundle/**/*'
+    - 'examples/*'
+
+Layout/ExtraSpacing:
+  AllowBeforeTrailingComments: true
+
+Layout/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: space
+
+Lint/DuplicateBranch:
+  IgnoreLiteralBranches: true
+  IgnoreConstantBranches: true
+
+Metrics/AbcSize:
+  CountRepeatedAttributes: false
+  Max: 25
+  Exclude:
+    - 'tasks/**/*'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'tasks/**/*'
+    - 'spec/**/*'
+
+Metrics/ClassLength:
+  Exclude:
+    - 'tasks/**/*'
+
+Metrics/MethodLength:
+  Max: 20
+
+# keeps want to combine examples
+Style/CombinableLoops:
+  Exclude:
+    - README.md
+
+Style/Documentation:
+  Exclude:
+    - 'spec/**/*'
+
+Style/TernaryParentheses:
+  EnforcedStyle: require_parentheses_when_complex
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: double_quotes
+  ConsistentQuotesInMultiline: false
+
+ThreadSafety/InstanceVariableInClassMethod:
+  Enabled: false
+ThreadSafety/NewThread:
+  Enabled: false

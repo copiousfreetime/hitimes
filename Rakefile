@@ -1,20 +1,22 @@
+# frozen_string_literal: true
+
 # vim: syntax=ruby
-load 'tasks/this.rb'
+load "tasks/this.rb"
 
 This.name     = "hitimes"
 This.author   = "Jeremy Hinegardner"
 This.email    = "jeremy@copiousfreetime.org"
-This.homepage = "http://github.com/copiousfreetime/#{ This.name }"
+This.homepage = "http://github.com/copiousfreetime/#{This.name}"
 
 This.ruby_gemspec do |spec|
-  spec.add_development_dependency( 'rake'         , '~> 12.3')
-  spec.add_development_dependency( 'minitest'     , '~> 5.5' )
-  spec.add_development_dependency( 'minitest-focus', '~> 1.3' )
-  spec.add_development_dependency( 'rdoc'         , '~> 6.2' )
-  spec.add_development_dependency( 'json'         , '~> 2.2' )
-  spec.add_development_dependency( 'simplecov'    , '~> 0.17' )
+  spec.metadata = {
+    "bug_tracker_uri" => "https://github.com/copiousfreetime/#{This.name}/issues",
+    "changelog_uri" => "https://github.com/copiousfreetime/#{This.name}/blob/master/HISTORY.md",
+    "homepage_uri" => "https://github.com/copiousfreetime/#{This.name}",
+    "source_code_uri" => "https://github.com/copiousfreetime/#{This.name}",
+  }
 
   spec.license = "ISC"
 end
 
-load 'tasks/default.rake'
+load "tasks/default.rake"

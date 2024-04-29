@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Copyright (c) 2008 Jeremy Hinegardner
 # All rights reserved.  See LICENSE and/or COPYING for details.
 #
@@ -20,7 +22,6 @@ module Hitimes
   # Interval is useful when you only need to track a single interval of time, or
   # if you do not want to track statistics about an operation.
   class Interval
-
     # Public: The integer representing the start instant of the Interval.  This
     # valuea is not useful on its own.  It is a platform dependent value.
     attr_reader :start_instant
@@ -48,14 +49,14 @@ module Hitimes
     #    Interval.measure {  }  -> Float
     #
     # Times the execution of the block returning the number of seconds it took
-    def self.measure(&block)
+    def self.measure
       raise Error, "No block given to Interval.measure" unless block_given?
 
       i = Interval.now
       yield
       i.stop
 
-      return i.duration
+      i.duration
     end
 
     # call-seq:
@@ -65,7 +66,7 @@ module Hitimes
     # start_instant equivalent to the stop_interval of self.
     def split
       @stop_instant = ::Hitimes.raw_instant
-      return Interval.new(@stop_instant)
+      Interval.new(@stop_instant)
     end
 
     # call-seq:
@@ -76,6 +77,7 @@ module Hitimes
     # interval is truely started +true+ is returned otherwise +false+.
     def start
       return false if started?
+
       @start_instant = ::Hitimes.raw_instant
       true
     end
@@ -92,7 +94,7 @@ module Hitimes
 
       @stop_instant = ::Hitimes.raw_instant
 
-      return duration
+      duration
     end
 
     # call-seq:
@@ -104,8 +106,8 @@ module Hitimes
     def duration_so_far
       return false unless running?
 
-      _now = Hitimes.raw_instant
-      calculate_duration(@start_instant, _now)
+      raw = Hitimes.raw_instant
+      calculate_duration(@start_instant, raw)
     end
 
     # call-seq:
@@ -120,7 +122,7 @@ module Hitimes
     #    interval.stopped? -> boolean
     #
     # returns whether or not the interval has been stopped
-    def  stopped?
+    def stopped?
       !!@stop_instant
     end
 
@@ -151,11 +153,9 @@ module Hitimes
 
       return duration_so_far unless stopped?
 
-      if @duration < 0 then
-        @duration = calculate_duration(@start_instant, @stop_instant)
-      end
+      @duration = calculate_duration(@start_instant, @stop_instant) if @duration.negative?
 
-      return @duration
+      @duration
     end
 
     alias to_f       duration
@@ -165,7 +165,7 @@ module Hitimes
     private
 
     def calculate_duration(start, stop)
-      (stop - start) / ::Hitimes::INSTANT_CONVERSION_FACTOR
+      (stop - start) / ::Hitimes::NANOSECONDS_PER_SECOND
     end
   end
 end

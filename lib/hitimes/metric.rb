@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 #--
 # Copyright (c) 2008, 2009 Jeremy Hinegardner
@@ -13,15 +14,14 @@ module Hitimes
   # * The name of the metric
   # * The time of day the first measurement is taken
   # * The time of day the last measurement is taken
-  # * additional data 
+  # * additional data
   #
   # Each derived class is assumed to set the sampling_start_time and
   # sampling_stop_time appropriately.
-  # 
+  #
   # Metric itself should generally not be used.  Only use the derived classes.
   #
   class Metric
-
     # the number of seconds as a float since the sampling_start_time
     attr_reader :sampling_delta
 
@@ -41,7 +41,7 @@ module Hitimes
     # +additional_data+ may be anything that follows the +to_hash+ protocol.
     # +name+ may be anything that follows the +to_s+ protocol.
     #
-    def initialize( name, additional_data = {} )
+    def initialize(name, additional_data = {})
       @sampling_start_time     = nil
       @sampling_start_interval = nil
       @sampling_delta          = 0
@@ -51,7 +51,7 @@ module Hitimes
     end
 
     #
-    # :call-seq: 
+    # :call-seq:
     #   metric.sampling_start_time -> Float or nil
     #
     # The time at which the first sample was taken.
@@ -60,11 +60,9 @@ module Hitimes
     # If the metric has not started measuring then the start time is nil.
     #
     def sampling_start_time
-      if @sampling_start_interval then
-        @sampling_start_time ||= self.utc_microseconds()
-      else
-        nil
-      end
+      return unless @sampling_start_interval
+
+      @sampling_start_time ||= utc_microseconds
     end
 
     #
@@ -73,8 +71,8 @@ module Hitimes
     #
     # The time at which the last sample was taken
     # This is the number of microseconds since UNIX epoch UTC as a Float
-    # 
-    # If the metric has not completely measured at least one thing then 
+    #
+    # If the metric has not completely measured at least one thing then
     # stop time is nil.
     #
     # Because accessing the actual 'time of day' is an expesive operation, we
@@ -84,11 +82,9 @@ module Hitimes
     # When sampling_stop_time is called, the actual time of day is caculated.
     #
     def sampling_stop_time
-      if @sampling_delta > 0 then
-        (self.sampling_start_time + (@sampling_delta * 1_000_000))
-      else 
-        nil
-      end
+      return unless @sampling_delta.positive?
+
+      (sampling_start_time + (@sampling_delta * 1_000_000))
     end
 
     #
@@ -96,13 +92,13 @@ module Hitimes
     #    metric.to_hash -> Hash
     #    metric.to_hash
     #
-    # Convert the metric to a Hash.  
+    # Convert the metric to a Hash.
     #
     def to_hash
-      { 'sampling_start_time' => self.sampling_start_time,
-        'sampling_stop_time'  => self.sampling_stop_time,
-        'additional_data'     => self.additional_data,
-        'name'                => self.name }
+      { "sampling_start_time" => sampling_start_time,
+        "sampling_stop_time" => sampling_stop_time,
+        "additional_data" => additional_data,
+        "name" => name, }
     end
 
     #

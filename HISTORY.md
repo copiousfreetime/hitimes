@@ -1,4 +1,21 @@
-# Hitimes Changeloga
+# Hitimes Changelog
+## Version 3.0.0 - 2024-04-30
+
+* Migrated to SemaphoreCI for doing full test runs on all active ruby versions.
+* Remove the dependency on `Process.clock_getres` as it is unreliable.
+* This has the effect of deprecating some Hitimes constants that had been documented as public. These are now removed as this is a major version update
+  - `Hitimes::CLOCK_RESOLUTION_NANOSECONDS`
+  - `Hitimes::CLOCK_RESOLUTION_SECONDS`
+  - `Hitimes::INSTANT_CONVERSION_FACTOR`
+  - `Hitimes.clock_resolution_description`
+  - `Hitimes.clock_description`
+* Added Rubocop for some coding consistency
+* Updated the supported ruby version to be 3.0 and up
+* Updated all dependencies
+* Changed how all the `assert_delta` style tests were done so they were not so flakey
+* Hitimes will now emit a `warn` message if it ends up using `CLOCK_REALTIME`
+* Hitimes will raise an exception if it cannot find a valid clock id. This is a bug and a message to file a report is in the exception
+
 ## Version 2.0.0 2019-09-23
 
 * Remove the C and Java extensions as `Process.clock_gettime()` has the same
@@ -83,7 +100,7 @@
 
 ## Version 1.0.3 2009-06-28
 
-* Fix bug with time.h on linode (reported by Roger Pack) 
+* Fix bug with time.h on linode (reported by Roger Pack)
 * Fix potential garbage collection issue with Interval class
 * Windows gem is now a fat binary to support installing in 1.8 or 1.9 from the
   same gem
@@ -112,7 +129,7 @@
 
 * Added new stat 'rate'
 * Added new stat method to_hash
-* Added Hitimes::MutexedStats class for threadsafe stats collection 
+* Added Hitimes::MutexedStats class for threadsafe stats collection
     - not needed when used in MRI 1.8.x
 * remove stale dependency on mkrf
 

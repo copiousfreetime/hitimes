@@ -1,9 +1,9 @@
+# frozen_string_literal: true
+
 #--
 # Copyright (c) 2008, 2009 Jeremy Hinegardner
 # All rights reserved.  See LICENSE and/or COPYING for details.
 #++
-
-require 'thread'
 
 module Hitimes
   #
@@ -13,5 +13,3 @@ module Hitimes
   #
   MutexedStats = Stats
 end
-
-

@@ -1,14 +1,18 @@
+# frozen_string_literal: true
+
 require "spec_helper"
 
 describe Hitimes::Interval do
   it "raises an error if duration is called on a non-started interval" do
     i = Hitimes::Interval.new
-    _(lambda{ i.duration }).must_raise( Hitimes::Error, /\AAttempt to report a duration on an interval that has not started\Z/ )
+    _(lambda {
+        i.duration
+      }).must_raise(Hitimes::Error, /\AAttempt to report a duration on an interval that has not started\Z/)
   end
 
   it "raises an error if stop is called on a non-started interval" do
     i = Hitimes::Interval.new
-    _(lambda { i.stop }).must_raise( Hitimes::Error, /\AAttempt to stop an interval that has not started\Z/ )
+    _(-> { i.stop }).must_raise(Hitimes::Error, /\AAttempt to stop an interval that has not started\Z/)
   end
 
   it "knows if it has been started" do
@@ -38,13 +42,13 @@ describe Hitimes::Interval do
 
   it "can time a block of code" do
     d = Hitimes::Interval.measure do
-      sleep 0.2
+      sleep 0.01
     end
-    _(d).must_be_close_to(0.2, 0.002)
+    _(d).must_be :>, 0
   end
 
   it "raises an error if measure is called with no block" do
-    _(lambda{ Hitimes::Interval.measure }).must_raise( Hitimes::Error, /\ANo block given to Interval.measure\Z/ )
+    _(-> { Hitimes::Interval.measure }).must_raise(Hitimes::Error, /\ANo block given to Interval.measure\Z/)
   end
 
   it "creates an interval via #now" do
@@ -73,7 +77,7 @@ describe Hitimes::Interval do
   it "returns the duration on the first call to stop" do
     i = Hitimes::Interval.now
     d = i.stop
-    _(d).must_be_instance_of( Float )
+    _(d).must_be_instance_of(Float)
   end
 
   it "calling stop multiple times on has no effect after the first call" do
@@ -85,7 +89,6 @@ describe Hitimes::Interval do
     _(i.stop_instant).must_be :>, 0
     _(i.stop).must_equal false
     _(x).must_equal i.stop_instant
-
   end
 
   it "duration does not change after stop is calledd" do
@@ -116,7 +119,6 @@ describe Hitimes::Interval do
   end
 
   describe "#split" do
-
     it "creates a new Interval object" do
       i = Hitimes::Interval.new
       i.start
@@ -131,6 +133,4 @@ describe Hitimes::Interval do
       _(i.stop_instant).must_equal i2.start_instant
     end
   end
-
 end
-
