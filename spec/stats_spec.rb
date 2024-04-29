@@ -6,7 +6,7 @@ describe Hitimes::Stats do
     @stats = Hitimes::Stats.new
     @full_stats = Hitimes::Stats.new
     
-    [ 1, 2, 3].each { |i| @full_stats.update( i ) }
+    [1, 2, 3].each { |i| @full_stats.update( i ) }
   end
 
   it "is initialized with usable values" do

@@ -1,5 +1,4 @@
 module Hitimes
-
   # Internal: Internal setup that is done when the library is loaded
   #
   # We want to determine what clock to use for this machine. So we need to
@@ -8,7 +7,6 @@ module Hitimes
   # constant
   #
   module Initialize
-
     # Internal: Return the list of clock ids, that we are going to test. We'll
     # test to see if it exists, and then do further tests after that.
     #
@@ -43,7 +41,7 @@ module Hitimes
       17.times do
         val = Process.clock_gettime(clock_id, :nanosecond)
         res = if (val % 1_000_000_000).zero? then
-          1
+                1
         elsif (val % 1_000_000).zero? then
           1e-3
         elsif (val % 1_000).zero? then

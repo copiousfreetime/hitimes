@@ -17,7 +17,6 @@ module Hitimes
   # object for convenience.
   #
   class ValueMetric < Metric
-
     # holds all the statistics
     attr_reader :stats
     

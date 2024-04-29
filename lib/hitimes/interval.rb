@@ -20,7 +20,6 @@ module Hitimes
   # Interval is useful when you only need to track a single interval of time, or
   # if you do not want to track statistics about an operation.
   class Interval
-
     # Public: The integer representing the start instant of the Interval.  This
     # valuea is not useful on its own.  It is a platform dependent value.
     attr_reader :start_instant
@@ -76,6 +75,7 @@ module Hitimes
     # interval is truely started +true+ is returned otherwise +false+.
     def start
       return false if started?
+
       @start_instant = ::Hitimes.raw_instant
       true
     end
@@ -120,7 +120,7 @@ module Hitimes
     #    interval.stopped? -> boolean
     #
     # returns whether or not the interval has been stopped
-    def  stopped?
+    def stopped?
       !!@stop_instant
     end
 

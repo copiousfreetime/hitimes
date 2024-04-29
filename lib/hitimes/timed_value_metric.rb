@@ -227,7 +227,5 @@ module Hitimes
       h["unit_count"] = self.unit_count
       return h
     end
-
-
   end
 end

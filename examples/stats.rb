@@ -9,6 +9,7 @@ rescue LoadError => le
     if $:.include?( path ) then
       raise le
     end
+
     $: << path
   end
   retry

@@ -56,7 +56,7 @@ describe Hitimes::ValueMetric do
   it "keeps track of the first start time of all the measurements" do
     m = Hitimes::ValueMetric.new( "first-start-time" )
     f1 = Time.now.gmtime.to_f * 1_000_000
-    10.times{ |x| m.measure( x ); sleep 0.1 }
+    10.times { |x| m.measure( x ); sleep 0.1 }
     f2 = Time.now.gmtime.to_f * 1_000_000
     _(m.sampling_start_time).must_be :>=, f1
     _(m.sampling_start_time).must_be :<, f2
@@ -68,7 +68,7 @@ describe Hitimes::ValueMetric do
   it "keeps track of the last stop time of all the intervals" do
     m = Hitimes::ValueMetric.new( "last-stop-time" )
     f1 = Time.now.gmtime.to_f * 1_000_000
-    10.times {|x| m.measure( x ); sleep 0.1  }
+    10.times { |x| m.measure( x ); sleep 0.1 }
     f2 = Time.now.gmtime.to_f * 1_000_000
     _(m.sampling_stop_time).must_be :>, f1
     _(m.sampling_stop_time).must_be :<=, f2
@@ -78,7 +78,6 @@ describe Hitimes::ValueMetric do
   end
 
   describe "#to_hash" do
-
     it "has name value" do
       h = @metric.to_hash
       _(h["name"]).must_equal "testing"
@@ -96,7 +95,7 @@ describe Hitimes::ValueMetric do
     end
 
     fields = ::Hitimes::Stats::STATS.dup + %w[ name additional_data sampling_start_time sampling_stop_time ]
-    fields = fields - [ "rate" ]
+    fields = fields - ["rate"]
     fields.each do |f|
       it "has a value for #{f}" do
         h = @metric.to_hash

@@ -12,6 +12,7 @@ rescue LoadError => le
   if $:.include?( ext_path ) then
     raise le
   end
+
   $: << ext_path
   $: << lib_path
   retry
@@ -50,7 +51,7 @@ end
 #
 # reuse the same timer over and over
 #
-HT2= Hitimes::TimedMetric.new( "duration_t2" )
+HT2 = Hitimes::TimedMetric.new( "duration_t2" )
 def hitimes_duration_t2
   HT2.start
   HT2.stop

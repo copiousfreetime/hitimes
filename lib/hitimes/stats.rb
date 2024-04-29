@@ -73,6 +73,7 @@ module Hitimes
     # values have passed through the stats object then 0.0 is returned;
     def mean
       return 0.0 if @count.zero?
+
       return @sum / @count
     end
 
@@ -91,6 +92,7 @@ module Hitimes
     #
     def rate
       return 0.0 if @sum.zero?
+
       return @count / @sum
     end
 
@@ -104,7 +106,8 @@ module Hitimes
     #
     def stddev
       return 0.0 unless @count > 1
-      Math.sqrt((@sumsq - ((@sum * @sum)/@count)) / (@count - 1))
+
+      Math.sqrt((@sumsq - ((@sum * @sum) / @count)) / (@count - 1))
     end
 
     # 
@@ -121,7 +124,7 @@ module Hitimes
     #
     def to_hash( *args )
       h = {}
-      args = [ args ].flatten
+      args = [args].flatten
       args = STATS if args.empty?
       args.each do |meth|
         h[meth] = self.send( meth )
@@ -144,7 +147,7 @@ module Hitimes
       s = StringIO.new
 
       s.print "{ "
-      h.each_pair do |k,v|
+      h.each_pair do |k, v|
         a << "\"#{k}\": #{v}"
       end
       s.print a.join(", ")

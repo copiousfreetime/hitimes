@@ -17,7 +17,7 @@ module Hitimes
     # is guaranteed.
     #   
     def self.root_dir
-      @root_dir ||=(
+      @root_dir ||= (
         path_parts = ::File.expand_path(__FILE__).split(::File::SEPARATOR)
         lib_index  = path_parts.rindex("lib")
         @root_dir = path_parts[0...lib_index].join(::File::SEPARATOR) + ::File::SEPARATOR
@@ -45,7 +45,7 @@ module Hitimes
     # _arg_ parameters passed in are joined onto the result.  A trailing
     # File::SEPARATOR is guaranteed if _args_ are *not* present.
     #
-    def self.sub_path(sub,*args)
+    def self.sub_path(sub, *args)
       sp = ::File.join(root_dir, sub) + File::SEPARATOR
       sp = ::File.join(sp, *args) if args
     end

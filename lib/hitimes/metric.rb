@@ -1,4 +1,3 @@
-
 #--
 # Copyright (c) 2008, 2009 Jeremy Hinegardner
 # All rights reserved.  See LICENSE and/or COPYING for details.
@@ -21,7 +20,6 @@ module Hitimes
   # Metric itself should generally not be used.  Only use the derived classes.
   #
   class Metric
-
     # the number of seconds as a float since the sampling_start_time
     attr_reader :sampling_delta
 
