@@ -41,8 +41,8 @@ module Hitimes
       #
       # Return a TimedMetric that has been started
       #
-      def now( name, additional_data = {} )
-        t = TimedMetric.new( name, additional_data )
+      def now(name, additional_data = {})
+        t = TimedMetric.new(name, additional_data)
         t.start
         return t
       end
@@ -56,8 +56,8 @@ module Hitimes
     # Create a new TimedMetric giving it a name and additional data.
     # +additional_data+ may be anything that follows the +to_hash+ protocol
     #
-    def initialize( name, additional_data = {} )
-      super( name, additional_data )
+    def initialize(name, additional_data = {})
+      super(name, additional_data)
       @stats            = Stats.new
       @current_interval = Interval.new
     end
@@ -100,7 +100,7 @@ module Hitimes
     def stop
       if @current_interval.running? then
         d = @current_interval.stop
-        @stats.update( d )
+        @stats.update(d)
         @current_interval = Interval.new
 
         # update the length of time we have been sampling
@@ -118,7 +118,7 @@ module Hitimes
     # Measure the execution of a block and add those stats to the running stats.
     # The return value is the return value of the block
     #
-    def measure( &block )
+    def measure(&block)
       return_value = nil
       begin
         start
@@ -146,7 +146,7 @@ module Hitimes
       if @current_interval.running? then
         next_interval = @current_interval.split
         d = @current_interval.duration
-        @stats.update( d )
+        @stats.update(d)
         @current_interval = next_interval
         return d
       end
@@ -162,7 +162,7 @@ module Hitimes
     def to_hash
       h = super
       Stats::STATS.each do |s|
-        h[s] = self.send( s )
+        h[s] = self.send(s)
       end
       return h
     end

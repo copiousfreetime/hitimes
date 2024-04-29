@@ -1,8 +1,8 @@
 require "spec_helper"
 
 describe Hitimes::Metric do
-  before( :each ) do
-    @metric = Hitimes::Metric.new( "testing" )
+  before(:each) do
+    @metric = Hitimes::Metric.new("testing")
   end
 
   it "has a name" do
@@ -10,11 +10,11 @@ describe Hitimes::Metric do
   end
 
   it "has associated data from initialization" do
-    m = Hitimes::Metric.new( "more-data", "foo" => "bar", "this" => "that" )
+    m = Hitimes::Metric.new("more-data", "foo" => "bar", "this" => "that")
     _(m.additional_data["foo"]).must_equal "bar"
     _(m.additional_data["this"]).must_equal "that"
 
-    m = Hitimes::Metric.new( "more-data", { "foo" => "bar", "this" => "that" } )
+    m = Hitimes::Metric.new("more-data", { "foo" => "bar", "this" => "that" })
     _(m.additional_data["foo"]).must_equal "bar"
     _(m.additional_data["this"]).must_equal "that"
   end

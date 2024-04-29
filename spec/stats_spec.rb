@@ -2,11 +2,11 @@ require "spec_helper"
 require "json"
 
 describe Hitimes::Stats do
-  before( :each ) do
+  before(:each) do
     @stats = Hitimes::Stats.new
     @full_stats = Hitimes::Stats.new
 
-    [1, 2, 3].each { |i| @full_stats.update( i ) }
+    [1, 2, 3].each { |i| @full_stats.update(i) }
   end
 
   it "is initialized with usable values" do
@@ -57,42 +57,42 @@ describe Hitimes::Stats do
     end
 
     it "converts to a limited Hash if given arguments" do
-      h = @full_stats.to_hash( "min", "max", "mean" )
+      h = @full_stats.to_hash("min", "max", "mean")
       _(h.size).must_equal 3
       _(h.keys.sort).must_equal %w[max mean min]
 
-      h = @full_stats.to_hash( %w[count rate] )
+      h = @full_stats.to_hash(%w[count rate])
       _(h.size).must_equal 2
       _(h.keys.sort).must_equal %w[count rate]
     end
 
     it "raises NoMethodError if an invalid stat is used" do
-      _(lambda { @full_stats.to_hash( "wibble" ) }).must_raise( NoMethodError )
+      _(lambda { @full_stats.to_hash("wibble") }).must_raise(NoMethodError)
     end
   end
 
   describe "#to_json" do
     it "converts to a json string" do
       j = @full_stats.to_json
-      h = JSON.parse( j )
+      h = JSON.parse(j)
       _(h.size).must_equal ::Hitimes::Stats::STATS.size
       _(h.keys.sort).must_equal ::Hitimes::Stats::STATS
     end
 
     it "converts to a limited Hash if given arguments" do
-      j = @full_stats.to_json( "min", "max", "mean" )
-      h = JSON.parse( j )
+      j = @full_stats.to_json("min", "max", "mean")
+      h = JSON.parse(j)
       _(h.size).must_equal 3
       _(h.keys.sort).must_equal %w[max mean min]
 
-      j = @full_stats.to_json( %w[count rate] )
-      h = JSON.parse( j )
+      j = @full_stats.to_json(%w[count rate])
+      h = JSON.parse(j)
       _(h.size).must_equal 2
       _(h.keys.sort).must_equal %w[count rate]
     end
 
     it "raises NoMethodError if an invalid stat is used" do
-      _(lambda { @full_stats.to_json( "wibble" ) }).must_raise( NoMethodError )
+      _(lambda { @full_stats.to_json("wibble") }).must_raise(NoMethodError)
     end
   end
 end

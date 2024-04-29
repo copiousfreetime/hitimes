@@ -3,12 +3,12 @@ require "spec_helper"
 describe Hitimes::Interval do
   it "raises an error if duration is called on a non-started interval" do
     i = Hitimes::Interval.new
-    _(lambda { i.duration }).must_raise( Hitimes::Error, /\AAttempt to report a duration on an interval that has not started\Z/ )
+    _(lambda { i.duration }).must_raise(Hitimes::Error, /\AAttempt to report a duration on an interval that has not started\Z/)
   end
 
   it "raises an error if stop is called on a non-started interval" do
     i = Hitimes::Interval.new
-    _(lambda { i.stop }).must_raise( Hitimes::Error, /\AAttempt to stop an interval that has not started\Z/ )
+    _(lambda { i.stop }).must_raise(Hitimes::Error, /\AAttempt to stop an interval that has not started\Z/)
   end
 
   it "knows if it has been started" do
@@ -44,7 +44,7 @@ describe Hitimes::Interval do
   end
 
   it "raises an error if measure is called with no block" do
-    _(lambda { Hitimes::Interval.measure }).must_raise( Hitimes::Error, /\ANo block given to Interval.measure\Z/ )
+    _(lambda { Hitimes::Interval.measure }).must_raise(Hitimes::Error, /\ANo block given to Interval.measure\Z/)
   end
 
   it "creates an interval via #now" do
@@ -73,7 +73,7 @@ describe Hitimes::Interval do
   it "returns the duration on the first call to stop" do
     i = Hitimes::Interval.now
     d = i.stop
-    _(d).must_be_instance_of( Float )
+    _(d).must_be_instance_of(Float)
   end
 
   it "calling stop multiple times on has no effect after the first call" do

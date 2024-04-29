@@ -9,7 +9,7 @@ describe Hitimes do
   end
 
   it "raises an error if measure is called with no block" do
-    _(lambda { Hitimes.measure }).must_raise( Hitimes::Error )
+    _(lambda { Hitimes.measure }).must_raise(Hitimes::Error)
   end
 
   it "has the raw instant value" do

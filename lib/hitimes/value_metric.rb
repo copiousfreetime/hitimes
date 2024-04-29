@@ -28,8 +28,8 @@ module Hitimes
     # Create a new ValueMetric giving it a name and additional data.
     # +additional_data+ may be anything that follows the +to_hash+ protocol.
     #
-    def initialize( name, additional_data = {} )
-      super( name, additional_data )
+    def initialize(name, additional_data = {})
+      super(name, additional_data)
       @stats = Stats.new
     end
 
@@ -39,11 +39,11 @@ module Hitimes
     #
     # Give the +value+ as the measurement to the metric.  The value is returned
     #
-    def measure( value )
+    def measure(value)
       @sampling_start_time ||= self.utc_microseconds()
       @sampling_start_interval ||= Interval.now
 
-      @stats.update( value )
+      @stats.update(value)
 
       # update the length of time we have been sampling
       @sampling_delta = @sampling_start_interval.duration_so_far
@@ -58,7 +58,7 @@ module Hitimes
     def to_hash
       h = super
       (Stats::STATS - %w[rate]).each do |s|
-        h[s] = self.send( s )
+        h[s] = self.send(s)
       end
       return h
     end

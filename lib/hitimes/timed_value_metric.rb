@@ -40,8 +40,8 @@ module Hitimes
       #
       # Return a TimedValueMetric that has been started
       #
-      def now( name, additional_data = {} )
-        t = TimedValueMetric.new( name, additional_data )
+      def now(name, additional_data = {})
+        t = TimedValueMetric.new(name, additional_data)
         t.start
         return t
       end
@@ -55,8 +55,8 @@ module Hitimes
     # Create a new TimedValueMetric giving it a name and additional data.
     # +additional_data+ may be anything that follows the +to_hash+ protocol
     #
-    def initialize( name, additional_data = {} )
-      super( name, additional_data )
+    def initialize(name, additional_data = {})
+      super(name, additional_data)
       @timed_stats      = Stats.new
       @value_stats      = Stats.new
       @current_interval = Interval.new
@@ -103,12 +103,12 @@ module Hitimes
     # call, then false is returned and no stats are updated.
     #
     #
-    def stop( value )
+    def stop(value)
       if @current_interval.running? then
         d = @current_interval.stop
-        @timed_stats.update( d )
+        @timed_stats.update(d)
         @current_interval = Interval.new
-        @value_stats.update( value )
+        @value_stats.update(value)
 
         # update the lenght of time we have been sampling
         @sampling_delta = @sampling_start_interval.duration_so_far
@@ -126,13 +126,13 @@ module Hitimes
     # The return value is the return value of the block.  A value must be passed
     # into +measure+ to update the +value_stats+ portion of the TimedValueMetric.
     #
-    def measure( value, &block )
+    def measure(value, &block)
       return_value = nil
       begin
         start
         return_value = yield
       ensure
-        stop( value )
+        stop(value)
       end
       return return_value
     end
@@ -151,12 +151,12 @@ module Hitimes
     # happens, no stats are updated, and false is returned.
     #
     #
-    def split( value )
+    def split(value)
       if @current_interval.running? then
         next_interval = @current_interval.split
         d = @current_interval.duration
-        @timed_stats.update( d )
-        @value_stats.update( value )
+        @timed_stats.update(d)
+        @value_stats.update(value)
         @current_interval = next_interval
         return d
       end
@@ -222,7 +222,7 @@ module Hitimes
     def to_hash
       h = super
       h["timed_stats"] = @timed_stats.to_hash
-      h["value_stats"] = @value_stats.to_hash( Stats::STATS - %w[rate] )
+      h["value_stats"] = @value_stats.to_hash(Stats::STATS - %w[rate])
       h["rate"] = self.rate
       h["unit_count"] = self.unit_count
       return h

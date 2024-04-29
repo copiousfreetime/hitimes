@@ -81,7 +81,7 @@ value of the block.
 
 ```ruby
 collection.each do |item|
-  result_of_do_something = timed_metric.measure { do_something( item ) }
+  result_of_do_something = timed_metric.measure { do_something(item) }
 end
 ```
 And then look at the stats

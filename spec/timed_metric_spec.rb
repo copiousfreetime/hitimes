@@ -1,8 +1,8 @@
 require "spec_helper"
 
 describe Hitimes::TimedMetric do
-  before( :each ) do
-    @tm = Hitimes::TimedMetric.new( "test-timed-metric" )
+  before(:each) do
+    @tm = Hitimes::TimedMetric.new("test-timed-metric")
   end
 
   it "knows if it is running or not" do
@@ -88,7 +88,7 @@ describe Hitimes::TimedMetric do
     _(@tm.sampling_start_time).must_be :<, f2
     # distance from now to start time should be greater than the distance from
     # the start to the min start_time
-    _((f2 - @tm.sampling_start_time)).must_be :>, ( @tm.sampling_start_time - f1 )
+    _((f2 - @tm.sampling_start_time)).must_be :>, (@tm.sampling_start_time - f1)
   end
 
   it "keeps track of the last stop time of all the intervals" do
@@ -101,23 +101,23 @@ describe Hitimes::TimedMetric do
     _(@tm.sampling_stop_time).must_be :<=, f2
     # distance from now to max stop time time should be less than the distance
     # from the start to the max stop time
-    _((f2 - @tm.sampling_stop_time)).must_be :<, ( @tm.sampling_stop_time - f1 )
+    _((f2 - @tm.sampling_stop_time)).must_be :<, (@tm.sampling_stop_time - f1)
   end
 
   it "can create an already running timer" do
-    t = Hitimes::TimedMetric.now( "already-running" )
+    t = Hitimes::TimedMetric.now("already-running")
     _(t.running?).must_equal true
   end
 
   it "can measure a block of code from an instance" do
-    t = Hitimes::TimedMetric.new( "measure a block" )
+    t = Hitimes::TimedMetric.new("measure a block")
     3.times { t.measure { sleep 0.05 } }
     _(t.duration).must_be_close_to(0.15, 0.01)
     _(t.count).must_equal 3
   end
 
   it "returns the value of the block when measuring" do
-    t = Hitimes::TimedMetric.new( "measure a block" )
+    t = Hitimes::TimedMetric.new("measure a block")
     x = t.measure { sleep 0.05; 42 }
     _(t.duration).must_be_close_to(0.05, 0.002)
     _(x).must_equal 42

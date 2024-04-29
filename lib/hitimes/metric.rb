@@ -39,7 +39,7 @@ module Hitimes
     # +additional_data+ may be anything that follows the +to_hash+ protocol.
     # +name+ may be anything that follows the +to_s+ protocol.
     #
-    def initialize( name, additional_data = {} )
+    def initialize(name, additional_data = {})
       @sampling_start_time     = nil
       @sampling_start_interval = nil
       @sampling_delta          = 0

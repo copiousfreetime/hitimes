@@ -7,9 +7,9 @@ require "time"
 begin
   require "hitimes"
 rescue LoadError => le
-  ext_path = File.expand_path( File.join( File.dirname( __FILE__ ), "..", "ext" ) )
-  lib_path = File.expand_path( File.join( File.dirname( __FILE__ ), "..", "lib" ) )
-  if $:.include?( ext_path ) then
+  ext_path = File.expand_path(File.join(File.dirname(__FILE__), "..", "ext"))
+  lib_path = File.expand_path(File.join(File.dirname(__FILE__), "..", "lib"))
+  if $:.include?(ext_path) then
     raise le
   end
 
@@ -51,13 +51,13 @@ end
 #
 # reuse the same timer over and over
 #
-HT2 = Hitimes::TimedMetric.new( "duration_t2" )
+HT2 = Hitimes::TimedMetric.new("duration_t2")
 def hitimes_duration_t2
   HT2.start
   HT2.stop
 end
 
-HT3 = Hitimes::TimedMetric.new( "duration_t3" )
+HT3 = Hitimes::TimedMetric.new("duration_t3")
 def hitimes_duration_t3
   HT3.measure { nil }
 end
@@ -66,18 +66,18 @@ end
 # Check out the speed of the TimedValueMetric too
 #
 def hitimes_duration_tv1
-  Hitimes::TimedValueMetric.now( "duration_tv1" ).stop( 42 )
+  Hitimes::TimedValueMetric.now("duration_tv1").stop(42)
 end
 
-HTV2 = Hitimes::TimedValueMetric.new( "duration_tv2" )
+HTV2 = Hitimes::TimedValueMetric.new("duration_tv2")
 def hitimes_duration_tv2
   HTV2.start
-  HTV2.stop( 42 )
+  HTV2.stop(42)
 end
 
-HTV3 = Hitimes::TimedValueMetric.new( "duration_tv3" )
+HTV3 = Hitimes::TimedValueMetric.new("duration_tv3")
 def hitimes_duration_tv3
-  HTV3.measure( 42 ) { nil }
+  HTV3.measure(42) { nil }
 end
 
 #

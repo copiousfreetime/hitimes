@@ -122,12 +122,12 @@ module Hitimes
     # If passed in an empty array or nil to to_hash then STATS is assumed to be
     # the list of stats to return in the hash.
     #
-    def to_hash( *args )
+    def to_hash(*args)
       h = {}
       args = [args].flatten
       args = STATS if args.empty?
       args.each do |meth|
-        h[meth] = self.send( meth )
+        h[meth] = self.send(meth)
       end
       return h
     end
@@ -141,8 +141,8 @@ module Hitimes
     # of all the stats.  If an array of items is passed in, those that match the
     # known stats will be all that is included in the json output.
     #
-    def to_json( *args )
-      h = to_hash( *args )
+    def to_json(*args)
+      h = to_hash(*args)
       a = []
       s = StringIO.new
 
