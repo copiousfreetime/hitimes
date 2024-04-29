@@ -55,7 +55,7 @@ module Hitimes
       # now just resolution of the one that has the most values, which will be
       # the last one when sorted.
       ordered = counts.to_a.sort_by { |pair| pair[1] }
-      return ordered.last[0]
+      ordered.last[0]
     end
     module_function :resolution_of
 
@@ -77,7 +77,7 @@ module Hitimes
       best_clock_and_resolution = ids_and_resolutions[0]
 
       # return the clock id
-      return best_clock_and_resolution[0]
+      best_clock_and_resolution[0]
     end
     module_function :determine_clock_id
   end

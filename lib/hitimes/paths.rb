@@ -34,7 +34,7 @@ module Hitimes
     # _args_ are *not* present.
     #
     def self.lib_path(*args)
-      self.sub_path("lib", *args)
+      sub_path("lib", *args)
     end
 
     #

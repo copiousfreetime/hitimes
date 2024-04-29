@@ -141,7 +141,7 @@ describe Hitimes::TimedMetric do
       _(h["sum"]).must_be_close_to(0.45, 0.01)
     end
 
-    fields = ::Hitimes::Stats::STATS.dup + %w[name additional_data sampling_start_time sampling_stop_time]
+    fields = Hitimes::Stats::STATS.dup + %w[name additional_data sampling_start_time sampling_stop_time]
     fields.each do |f|
       it "has a value for #{f}" do
         @tm.measure { sleep 0.001 }

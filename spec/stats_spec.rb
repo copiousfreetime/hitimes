@@ -52,8 +52,8 @@ describe Hitimes::Stats do
   describe "#to_hash " do
     it "converts to a Hash" do
       h = @full_stats.to_hash
-      _(h.size).must_equal ::Hitimes::Stats::STATS.size
-      _(h.keys.sort).must_equal ::Hitimes::Stats::STATS
+      _(h.size).must_equal Hitimes::Stats::STATS.size
+      _(h.keys.sort).must_equal Hitimes::Stats::STATS
     end
 
     it "converts to a limited Hash if given arguments" do
@@ -75,8 +75,8 @@ describe Hitimes::Stats do
     it "converts to a json string" do
       j = @full_stats.to_json
       h = JSON.parse(j)
-      _(h.size).must_equal ::Hitimes::Stats::STATS.size
-      _(h.keys.sort).must_equal ::Hitimes::Stats::STATS
+      _(h.size).must_equal Hitimes::Stats::STATS.size
+      _(h.keys.sort).must_equal Hitimes::Stats::STATS
     end
 
     it "converts to a limited Hash if given arguments" do

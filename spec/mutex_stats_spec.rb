@@ -13,16 +13,16 @@ describe Hitimes::MutexedStats do
       spool << Thread.new { iters.times { stats.update(1) } }
     end
     spool.each { |t| t.join }
-    return stats
+    stats
   end
 
   it "Hitimes::Stats is threadsafe" do
-    stats = run_with_scissors(::Hitimes::Stats.new, @threads, @iters)
+    stats = run_with_scissors(Hitimes::Stats.new, @threads, @iters)
     _(stats.count).must_equal @final_value
   end
 
   it "has a threadsafe update" do
-    stats = run_with_scissors(::Hitimes::MutexedStats.new, @threads, @iters)
+    stats = run_with_scissors(Hitimes::MutexedStats.new, @threads, @iters)
     _(stats.count).must_equal @final_value
   end
 end

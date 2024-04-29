@@ -41,7 +41,7 @@ module Hitimes
       const = Process.constants.grep(/CLOCK/).find { |c|
         CLOCK_ID == Process.const_get(c)
       }
-      "Process::#{const.to_s}"
+      "Process::#{const}"
     end
   end
   module_function :clock_name

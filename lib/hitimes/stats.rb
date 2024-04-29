@@ -63,7 +63,7 @@ module Hitimes
         @sumsq += (value * value)
       end
 
-      return value
+      value
     end
 
     # call-seq:
@@ -74,7 +74,7 @@ module Hitimes
     def mean
       return 0.0 if @count.zero?
 
-      return @sum / @count
+      @sum / @count
     end
 
     # call-seq:
@@ -93,7 +93,7 @@ module Hitimes
     def rate
       return 0.0 if @sum.zero?
 
-      return @count / @sum
+      @count / @sum
     end
 
     #
@@ -127,9 +127,9 @@ module Hitimes
       args = [args].flatten
       args = STATS if args.empty?
       args.each do |meth|
-        h[meth] = self.send(meth)
+        h[meth] = send(meth)
       end
-      return h
+      h
     end
 
     #
@@ -152,7 +152,7 @@ module Hitimes
       end
       s.print a.join(", ")
       s.print "}"
-      return s.string
+      s.string
     end
   end
 end

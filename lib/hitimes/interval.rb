@@ -54,7 +54,7 @@ module Hitimes
       yield
       i.stop
 
-      return i.duration
+      i.duration
     end
 
     # call-seq:
@@ -64,7 +64,7 @@ module Hitimes
     # start_instant equivalent to the stop_interval of self.
     def split
       @stop_instant = ::Hitimes.raw_instant
-      return Interval.new(@stop_instant)
+      Interval.new(@stop_instant)
     end
 
     # call-seq:
@@ -92,7 +92,7 @@ module Hitimes
 
       @stop_instant = ::Hitimes.raw_instant
 
-      return duration
+      duration
     end
 
     # call-seq:
@@ -155,7 +155,7 @@ module Hitimes
         @duration = calculate_duration(@start_instant, @stop_instant)
       end
 
-      return @duration
+      @duration
     end
 
     alias to_f       duration

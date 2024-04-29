@@ -43,7 +43,7 @@ module Hitimes
       def now(name, additional_data = {})
         t = TimedValueMetric.new(name, additional_data)
         t.start
-        return t
+        t
       end
     end
 
@@ -82,7 +82,7 @@ module Hitimes
     def start
       if not @current_interval.running? then
         @current_interval.start
-        @sampling_start_time ||= self.utc_microseconds()
+        @sampling_start_time ||= utc_microseconds()
         @sampling_start_interval ||= Interval.now
       end
       nil
@@ -115,7 +115,7 @@ module Hitimes
 
         return d
       end
-      return false
+      false
     end
 
     #
@@ -134,7 +134,7 @@ module Hitimes
       ensure
         stop(value)
       end
-      return return_value
+      return_value
     end
 
     #
@@ -160,7 +160,7 @@ module Hitimes
         @current_interval = next_interval
         return d
       end
-      return false
+      false
     end
 
     #
@@ -223,9 +223,9 @@ module Hitimes
       h = super
       h["timed_stats"] = @timed_stats.to_hash
       h["value_stats"] = @value_stats.to_hash(Stats::STATS - %w[rate])
-      h["rate"] = self.rate
-      h["unit_count"] = self.unit_count
-      return h
+      h["rate"] = rate
+      h["unit_count"] = unit_count
+      h
     end
   end
 end

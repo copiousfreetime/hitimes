@@ -40,7 +40,7 @@ module Hitimes
     # Give the +value+ as the measurement to the metric.  The value is returned
     #
     def measure(value)
-      @sampling_start_time ||= self.utc_microseconds()
+      @sampling_start_time ||= utc_microseconds()
       @sampling_start_interval ||= Interval.now
 
       @stats.update(value)
@@ -58,9 +58,9 @@ module Hitimes
     def to_hash
       h = super
       (Stats::STATS - %w[rate]).each do |s|
-        h[s] = self.send(s)
+        h[s] = send(s)
       end
-      return h
+      h
     end
 
     # forward appropriate calls directly to the stats object

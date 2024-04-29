@@ -94,7 +94,7 @@ describe Hitimes::ValueMetric do
       _(h["sum"]).must_equal 45
     end
 
-    fields = ::Hitimes::Stats::STATS.dup + %w[name additional_data sampling_start_time sampling_stop_time]
+    fields = Hitimes::Stats::STATS.dup + %w[name additional_data sampling_start_time sampling_stop_time]
     fields = fields - ["rate"]
     fields.each do |f|
       it "has a value for #{f}" do

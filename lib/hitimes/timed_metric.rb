@@ -44,7 +44,7 @@ module Hitimes
       def now(name, additional_data = {})
         t = TimedMetric.new(name, additional_data)
         t.start
-        return t
+        t
       end
     end
 
@@ -82,7 +82,7 @@ module Hitimes
     def start
       if not @current_interval.running? then
         @current_interval.start
-        @sampling_start_time ||= self.utc_microseconds()
+        @sampling_start_time ||= utc_microseconds()
         @sampling_start_interval ||= Interval.now
       end
       nil
@@ -108,7 +108,7 @@ module Hitimes
 
         return d
       end
-      return false
+      false
     end
 
     #
@@ -126,7 +126,7 @@ module Hitimes
       ensure
         stop
       end
-      return return_value
+      return_value
     end
 
     #
@@ -150,7 +150,7 @@ module Hitimes
         @current_interval = next_interval
         return d
       end
-      return false
+      false
     end
 
     #
@@ -162,9 +162,9 @@ module Hitimes
     def to_hash
       h = super
       Stats::STATS.each do |s|
-        h[s] = self.send(s)
+        h[s] = send(s)
       end
-      return h
+      h
     end
 
     # forward appropriate calls directly to the stats object

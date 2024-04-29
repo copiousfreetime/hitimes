@@ -59,7 +59,7 @@ module Hitimes
     #
     def sampling_start_time
       if @sampling_start_interval then
-        @sampling_start_time ||= self.utc_microseconds()
+        @sampling_start_time ||= utc_microseconds()
       else
         nil
       end
@@ -83,7 +83,7 @@ module Hitimes
     #
     def sampling_stop_time
       if @sampling_delta > 0 then
-        (self.sampling_start_time + (@sampling_delta * 1_000_000))
+        (sampling_start_time + (@sampling_delta * 1_000_000))
       else
         nil
       end
@@ -97,10 +97,10 @@ module Hitimes
     # Convert the metric to a Hash.
     #
     def to_hash
-      { "sampling_start_time" => self.sampling_start_time,
-        "sampling_stop_time" => self.sampling_stop_time,
-        "additional_data" => self.additional_data,
-        "name" => self.name }
+      { "sampling_start_time" => sampling_start_time,
+        "sampling_stop_time" => sampling_stop_time,
+        "additional_data" => additional_data,
+        "name" => name }
     end
 
     #
