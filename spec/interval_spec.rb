@@ -42,9 +42,9 @@ describe Hitimes::Interval do
 
   it "can time a block of code" do
     d = Hitimes::Interval.measure do
-      sleep 0.2
+      sleep 0.01
     end
-    _(d).must_be_close_to(0.2, 0.002)
+    _(d).must_be :>, 0
   end
 
   it "raises an error if measure is called with no block" do

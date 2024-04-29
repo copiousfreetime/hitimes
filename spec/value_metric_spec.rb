@@ -60,7 +60,6 @@ describe Hitimes::ValueMetric do
     f1 = Time.now.gmtime.to_f * 1_000_000
     10.times do |x|
       m.measure(x)
-      sleep 0.1
     end
     f2 = Time.now.gmtime.to_f * 1_000_000
     _(m.sampling_start_time).must_be :>=, f1
@@ -75,7 +74,6 @@ describe Hitimes::ValueMetric do
     f1 = Time.now.gmtime.to_f * 1_000_000
     10.times do |x|
       m.measure(x)
-      sleep 0.1
     end
     f2 = Time.now.gmtime.to_f * 1_000_000
     _(m.sampling_stop_time).must_be :>, f1
