@@ -60,7 +60,7 @@ describe Hitimes::TimedMetric do
   end
 
   it "calculates the stddev of the durations" do
-    3.times do |x|
+    3.times do |_x|
       @tm.start
       @tm.stop
     end

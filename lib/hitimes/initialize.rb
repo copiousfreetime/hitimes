@@ -50,7 +50,7 @@ module Hitimes
     # *BSD:
     #
     #   All the BSDs seem to have CLOCK_MONOTONIC and CLOCK_REALTIME although on
-    #   NetBSD CLOCK_MONOTONIC is not affected by adjtime(2). It is unclear if 
+    #   NetBSD CLOCK_MONOTONIC is not affected by adjtime(2). It is unclear if
     #   they are affected by adjtime(2) on FreeBSD, OpenBSD, or DragonFlyBSD. -
     #   at least according to the man pages.
     #
@@ -71,27 +71,27 @@ module Hitimes
     #
     # If CLOCK_REALTIME is chose, we will dump a warning to the user.
     # And if we can't finde one, which is really, really odd, we'll raise an exception.
-    POTENTIAL_CLOCK_IDS = %i[ CLOCK_MONOTONIC_RAW CLOCK_MONOTONIC CLOCK_REALTIME].freeze
+    POTENTIAL_CLOCK_IDS = %i[CLOCK_MONOTONIC_RAW CLOCK_MONOTONIC CLOCK_REALTIME].freeze
     def determine_clock_id(potential_ids = POTENTIAL_CLOCK_IDS)
       sym = potential_ids.find { |c| Process.const_defined?(c) }
 
-      if :CLOCK_REALTIME == sym
+      if sym == :CLOCK_REALTIME
         warn <<~TXT
-        Unable to find a high resolution clock. Using CLOCK_REALTIME for timing.
+          Unable to find a high resolution clock. Using CLOCK_REALTIME for timing.
 
-        RUBY_DESCRIPTION: #{RUBY_DESCRIPTION}
+          RUBY_DESCRIPTION: #{RUBY_DESCRIPTION}
 
-        Please report the above information hitimes issue tracker at
-        https://github.com/copiousfreetime/hitimes/issuest
+          Please report the above information hitimes issue tracker at
+          https://github.com/copiousfreetime/hitimes/issuest
         TXT
       elsif sym.nil?
         raise Hitimes::Error, <<~ERROR
-        Unable to find a high resolution clock at all. THIS IS A BUG!!
+          Unable to find a high resolution clock at all. THIS IS A BUG!!
 
-        RUBY_DESCRIPTION: #{RUBY_DESCRIPTION}
+          RUBY_DESCRIPTION: #{RUBY_DESCRIPTION}
 
-        Please report this bug to the hitimes issue tracker at
-        https://github.com/copiousfreetime/hitimes/issues
+          Please report this bug to the hitimes issue tracker at
+          https://github.com/copiousfreetime/hitimes/issues
         ERROR
       end
 

@@ -82,7 +82,7 @@ describe Hitimes::TimedValueMetric do
       @tm.start
       @tm.stop(x)
     end
-    _(@tm.timed_stats.min).must_be :>,  0
+    _(@tm.timed_stats.min).must_be :>, 0
     _(@tm.value_stats.min).must_equal 0
   end
 
