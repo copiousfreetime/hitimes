@@ -3,8 +3,6 @@
 # All rights reserved.  See LICENSE and/or COPYING for details.
 #++
 
-require "thread"
-
 module Hitimes
   #
   # MutexedStats is the start of a threadsafe Stats class.  Currently, on MRI

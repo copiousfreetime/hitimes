@@ -4,7 +4,6 @@
 #++
 
 require "stringio"
-require "thread"
 module Hitimes
   #
   # The Stats class encapulsates capturing and reporting statistics.  It is
