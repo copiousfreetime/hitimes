@@ -1,14 +1,20 @@
 # Hitimes Changelog
-## Version 2.1.0 2023-XX-XX
+## Version 3.0.0 - 2024-04-30
 
 * Migrated to SemaphoreCI for doing full test runs on all active ruby versions.
-* Remove the dependency on `Process.clock_getres` as it is unreliable. This has
-  the effect of deprecating some Hitimes constants that had been documented as
-  public. These are now constant values across all systems and will be removed
-  in the future. (#76)
+* Remove the dependency on `Process.clock_getres` as it is unreliable.
+* This has the effect of deprecating some Hitimes constants that had been documented as public. These are now removed as this is a major version update
   - `Hitimes::CLOCK_RESOLUTION_NANOSECONDS`
   - `Hitimes::CLOCK_RESOLUTION_SECONDS`
   - `Hitimes::INSTANT_CONVERSION_FACTOR`
+  - `Hitimes.clock_resolution_description`
+  - `Hitimes.clock_description`
+* Added Rubocop for some coding consistency
+* Updated the supported ruby version to be 3.0 and up
+* Updated all dependencies
+* Changed how all the `assert_delta` style tests were done so they were not so flakey
+* Hitimes will now emit a `warn` message if it ends up using `CLOCK_REALTIME`
+* Hitimes will raise an exception if it cannot find a valid clock id. This is a bug and a message to file a report is in the exception
 
 ## Version 2.0.0 2019-09-23
 
