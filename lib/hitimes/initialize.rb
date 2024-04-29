@@ -42,13 +42,13 @@ module Hitimes
         val = Process.clock_gettime(clock_id, :nanosecond)
         res = if (val % 1_000_000_000).zero? then
                 1
-        elsif (val % 1_000_000).zero? then
-          1e-3
-        elsif (val % 1_000).zero? then
-          1e-6
-        else
-          1e-9
-        end
+              elsif (val % 1_000_000).zero? then
+                1e-3
+              elsif (val % 1_000).zero? then
+                1e-6
+              else
+                1e-9
+              end
         counts[res] += 1
       end
 

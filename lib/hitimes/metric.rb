@@ -98,9 +98,9 @@ module Hitimes
     #
     def to_hash
       { "sampling_start_time" => self.sampling_start_time,
-        "sampling_stop_time"  => self.sampling_stop_time,
-        "additional_data"     => self.additional_data,
-        "name"                => self.name }
+        "sampling_stop_time" => self.sampling_stop_time,
+        "additional_data" => self.additional_data,
+        "name" => self.name }
     end
 
     #
