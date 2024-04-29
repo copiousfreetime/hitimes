@@ -3,11 +3,11 @@
 #
 begin
   require "hitimes"
-rescue LoadError => le
+rescue LoadError => e
   %w[ext lib].each do |p|
     path = File.expand_path(File.join(File.dirname(__FILE__), "..", p))
     if $:.include?(path) then
-      raise le
+      raise e
     end
 
     $: << path

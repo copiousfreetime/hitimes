@@ -6,11 +6,11 @@ require "time"
 #
 begin
   require "hitimes"
-rescue LoadError => le
+rescue LoadError => e
   ext_path = File.expand_path(File.join(File.dirname(__FILE__), "..", "ext"))
   lib_path = File.expand_path(File.join(File.dirname(__FILE__), "..", "lib"))
   if $:.include?(ext_path) then
-    raise le
+    raise e
   end
 
   $: << ext_path
