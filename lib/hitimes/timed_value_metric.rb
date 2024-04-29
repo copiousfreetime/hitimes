@@ -80,9 +80,9 @@ module Hitimes
     # this is a noop.
     #
     def start
-      if not @current_interval.running? then
+      unless @current_interval.running?
         @current_interval.start
-        @sampling_start_time ||= utc_microseconds()
+        @sampling_start_time ||= utc_microseconds
         @sampling_start_interval ||= Interval.now
       end
       nil
@@ -104,7 +104,7 @@ module Hitimes
     #
     #
     def stop(value)
-      if @current_interval.running? then
+      if @current_interval.running?
         d = @current_interval.stop
         @timed_stats.update(d)
         @current_interval = Interval.new
@@ -152,7 +152,7 @@ module Hitimes
     #
     #
     def split(value)
-      if @current_interval.running? then
+      if @current_interval.running?
         next_interval = @current_interval.split
         d = @current_interval.duration
         @timed_stats.update(d)

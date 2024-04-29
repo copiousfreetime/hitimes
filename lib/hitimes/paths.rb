@@ -17,11 +17,11 @@ module Hitimes
     # is guaranteed.
     #
     def self.root_dir
-      @root_dir ||= (
+      @root_dir ||= begin
         path_parts = ::File.expand_path(__FILE__).split(::File::SEPARATOR)
         lib_index  = path_parts.rindex("lib")
         @root_dir = path_parts[0...lib_index].join(::File::SEPARATOR) + ::File::SEPARATOR
-      )
+      end
     end
 
     #

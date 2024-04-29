@@ -131,7 +131,7 @@ describe Hitimes::TimedMetric do
 
     it "has an empty hash for additional_data" do
       h = @tm.to_hash
-      _(h["additional_data"]).must_equal Hash.new
+      _(h["additional_data"]).must_equal({})
       _(h["additional_data"].size).must_equal 0
     end
 

@@ -67,7 +67,7 @@ describe Hitimes::Stats do
     end
 
     it "raises NoMethodError if an invalid stat is used" do
-      _(lambda { @full_stats.to_hash("wibble") }).must_raise(NoMethodError)
+      _(-> { @full_stats.to_hash("wibble") }).must_raise(NoMethodError)
     end
   end
 
@@ -92,7 +92,7 @@ describe Hitimes::Stats do
     end
 
     it "raises NoMethodError if an invalid stat is used" do
-      _(lambda { @full_stats.to_json("wibble") }).must_raise(NoMethodError)
+      _(-> { @full_stats.to_json("wibble") }).must_raise(NoMethodError)
     end
   end
 end

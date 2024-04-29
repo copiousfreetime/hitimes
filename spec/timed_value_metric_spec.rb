@@ -91,9 +91,9 @@ describe Hitimes::TimedValueMetric do
   end
 
   it "keeps track of the minimum start time of all the intervals" do
-    f1 = Time.now.gmtime.to_f * 1000000
+    f1 = Time.now.gmtime.to_f * 1_000_000
     5.times { @tm.start; sleep 0.05; @tm.stop(1) }
-    f2 = Time.now.gmtime.to_f * 1000000
+    f2 = Time.now.gmtime.to_f * 1_000_000
     _(@tm.sampling_start_time).must_be :>=, f1
     _(@tm.sampling_start_time).must_be :<, f2
     # distance from now to start time should be greater than the distance from
@@ -141,7 +141,7 @@ describe Hitimes::TimedValueMetric do
 
     it "has an empty has for additional_data" do
       h = @tm.to_hash
-      _(h["additional_data"]).must_equal Hash.new
+      _(h["additional_data"]).must_equal({})
       _(h["additional_data"].size).must_equal 0
     end
 

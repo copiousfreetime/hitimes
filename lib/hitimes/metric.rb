@@ -58,11 +58,9 @@ module Hitimes
     # If the metric has not started measuring then the start time is nil.
     #
     def sampling_start_time
-      if @sampling_start_interval then
-        @sampling_start_time ||= utc_microseconds()
-      else
-        nil
-      end
+      return unless @sampling_start_interval
+
+      @sampling_start_time ||= utc_microseconds
     end
 
     #
@@ -82,11 +80,9 @@ module Hitimes
     # When sampling_stop_time is called, the actual time of day is caculated.
     #
     def sampling_stop_time
-      if @sampling_delta > 0 then
-        (sampling_start_time + (@sampling_delta * 1_000_000))
-      else
-        nil
-      end
+      return unless @sampling_delta > 0
+
+      (sampling_start_time + (@sampling_delta * 1_000_000))
     end
 
     #
@@ -100,7 +96,7 @@ module Hitimes
       { "sampling_start_time" => sampling_start_time,
         "sampling_stop_time" => sampling_stop_time,
         "additional_data" => additional_data,
-        "name" => name }
+        "name" => name, }
     end
 
     #

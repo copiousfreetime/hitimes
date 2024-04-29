@@ -151,9 +151,7 @@ module Hitimes
 
       return duration_so_far unless stopped?
 
-      if @duration < 0 then
-        @duration = calculate_duration(@start_instant, @stop_instant)
-      end
+      @duration = calculate_duration(@start_instant, @stop_instant) if @duration < 0
 
       @duration
     end

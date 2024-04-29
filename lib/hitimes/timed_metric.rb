@@ -80,9 +80,9 @@ module Hitimes
     # this is a noop.
     #
     def start
-      if not @current_interval.running? then
+      unless @current_interval.running?
         @current_interval.start
-        @sampling_start_time ||= utc_microseconds()
+        @sampling_start_time ||= utc_microseconds
         @sampling_start_interval ||= Interval.now
       end
       nil
@@ -98,7 +98,7 @@ module Hitimes
     # no stats are updated.
     #
     def stop
-      if @current_interval.running? then
+      if @current_interval.running?
         d = @current_interval.stop
         @stats.update(d)
         @current_interval = Interval.new
@@ -143,7 +143,7 @@ module Hitimes
     # happens and false is returned.
     #
     def split
-      if @current_interval.running? then
+      if @current_interval.running?
         next_interval = @current_interval.split
         d = @current_interval.duration
         @stats.update(d)
@@ -170,6 +170,6 @@ module Hitimes
     # forward appropriate calls directly to the stats object
     extend Forwardable
     def_delegators :@stats, :count, :max, :mean, :min, :rate, :stddev, :sum, :sumsq
-    alias :duration :sum
+    alias duration sum
   end
 end

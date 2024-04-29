@@ -40,7 +40,7 @@ module Hitimes
     # Give the +value+ as the measurement to the metric.  The value is returned
     #
     def measure(value)
-      @sampling_start_time ||= utc_microseconds()
+      @sampling_start_time ||= utc_microseconds
       @sampling_start_interval ||= Interval.now
 
       @stats.update(value)

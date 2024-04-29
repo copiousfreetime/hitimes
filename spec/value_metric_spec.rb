@@ -85,7 +85,7 @@ describe Hitimes::ValueMetric do
 
     it "has an empty has for additional_data" do
       h = @metric.to_hash
-      _(h["additional_data"]).must_equal Hash.new
+      _(h["additional_data"]).must_equal({})
       _(h["additional_data"].size).must_equal 0
     end
 
@@ -95,7 +95,7 @@ describe Hitimes::ValueMetric do
     end
 
     fields = Hitimes::Stats::STATS.dup + %w[name additional_data sampling_start_time sampling_stop_time]
-    fields = fields - ["rate"]
+    fields -= ["rate"]
     fields.each do |f|
       it "has a value for #{f}" do
         h = @metric.to_hash

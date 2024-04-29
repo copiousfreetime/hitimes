@@ -32,11 +32,7 @@ module Hitimes
     # A list of the available stats
     STATS = %w[count max mean min rate stddev sum sumsq]
 
-    attr_reader :min
-    attr_reader :max
-    attr_reader :count
-    attr_reader :sum
-    attr_reader :sumsq
+    attr_reader :min, :max, :count, :sum, :sumsq
 
     def initialize
       @mutex = Mutex.new

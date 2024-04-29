@@ -9,9 +9,7 @@ begin
 rescue LoadError => e
   ext_path = File.expand_path(File.join(File.dirname(__FILE__), "..", "ext"))
   lib_path = File.expand_path(File.join(File.dirname(__FILE__), "..", "lib"))
-  if $:.include?(ext_path) then
-    raise e
-  end
+  raise e if $:.include?(ext_path)
 
   $: << ext_path
   $: << lib_path

@@ -6,9 +6,7 @@ begin
 rescue LoadError => e
   %w[ext lib].each do |p|
     path = File.expand_path(File.join(File.dirname(__FILE__), "..", p))
-    if $:.include?(path) then
-      raise e
-    end
+    raise e if $:.include?(path)
 
     $: << path
   end
@@ -19,9 +17,7 @@ s = Hitimes::Stats.new
 dir = ARGV.shift || Dir.pwd
 Dir.entries(dir).each do |entry|
   fs = File.stat(entry)
-  if fs.file? then
-    s.update(fs.size)
-  end
+  s.update(fs.size) if fs.file?
 end
 
 Hitimes::Stats::STATS.each do |m|

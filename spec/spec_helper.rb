@@ -1,4 +1,4 @@
-if RUBY_VERSION >= "1.9.2" then
+if RUBY_VERSION >= "1.9.2"
   require "simplecov"
   puts "Using coverage!"
   SimpleCov.start if ENV["COVERAGE"]

@@ -14,7 +14,7 @@ module Hitimes
     #
     # Returns an array of clock ids
     def potential_clock_ids
-      Array.new.tap do |clock_ids|
+      [].tap do |clock_ids|
         # General monotonic constants in general order of priority. We'll use
         # the first one that matches.
         #
@@ -40,11 +40,11 @@ module Hitimes
       counts = Hash.new(0)
       17.times do
         val = Process.clock_gettime(clock_id, :nanosecond)
-        res = if (val % 1_000_000_000).zero? then
+        res = if (val % 1_000_000_000).zero?
                 1
-              elsif (val % 1_000_000).zero? then
+              elsif (val % 1_000_000).zero?
                 1e-3
-              elsif (val % 1_000).zero? then
+              elsif (val % 1_000).zero?
                 1e-6
               else
                 1e-9
@@ -68,9 +68,9 @@ module Hitimes
     #
     # Returns the clock id to use on this ruby
     def determine_clock_id
-      ids_and_resolutions = potential_clock_ids.map { |clock_id|
+      ids_and_resolutions = potential_clock_ids.map do |clock_id|
         [clock_id, resolution_of(clock_id)]
-      }
+      end
 
       # Sort them by the resolution - we want the smallest one first
       ids_and_resolutions.sort_by! { |pair| pair[1] }
