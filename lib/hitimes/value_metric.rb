@@ -12,14 +12,14 @@ module Hitimes
   #
   # A good example of a ValueMetric is measuring the number of items in a queue.
   #
-  # A ValueMetric contains a Stats object, therefore ValueMetric has +count+, +max+, 
+  # A ValueMetric contains a Stats object, therefore ValueMetric has +count+, +max+,
   # +mean+, +min+, +stddev+, +sum+, +sumsq+ methods that delegate to that Stats
   # object for convenience.
   #
   class ValueMetric < Metric
     # holds all the statistics
     attr_reader :stats
-    
+
     #
     # :call-seq:
     #   ValueMetric.new( 'my_metric' ) -> ValueMetric
@@ -44,7 +44,7 @@ module Hitimes
       @sampling_start_interval ||= Interval.now
 
       @stats.update( value )
-      
+
       # update the length of time we have been sampling
       @sampling_delta = @sampling_start_interval.duration_so_far
     end
@@ -52,13 +52,13 @@ module Hitimes
     #
     # :call-seq:
     #   metric.to_hash -> Hash
-    #   
+    #
     # Convert the metric to a hash
     #
     def to_hash
       h = super
-      (Stats::STATS - %w[ rate ]).each do |s|
-        h[s] = self.send( s ) 
+      (Stats::STATS - %w[rate]).each do |s|
+        h[s] = self.send( s )
       end
       return h
     end

@@ -10,7 +10,7 @@ module Hitimes
   #
   #   tm = TimedValueMetric.new( 'my-batch-method' )
   #
-  #   42.times do 
+  #   42.times do
   #     tm.start
   #     number_of_items_processed = do_something
   #     tm.stop( number_of_items_processed )
@@ -72,17 +72,17 @@ module Hitimes
       @current_interval.running?
     end
 
-    # 
+    #
     # :call-seq:
     #   timed_value_metric.start -> nil
     #
     # Start the current timer, if the current timer is already started, then
-    # this is a noop.  
+    # this is a noop.
     #
     def start
       if not @current_interval.running? then
         @current_interval.start
-        @sampling_start_time ||= self.utc_microseconds() 
+        @sampling_start_time ||= self.utc_microseconds()
         @sampling_start_interval ||= Interval.now
       end
       nil
@@ -101,7 +101,7 @@ module Hitimes
     # the current interval. If the metric is stopped then the duration of the
     # last Interval is returned.  If the metric was already stopped before this
     # call, then false is returned and no stats are updated.
-    # 
+    #
     #
     def stop( value )
       if @current_interval.running? then
@@ -148,18 +148,18 @@ module Hitimes
     #
     # If the metric is running, then split returns the duration of the previous
     # interval, i.e. the split-time.  If the metric is not running, nothing
-    # happens, no stats are updated, and false is returned.  
+    # happens, no stats are updated, and false is returned.
     #
     #
     def split( value )
-      if @current_interval.running? then 
+      if @current_interval.running? then
         next_interval = @current_interval.split
         d = @current_interval.duration
         @timed_stats.update( d )
         @value_stats.update( value )
-        @current_interval = next_interval 
+        @current_interval = next_interval
         return d
-      end 
+      end
       return false
     end
 
@@ -192,7 +192,7 @@ module Hitimes
     # associated with a quantity of things done during that unit of time.  So
     # the +rate+ for a TimedValueMetric is the (sum of all quantities sampled) /
     # ( sum of all durations measured )
-    # 
+    #
     # For example, say you were measuring, using a TimedValueMetric batch jobs
     # that had individual units of work.
     #
@@ -208,7 +208,7 @@ module Hitimes
     # At this point the rate of units per second is calculated as ( 12 + 42 ) / ( duration1 + duration2 )
     #
     #   some_batch_rate = tvm.rate # returns ( 34 / ( duration1+duration2 ) )
-    # 
+    #
     def rate
       @value_stats.sum / @timed_stats.sum
     end
@@ -216,13 +216,13 @@ module Hitimes
     #
     # :call-seq:
     #   metric.to_hash -> Hash
-    #   
+    #
     # Convert the metric to a hash
     #
     def to_hash
       h = super
       h["timed_stats"] = @timed_stats.to_hash
-      h["value_stats"] = @value_stats.to_hash( Stats::STATS - %w[ rate ] )
+      h["value_stats"] = @value_stats.to_hash( Stats::STATS - %w[rate] )
       h["rate"] = self.rate
       h["unit_count"] = self.unit_count
       return h

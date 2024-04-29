@@ -5,7 +5,7 @@ describe Hitimes::Stats do
   before( :each ) do
     @stats = Hitimes::Stats.new
     @full_stats = Hitimes::Stats.new
-    
+
     [1, 2, 3].each { |i| @full_stats.update( i ) }
   end
 
@@ -36,18 +36,18 @@ describe Hitimes::Stats do
   it "tracks the count" do
     _(@full_stats.count).must_equal 3
   end
-  
+
   it "tracks the sum" do
     _(@full_stats.sum).must_equal 6.0
   end
 
   it "calculates the standard deviation" do
     _(@full_stats.stddev).must_equal 1.0
-  end 
+  end
 
   it "calculates the sum of squares " do
     _(@full_stats.sumsq).must_equal 14.0
-  end 
+  end
 
   describe "#to_hash " do
     it "converts to a Hash" do
@@ -59,11 +59,11 @@ describe Hitimes::Stats do
     it "converts to a limited Hash if given arguments" do
       h = @full_stats.to_hash( "min", "max", "mean" )
       _(h.size).must_equal 3
-      _(h.keys.sort).must_equal %w[ max mean min  ]
+      _(h.keys.sort).must_equal %w[max mean min]
 
-      h = @full_stats.to_hash( %w[ count rate ] )
+      h = @full_stats.to_hash( %w[count rate] )
       _(h.size).must_equal 2
-      _(h.keys.sort).must_equal %w[ count rate ]
+      _(h.keys.sort).must_equal %w[count rate]
     end
 
     it "raises NoMethodError if an invalid stat is used" do
@@ -83,12 +83,12 @@ describe Hitimes::Stats do
       j = @full_stats.to_json( "min", "max", "mean" )
       h = JSON.parse( j )
       _(h.size).must_equal 3
-      _(h.keys.sort).must_equal %w[ max mean min  ]
+      _(h.keys.sort).must_equal %w[max mean min]
 
-      j = @full_stats.to_json( %w[ count rate ] )
+      j = @full_stats.to_json( %w[count rate] )
       h = JSON.parse( j )
       _(h.size).must_equal 2
-      _(h.keys.sort).must_equal %w[ count rate ]
+      _(h.keys.sort).must_equal %w[count rate]
     end
 
     it "raises NoMethodError if an invalid stat is used" do

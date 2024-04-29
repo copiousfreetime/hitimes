@@ -130,4 +130,3 @@ describe Hitimes::Interval do
     end
   end
 end
-

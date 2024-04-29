@@ -11,11 +11,11 @@ module Hitimes
   #
   #   tm = TimedMetric.new( 'my-method' )
   #
-  #   200.times do 
-  #     my_method_result = tm.measure do 
+  #   200.times do
+  #     my_method_result = tm.measure do
   #       my_method( ... )
   #     end
-  #   end 
+  #   end
   #
   #   puts "#{ tm.name } operated at a rate of #{ tm.rate } calls per second"
   #
@@ -23,9 +23,9 @@ module Hitimes
   # Metric API also.
   #
   # A TimedMetric measures the execution time of an option with the Interval
-  # class. 
-  # 
-  # A TimedMetric contains a Stats object, therefore TimedMetric has +count+, +max+, 
+  # class.
+  #
+  # A TimedMetric contains a Stats object, therefore TimedMetric has +count+, +max+,
   # +mean+, +min+, +rate+, +stddev+, +sum+, +sumsq+ methods that delegate to that Stats
   # object for convenience.
   #
@@ -66,23 +66,23 @@ module Hitimes
     # :call-seq:
     #   timed_metric.running? -> true or false
     #
-    # return whether or not the timer is currently running.  
+    # return whether or not the timer is currently running.
     #
     def running?
       @current_interval.running?
     end
 
-    # 
+    #
     # :call-seq:
     #   timed_metric.start -> nil
     #
     # Start the current metric, if the current metric is already started, then
-    # this is a noop.  
+    # this is a noop.
     #
     def start
       if not @current_interval.running? then
-        @current_interval.start 
-        @sampling_start_time ||= self.utc_microseconds() 
+        @current_interval.start
+        @sampling_start_time ||= self.utc_microseconds()
         @sampling_start_interval ||= Interval.now
       end
       nil
@@ -96,7 +96,7 @@ module Hitimes
     # interval. If the timer was stopped then the duration of the last Interval
     # is returned.  If the timer was already stopped then false is returned and
     # no stats are updated.
-    # 
+    #
     def stop
       if @current_interval.running? then
         d = @current_interval.stop
@@ -142,31 +142,30 @@ module Hitimes
     # interval, i.e. the split-time.  If the timer is not running, nothing
     # happens and false is returned.
     #
-    def split  
-      if @current_interval.running? then 
+    def split
+      if @current_interval.running? then
         next_interval = @current_interval.split
         d = @current_interval.duration
         @stats.update( d )
-        @current_interval = next_interval 
+        @current_interval = next_interval
         return d
-      end 
+      end
       return false
     end
 
     #
     # :call-seq:
     #   metric.to_hash -> Hash
-    #   
+    #
     # Convert the metric to a hash
     #
     def to_hash
       h = super
       Stats::STATS.each do |s|
-        h[s] = self.send( s ) 
+        h[s] = self.send( s )
       end
       return h
     end
-
 
     # forward appropriate calls directly to the stats object
     extend Forwardable

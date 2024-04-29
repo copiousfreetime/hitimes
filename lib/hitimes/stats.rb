@@ -10,7 +10,7 @@ module Hitimes
   # The Stats class encapulsates capturing and reporting statistics.  It is
   # modeled after the RFuzz::Sampler class, but implemented in C.  For general use
   # you allocate a new Stats object, and then update it with new values.  The
-  # Stats object will keep track of the _min_, _max_, _count_, _sum_ and _sumsq_ 
+  # Stats object will keep track of the _min_, _max_, _count_, _sum_ and _sumsq_
   # and when you want you may also retrieve the _mean_, _stddev_ and _rate_.
   #
   # this contrived example shows getting a list of all the files in a directory
@@ -31,7 +31,7 @@ module Hitimes
   #
   class Stats
     # A list of the available stats
-    STATS = %w[ count max mean min rate stddev sum sumsq ]
+    STATS = %w[count max mean min rate stddev sum sumsq]
 
     attr_reader :min
     attr_reader :max
@@ -68,7 +68,7 @@ module Hitimes
 
     # call-seq:
     #    stat.mean -> Float
-    # 
+    #
     # Return the arithmetic mean of the values put into the Stats object.  If no
     # values have passed through the stats object then 0.0 is returned;
     def mean
@@ -110,14 +110,14 @@ module Hitimes
       Math.sqrt((@sumsq - ((@sum * @sum) / @count)) / (@count - 1))
     end
 
-    # 
+    #
     # call-seq:
     #   stat.to_hash   -> Hash
     #   stat.to_hash( %w[ count max mean ]) -> Hash
     #
     # return a hash of the stats.  By default this returns a hash of all stats
     # but passing in an array of items will limit the stats returned to only
-    # those in the Array. 
+    # those in the Array.
     #
     # If passed in an empty array or nil to to_hash then STATS is assumed to be
     # the list of stats to return in the hash.

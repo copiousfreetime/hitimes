@@ -18,7 +18,7 @@ module Hitimes
         # General monotonic constants in general order of priority. We'll use
         # the first one that matches.
         #
-        %i[ CLOCK_MONOTONIC_RAW CLOCK_BOOTTIME CLOCK_MONOTONIC ].each do |c|
+        %i[CLOCK_MONOTONIC_RAW CLOCK_BOOTTIME CLOCK_MONOTONIC].each do |c|
           clock_ids << Process.const_get(c) if Process.const_defined?(c)
         end
       end

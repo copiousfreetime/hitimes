@@ -55,7 +55,6 @@ describe Hitimes::TimedValueMetric do
     _(@tm.rate).must_be_close_to(40.0, 1.0)
   end
 
-
   it "calculates the stddev of the durations" do
     3.times { |x| @tm.start; sleep(0.05 * x); @tm.stop(x) }
     _(@tm.timed_stats.stddev).must_be_close_to(0.05, 0.001)
@@ -84,7 +83,7 @@ describe Hitimes::TimedValueMetric do
     _(@tm.timed_stats.sum).must_be_close_to( 0.15, 0.01 )
     _(@tm.value_stats.sum).must_equal 3
   end
-  
+
   it "keeps track of the sum of squares value" do
     3.times { |x| @tm.start; sleep 0.05; @tm.stop( x ) }
     _(@tm.timed_stats.sumsq).must_be_close_to(0.0075, 0.0005)
@@ -158,7 +157,7 @@ describe Hitimes::TimedValueMetric do
       _(h["unit_count"]).must_equal 10
     end
 
-    fields = %w[ name additional_data sampling_start_time sampling_stop_time value_stats timed_stats rate unit_count ]
+    fields = %w[name additional_data sampling_start_time sampling_stop_time value_stats timed_stats rate unit_count]
     fields.each do |f|
       it "has a value for #{f}" do
         3.times { |x| @tm.measure(x) { sleep 0.001 } }
@@ -166,5 +165,5 @@ describe Hitimes::TimedValueMetric do
         _(h[f]).wont_be_nil
       end
     end
-  end 
+  end
 end

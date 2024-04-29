@@ -35,4 +35,3 @@ require "hitimes/metric"
 require "hitimes/value_metric"
 require "hitimes/timed_metric"
 require "hitimes/timed_value_metric"
-

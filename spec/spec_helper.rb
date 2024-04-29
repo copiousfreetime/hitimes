@@ -9,4 +9,3 @@ require "hitimes"
 require "minitest/autorun"
 require "minitest/focus"
 require "minitest/pride"
-

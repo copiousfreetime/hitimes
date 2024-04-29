@@ -13,5 +13,3 @@ module Hitimes
   #
   MutexedStats = Stats
 end
-
-

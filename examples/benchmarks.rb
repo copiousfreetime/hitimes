@@ -81,7 +81,7 @@ def hitimes_duration_tv3
 end
 
 #
-# use the Struct::Tms values and return  the difference in User time between 2 
+# use the Struct::Tms values and return  the difference in User time between 2
 # successive calls
 #
 def process_duration
@@ -96,7 +96,6 @@ def time_duration
   t1 = Time.now.to_f
   Time.now.to_f - t1
 end
-  
 
 puts "Testing time sampling 100,000 times"
 

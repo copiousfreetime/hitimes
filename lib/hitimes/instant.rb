@@ -18,7 +18,6 @@ module Hitimes
   # Deprecated: No longer used
   INSTANT_CONVERSION_FACTOR       = 1
 
-
   # Public: Get the raw instant
   #
   # Examples:

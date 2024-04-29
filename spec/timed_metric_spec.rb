@@ -51,7 +51,6 @@ describe Hitimes::TimedMetric do
     _(@tm.rate).must_be_close_to(20.00, 0.5)
   end
 
-
   it "calculates the stddev of the durations" do
     3.times { |x| @tm.start; sleep(0.05 * x); @tm.stop }
     _(@tm.stddev).must_be_close_to(0.05)
@@ -142,7 +141,7 @@ describe Hitimes::TimedMetric do
       _(h["sum"]).must_be_close_to(0.45, 0.01)
     end
 
-    fields = ::Hitimes::Stats::STATS.dup + %w[ name additional_data sampling_start_time sampling_stop_time ]
+    fields = ::Hitimes::Stats::STATS.dup + %w[name additional_data sampling_start_time sampling_stop_time]
     fields.each do |f|
       it "has a value for #{f}" do
         @tm.measure { sleep 0.001 }
@@ -150,5 +149,5 @@ describe Hitimes::TimedMetric do
         _(h[f]).wont_be_nil
       end
     end
-  end 
+  end
 end

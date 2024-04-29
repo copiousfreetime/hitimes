@@ -4,7 +4,7 @@
 begin
   require "hitimes"
 rescue LoadError => le
-  %w[ ext lib ].each do |p|
+  %w[ext lib].each do |p|
     path = File.expand_path( File.join( File.dirname( __FILE__ ), "..", p ) )
     if $:.include?( path ) then
       raise le
@@ -25,8 +25,7 @@ Dir.entries( dir ).each do |entry|
 end
 
 Hitimes::Stats::STATS.each do |m|
-  puts "#{m.rjust(6)} : #{s.send( m ) }"
+  puts "#{m.rjust(6)} : #{s.send( m )}"
 end
 
 puts s.to_hash.inspect
-

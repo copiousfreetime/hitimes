@@ -13,7 +13,7 @@ describe Hitimes::Metric do
     m = Hitimes::Metric.new( "more-data", "foo" => "bar", "this" => "that" )
     _(m.additional_data["foo"]).must_equal "bar"
     _(m.additional_data["this"]).must_equal "that"
-    
+
     m = Hitimes::Metric.new( "more-data", { "foo" => "bar", "this" => "that" } )
     _(m.additional_data["foo"]).must_equal "bar"
     _(m.additional_data["this"]).must_equal "that"
@@ -24,5 +24,3 @@ describe Hitimes::Metric do
     _(@metric.sampling_stop_time).must_be_nil
   end
 end
-
- 

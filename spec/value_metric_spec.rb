@@ -14,7 +14,7 @@ describe Hitimes::ValueMetric do
     m = Hitimes::ValueMetric.new( "more-data", "foo" => "bar", "this" => "that" )
     _(m.additional_data["foo"]).must_equal "bar"
     _(m.additional_data["this"]).must_equal "that"
-    
+
     m = Hitimes::ValueMetric.new( "more-data", { "foo" => "bar", "this" => "that" } )
     _(m.additional_data["foo"]).must_equal "bar"
     _(m.additional_data["this"]).must_equal "that"
@@ -94,7 +94,7 @@ describe Hitimes::ValueMetric do
       _(h["sum"]).must_equal 45
     end
 
-    fields = ::Hitimes::Stats::STATS.dup + %w[ name additional_data sampling_start_time sampling_stop_time ]
+    fields = ::Hitimes::Stats::STATS.dup + %w[name additional_data sampling_start_time sampling_stop_time]
     fields = fields - ["rate"]
     fields.each do |f|
       it "has a value for #{f}" do
@@ -104,4 +104,3 @@ describe Hitimes::ValueMetric do
     end
   end
 end
-
