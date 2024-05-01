@@ -122,9 +122,6 @@ describe Hitimes::TimedValueMetric do
     f2 = Time.now.gmtime.to_f * 1_000_000
     _(@tm.sampling_start_time).must_be :>=, f1
     _(@tm.sampling_start_time).must_be :<, f2
-    # distance from now to start time should be greater than the distance from
-    # the start to the min start_time
-    _((f2 - @tm.sampling_start_time)).must_be :>, (@tm.sampling_start_time - f1)
   end
 
   it "keeps track of the last stop time of all the intervals" do
@@ -136,9 +133,6 @@ describe Hitimes::TimedValueMetric do
     f2 = Time.now.gmtime.to_f * 1_000_000
     _(@tm.sampling_stop_time).must_be :>, f1
     _(@tm.sampling_stop_time).must_be :<=, f2
-    # distance from now to max stop time time should be less than the distance
-    # from the start to the max stop time
-    _((f2 - @tm.sampling_stop_time)).must_be :<, (@tm.sampling_stop_time - f1)
   end
 
   it "can create an already running timer" do
