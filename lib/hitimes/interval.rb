@@ -52,11 +52,11 @@ module Hitimes
     def self.measure
       raise Error, "No block given to Interval.measure" unless block_given?
 
-      i = Interval.now
+      interval = Interval.now
       yield
-      i.stop
+      interval.stop
 
-      i.duration
+      interval.duration
     end
 
     # call-seq:

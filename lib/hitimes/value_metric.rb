@@ -58,11 +58,11 @@ module Hitimes
     # Convert the metric to a hash
     #
     def to_hash
-      h = super
-      (Stats::STATS - %w[rate]).each do |s|
-        h[s] = send(s)
+      result = super
+      (Stats::STATS - %w[rate]).each do |stat|
+        result[stat] = send(stat)
       end
-      h
+      result
     end
 
     # forward appropriate calls directly to the stats object

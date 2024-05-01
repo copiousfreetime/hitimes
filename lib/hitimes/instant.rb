@@ -31,8 +31,8 @@ module Hitimes
     when Symbol
       CLOCK_ID.to_s
     else
-      const = Process.constants.grep(/CLOCK/).find do |c|
-        Process.const_get(c) == CLOCK_ID
+      const = Process.constants.grep(/CLOCK/).find do |id|
+        Process.const_get(id) == CLOCK_ID
       end
       "Process::#{const}"
     end

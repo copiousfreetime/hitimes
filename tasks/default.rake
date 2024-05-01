@@ -9,9 +9,7 @@ require "digest"
 begin
   require "minitest/test_task"
   Minitest::TestTask.create(:test) do |t|
-    t.libs << "lib"
     t.libs << "spec"
-    t.libs << "test"
     t.warning = true
     t.test_globs = "{test,spec}/**/{test_*,*_spec}.rb"
   end
@@ -24,6 +22,23 @@ begin
   task default: :test
 rescue LoadError
   This.task_warning("test")
+end
+
+#------------------------------------------------------------------------------
+# Coverage - integrated with minitest
+#------------------------------------------------------------------------------
+begin
+  require "simplecov"
+  desc "Run tests with code coverage"
+  Minitest::TestTask.create(:coverage) do |t|
+    t.test_prelude = 'require "simplecov"; SimpleCov.start;'
+    t.libs << "spec"
+    t.warning = true
+    t.test_globs = "{test,spec}/**/{test_*,*_spec}.rb"
+  end
+  CLOBBER << "coverage" if File.directory?("coverage")
+rescue LoadError
+  This.task_warning("simplecov")
 end
 
 #------------------------------------------------------------------------------
@@ -46,19 +61,13 @@ rescue StandardError, LoadError
 end
 
 #------------------------------------------------------------------------------
-# Coverage - optional code coverage, rcov for 1.8 and simplecov for 1.9, so
-#            for the moment only rcov is listed.
+# Reek - static code analysis
 #------------------------------------------------------------------------------
 begin
-  require "simplecov"
-  desc "Run tests with code coverage"
-  task :coverage do
-    ENV["COVERAGE"] = "true"
-    Rake::Task[:test].execute
-  end
-  CLOBBER << "coverage" if File.directory?("coverage")
+  require "reek/rake/task"
+  Reek::Rake::Task.new
 rescue LoadError
-  This.task_warning("simplecov")
+  This.task_warning("reek")
 end
 
 #------------------------------------------------------------------------------
