@@ -27,6 +27,10 @@ Lint/DuplicateBranch:
   IgnoreLiteralBranches: true
   IgnoreConstantBranches: true
 
+Lint/SuppressedException:
+  Exclude:
+    - 'spec/spec_helper.rb'
+
 Metrics/AbcSize:
   CountRepeatedAttributes: false
   Max: 25
@@ -54,6 +58,11 @@ Style/Documentation:
   Exclude:
     - 'spec/**/*'
 
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: double_quotes
+  ConsistentQuotesInMultiline: false
+
 Style/TernaryParentheses:
   EnforcedStyle: require_parentheses_when_complex
 
@@ -61,11 +70,6 @@ Style/TrailingCommaInArrayLiteral:
   EnforcedStyleForMultiline: consistent_comma
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: consistent_comma
-
-Style/StringLiterals:
-  Enabled: true
-  EnforcedStyle: double_quotes
-  ConsistentQuotesInMultiline: false
 
 ThreadSafety/InstanceVariableInClassMethod:
   Enabled: false
