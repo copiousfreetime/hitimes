@@ -46,6 +46,16 @@ rescue StandardError, LoadError
 end
 
 #------------------------------------------------------------------------------
+# Reek - static code analysis
+#------------------------------------------------------------------------------
+begin
+  require "reek/rake/task"
+  Reek::Rake::Task.new
+rescue LoadError
+  This.task_warning("reek")
+end
+
+#------------------------------------------------------------------------------
 # Coverage - optional code coverage, rcov for 1.8 and simplecov for 1.9, so
 #            for the moment only rcov is listed.
 #------------------------------------------------------------------------------

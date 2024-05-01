@@ -14,6 +14,7 @@ group :development, :test do
 
   gem "rake"
   gem "rdoc", "~> 6.3", require: false
+  gem "reek", require: false
 
   gem "rubocop", "~> 1.63", require: false
   gem "rubocop-minitest", "~> 0.35", require: false
