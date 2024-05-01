@@ -92,8 +92,8 @@ module Hitimes
 
           RUBY_DESCRIPTION: #{RUBY_DESCRIPTION}
 
-          Please report the above information hitimes issue tracker at
-          https://github.com/copiousfreetime/hitimes/issuest
+          Please report the above information to the hitimes issue tracker at
+          https://github.com/copiousfreetime/hitimes/issues
         TXT
       end
 
