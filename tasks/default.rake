@@ -25,8 +25,7 @@ rescue LoadError
 end
 
 #------------------------------------------------------------------------------
-# Coverage - optional code coverage, rcov for 1.8 and simplecov for 1.9, so
-#            for the moment only rcov is listed.
+# Coverage - integrated with minitest
 #------------------------------------------------------------------------------
 begin
   require "simplecov"
