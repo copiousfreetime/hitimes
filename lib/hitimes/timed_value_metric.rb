@@ -43,9 +43,9 @@ module Hitimes
       # Return a TimedValueMetric that has been started
       #
       def now(name, additional_data = {})
-        t = TimedValueMetric.new(name, additional_data)
-        t.start
-        t
+        tvm = TimedValueMetric.new(name, additional_data)
+        tvm.start
+        tvm
       end
     end
 
@@ -107,15 +107,15 @@ module Hitimes
     #
     def stop(value)
       if @current_interval.running?
-        d = @current_interval.stop
-        @timed_stats.update(d)
+        duration = @current_interval.stop
+        @timed_stats.update(duration)
         @current_interval = Interval.new
         @value_stats.update(value)
 
         # update the lenght of time we have been sampling
         @sampling_delta = @sampling_start_interval.duration_so_far
 
-        return d
+        return duration
       end
       false
     end
@@ -156,11 +156,11 @@ module Hitimes
     def split(value)
       if @current_interval.running?
         next_interval = @current_interval.split
-        d = @current_interval.duration
-        @timed_stats.update(d)
+        duration = @current_interval.duration
+        @timed_stats.update(duration)
         @value_stats.update(value)
         @current_interval = next_interval
-        return d
+        return duration
       end
       false
     end
@@ -222,12 +222,12 @@ module Hitimes
     # Convert the metric to a hash
     #
     def to_hash
-      h = super
-      h["timed_stats"] = @timed_stats.to_hash
-      h["value_stats"] = @value_stats.to_hash(Stats::STATS - %w[rate])
-      h["rate"] = rate
-      h["unit_count"] = unit_count
-      h
+      result = super
+      result["timed_stats"] = @timed_stats.to_hash
+      result["value_stats"] = @value_stats.to_hash(Stats::STATS - %w[rate])
+      result["rate"] = rate
+      result["unit_count"] = unit_count
+      result
     end
   end
 end

@@ -73,7 +73,18 @@ module Hitimes
     # And if we can't finde one, which is really, really odd, we'll raise an exception.
     POTENTIAL_CLOCK_IDS = %i[CLOCK_MONOTONIC_RAW CLOCK_MONOTONIC CLOCK_REALTIME].freeze
     def determine_clock_id(potential_ids = POTENTIAL_CLOCK_IDS)
-      sym = potential_ids.find { |c| Process.const_defined?(c) }
+      sym = potential_ids.find { |id| Process.const_defined?(id) }
+
+      unless sym
+        raise Hitimes::Error, <<~ERROR
+          Unable to find a high resolution clock at all. THIS IS A BUG!!
+
+          RUBY_DESCRIPTION: #{RUBY_DESCRIPTION}
+
+          Please report this bug to the hitimes issue tracker at
+          https://github.com/copiousfreetime/hitimes/issues
+        ERROR
+      end
 
       if sym == :CLOCK_REALTIME
         warn <<~TXT
@@ -84,15 +95,6 @@ module Hitimes
           Please report the above information hitimes issue tracker at
           https://github.com/copiousfreetime/hitimes/issuest
         TXT
-      elsif sym.nil?
-        raise Hitimes::Error, <<~ERROR
-          Unable to find a high resolution clock at all. THIS IS A BUG!!
-
-          RUBY_DESCRIPTION: #{RUBY_DESCRIPTION}
-
-          Please report this bug to the hitimes issue tracker at
-          https://github.com/copiousfreetime/hitimes/issues
-        ERROR
       end
 
       Process.const_get(sym)

@@ -120,13 +120,13 @@ module Hitimes
     # the list of stats to return in the hash.
     #
     def to_hash(*args)
-      h = {}
-      args = [args].flatten
-      args = STATS if args.empty?
-      args.each do |meth|
-        h[meth] = send(meth)
+      result = {}
+      fields = [args].flatten
+      fields = STATS if fields.empty?
+      fields.each do |meth|
+        result[meth] = send(meth)
       end
-      h
+      result
     end
 
     #
@@ -139,17 +139,17 @@ module Hitimes
     # known stats will be all that is included in the json output.
     #
     def to_json(*args)
-      h = to_hash(*args)
-      a = []
-      s = StringIO.new
+      stats = to_hash(*args)
+      slugs = []
+      out = StringIO.new
 
-      s.print "{ "
-      h.each_pair do |k, v|
-        a << "\"#{k}\": #{v}"
+      out.print "{ "
+      stats.each_pair do |key, val|
+        slugs << "\"#{key}\": #{val}"
       end
-      s.print a.join(", ")
-      s.print "}"
-      s.string
+      out.print slugs.join(", ")
+      out.print "}"
+      out.string
     end
   end
 end

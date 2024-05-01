@@ -44,9 +44,9 @@ module Hitimes
       # Return a TimedMetric that has been started
       #
       def now(name, additional_data = {})
-        t = TimedMetric.new(name, additional_data)
-        t.start
-        t
+        tm = TimedMetric.new(name, additional_data)
+        tm.start
+        tm
       end
     end
 
@@ -101,14 +101,14 @@ module Hitimes
     #
     def stop
       if @current_interval.running?
-        d = @current_interval.stop
-        @stats.update(d)
+        duration = @current_interval.stop
+        @stats.update(duration)
         @current_interval = Interval.new
 
         # update the length of time we have been sampling
         @sampling_delta = @sampling_start_interval.duration_so_far
 
-        return d
+        return duration
       end
       false
     end
@@ -147,10 +147,10 @@ module Hitimes
     def split
       if @current_interval.running?
         next_interval = @current_interval.split
-        d = @current_interval.duration
-        @stats.update(d)
+        duration = @current_interval.duration
+        @stats.update(duration)
         @current_interval = next_interval
-        return d
+        return duration
       end
       false
     end
@@ -162,11 +162,11 @@ module Hitimes
     # Convert the metric to a hash
     #
     def to_hash
-      h = super
-      Stats::STATS.each do |s|
-        h[s] = send(s)
+      result = super
+      Stats::STATS.each do |stat|
+        result[stat] = send(stat)
       end
-      h
+      result
     end
 
     # forward appropriate calls directly to the stats object
