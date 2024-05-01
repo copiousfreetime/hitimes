@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib".freeze]
   s.authors = ["Jeremy Hinegardner".freeze]
   s.bindir = "exe".freeze
-  s.date = "2024-04-29"
+  s.date = "2024-05-01"
   s.description = "A fast, high resolution timer library for recording performance metrics.".freeze
   s.email = "jeremy@copiousfreetime.org".freeze
   s.extra_rdoc_files = ["CONTRIBUTING.md".freeze, "HISTORY.md".freeze, "LICENSE.txt".freeze, "Manifest.txt".freeze, "README.md".freeze]
