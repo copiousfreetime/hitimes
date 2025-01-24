@@ -1,4 +1,7 @@
 # Hitimes Changelog
+## Versino 3.1.0 - 2025-01-24
+* Update the supported ruby versions to be 3.1 and up
+
 ## Version 3.0.0 - 2024-05-01
 
 * Migrated to SemaphoreCI for doing full test runs on all active ruby versions.
