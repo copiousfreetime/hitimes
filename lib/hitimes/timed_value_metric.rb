@@ -58,7 +58,7 @@ module Hitimes
     # +additional_data+ may be anything that follows the +to_hash+ protocol
     #
     def initialize(name, additional_data = {})
-      super(name, additional_data)
+      super
       @timed_stats      = Stats.new
       @value_stats      = Stats.new
       @current_interval = Interval.new

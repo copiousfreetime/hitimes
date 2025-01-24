@@ -8,6 +8,7 @@ require:
 
 AllCops:
   NewCops: enable
+  TargetRubyVersion: 3.0
   Exclude:
     - 'coverage/**/*'
     - 'doc/**/*'
@@ -71,7 +72,9 @@ Style/TrailingCommaInArrayLiteral:
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: consistent_comma
 
-ThreadSafety/InstanceVariableInClassMethod:
+ThreadSafety/ClassInstanceVariable:
   Enabled: false
 ThreadSafety/NewThread:
+  Enabled: false
+ThreadSafety/DirChdir:
   Enabled: false
