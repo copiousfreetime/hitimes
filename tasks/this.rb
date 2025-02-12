@@ -30,7 +30,7 @@ class ThisProject
   #
   # Yields self
   def initialize
-    @include_in_manifest = Regexp.union(/\Alib/, /\Aexe/, /\Aext/,
+    @include_in_manifest = Regexp.union(/\A(lib|exe|ext|data)/,
                                         %r{\A[^/]+\.(gemspec|txt|md|rdoc|adoc)\Z})
     @gemspecs = {}
     yield self if block_given?
