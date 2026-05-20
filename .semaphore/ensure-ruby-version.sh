@@ -8,6 +8,9 @@ if cache has_key "${cache_key}"; then
   sem-version ruby "${RUBY_VERSION}" -f
 else
   echo "Installing Ruby $RUBY_VERSION"
+  if [[ "${RUBY_VERSION}" == jruby* ]]; then
+    sem-version java 21
+  fi
   sem-version ruby "${RUBY_VERSION}" -f
   cache store "${cache_key}" "${HOME}/.rbenv/versions/${RUBY_VERSION}"
 fi
