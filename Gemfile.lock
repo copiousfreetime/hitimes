@@ -11,6 +11,7 @@ GEM
     ast (2.4.3)
     bigdecimal (4.1.2)
     bigdecimal (4.1.2-java)
+    builder (3.3.0)
     concurrent-ruby (1.3.6)
     date (3.5.1)
     date (3.5.1-java)
@@ -68,13 +69,11 @@ GEM
     minitest (5.27.0)
     minitest-focus (1.4.1)
       minitest (> 5.0)
-    minitest-junit (2.1.0)
+    minitest-junit (1.1.0)
+      builder (~> 3.2)
       minitest (~> 5.11)
-      ox (~> 2, >= 2.14.2)
     nio4r (2.7.5)
     nio4r (2.7.5-java)
-    ox (2.14.26)
-      bigdecimal (>= 3.0)
     parallel (1.28.0)
     parser (3.3.11.1)
       ast (~> 2.4.1)
@@ -170,7 +169,7 @@ DEPENDENCIES
   hitimes!
   minitest (~> 5.11)
   minitest-focus (~> 1.2)
-  minitest-junit (~> 2.0)
+  minitest-junit (~> 1.1)
   rake
   rdoc (~> 7.2)
   reek
@@ -188,6 +187,7 @@ CHECKSUMS
   ast (2.4.3) sha256=954615157c1d6a382bc27d690d973195e79db7f55e9765ac7c481c60bdb4d383
   bigdecimal (4.1.2) sha256=53d217666027eab4280346fba98e7d5b66baaae1b9c3c1c0ffe89d48188a3fbd
   bigdecimal (4.1.2-java) sha256=ccc836eab720a525529f70ed0de26a206fdbc9a9e8ac67b3b4ac7318b03e114d
+  builder (3.3.0) sha256=497918d2f9dca528fdca4b88d84e4ef4387256d984b8154e9d5d3fe5a9c8835f
   bundler (4.0.12) sha256=7f8b757d28dfb636e7b24fba2344ac6dd13b5b24f4b46d62573d483f211825ac
   concurrent-ruby (1.3.6) sha256=6b56837e1e7e5292f9864f34b69c5a2cbc75c0cf5338f1ce9903d10fa762d5ab
   date (3.5.1) sha256=750d06384d7b9c15d562c76291407d89e368dda4d4fff957eb94962d325a0dc0
@@ -215,10 +215,9 @@ CHECKSUMS
   mime-types-data (3.2026.0414) sha256=461c4c655373a44bd6c5fe54bcf5b7776026ea96e808144b1ec465c4b99148cc
   minitest (5.27.0) sha256=2d3b17f8a36fe7801c1adcffdbc38233b938eb0b4966e97a6739055a45fa77d5
   minitest-focus (1.4.1) sha256=394517cbe2dcb2d992d8ffc41a3b2b6315777a4daa69239de4fefe7110dd810e
-  minitest-junit (2.1.0) sha256=b519b50e2d843d5540130d1036b137b0085e5aca76c2e1382d6a5b3fbab39d20
+  minitest-junit (1.1.0) sha256=036c7c29ed8d852424631c7240c5b9eaa76edbadff4a8b321c12cb77869e6032
   nio4r (2.7.5) sha256=6c90168e48fb5f8e768419c93abb94ba2b892a1d0602cb06eef16d8b7df1dca1
   nio4r (2.7.5-java) sha256=d14779d2a9b012ec0148a53344fbb2ed2a3c4d90c5dd923bf281135ab983b2c9
-  ox (2.14.26) sha256=d4a9cb49fb55751631d469623cfb2e7dad7cea89119c93749c1e31a3fb2f4896
   parallel (1.28.0) sha256=33e6de1484baf2524792d178b0913fc8eb94c628d6cfe45599ad4458c638c970
   parser (3.3.11.1) sha256=d17ace7aabe3e72c3cc94043714be27cc6f852f104d81aa284c2281aecc65d54
   prism (1.9.0) sha256=7b530c6a9f92c24300014919c9dcbc055bf4cdf51ec30aed099b06cd6674ef85

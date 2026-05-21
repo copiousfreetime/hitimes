@@ -9,7 +9,7 @@ gem "heel", require: false
 
 gem "minitest", "~> 5.11"
 gem "minitest-focus", "~> 1.2"
-gem "minitest-junit", "~> 2.0"
+gem "minitest-junit", "~> 1.1" # keep at 1.x until 2.x can be used on jruby / because ox
 
 gem "rake"
 gem "rdoc", "~> 7.2", require: false
