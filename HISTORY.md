@@ -1,5 +1,12 @@
 # Hitimes Changelog
-## Versino 3.1.0 - 2025-01-24
+## Version 3.2.0 - 2026-05-21
+* Fix tests for future Minitest 6.0 `must_raise` change (#91)
+* Add Mamoru TASAKA to contributors
+* Fix flaky timestamp comparison tests with directional epsilon tolerance (#95)
+* Update Semaphore CI config and ruby versions in test matrxi to 3.2 and up
+* Update dependencies
+
+## Version 3.1.0 - 2025-01-24
 * Update the supported ruby versions to be 3.1 and up
 
 ## Version 3.0.0 - 2024-05-01
