@@ -120,8 +120,8 @@ describe Hitimes::TimedValueMetric do
       @tm.stop(1)
     end
     f2 = Time.now.gmtime.to_f * 1_000_000
-    _(@tm.sampling_start_time).must_be :>=, f1
-    _(@tm.sampling_start_time).must_be :<, f2
+    _(@tm.sampling_start_time).must_be_gte_within f1
+    _(@tm.sampling_start_time).must_be_lte_within f2
   end
 
   it "keeps track of the last stop time of all the intervals" do
@@ -131,8 +131,8 @@ describe Hitimes::TimedValueMetric do
       @tm.stop(1)
     end
     f2 = Time.now.gmtime.to_f * 1_000_000
-    _(@tm.sampling_stop_time).must_be :>, f1
-    _(@tm.sampling_stop_time).must_be :<=, f2
+    _(@tm.sampling_stop_time).must_be_gte_within f1
+    _(@tm.sampling_stop_time).must_be_lte_within f2
   end
 
   it "can create an already running timer" do
