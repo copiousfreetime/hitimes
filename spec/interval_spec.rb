@@ -5,14 +5,16 @@ require "spec_helper"
 describe Hitimes::Interval do
   it "raises an error if duration is called on a non-started interval" do
     i = Hitimes::Interval.new
-    _(lambda {
-        i.duration
-      }).must_raise(Hitimes::Error, /\AAttempt to report a duration on an interval that has not started\Z/)
+    ex = _(lambda {
+      i.duration
+    }).must_raise(Hitimes::Error)
+    assert_match(/\AAttempt to report a duration on an interval that has not started\Z/, ex.message)
   end
 
   it "raises an error if stop is called on a non-started interval" do
     i = Hitimes::Interval.new
-    _(-> { i.stop }).must_raise(Hitimes::Error, /\AAttempt to stop an interval that has not started\Z/)
+    ex = _(-> { i.stop }).must_raise(Hitimes::Error)
+    assert_match(/\AAttempt to stop an interval that has not started\Z/, ex.message)
   end
 
   it "knows if it has been started" do
@@ -48,7 +50,8 @@ describe Hitimes::Interval do
   end
 
   it "raises an error if measure is called with no block" do
-    _(-> { Hitimes::Interval.measure }).must_raise(Hitimes::Error, /\ANo block given to Interval.measure\Z/)
+    ex = _(-> { Hitimes::Interval.measure }).must_raise(Hitimes::Error)
+    assert_match(/\ANo block given to Interval.measure\Z/, ex.message)
   end
 
   it "creates an interval via #now" do

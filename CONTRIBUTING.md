@@ -37,6 +37,7 @@ easiest way to contribute.
 
 * Jeremy Hinegardner
 * Wojciech Piekutowski
+* Mamoru TASAKA
 
 [GitHub Account]: https://github.com/signup/free "GitHub Signup"
 [GitHub Issues]:  https://github.com/copiousfreetime/hitimes/issues "Hitimes Issues"
