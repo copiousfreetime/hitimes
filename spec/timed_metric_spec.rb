@@ -125,7 +125,7 @@ describe Hitimes::TimedMetric do
     _(@tm.sampling_stop_time).must_be :<=, f2
     # distance from now to max stop time time should be less than the distance
     # from the start to the max stop time
-    _((f2 - @tm.sampling_stop_time)).must_be :<, (@tm.sampling_stop_time - f1)
+    _(f2 - @tm.sampling_stop_time).must_be :<, (@tm.sampling_stop_time - f1)
   end
 
   it "can create an already running timer" do

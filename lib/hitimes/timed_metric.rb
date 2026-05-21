@@ -171,6 +171,7 @@ module Hitimes
 
     # forward appropriate calls directly to the stats object
     extend Forwardable
+
     def_delegators :@stats, :count, :max, :mean, :min, :rate, :stddev, :sum, :sumsq
     alias duration sum
   end

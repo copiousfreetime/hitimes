@@ -121,7 +121,7 @@ Use a `Hitimes::TimedValueMetric` to calculate statistics about batches of sampl
 ``` ruby
 timed_value_metric = Hitimes::TimedValueMetric.new("batch times")
 loop do
-  batch = ... # get a batch of things
+  batch = ...# get a batch of things
   timed_value_metric.start
   # .. do something with batch
   timed_value_metric.stop(batch.size)
