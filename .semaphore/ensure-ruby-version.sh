@@ -2,6 +2,10 @@
 #
 cache_key="${SEMAPHORE_AGENT_MACHINE_OS_IMAGE}-${RUBY_VERSION}"
 
+if [[ "${RUBY_VERSION}" == jruby* ]]; then
+  sem-version java 21
+fi
+
 if cache has_key "${cache_key}"; then
   echo "Ruby ${RUBY_VERSION} found in cache"
   cache restore "${cache_key}"

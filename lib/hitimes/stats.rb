@@ -52,8 +52,8 @@ module Hitimes
     # Return the input value.
     def update(value)
       @mutex.synchronize do
-        @min = (value < @min) ? value : @min
-        @max = (value > @max) ? value : @max
+        @min = [value, @min].min
+        @max = [value, @max].max
 
         @count += 1
         @sum   += value

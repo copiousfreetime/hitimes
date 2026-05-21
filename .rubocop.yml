@@ -1,4 +1,4 @@
-require:
+plugins:
   - rubocop-md
   - rubocop-minitest
   - rubocop-packaging
