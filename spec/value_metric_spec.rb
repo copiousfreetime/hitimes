@@ -62,8 +62,8 @@ describe Hitimes::ValueMetric do
       m.measure(x)
     end
     f2 = Time.now.gmtime.to_f * 1_000_000
-    _(m.sampling_start_time).must_be :>=, f1
-    _(m.sampling_start_time).must_be :<, f2
+    _(m.sampling_start_time).must_be_gte_within f1
+    _(m.sampling_start_time).must_be_lte_within f2
   end
 
   it "keeps track of the last stop time of all the intervals" do
@@ -73,8 +73,8 @@ describe Hitimes::ValueMetric do
       m.measure(x)
     end
     f2 = Time.now.gmtime.to_f * 1_000_000
-    _(m.sampling_stop_time).must_be :>, f1
-    _(m.sampling_stop_time).must_be :<=, f2
+    _(m.sampling_stop_time).must_be_gte_within f1
+    _(m.sampling_stop_time).must_be_lte_within f2
   end
 
   describe "#to_hash" do
