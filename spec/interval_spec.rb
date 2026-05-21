@@ -6,8 +6,8 @@ describe Hitimes::Interval do
   it "raises an error if duration is called on a non-started interval" do
     i = Hitimes::Interval.new
     ex = _(lambda {
-        i.duration
-      }).must_raise(Hitimes::Error)
+      i.duration
+    }).must_raise(Hitimes::Error)
     assert_match(/\AAttempt to report a duration on an interval that has not started\Z/, ex.message)
   end
 

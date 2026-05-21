@@ -15,8 +15,8 @@ describe "Hitimes::Initialize" do
 
   it "should raise an error if no clock id is found" do
     ex = _(lambda {
-        Hitimes::Initialize.determine_clock_id([])
-      }).must_raise(Hitimes::Error)
+      Hitimes::Initialize.determine_clock_id([])
+    }).must_raise(Hitimes::Error)
     assert_match(/Unable to find a high resolution clock/, ex.message)
   end
 end
