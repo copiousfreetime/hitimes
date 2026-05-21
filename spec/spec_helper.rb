@@ -22,18 +22,18 @@ module Minitest
     # Assert that act >= exp - delta
     # "actual is greater than or equal to expected, within delta tolerance"
     def assert_gte_within(exp, act, delta = FLOAT_TOLERANCE, msg = nil)
-      msg = message(msg) {
+      msg = message(msg) do
         "Expected #{act} to be >= (#{exp} - #{delta}), i.e., >= #{exp - delta}"
-      }
+      end
       assert act >= (exp - delta), msg
     end
 
     # Assert that act <= exp + delta
     # "actual is less than or equal to expected, within delta tolerance"
     def assert_lte_within(exp, act, delta = FLOAT_TOLERANCE, msg = nil)
-      msg = message(msg) {
+      msg = message(msg) do
         "Expected #{act} to be <= (#{exp} + #{delta}), i.e., <= #{exp + delta}"
-      }
+      end
       assert act <= (exp + delta), msg
     end
   end
