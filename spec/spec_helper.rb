@@ -10,18 +10,19 @@ require "minitest/pride"
 #
 # Depending on the real time clock and other things, the values need a little
 # bit of epislon, similar to the existing assert_in_epsilon, but we want to only
-# assert within a particular direction.
+# assert within a particular direction. And this is jitter that might be
+# suseptible to JVM gc and other things, so making it a reasonable size
 #
 # The default tolerance of 100 microseconds is well within the minitest default
 # epsilon and accounts for the floating point rounding at the magnitude of
 # UTC microsecond timestamps.
 module Minitest
-  FLOAT_TOLERANCE = 100.0
+  TIMING_TOLERANCE = 10_000.0
 
   module Assertions
     # Assert that act >= exp - delta
     # "actual is greater than or equal to expected, within delta tolerance"
-    def assert_gte_within(exp, act, delta = FLOAT_TOLERANCE, msg = nil)
+    def assert_gte_within(exp, act, delta = TIMING_TOLERANCE, msg = nil)
       msg = message(msg) do
         "Expected #{act} to be >= (#{exp} - #{delta}), i.e., >= #{exp - delta}"
       end
@@ -30,7 +31,7 @@ module Minitest
 
     # Assert that act <= exp + delta
     # "actual is less than or equal to expected, within delta tolerance"
-    def assert_lte_within(exp, act, delta = FLOAT_TOLERANCE, msg = nil)
+    def assert_lte_within(exp, act, delta = TIMING_TOLERANCE, msg = nil)
       msg = message(msg) do
         "Expected #{act} to be <= (#{exp} + #{delta}), i.e., <= #{exp + delta}"
       end
