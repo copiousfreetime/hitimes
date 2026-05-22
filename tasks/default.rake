@@ -273,7 +273,6 @@ desc "Create tag v#{This.version}, build and push #{This.platform_gemspec.full_n
 task release: [:release_check, "manifest:check", :gem] do
   sh "git commit --allow-empty -a -m 'Release #{This.version}'"
   sh "git tag -a -m 'v#{This.version}' v#{This.version}"
-  sh "git push origin main"
-  sh "git push origin v#{This.version}"
+  sh "git push --tags origin"
   sh "gem push pkg/#{This.platform_gemspec.full_name}.gem"
 end
