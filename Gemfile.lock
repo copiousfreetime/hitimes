@@ -55,8 +55,8 @@ GEM
       rackup (~> 2.1)
       rouge (~> 4.0)
     jar-dependencies (0.5.7)
-    json (2.19.5)
-    json (2.19.5-java)
+    json (2.19.9)
+    json (2.19.9-java)
     language_server-protocol (3.17.0.5)
     launchy (2.5.2)
       addressable (~> 2.8)
@@ -205,8 +205,8 @@ CHECKSUMS
   heel (4.0.1) sha256=bd0bd0b20efec89a6bf2ab37958525386cfe84d0ba6159f49ac9cf684ec433d9
   hitimes (3.2.0)
   jar-dependencies (0.5.7) sha256=013ce5f4639414ac8cf1169cdbe763da164b81e2d2c983d11042b5ff7bfcce80
-  json (2.19.5) sha256=218a18553e4801d579ca7e0f5bc72bafd776d7397238a1fb4e74db5b0a812c59
-  json (2.19.5-java) sha256=c3b74d6cee27c06713dbe8a8eb4ae0d3e6d0d090214f5068e55c01e7011c0976
+  json (2.19.9) sha256=9b9025b7cdddafa38d316eca0b2358488e42d417045c1b90d216a9fefe46b79a
+  json (2.19.9-java) sha256=7673280594a1060594f43496a6d773ee2a40ac7e6c0f2b6a639bd5a9e0cc3e7a
   language_server-protocol (3.17.0.5) sha256=fd1e39a51a28bf3eec959379985a72e296e9f9acfce46f6a79d31ca8760803cc
   launchy (2.5.2) sha256=8aa0441655aec5514008e1d04892c2de3ba57bd337afb984568da091121a241b
   lint_roller (1.1.0) sha256=2c0c845b632a7d172cb849cc90c1bce937a28c5c8ccccb50dfd46a485003cc87
