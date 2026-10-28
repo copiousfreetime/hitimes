@@ -75,14 +75,13 @@ module Hitimes
     # mark the start of the interval.  Calling start on an already started
     # interval has no effect.  An interval can only be started once.  If the
     # interval is truely started +true+ is returned otherwise +false+.
-    # rubocop:disable Naming/PredicateMethod -- false positive
+    # rubocop:disable-next Naming/PredicateMethod -- false positive
     def start
       return false if started?
 
       @start_instant = ::Hitimes.raw_instant
       true
     end
-    # rubocop:enable Naming/PredicateMethod
 
     # call-seq:
     #    interval.stop -> bool or Float
