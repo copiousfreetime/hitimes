@@ -29,11 +29,11 @@ blocks:
             - env_var: RUBY_VERSION
               values:
                 - 3.2.11
-                - 3.3.11
-                - 3.4.9
-                - 4.0.5
-                - jruby-10.1.0.0
-                - truffleruby-34.0.0
+                - 3.3.13
+                - 3.4.12
+                - 4.0.9
+                - jruby-10.1.2.0
+                - truffleruby-40.0.0
           commands:
             - source .semaphore/ensure-ruby-version.sh
             - source .semaphore/ensure-bundle.sh
@@ -59,9 +59,9 @@ blocks:
             - env_var: RUBY_VERSION
               values:
                 - 3.2.11
-                - 3.3.11
-                - 3.4.9
-                - 4.0.5
+                - 3.3.13
+                - 3.4.12
+                - 4.0.9
           commands:
             - source .semaphore/ensure-ruby-version.sh
             - source .semaphore/ensure-bundle.sh
