@@ -92,7 +92,7 @@ GEM
       nio4r (~> 2.0)
     racc (1.8.1)
     racc (1.8.1-java)
-    rack (3.2.6)
+    rack (3.2.8)
     rackup (2.3.1)
       rack (>= 3)
     rainbow (3.1.1)
@@ -228,7 +228,7 @@ CHECKSUMS
   puma (6.6.1-java) sha256=b5384f7320e3ceb5aa41c729f5ebbde360394aa8f77fcb82a092d63f8512c9c4
   racc (1.8.1) sha256=4a7f6929691dbec8b5209a0b373bc2614882b55fc5d2e447a21aaa691303d62f
   racc (1.8.1-java) sha256=54f2e6d1e1b91c154013277d986f52a90e5ececbe91465d29172e49342732b98
-  rack (3.2.6) sha256=5ed78e1f73b2e25679bec7d45ee2d4483cc4146eb1be0264fc4d94cb5ef212c2
+  rack (3.2.8) sha256=1fecc85e463ebc7a2a945fff829ffcd549babeb1556384796fad946c28dc4ec7
   rackup (2.3.1) sha256=6c79c26753778e90983761d677a48937ee3192b3ffef6bc963c0950f94688868
   rainbow (3.1.1) sha256=039491aa3a89f42efa1d6dec2fc4e62ede96eb6acd95e52f1ad581182b79bc6a
   rake (13.4.2) sha256=cb825b2bd5f1f8e91ca37bddb4b9aaf345551b4731da62949be002fa89283701
