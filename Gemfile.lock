@@ -6,7 +6,7 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.9.0)
+    addressable (2.9.1)
       public_suffix (>= 2.0.2, < 8.0)
     ast (2.4.3)
     bigdecimal (4.1.2)
@@ -85,7 +85,7 @@ GEM
     psych (5.3.1-java)
       date
       jar-dependencies (>= 0.1.7)
-    public_suffix (7.0.5)
+    public_suffix (6.0.2)
     puma (6.6.1)
       nio4r (~> 2.0)
     puma (6.6.1-java)
@@ -183,7 +183,7 @@ DEPENDENCIES
   simplecov (~> 0.22)
 
 CHECKSUMS
-  addressable (2.9.0) sha256=7fdf6ac3660f7f4e867a0838be3f6cf722ace541dd97767fa42bc6cfa980c7af
+  addressable (2.9.1) sha256=f1212365945455c84e8d031eea40fc6bedf0c663a78d95b3ab93591040bc5c35
   ast (2.4.3) sha256=954615157c1d6a382bc27d690d973195e79db7f55e9765ac7c481c60bdb4d383
   bigdecimal (4.1.2) sha256=53d217666027eab4280346fba98e7d5b66baaae1b9c3c1c0ffe89d48188a3fbd
   bigdecimal (4.1.2-java) sha256=ccc836eab720a525529f70ed0de26a206fdbc9a9e8ac67b3b4ac7318b03e114d
@@ -223,7 +223,7 @@ CHECKSUMS
   prism (1.9.0) sha256=7b530c6a9f92c24300014919c9dcbc055bf4cdf51ec30aed099b06cd6674ef85
   psych (5.3.1) sha256=eb7a57cef10c9d70173ff74e739d843ac3b2c019a003de48447b2963d81b1974
   psych (5.3.1-java) sha256=20a4a81ad01479ef060f604ed75ba42fe673169e67d923b1bae5aa4e13cc5820
-  public_suffix (7.0.5) sha256=1a8bb08f1bbea19228d3bed6e5ed908d1cb4f7c2726d18bd9cadf60bc676f623
+  public_suffix (6.0.2) sha256=bfa7cd5108066f8c9602e0d6d4114999a5df5839a63149d3e8b0f9c1d3558394
   puma (6.6.1) sha256=b9b56e4a4ea75d1bfa6d9e1972ee2c9f43d0883f011826d914e8e37b3694ea1e
   puma (6.6.1-java) sha256=b5384f7320e3ceb5aa41c729f5ebbde360394aa8f77fcb82a092d63f8512c9c4
   racc (1.8.1) sha256=4a7f6929691dbec8b5209a0b373bc2614882b55fc5d2e447a21aaa691303d62f
